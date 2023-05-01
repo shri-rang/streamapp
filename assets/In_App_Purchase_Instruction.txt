@@ -1,0 +1,4 @@
+
+Browse bellow link to setup Premium subscription plan(In app purchase):
+
+https://github.com/flutter/plugins/blob/master/packages/in_app_purchase/in_app_purchase/example/README.md
