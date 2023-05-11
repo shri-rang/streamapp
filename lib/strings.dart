@@ -1,5 +1,5 @@
 class AppContent {
-  static final String appName = "OXOO-Flutter";
+  static final String appName = "OUCH";
   static final String oxooLiveTV = "$appName";
   static final String home = "Home";
   static final String movies = "Movies";

@@ -33,12 +33,14 @@ class ImageSlider extends StatelessWidget {
         return Builder(
           builder: (BuildContext context) {
             return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
               child: InkWell(
                 onTap: () {
                   switch (slide.actionType) {
                     case "movie":
-                      Navigator.pushNamed(context, MovieDetailScreen.route, arguments: {"movieID": slide.actionId});
+                      Navigator.pushNamed(context, MovieDetailScreen.route,
+                          arguments: {"movieID": slide.actionId});
                       break;
                     case "tv":
                       Navigator.push(
@@ -92,7 +94,8 @@ class ImageSlider extends StatelessWidget {
                             padding: const EdgeInsets.all(10.0),
                             child: Text(
                               slide.title!,
-                              style: TextStyle(color: Colors.white, fontSize: 12),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 12),
                             ),
                           ),
                         )

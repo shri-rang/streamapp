@@ -58,14 +58,19 @@ class _AuthScreenState extends State<AuthScreen> {
         ? LandingScreen()
         : Scaffold(
             appBar: fromPaidScreen
-                ? AppBar(backgroundColor: isDark ? CustomTheme.darkGrey : CustomTheme.primaryColor, title: Text(AppContent.goBack))
+                ? AppBar(
+                    backgroundColor: isDark
+                        ? CustomTheme.darkGrey
+                        : CustomTheme.primaryColor,
+                    title: Text(AppContent.goBack))
                 : PreferredSize(
                     preferredSize: Size.fromHeight(0.0),
                     child: Container(
                       width: 0.0,
                       height: 0.0,
                     )),
-            backgroundColor: isDark ? CustomTheme.primaryColorDark : Colors.black,
+            backgroundColor:
+                isDark ? CustomTheme.primaryColorDark : Colors.black,
             body: SingleChildScrollView(
               child: Stack(
                 alignment: Alignment.center,
@@ -73,15 +78,29 @@ class _AuthScreenState extends State<AuthScreen> {
                   Stack(
                     alignment: Alignment.bottomLeft,
                     children: [
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height,
-                        decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assets/splash_image.png'), fit: BoxFit.cover)),
+                      ColorFiltered(
+                        colorFilter: ColorFilter.mode(
+                            Colors.black.withOpacity(0.6), BlendMode.srcOver),
+                        child: Image.asset(
+                          "assets/posterbg.jpg",
+                          height: MediaQuery.of(context).size.height,
+                          fit: BoxFit.cover,
+                          colorBlendMode: BlendMode.srcOver,
+                        ),
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
+                          Center(
+                            child: Image.asset(
+                              "assets/ocuhfilms.png",
+                              width: 170,
+                              // height: MediaQuery.of(context).size.height,
+                              // fit: BoxFit.cover,
+                              // colorBlendMode: BlendMode.srcOver,
+                            ),
+                          ),
                           if (Config.enablePhoneAuth)
                             phoneAuthWidget(
                               color: CustomTheme.springGreen,
@@ -105,9 +124,15 @@ class _AuthScreenState extends State<AuthScreen> {
                             ),
                           InkWell(
                               onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => LoginPage()));
                               },
-                              child: mailAuthWidget(color: CustomTheme.salmonColor, title: AppContent.loginWithEmail, imagePath: "ic_button_email")),
+                              child: mailAuthWidget(
+                                  color: CustomTheme.salmonColor,
+                                  title: AppContent.loginWithEmail,
+                                  imagePath: "ic_button_email")),
                           if (Platform.isIOS)
                             socialAuthWidget(
                                 color: Colors.white,
@@ -128,7 +153,13 @@ class _AuthScreenState extends State<AuthScreen> {
           );
   }
 
-  Widget socialAuthWidget({Color? color, String? title, String? imagePath, AuthService? authService, Function? function, bool isApple = false}) {
+  Widget socialAuthWidget(
+      {Color? color,
+      String? title,
+      String? imagePath,
+      AuthService? authService,
+      Function? function,
+      bool isApple = false}) {
     return BlocListener<FirebaseAuthBloc, FirebaseAuthState>(
       listener: (context, state) {
         if (state is FirebaseAuthStateCompleted) {
@@ -140,7 +171,9 @@ class _AuthScreenState extends State<AuthScreen> {
             authService!.updateUser(user);
             isLoading = false;
             if (authService.getUser() != null) {
-              Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => LandingScreen()), (Route<dynamic> route) => false);
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => LandingScreen()),
+                  (Route<dynamic> route) => false);
             }
           }
         } else if (state is FirebaseAuthFailedState) {
@@ -163,10 +196,12 @@ class _AuthScreenState extends State<AuthScreen> {
               ));
             },
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
               child: Container(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0, vertical: 10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -178,11 +213,16 @@ class _AuthScreenState extends State<AuthScreen> {
                       SizedBox(
                         width: 10.0,
                       ),
-                      Text(title!, style: isApple ? CustomTheme.authBtnTitleBlack : CustomTheme.authBtnTitle),
+                      Text(title!,
+                          style: isApple
+                              ? CustomTheme.authBtnTitleBlack
+                              : CustomTheme.authBtnTitle),
                     ],
                   ),
                 ),
-                decoration: BoxDecoration(color: color, borderRadius: BorderRadius.all(Radius.circular(4.0))),
+                decoration: BoxDecoration(
+                    color: color,
+                    borderRadius: BorderRadius.all(Radius.circular(4.0))),
               ),
             ),
           );
@@ -191,7 +231,8 @@ class _AuthScreenState extends State<AuthScreen> {
     );
   }
 
-  Widget phoneAuthWidget({Color? color, required String title, String? imagePath}) {
+  Widget phoneAuthWidget(
+      {Color? color, required String title, String? imagePath}) {
     return InkWell(
       onTap: () {
         Navigator.pushNamed(context, PhoneAuthScreen.route);
@@ -200,7 +241,8 @@ class _AuthScreenState extends State<AuthScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
         child: Container(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -228,13 +270,15 @@ class _AuthScreenState extends State<AuthScreen> {
     );
   }
 
-  Widget mailAuthWidget({Color? color, required String title, String? imagePath}) {
+  Widget mailAuthWidget(
+      {Color? color, required String title, String? imagePath}) {
     return InkWell(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
         child: Container(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -264,7 +308,8 @@ class _AuthScreenState extends State<AuthScreen> {
 
   Future _signInWithGoogle() async {
     final GoogleSignInAccount? googleUser = await (_googleSignIn.signIn());
-    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
     final AuthCredential credential = GoogleAuthProvider.credential(
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
@@ -290,7 +335,9 @@ class _AuthScreenState extends State<AuthScreen> {
     );
     print(appleCredential);
     final OAuthProvider oAuthProvider = OAuthProvider('apple.com');
-    final credential = oAuthProvider.credential(idToken: appleCredential.identityToken, accessToken: appleCredential.authorizationCode);
+    final credential = oAuthProvider.credential(
+        idToken: appleCredential.identityToken,
+        accessToken: appleCredential.authorizationCode);
     final User user = (await _auth.signInWithCredential(credential)).user!;
     print(user.email);
     if (user.email != null && user.email != "") {

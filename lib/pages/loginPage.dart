@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oxoo/pages/ChosseIntrestPage.dart';
 import 'package:oxoo/pages/CoontinuePage.dart';
 import 'package:oxoo/screen/landing_screen.dart';
 import 'package:oxoo/widgets/home_screen/commonWidget.dart';
@@ -20,20 +21,20 @@ class _LoginPageState extends State<LoginPage> {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color.fromARGB(255, 41, 37, 37).withOpacity(0.9),
       body: Stack(
         children: [
-          ColorFiltered(
-            colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.6), BlendMode.srcOver),
-            child: Image.asset(
-              "assets/optimus.jpg",
-              height: 400,
-              width: double.infinity,
-              fit: BoxFit.cover,
-              colorBlendMode: BlendMode.srcOver,
-            ),
-          ),
+          // ColorFiltered(
+          //   colorFilter: ColorFilter.mode(
+          //       Colors.black.withOpacity(0.6), BlendMode.srcOver),
+          //   child: Image.asset(
+          //     "assets/optimus.jpg",
+          //     height: 400,
+          //     width: double.infinity,
+          //     fit: BoxFit.cover,
+          //     colorBlendMode: BlendMode.srcOver,
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 17),
             child: Column(
@@ -73,15 +74,16 @@ class _LoginPageState extends State<LoginPage> {
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) {
-                        return LandingScreen();
+                        return ChooseInterest();
                       },
                     ));
                     // Get.to(LoginInput(type: "Sign Up"));
                   },
                   child: PrimaryButton(
                     title: "LOGIN",
-                    width: screenWidth * .8,
-                    height: 60,
+                    width: double.infinity,
+                    // screenWidth * .8,
+                    height: 69,
                   ),
                 ),
               ],

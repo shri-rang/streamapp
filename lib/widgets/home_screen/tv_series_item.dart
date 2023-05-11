@@ -14,14 +14,18 @@ class HomeScreenSeriesList extends StatelessWidget {
   final bool? isDark;
   double? cardWidth;
 
-  HomeScreenSeriesList({required this.latestTvSeries, this.title, this.isSearchWidget = false, this.isDark});
+  HomeScreenSeriesList(
+      {required this.latestTvSeries,
+      this.title,
+      this.isSearchWidget = false,
+      this.isDark});
 
   @override
   Widget build(BuildContext context) {
     cardWidth = MediaQuery.of(context).size.width / 3.1;
     return Container(
         padding: EdgeInsets.only(left: 2),
-        height: 232,
+        height: 242,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -37,8 +41,8 @@ class HomeScreenSeriesList extends StatelessWidget {
                     style: isDark!
                         ? CustomTheme.bodyText2White
                         : isSearchWidget
-                        ? CustomTheme.bodyText2
-                        : CustomTheme.coloredBodyText2,
+                            ? CustomTheme.bodyText2
+                            : CustomTheme.coloredBodyText2,
                   ),
                   if (!isSearchWidget)
                     HomeScreenMoreWidget(
@@ -61,20 +65,26 @@ class HomeScreenSeriesList extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) => TvSerisDetailsScreen(
-                            seriesID: latestTvSeries![index].videosId!.toString(),
-                            isPaid: latestTvSeries![index].isPaid==null?"1":latestTvSeries![index].isPaid!.toString(),
-                          )),
+                                seriesID:
+                                    latestTvSeries![index].videosId!.toString(),
+                                isPaid: latestTvSeries![index].isPaid == null
+                                    ? "1"
+                                    : latestTvSeries![index].isPaid!.toString(),
+                              )),
                     ),
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(5.0),
                         child: Card(
                           elevation: 1,
-                          color: isDark! ? CustomTheme.primaryColorDark : Colors.white,
+                          color: isDark!
+                              ? CustomTheme.primaryColorDark
+                              : Colors.white,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: <Widget>[
                               ClipRRect(
-                                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5.0)),
                                 child: Image.network(
                                   latestTvSeries![index].thumbnailUrl!,
                                   fit: BoxFit.fitWidth,
@@ -91,16 +101,31 @@ class HomeScreenSeriesList extends StatelessWidget {
                                     Text(
                                       latestTvSeries![index].title!,
                                       overflow: TextOverflow.ellipsis,
-                                      style:
-                                      isDark! ? CustomTheme.smallTextWhite.copyWith(fontSize: 13) : CustomTheme.smallText.copyWith(fontSize: 13),
+                                      style: isDark!
+                                          ? CustomTheme.smallTextWhite
+                                              .copyWith(fontSize: 13)
+                                          : CustomTheme.smallText
+                                              .copyWith(fontSize: 13),
                                     ),
                                     Row(
                                       children: [
-                                        Text(latestTvSeries![index].videoQuality.toString(),
-                                            textAlign: TextAlign.start, style: isDark! ? CustomTheme.smallTextWhite : CustomTheme.smallText),
+                                        Text(
+                                            latestTvSeries![index]
+                                                .videoQuality
+                                                .toString(),
+                                            textAlign: TextAlign.start,
+                                            style: isDark!
+                                                ? CustomTheme.smallTextWhite
+                                                : CustomTheme.smallText),
                                         Expanded(
-                                          child: Text(latestTvSeries![index].release.toString(),
-                                              textAlign: TextAlign.end, style: isDark! ? CustomTheme.smallTextWhite : CustomTheme.smallText),
+                                          child: Text(
+                                              latestTvSeries![index]
+                                                  .release
+                                                  .toString(),
+                                              textAlign: TextAlign.end,
+                                              style: isDark!
+                                                  ? CustomTheme.smallTextWhite
+                                                  : CustomTheme.smallText),
                                         ),
                                       ],
                                     )

@@ -17,19 +17,19 @@ class _ContinuePageState extends State<ContinuePage> {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color.fromARGB(255, 41, 37, 37).withOpacity(0.9),
       body: Stack(
         children: [
-          ColorFiltered(
-            colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.6), BlendMode.srcOver),
-            child: Image.asset(
-              "assets/posterbg.jpg",
-              height: 450,
-              fit: BoxFit.cover,
-              colorBlendMode: BlendMode.srcOver,
-            ),
-          ),
+          // ColorFiltered(
+          //   colorFilter: ColorFilter.mode(
+          //       Colors.black.withOpacity(0.6), BlendMode.srcOver),
+          //   child: Image.asset(
+          //     "assets/posterbg.jpg",
+          //     height: 450,
+          //     fit: BoxFit.cover,
+          //     colorBlendMode: BlendMode.srcOver,
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
@@ -83,7 +83,7 @@ class _ContinuePageState extends State<ContinuePage> {
                       builder: (context) {
                         return LandingScreen();
                       },
-                    )); 
+                    ));
                   },
                   child: radiusContainerWithIcon("Continue with Whatsapp",
                       "assets/apple_logo.png", context),
@@ -106,8 +106,8 @@ class _ContinuePageState extends State<ContinuePage> {
                   },
                   child: PrimaryButton(
                     title: "SIGN IN WITH PASSWORD",
-                    width: screenWidth * .8,
-                    height: 60,
+                    width: double.infinity,
+                    height: 69,
                   ),
                 ),
                 Row(
@@ -159,7 +159,7 @@ class _ContinuePageState extends State<ContinuePage> {
   Widget radiusContainerWithIcon(
       String title, String img, BuildContext context) {
     return Container(
-      height: 60,
+      height: 69,
       padding: EdgeInsets.only(left: 40),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),

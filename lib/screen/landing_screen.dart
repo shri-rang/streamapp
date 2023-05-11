@@ -81,7 +81,7 @@ class _LandingScreenState extends State<LandingScreen>
     });
   }
 
-  final _pageController = PageController(initialPage: 1);
+  final _pageController = PageController(initialPage: 0);
   List<String> _widgetTitle = [
     "OUCH",
     "Movies",
@@ -201,12 +201,16 @@ class _LandingScreenState extends State<LandingScreen>
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Image.asset('assets/logo.png', scale: 6),
-                        HelpMe().space(10.0),
-                        Text(
-                          AppContent.oxooLiveTV,
-                          style: CustomTheme.bodyText1White,
+                        Image.asset(
+                          'assets/ocuhfilms.png',
+                          scale: 4,
+                          width: 140,
                         ),
+                        HelpMe().space(10.0),
+                        // Text(
+                        //   AppContent.oxooLiveTV,
+                        //   style: CustomTheme.bodyText1White,
+                        // ),
                       ],
                     ),
                   ),

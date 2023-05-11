@@ -123,40 +123,40 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
 
         //genre
-        if (appConfig.genreVisible)
-          SliverToBoxAdapter(
-            child: Container(
-              margin: EdgeInsets.only(top: 5, bottom: 5),
-              child: HomeScreenGenreList(
-                genreList: homeContent.allGenre,
-                isDark: isDark,
-              ),
-            ),
-          ),
+        // if (appConfig.genreVisible)
+        //   SliverToBoxAdapter(
+        //     child: Container(
+        //       margin: EdgeInsets.only(top: 5, bottom: 5),
+        //       child: HomeScreenGenreList(
+        //         genreList: homeContent.allGenre,
+        //         isDark: isDark,
+        //       ),
+        //     ),
+        //   ),
         //Featured TV Channels
-        if (homeContent.featuredTvChannel!.isNotEmpty)
-          SliverToBoxAdapter(
-            child: Container(
-              margin: EdgeInsets.only(top: 5, bottom: 5),
-              child: HomeScreenLiveTVList(
-                  tvList: homeContent.featuredTvChannel,
-                  title: AppContent.featuredTvChannels,
-                  isSearchWidget: false,
-                  isDark: isDark,
-                  isFromHomeScreen: true),
-            ),
-          ),
+        // if (homeContent.featuredTvChannel!.isNotEmpty)
+        //   SliverToBoxAdapter(
+        //     child: Container(
+        //       margin: EdgeInsets.only(top: 5, bottom: 5),
+        //       child: HomeScreenLiveTVList(
+        //           tvList: homeContent.featuredTvChannel,
+        //           title: AppContent.featuredTvChannels,
+        //           isSearchWidget: false,
+        //           isDark: isDark,
+        //           isFromHomeScreen: true),
+        //     ),
+        //   ),
         //popular star
-        if (homeContent.popularStars!.isNotEmpty)
-          SliverToBoxAdapter(
-            child: Container(
-              margin: EdgeInsets.only(top: 2, bottom: 5, left: 8),
-              child: PopularStarWidget(
-                isDark: isDark!,
-                popularStars: homeContent.popularStars!,
-              ),
-            ),
-          ),
+        // if (homeContent.popularStars!.isNotEmpty)
+        //   SliverToBoxAdapter(
+        //     child: Container(
+        //       margin: EdgeInsets.only(top: 2, bottom: 5, left: 8),
+        //       child: PopularStarWidget(
+        //         isDark: isDark!,
+        //         popularStars: homeContent.popularStars!,
+        //       ),
+        //     ),
+        //   ),
 
         //Latest movies
         SliverToBoxAdapter(
