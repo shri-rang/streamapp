@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:oxoo/screen/landing_screen.dart';
 import 'package:oxoo/widgets/home_screen/commonWidget.dart';
 
@@ -18,140 +19,145 @@ class _ContinuePageState extends State<ContinuePage> {
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 41, 37, 37).withOpacity(0.9),
-      body: Stack(
-        children: [
-          // ColorFiltered(
-          //   colorFilter: ColorFilter.mode(
-          //       Colors.black.withOpacity(0.6), BlendMode.srcOver),
-          //   child: Image.asset(
-          //     "assets/posterbg.jpg",
-          //     height: 450,
-          //     fit: BoxFit.cover,
-          //     colorBlendMode: BlendMode.srcOver,
-          //   ),
-          // ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              // crossAxisAlignment: CrossAxisAlignment.center,
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            // ColorFiltered(
+            //   colorFilter: ColorFilter.mode(
+            //       Colors.black.withOpacity(0.6), BlendMode.srcOver),
+            //   child: Image.asset(
+            //     "assets/posterbg.jpg",
+            //     height: 450,
+            //     fit: BoxFit.cover,
+            //     colorBlendMode: BlendMode.srcOver,
+            //   ),
+            // ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                // crossAxisAlignment: CrossAxisAlignment.center,
 
-              children: [
-                SizedBox(
-                  height: 250,
-                ),
-                Text(
-                  "Let's you in",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline2!
-                      .copyWith(color: Colors.white),
-                ),
-                SizedBox(
-                  height: 40,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) {
-                        return LandingScreen();
-                      },
-                    ));
-                  },
-                  child: radiusContainerWithIcon(
-                      "Continue with Whatsapp", "assets/whatapp.png", context),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) {
-                        return LandingScreen();
-                      },
-                    ));
-                  },
-                  child: radiusContainerWithIcon("Continue with Whatsapp",
-                      "assets/google_logo.png", context),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) {
-                        return LandingScreen();
-                      },
-                    ));
-                  },
-                  child: radiusContainerWithIcon("Continue with Whatsapp",
-                      "assets/apple_logo.png", context),
-                ),
-                SizedBox(
-                  height: 40,
-                ),
-                or(context),
-                SizedBox(
-                  height: 40,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) {
-                        return LoginPage();
-                      },
-                    ));
-                    // Get.to(LoginInput(type: "Sign Up"));
-                  },
-                  child: PrimaryButton(
-                    title: "SIGN IN WITH PASSWORD",
-                    width: double.infinity,
-                    height: 69,
+                children: [
+                  SizedBox(
+                    height:
+                        // 240
+
+                        MediaQuery.of(context).size.height / 3.4,
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Don't have an account?",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline6!
-                          .copyWith(color: Colors.white),
-                      // style: GoogleFonts.nunito(
-                      //     color: Colors.grey,
-                      //     fontSize: 18,
-                      //     fontWeight: FontWeight.w500),
+                  Text(
+                    "Let's you in",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline2!
+                        .copyWith(color: Colors.white),
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) {
+                          return LandingScreen();
+                        },
+                      ));
+                    },
+                    child: radiusContainerWithIcon("Continue with Whatsapp",
+                        "assets/whatapp.png", context),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) {
+                          return LandingScreen();
+                        },
+                      ));
+                    },
+                    child: radiusContainerWithIcon("Continue with Whatsapp",
+                        "assets/google_logo.png", context),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) {
+                          return LandingScreen();
+                        },
+                      ));
+                    },
+                    child: radiusContainerWithIcon("Continue with Whatsapp",
+                        "assets/apple_logo.png", context),
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  or(context),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) {
+                          return LoginPage();
+                        },
+                      ));
+                      // Get.to(LoginInput(type: "Sign Up"));
+                    },
+                    child: PrimaryButton(
+                      title: "SIGN IN WITH PASSWORD",
+                      width: double.infinity,
+                      height: 69,
                     ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) {
-                            return LandingScreen();
-                          },
-                        ));
-                        // Get.to(LoginInput(type: "Sign Up"));
-                      },
-                      child: Text(
-                        "Sign up",
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Don't have an account?",
                         style: Theme.of(context)
                             .textTheme
                             .headline6!
-                            .copyWith(color: Colors.purple),
+                            .copyWith(color: Colors.white),
                         // style: GoogleFonts.nunito(
-                        //     color: Colors.white,
-                        //     decoration: TextDecoration.underline,
+                        //     color: Colors.grey,
                         //     fontSize: 18,
-                        //     fontWeight: FontWeight.w700),
+                        //     fontWeight: FontWeight.w500),
                       ),
-                    )
-                  ],
-                ),
-              ],
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) {
+                              return LandingScreen();
+                            },
+                          ));
+                          // Get.to(LoginInput(type: "Sign Up"));
+                        },
+                        child: Text(
+                          "Sign up",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline6!
+                              .copyWith(color: Colors.purple),
+                          // style: GoogleFonts.nunito(
+                          //     color: Colors.white,
+                          //     decoration: TextDecoration.underline,
+                          //     fontSize: 18,
+                          //     fontWeight: FontWeight.w700),
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -181,7 +187,7 @@ class _ContinuePageState extends State<ContinuePage> {
             style: Theme.of(context)
                 .textTheme
                 .headline6!
-                .copyWith(color: Colors.white),
+                .copyWith(fontSize: 20.sp, color: Colors.white),
           )
           // smallTexttwo(
           //   title,

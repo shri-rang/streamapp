@@ -1,4 +1,5 @@
 import 'package:admob_flutter/admob_flutter.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
@@ -47,5 +48,10 @@ Future<void> main() async {
   if (defaultTargetPlatform == TargetPlatform.android) {
     await InAppPurchase.instance.restorePurchases().then((value) => {});
   }
-  runApp(MyApp());
+  runApp(MyApp()
+      // DevicePreview(
+      //   enabled: true,
+      //   builder: (context) => MyApp(),
+      // ),
+      );
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:oxoo/bloc/bloc.dart';
 import 'package:oxoo/config.dart';
@@ -70,11 +71,33 @@ class _MyAppState extends State<MyApp> {
               create: (context) => FirebaseAuthBloc(Repository()),
             ),
           ],
-          child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            routes: Routes.getRoute(),
-            home: RenderFirstScreen(),
-          )),
+          child: ScreenUtilInit(
+            designSize: const Size(360, 690),
+            minTextAdapt: true,
+            splitScreenMode: true,
+            builder: (context, child) {
+              return MaterialApp(
+                debugShowCheckedModeBanner: false,
+                title: 'First Method',
+                routes: Routes.getRoute(),
+                // You can use the library anywhere in the app even in theme
+                theme: ThemeData(
+                  primarySwatch: Colors.blue,
+                  textTheme:
+                      Typography.englishLike2018.apply(fontSizeFactor: 1.sp),
+                ),
+                home: child,
+              );
+            },
+            child: RenderFirstScreen(),
+          )
+
+          //  MaterialApp(
+          //   debugShowCheckedModeBanner: false,
+          //   routes: Routes.getRoute(),
+          //   home: RenderFirstScreen(),
+          // )
+          ),
     );
   }
 

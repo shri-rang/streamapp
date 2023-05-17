@@ -41,6 +41,7 @@ import '../../widgets/tv_series/cast_crew_item_card.dart';
 import 'package:path_provider/path_provider.dart';
 
 class MovieDetailScreen extends StatefulWidget {
+  
   static final String route = "/MovieDetailScreen";
   final String movieID;
   final String? isPaid;
@@ -142,6 +143,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     PaymentConfig? paymentConfig = configService.paymentConfig();
     platform = Theme.of(context).platform;
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 41, 37, 37).withOpacity(0.9),
       body: Container(
         color: isDark! ? CustomTheme.primaryColorDark : Colors.white,
         child: BlocProvider<MovieDetailsBloc>(
@@ -187,248 +189,409 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
         return CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
-              child: Stack(
-                alignment: Alignment.bottomCenter,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                // alignment: Alignment.bottomCenter,
                 children: [
-                  Stack(
-                    alignment: Alignment.topCenter,
-                    children: [
-                      Stack(
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: 330.0,
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(2.0)),
-                              image: DecorationImage(
-                                image:
-                                    NetworkImage(movieDetailsModel.posterUrl),
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            height: 330.0,
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [
-                                  Colors.black87,
-                                  Colors.black87,
-                                  isDark! ? Colors.black : Colors.white
-                                ],
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 30.0, horizontal: 10.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            InkWell(
-                                onTap: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: Icon(
-                                  Icons.arrow_back_ios,
-                                  color: Colors.white,
-                                )),
-                            Row(
-                              children: [
-                                if (authUser != null)
-                                  favouriteMovie(authUser.userId, videoId),
-                                SizedBox(
-                                  width: 8.0,
-                                ),
-                                ShareApp(
-                                    title: movieDetailsModel.title,
-                                    color: Colors.white),
-                              ],
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
+                  // Stack(
+                  //   alignment: Alignment.topCenter,
+                  //   children: [
+                  //     // Stack(
+                  //     //   children: [
+                  //     //     // Container(
+                  //     //     //   width: MediaQuery.of(context).size.width,
+                  //     //     //   height: 330.0,
+                  //     //     //   decoration: BoxDecoration(
+                  //     //     //     borderRadius:
+                  //     //     //         BorderRadius.all(Radius.circular(2.0)),
+                  //     //     //     image: DecorationImage(
+                  //     //     //       image:
+                  //     //     //           NetworkImage(movieDetailsModel.posterUrl),
+                  //     //     //       fit: BoxFit.fill,
+                  //     //     //     ),
+                  //     //     //   ),
+                  //     //     // ),
+                  //     //     Container(
+                  //     //       height: 330.0,
+                  //     //       decoration: BoxDecoration(
+                  //     //         gradient: LinearGradient(
+                  //     //           begin: Alignment.topCenter,
+                  //     //           end: Alignment.bottomCenter,
+                  //     //           colors: [
+                  //     //             Colors.black87,
+                  //     //             Colors.black87,
+                  //     //             isDark! ? Colors.black : Colors.white
+                  //     //           ],
+                  //     //         ),
+                  //     //       ),
+                  //     //     )
+                  //     //   ],
+                  //     // ),
+                  //     Padding(
+                  //       padding: const EdgeInsets.symmetric(
+                  //           vertical: 30.0, horizontal: 10.0),
+                  //       child: Row(
+                  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //         children: [
+                  //           InkWell(
+                  //               onTap: () {
+                  //                 Navigator.of(context).pop();
+                  //               },
+                  //               child: Icon(
+                  //                 Icons.arrow_back_ios,
+                  //                 color: Colors.white,
+                  //               )),
+                  //           Row(
+                  //             children: [
+                  //               if (authUser != null)
+                  //                 favouriteMovie(authUser.userId, videoId),
+                  //               SizedBox(
+                  //                 width: 8.0,
+                  //               ),
+                  //               ShareApp(
+                  //                   title: movieDetailsModel.title,
+                  //                   color: Colors.white),
+                  //             ],
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     )
+                  //   ],
+                  // ),
+                  Container(
+                    margin: new EdgeInsets.symmetric(
+                        vertical: 10.0, horizontal: 15),
+                    width: 360,
+                    height: 400.0,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(6.0)),
+                        image: DecorationImage(
+                            image: NetworkImage(movieDetailsModel.thumbnailUrl),
+                            fit: BoxFit.fill)),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(
-                        bottom: 20.0, right: 8.0, left: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Text(
+                      // movieDetailsModel.title.length
+                      //  > 19
+                      //     ? movieDetailsModel.title.substring(0, 20) + "..."
+                      // :
+                      movieDetailsModel.title,
+                      maxLines: 1,
+                      style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.white,
+                        // fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Container(
+                      height: 15,
+                      width: MediaQuery.of(context).size.width - 170,
+                      child: ListView.builder(
+                          itemCount: movieDetailsModel.genre!.length > 2
+                              ? 2
+                              : movieDetailsModel.genre!.length,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Container(
+                                child: Text(
+                              index + 1 == movieDetailsModel.genre!.length
+                                  ? movieDetailsModel.genre!
+                                      .elementAt(index)
+                                      .name!
+                                  : movieDetailsModel.genre!
+                                          .elementAt(index)
+                                          .name! +
+                                      ", ",
+                              style: CustomTheme.bodyText3White,
+                            ));
+                          }),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: Row(
+                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          margin: new EdgeInsets.symmetric(vertical: 10.0),
-                          width: 140,
-                          height: 200.0,
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(6.0)),
-                              image: DecorationImage(
-                                  image: NetworkImage(
-                                      movieDetailsModel.thumbnailUrl),
-                                  fit: BoxFit.fill)),
-                        ),
-                        Container(
-                          height: 200.0,
-                          alignment: Alignment.bottomLeft,
-                          margin: new EdgeInsets.only(left: 10),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(
-                                movieDetailsModel.title.length > 19
-                                    ? movieDetailsModel.title.substring(0, 20) +
-                                        "..."
-                                    : movieDetailsModel.title,
-                                maxLines: 1,
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              HelpMe().space(8),
-                              Container(
-                                height: 15,
-                                width: MediaQuery.of(context).size.width - 170,
-                                child: ListView.builder(
-                                    itemCount:
-                                        movieDetailsModel.genre!.length > 2
-                                            ? 2
-                                            : movieDetailsModel.genre!.length,
-                                    scrollDirection: Axis.horizontal,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return Container(
-                                          child: Text(
-                                        index + 1 ==
-                                                movieDetailsModel.genre!.length
-                                            ? movieDetailsModel.genre!
-                                                .elementAt(index)
-                                                .name!
-                                            : movieDetailsModel.genre!
-                                                    .elementAt(index)
-                                                    .name! +
-                                                ", ",
-                                        style: CustomTheme.bodyText3White,
-                                      ));
-                                    }),
-                              ),
-                              HelpMe().space(8),
-                              Container(
-                                width: MediaQuery.of(context).size.width - 170,
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor:
-                                        CustomTheme.primaryColorRed,
-                                  ),
-                                  onPressed: () {
-                                    if (isUserValidSubscriber ||
-                                        movieDetailsModel.isPaid == "0") {
-                                      if (movieDetailsModel.videos!.length ==
-                                          1) {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    FlickPlayer(
-                                                      subtitles: movieDetailsModel
-                                                                  .videos!
-                                                                  .elementAt(0)
-                                                                  .subtitle!
-                                                                  .length !=
-                                                              0
-                                                          ? movieDetailsModel
-                                                              .videos!
-                                                              .elementAt(0)
-                                                              .subtitle
-                                                          : null,
-                                                      url: movieDetailsModel
+                        InkWell(
+                          onTap: () {
+                            if (isUserValidSubscriber ||
+                                movieDetailsModel.isPaid == "0") {
+                              if (movieDetailsModel.videos!.length == 1) {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => FlickPlayer(
+                                              subtitles: movieDetailsModel
                                                           .videos!
                                                           .elementAt(0)
-                                                          .fileUrl!,
-                                                      type: movieDetailsModel
-                                                              .videos!
-                                                              .elementAt(0)
-                                                              .fileType ??
-                                                          "mp4",
-                                                    )));
-                                      } else {
-                                        SelectServerDialog().createDialog(
-                                            context,
-                                            movieDetailsModel.videos!,
-                                            isDark);
-                                      }
-                                    } else {
-                                      // user is not logged in
-                                      //send user to login screen
-                                      if (authUser == null) {
-                                        SchedulerBinding.instance
-                                            .addPostFrameCallback((_) {
-                                          Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    AuthScreen(
-                                                      fromPaidScreen: true,
-                                                    )),
-                                          );
-                                        });
-                                      } else {
-                                        //user logged in
-                                        //but he/she hasn't any active subscription plan
-                                        PaidControllDialog().createDialog(
-                                            context,
-                                            isDark!,
-                                            authUser.userId.toString(),
-                                            widget.movieID);
-                                      }
-                                    }
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 14.0, horizontal: 10.0),
-                                    child: Text(AppContent.watchNow,
-                                        style: CustomTheme.bodyText3White),
-                                  ),
-                                ),
-                              ),
-
-                              //rent button
-                              if (isDownloadEnable)
-                                Container(
-                                  width:
-                                      MediaQuery.of(context).size.width - 170,
-                                  child: ElevatedButton(
-                                    onPressed: () async {
-                                      SelectDownloadDialog().createDialog(
-                                          context,
-                                          movieDetailsModel.downloadLinks!,
-                                          isDark,
-                                          downloadVideo);
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: CustomTheme.whiteColor,
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 14.0, horizontal: 10.0),
-                                      child: Text(AppContent.download,
-                                          style: CustomTheme.bodyText3),
-                                    ),
-                                  ),
-                                ),
-                            ],
+                                                          .subtitle!
+                                                          .length !=
+                                                      0
+                                                  ? movieDetailsModel.videos!
+                                                      .elementAt(0)
+                                                      .subtitle
+                                                  : null,
+                                              url: movieDetailsModel.videos!
+                                                  .elementAt(0)
+                                                  .fileUrl!,
+                                              type: movieDetailsModel.videos!
+                                                      .elementAt(0)
+                                                      .fileType ??
+                                                  "mp4",
+                                            )));
+                              } else {
+                                SelectServerDialog().createDialog(
+                                    context, movieDetailsModel.videos!, isDark);
+                              }
+                            } else {
+                              // user is not logged in
+                              //send user to login screen
+                              if (authUser == null) {
+                                SchedulerBinding.instance
+                                    .addPostFrameCallback((_) {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => AuthScreen(
+                                              fromPaidScreen: true,
+                                            )),
+                                  );
+                                });
+                              } else {
+                                //user logged in
+                                //but he/she hasn't any active subscription plan
+                                PaidControllDialog().createDialog(
+                                    context,
+                                    isDark!,
+                                    authUser.userId.toString(),
+                                    widget.movieID);
+                              }
+                            }
+                          },
+                          child: Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                                color: Colors.pink,
+                                borderRadius: BorderRadius.circular(100)),
+                            child: Icon(Icons.play_arrow),
                           ),
-                        )
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "Watch Now",
+                          style: TextStyle(color: Colors.white, fontSize: 17),
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width / 3.6,
+                        ),
+                        InkWell(
+                            onTap: () {
+                              SelectDownloadDialog().createDialog(
+                                  context,
+                                  movieDetailsModel.downloadLinks!,
+                                  isDark,
+                                  downloadVideo);
+                            },
+                            child: iconWTitle(Icons.download, "")),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        iconWTitle(Icons.share, ""),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        iconWTitle(Icons.bookmark_add_outlined, ""),
                       ],
                     ),
                   ),
+
+                  // Padding(
+                  //   padding: const EdgeInsets.only(
+                  //       bottom: 20.0, right: 8.0, left: 10),
+                  //   child: Row(
+                  //     children: [
+                  //       // Container(
+                  //       //   margin: new EdgeInsets.symmetric(vertical: 10.0),
+                  //       //   width: 140,
+                  //       //   height: 200.0,
+                  //       //   decoration: BoxDecoration(
+                  //       //       borderRadius:
+                  //       //           BorderRadius.all(Radius.circular(6.0)),
+                  //       //       image: DecorationImage(
+                  //       //           image: NetworkImage(
+                  //       //               movieDetailsModel.thumbnailUrl),
+                  //       //           fit: BoxFit.fill)),
+                  //       // ),
+                  //       Container(
+                  //         height: 200.0,
+                  //         alignment: Alignment.bottomLeft,
+                  //         margin: new EdgeInsets.only(left: 10),
+                  //         child: Column(
+                  //           mainAxisSize: MainAxisSize.min,
+                  //           crossAxisAlignment: CrossAxisAlignment.start,
+                  //           mainAxisAlignment: MainAxisAlignment.start,
+                  //           children: [
+                  //             // Text(
+                  //             //   movieDetailsModel.title.length > 19
+                  //             //       ? movieDetailsModel.title.substring(0, 20) +
+                  //             //           "..."
+                  //             //       : movieDetailsModel.title,
+                  //             //   maxLines: 1,
+                  //             //   style: TextStyle(
+                  //             //       fontSize: 16,
+                  //             //       color: Colors.white,
+                  //             //       fontWeight: FontWeight.bold),
+                  //             // ),
+                  //             // HelpMe().space(8),
+                  //             // Container(
+                  //             //   height: 15,
+                  //             //   width: MediaQuery.of(context).size.width - 170,
+                  //             //   child: ListView.builder(
+                  //             //       itemCount:
+                  //             //           movieDetailsModel.genre!.length > 2
+                  //             //               ? 2
+                  //             //               : movieDetailsModel.genre!.length,
+                  //             //       scrollDirection: Axis.horizontal,
+                  //             //       itemBuilder:
+                  //             //           (BuildContext context, int index) {
+                  //             //         return Container(
+                  //             //             child: Text(
+                  //             //           index + 1 ==
+                  //             //                   movieDetailsModel.genre!.length
+                  //             //               ? movieDetailsModel.genre!
+                  //             //                   .elementAt(index)
+                  //             //                   .name!
+                  //             //               : movieDetailsModel.genre!
+                  //             //                       .elementAt(index)
+                  //             //                       .name! +
+                  //             //                   ", ",
+                  //             //           style: CustomTheme.bodyText3White,
+                  //             //         ));
+                  //             //       }),
+                  //             // ),
+                  //             // HelpMe().space(8),
+                  //             // Container(
+                  //             //   width: MediaQuery.of(context).size.width - 170,
+                  //             //   child: ElevatedButton(
+                  //             //     style: ElevatedButton.styleFrom(
+                  //             //       backgroundColor:
+                  //             //           CustomTheme.primaryColorRed,
+                  //             //     ),
+                  //             //     onPressed: () {
+                  //             //       if (isUserValidSubscriber ||
+                  //             //           movieDetailsModel.isPaid == "0") {
+                  //             //         if (movieDetailsModel.videos!.length ==
+                  //             //             1) {
+                  //             //           Navigator.push(
+                  //             //               context,
+                  //             //               MaterialPageRoute(
+                  //             //                   builder: (context) =>
+                  //             //                       FlickPlayer(
+                  //             //                         subtitles: movieDetailsModel
+                  //             //                                     .videos!
+                  //             //                                     .elementAt(0)
+                  //             //                                     .subtitle!
+                  //             //                                     .length !=
+                  //             //                                 0
+                  //             //                             ? movieDetailsModel
+                  //             //                                 .videos!
+                  //             //                                 .elementAt(0)
+                  //             //                                 .subtitle
+                  //             //                             : null,
+                  //             //                         url: movieDetailsModel
+                  //             //                             .videos!
+                  //             //                             .elementAt(0)
+                  //             //                             .fileUrl!,
+                  //             //                         type: movieDetailsModel
+                  //             //                                 .videos!
+                  //             //                                 .elementAt(0)
+                  //             //                                 .fileType ??
+                  //             //                             "mp4",
+                  //             //                       )));
+                  //             //         } else {
+                  //             //           SelectServerDialog().createDialog(
+                  //             //               context,
+                  //             //               movieDetailsModel.videos!,
+                  //             //               isDark);
+                  //             //         }
+                  //             //       } else {
+                  //             //         // user is not logged in
+                  //             //         //send user to login screen
+                  //             //         if (authUser == null) {
+                  //             //           SchedulerBinding.instance
+                  //             //               .addPostFrameCallback((_) {
+                  //             //             Navigator.pushReplacement(
+                  //             //               context,
+                  //             //               MaterialPageRoute(
+                  //             //                   builder: (context) =>
+                  //             //                       AuthScreen(
+                  //             //                         fromPaidScreen: true,
+                  //             //                       )),
+                  //             //             );
+                  //             //           });
+                  //             //         } else {
+                  //             //           //user logged in
+                  //             //           //but he/she hasn't any active subscription plan
+                  //             //           PaidControllDialog().createDialog(
+                  //             //               context,
+                  //             //               isDark!,
+                  //             //               authUser.userId.toString(),
+                  //             //               widget.movieID);
+                  //             //         }
+                  //             //       }
+                  //             //     },
+                  //             //     child: Padding(
+                  //             //       padding: const EdgeInsets.symmetric(
+                  //             //           vertical: 14.0, horizontal: 10.0),
+                  //             //       child: Text(AppContent.watchNow,
+                  //             //           style: CustomTheme.bodyText3White),
+                  //             //     ),
+                  //             //   ),
+                  //             // ),
+
+                  //             // //rent button
+                  //             // if (isDownloadEnable)
+                  //             //   Container(
+                  //             //     width:
+                  //             //         MediaQuery.of(context).size.width - 170,
+                  //             //     child: ElevatedButton(
+                  //             //       onPressed: () async {
+                  //             //         SelectDownloadDialog().createDialog(
+                  //             //             context,
+                  //             //             movieDetailsModel.downloadLinks!,
+                  //             //             isDark,
+                  //             //             downloadVideo);
+                  //             //       },
+                  //             //       style: ElevatedButton.styleFrom(
+                  //             //         backgroundColor: CustomTheme.whiteColor,
+                  //             //       ),
+                  //             //       child: Padding(
+                  //             //         padding: const EdgeInsets.symmetric(
+                  //             //             vertical: 14.0, horizontal: 10.0),
+                  //             //         child: Text(AppContent.download,
+                  //             //             style: CustomTheme.bodyText3),
+                  //             //       ),
+                  //             //     ),
+                  //             //   ),
+                  //           ],
+                  //         ),
+                  //       )
+                  //     ],
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -446,87 +609,87 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         : CustomTheme.bodyText2),
               ),
             ),
-            if (movieDetailsModel.director!.length > 0)
-              SliverToBoxAdapter(
-                child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(AppContent.director,
-                        style: isDark!
-                            ? CustomTheme.bodyText1BoldWhite
-                            : CustomTheme.bodyText1Bold)),
-              ),
-            if (movieDetailsModel.director!.length > 0)
-              SliverList(
-                delegate: SliverChildListDelegate(
-                  List.generate(
-                    movieDetailsModel.director!.length,
-                    (index) => Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                          child: Text(
-                        index + 1 == movieDetailsModel.director!.length
-                            ? movieDetailsModel.director!.elementAt(index).name!
-                            : movieDetailsModel.director!
-                                    .elementAt(index)
-                                    .name! +
-                                ", ",
-                        style: isDark!
-                            ? CustomTheme.bodyText2White
-                            : CustomTheme.bodyText2,
-                      )),
-                    ),
-                  ).toList(),
-                ),
-              ),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                    "${AppContent.releaseOn}${movieDetailsModel.release}",
-                    style: isDark!
-                        ? CustomTheme.bodyText2White
-                        : CustomTheme.bodyText2),
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
-                child: Text(
-                  AppContent.genre,
-                  style: isDark!
-                      ? CustomTheme.bodyText2White
-                      : CustomTheme.bodyText2,
-                ),
-              ),
-            ),
-            if (movieDetailsModel.genre!.length > 0)
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8.0,
-                  ),
-                  child: Container(
-                    height: 20,
-                    child: ListView.builder(
-                        itemCount: movieDetailsModel.genre!.length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Container(
-                              child: Text(
-                            index + 1 == movieDetailsModel.genre!.length
-                                ? movieDetailsModel.genre!
-                                    .elementAt(index)
-                                    .name!
-                                : movieDetailsModel.genre!
-                                        .elementAt(index)
-                                        .name! +
-                                    ", ",
-                            style: CustomTheme.smallTextGrey,
-                          ));
-                        }),
-                  ),
-                ),
-              ),
+            // if (movieDetailsModel.director!.length > 0)
+            //   SliverToBoxAdapter(
+            //     child: Padding(
+            //         padding: const EdgeInsets.all(8.0),
+            //         child: Text(AppContent.director,
+            //             style: isDark!
+            //                 ? CustomTheme.bodyText1BoldWhite
+            //                 : CustomTheme.bodyText1Bold)),
+            //   ),
+            // if (movieDetailsModel.director!.length > 0)
+            //   SliverList(
+            //     delegate: SliverChildListDelegate(
+            //       List.generate(
+            //         movieDetailsModel.director!.length,
+            //         (index) => Padding(
+            //           padding: const EdgeInsets.all(8.0),
+            //           child: Container(
+            //               child: Text(
+            //             index + 1 == movieDetailsModel.director!.length
+            //                 ? movieDetailsModel.director!.elementAt(index).name!
+            //                 : movieDetailsModel.director!
+            //                         .elementAt(index)
+            //                         .name! +
+            //                     ", ",
+            //             style: isDark!
+            //                 ? CustomTheme.bodyText2White
+            //                 : CustomTheme.bodyText2,
+            //           )),
+            //         ),
+            //       ).toList(),
+            //     ),
+            //   ),
+            // SliverToBoxAdapter(
+            //   child: Padding(
+            //     padding: const EdgeInsets.all(8.0),
+            //     child: Text(
+            //         "${AppContent.releaseOn}${movieDetailsModel.release}",
+            //         style: isDark!
+            //             ? CustomTheme.bodyText2White
+            //             : CustomTheme.bodyText2),
+            //   ),
+            // ),
+            // SliverToBoxAdapter(
+            //   child: Padding(
+            //     padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
+            //     child: Text(
+            //       AppContent.genre,
+            //       style: isDark!
+            //           ? CustomTheme.bodyText2White
+            //           : CustomTheme.bodyText2,
+            //     ),
+            //   ),
+            // ),
+            // if (movieDetailsModel.genre!.length > 0)
+            //   SliverToBoxAdapter(
+            //     child: Padding(
+            //       padding: const EdgeInsets.symmetric(
+            //         horizontal: 8.0,
+            //       ),
+            //       child: Container(
+            //         height: 20,
+            //         child: ListView.builder(
+            //             itemCount: movieDetailsModel.genre!.length,
+            //             scrollDirection: Axis.horizontal,
+            //             itemBuilder: (BuildContext context, int index) {
+            //               return Container(
+            //                   child: Text(
+            //                 index + 1 == movieDetailsModel.genre!.length
+            //                     ? movieDetailsModel.genre!
+            //                         .elementAt(index)
+            //                         .name!
+            //                     : movieDetailsModel.genre!
+            //                             .elementAt(index)
+            //                             .name! +
+            //                         ", ",
+            //                 style: CustomTheme.smallTextGrey,
+            //               ));
+            //             }),
+            //       ),
+            //     ),
+            //   ),
             if (movieDetailsModel.castAndCrew!.length > 0)
               SliverToBoxAdapter(
                 child: Padding(
@@ -542,7 +705,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                 child: Container(
                   margin: const EdgeInsets.symmetric(
                       horizontal: 4.0, vertical: 6.0),
-                  height: 120.0,
+                  height: 110.0,
                   child: ListView.builder(
                       itemCount: movieDetailsModel.castAndCrew!.length,
                       scrollDirection: Axis.horizontal,
@@ -568,17 +731,25 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
               ),
             if (movieDetailsModel.relatedMovie!.length > 0)
               SliverToBoxAdapter(
-                child: Container(
-                  height: 200,
-                  margin: EdgeInsets.only(top: 2, bottom: 15),
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: movieDetailsModel.relatedMovie!.length,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) => MoviePoster(
-                        movie: movieDetailsModel.relatedMovie![index],
-                        isDark: isDark!),
-                  ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: 200,
+                      margin: EdgeInsets.only(top: 2, bottom: 15, left: 15),
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: movieDetailsModel.relatedMovie!.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) => MoviePoster(
+                            movie: movieDetailsModel.relatedMovie![index],
+                            isDark: isDark!),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                  ],
                 ),
               ),
 
@@ -881,6 +1052,14 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
         ),
         _space(width: 6.0),
       ],
+    );
+  }
+
+  Widget iconWTitle(IconData icon, String title) {
+    return Icon(
+      icon,
+      color: Colors.white,
+      size: 27,
     );
   }
 

@@ -127,9 +127,9 @@ abstract class CustomTheme {
   );
   static TextStyle bodyText2White = TextStyle(
     // fontFamily: 'NunitoSans',
-    fontWeight: FontWeight.w700,
+    // fontWeight: FontWeight.w700,
     color: whiteColor,
-    fontSize: 20,
+    fontSize: 17,
   );
   static TextStyle bodyTextgray2 = TextStyle(
     fontFamily: 'NunitoSans',

@@ -77,6 +77,8 @@ class HomeScreenMovieList extends StatelessWidget {
                   margin: EdgeInsets.only(right: 2),
                   child: InkWell(
                     onTap: () {
+                      print(latestMovies![index].videosId);
+
                       if (latestMovies![index].isTvseries == "1") {
                         Navigator.push(
                           context,
@@ -88,7 +90,7 @@ class HomeScreenMovieList extends StatelessWidget {
                           ),
                         );
                       } else {
-                        Navigator.pushNamed(context, MovieDetailScreen.route,
+                        Navigator.pushNamed(context, MovieDetailScreen.route,   
                             arguments: {
                               "movieID": latestMovies![index].videosId
                             });

@@ -1,9 +1,11 @@
 import 'dart:io';
 
 import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:oxoo/pages/CoontinuePage.dart';
 import '../../screen/auth/auth_screen.dart';
 import '../../server/repository.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
@@ -75,6 +77,7 @@ class _LandingScreenState extends State<LandingScreen>
         .addPostFrameCallback((_) => configOneSignal(context));
   }
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -103,7 +106,7 @@ class _LandingScreenState extends State<LandingScreen>
     MoviesScreen(),
     LiveTvScreen(),
     TvSeriesScreen(),
-    FavouriteScreen()
+    // FavouriteScreen()
   ];
 
   @override
@@ -184,10 +187,13 @@ class _LandingScreenState extends State<LandingScreen>
   Widget build(BuildContext context) {
     printLog("_LandingScreenState");
 
-    return Scaffold(
+    return SafeArea(
+      child: Scaffold(
+        key: _scaffoldKey,
+
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.black.withOpacity(0.9),
-        appBar: _renderAppBar() as PreferredSizeWidget?,
+        // appBar: _renderAppBar() as PreferredSizeWidget?,
         drawer: Drawer(
           child: Container(
             color: isDark
@@ -251,227 +257,59 @@ class _LandingScreenState extends State<LandingScreen>
         //   },
         // ),
         // floatingActionButtonLocation: FloatingActionButtonLocation.startDocked,
-        bottomNavigationBar: Container(
-          height: 100,
-          child: AnimatedNotchBottomBar(
-            pageController: _pageController,
-            color: Color.fromARGB(255, 55, 52, 52),
-            showLabel: false,
-            notchColor: Colors.pink,
-            bottomBarItems: [
-              const BottomBarItem(
-                inActiveItem: Icon(
-                  Icons.home_filled,
-                  color: Colors.white,
-                  // size: 30,
-                ),
-                activeItem: Icon(
-                  Icons.home_filled,
-                  color: Colors.white,
-                  // size: 30,
-                ),
-                itemLabel: 'Page 1',
-              ),
-              const BottomBarItem(
-                inActiveItem: Icon(
-                  Icons.search,
-                  color: Colors.white,
-                ),
-                activeItem: Icon(
-                  Icons.search,
-                  color: Colors.white,
-                ),
-                itemLabel: 'Page 2',
-              ),
-
-              ///svg example
-              BottomBarItem(
-                inActiveItem: Icon(
-                  Icons.cloud,
-                  color: Colors.white,
-                ),
-                activeItem: Icon(
-                  Icons.cloud,
-                  color: Colors.white,
-                ),
-                itemLabel: 'Page 3',
-              ),
-              const BottomBarItem(
-                inActiveItem: Icon(
-                  Icons.download,
-                  color: Colors.white,
-                ),
-                activeItem: Icon(
-                  Icons.download,
-                  color: Colors.white,
-                ),
-                itemLabel: 'Page 4',
-              ),
-              const BottomBarItem(
-                inActiveItem: Icon(
-                  Icons.person,
-                  color: Colors.white,
-                ),
-                activeItem: Icon(
-                  Icons.person,
-                  color: Colors.white,
-                ),
-                itemLabel: 'Page 5',
-              ),
-            ],
-            onTap: (index) {
-              /// control your animation using page controller
+        bottomNavigationBar: CurvedNavigationBar(
+          backgroundColor: Colors.transparent,
+          height: 60,
+          
+          // Color.fromARGB(255, 41, 37, 37).withOpacity(0.9),
+          buttonBackgroundColor: Colors.purple,
+          animationCurve: Curves.easeInOut,
+          color: Color.fromARGB(255, 41, 37, 37),
+          items: <Widget>[
+            Icon(
+              Icons.home_filled,
+              color: Colors.white,
+              size: 35,
+            ),
+            Icon(
+              Icons.search,
+              color: Colors.white,
+              size: 35,
+            ),
+            Icon(
+              Icons.download,
+              color: Colors.white,
+              size: 35,
+            ),
+            Icon(
+              Icons.person,
+              color: Colors.white,
+              size: 35,
+            ),
+            Icon(
+              Icons.menu_rounded,
+              color: Colors.white,
+              size: 35,
+            ),
+            // Icon(Icons.add, size: 30),
+            // Icon(Icons.list, size: 30),
+            // Icon(Icons.compare_arrows, size: 30),
+          ],
+          onTap: (index) {
+            //Handle button tap
+            if (index == 4) {
+              _scaffoldKey.currentState!.openDrawer();
+            } else {
               _pageController.animateToPage(
                 index,
                 duration: const Duration(milliseconds: 500),
                 curve: Curves.easeIn,
               );
-            },
-          ),
-        )
-        //  BottomAppBar(
-        //   //bottom navigation bar on scaffold
-        //   color: Colors.black.withOpacity(0.9),
-        //   shape: CircularNotchedRectangle(), //shape of notch
-        //   notchMargin:
-        //       5, //notche margin between floating button and bottom appbar
-        //   child: Container(
-        //     height: 55,
-        //     child: Row(
-        //       //children inside bottom appbar
-        //       // mainAxisSize: MainAxisSize.max,d
-        //       crossAxisAlignment: CrossAxisAlignment.center,
-        //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //       children: <Widget>[
-        //         Padding(
-        //           padding: EdgeInsets.only(left: 90),
-        //           child: IconButton(
-        //             icon: Icon(
-        //               Icons.search,
-        //               color: Colors.white,
-        //               size: 40,
-        //             ),
-        //             onPressed: () {
-        //               _selectedIndex = 1;
-        //               setState(() {});
-        //             },
-        //           ),
-        //         ),
-        //         IconButton(
-        //           icon: Icon(
-        //             Icons.cloud,
-        //             size: 40,
-        //             color: Colors.white,
-        //           ),
-        //           onPressed: () {
-        //             _selectedIndex = 2;
-        //             setState(() {});
-        //           },
-        //         ),
-        //         IconButton(
-        //           icon: Icon(
-        //             Icons.download_sharp,
-        //             size: 40,
-        //             color: Colors.white,
-        //           ),
-        //           onPressed: () {
-        //             _selectedIndex = 3;
-        //             setState(() {});
-        //           },
-        //         ),
-        //         IconButton(
-        //           icon: Icon(
-        //             Icons.people,
-        //             size: 40,
-        //             color: Colors.white,
-        //           ),
-        //           onPressed: () {
-        //             _selectedIndex = 4;
-        //             setState(() {});
-        //           },
-        //         ),
-        //       ],
-        //     ),
-        //   ),
-        // ),
-
-        // bottomNavigationBar: BottomNavigationBar(
-        //   items: <BottomNavigationBarItem>[
-        //     BottomNavigationBarItem(
-        //       activeIcon: Image.asset(
-        //         'assets/bottom_nav/icon_home.png',
-        //         color: CustomTheme.primaryColorRed,
-        //         scale: 3,
-        //       ),
-        //       icon: Image.asset(
-        //         'assets/bottom_nav/icon_home.png',
-        //         color: CustomTheme.grey_transparent2,
-        //         scale: 3,
-        //       ),
-        //       label: AppContent.home,
-        //     ),
-        //     BottomNavigationBarItem(
-        //       activeIcon: Image.asset(
-        //         'assets/bottom_nav/icon_movie.png',
-        //         color: CustomTheme.primaryColorRed,
-        //         scale: 3,
-        //       ),
-        //       icon: Image.asset(
-        //         'assets/bottom_nav/icon_movie.png',
-        //         color: CustomTheme.grey_transparent2,
-        //         scale: 3,
-        //       ),
-        //       label: AppContent.movies,
-        //     ),
-        //     BottomNavigationBarItem(
-        //       activeIcon: Image.asset(
-        //         'assets/bottom_nav/icon_tv.png',
-        //         color: CustomTheme.primaryColorRed,
-        //         scale: 3,
-        //       ),
-        //       icon: Image.asset(
-        //         'assets/bottom_nav/icon_tv.png',
-        //         color: CustomTheme.grey_transparent2,
-        //         scale: 3,
-        //       ),
-        //       label: AppContent.live,
-        //     ),
-        //     BottomNavigationBarItem(
-        //       activeIcon: Image.asset(
-        //         'assets/bottom_nav/icon_tv_series.png',
-        //         color: CustomTheme.primaryColorRed,
-        //         scale: 3,
-        //       ),
-        //       icon: Image.asset(
-        //         'assets/bottom_nav/icon_tv_series.png',
-        //         color: CustomTheme.grey_transparent2,
-        //         scale: 3,
-        //       ),
-        //       label: AppContent.series,
-        //     ),
-        //     BottomNavigationBarItem(
-        //       activeIcon: Image.asset(
-        //         'assets/bottom_nav/icon_favourite.png',
-        //         color: CustomTheme.primaryColorRed,
-        //         scale: 3,
-        //       ),
-        //       icon: Image.asset(
-        //         'assets/bottom_nav/icon_favourite.png',
-        //         color: CustomTheme.grey_transparent2,
-        //         scale: 3,
-        //       ),
-        //       label: AppContent.favourite,
-        //     ),
-        //   ],
-        //   backgroundColor:
-        //       isDark ? CustomTheme.primaryColorDark : CustomTheme.whiteColor,
-        //   currentIndex: _selectedIndex,
-        //   selectedItemColor: CustomTheme.primaryColorRed,
-        //   onTap: _onItemTapped,
-        //   unselectedItemColor: CustomTheme.grey_transparent2,
-        //   type: BottomNavigationBarType.fixed,
-        // ),
-        );
+            }
+          },
+        ),
+      ),
+    );
   }
 
   //renderAppBar
@@ -773,6 +611,11 @@ class _LandingScreenState extends State<LandingScreen>
                   break;
                 case 8:
                   Navigator.pop(context);
+                  // Navigator.of(context).push(MaterialPageRoute(
+                  //   builder: (context) {
+                  //     return ContinuePage();
+                  //   },
+                  // ));
                   Navigator.pushNamed(context, AuthScreen.route);
                   break;
                 case 10:
