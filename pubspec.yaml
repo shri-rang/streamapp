@@ -78,6 +78,7 @@ dependencies:
 dev_dependencies:
   build_runner: ^2.0.6
   flutter_launcher_icons: ^0.10.0
+  change_app_package_name: ^1.1.0
   flutter_test:
     sdk: flutter
   hive_generator: ^1.1.0

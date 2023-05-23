@@ -1,4 +1,4 @@
-package com.oxoo.spagreen
+package com.lai.bhari
 
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.android.FlutterFragmentActivity

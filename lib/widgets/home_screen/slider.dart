@@ -137,6 +137,9 @@ class ImageSlider extends StatelessWidget {
                           child: PrimaryButton(
                             title: "PLAY",
                             width: 100,
+                            onTap: () {
+                              
+                            },
                             // screenWidth * .8,
                             height: 40,
                           ),

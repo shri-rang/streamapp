@@ -5,6 +5,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:oxoo/colors.dart';
 import 'package:oxoo/pages/CoontinuePage.dart';
 import '../../screen/auth/auth_screen.dart';
 import '../../server/repository.dart';
@@ -208,12 +209,14 @@ class _LandingScreenState extends State<LandingScreen>
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Image.asset(
-                          'assets/ocuhfilms.png',
+                          'assets/LaiBharee.jpg',
                           scale: 4,
+                          height: 120,
                           width: 140,
                         ),
                         HelpMe().space(10.0),
                         // Text(
+
                         //   AppContent.oxooLiveTV,
                         //   style: CustomTheme.bodyText1White,
                         // ),
@@ -260,9 +263,9 @@ class _LandingScreenState extends State<LandingScreen>
         bottomNavigationBar: CurvedNavigationBar(
           backgroundColor: Colors.transparent,
           height: 60,
-          
+
           // Color.fromARGB(255, 41, 37, 37).withOpacity(0.9),
-          buttonBackgroundColor: Colors.purple,
+          buttonBackgroundColor: orange,
           animationCurve: Curves.easeInOut,
           color: Color.fromARGB(255, 41, 37, 37),
           items: <Widget>[

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:oxoo/colors.dart';
 import 'package:oxoo/pages/ChosseIntrestPage.dart';
 import 'package:oxoo/pages/CoontinuePage.dart';
 import 'package:oxoo/screen/landing_screen.dart';
@@ -21,7 +23,7 @@ class _LoginPageState extends State<LoginPage> {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 41, 37, 37).withOpacity(0.9),
+      backgroundColor: orange,
       body: SingleChildScrollView(
         child: Stack(
           children: [
@@ -41,20 +43,24 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 250,
+                    height: 300,
                   ),
                   Center(
                     child: Text(
                       "Login to your",
-                      style: Theme.of(context).textTheme.headline4!.copyWith(
-                          fontWeight: FontWeight.bold, color: Colors.white),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                   Center(
                     child: Text(
                       "account",
-                      style: Theme.of(context).textTheme.headline4!.copyWith(
-                          fontWeight: FontWeight.bold, color: Colors.white),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                   SizedBox(
@@ -64,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                       TextInputType.number, (p0) {},
                       preffixicon: Icon(
                         Icons.call,
-                        color: Colors.pink,
+                        color: orange,
                       )),
                   SizedBox(
                     height: 20,
@@ -73,26 +79,59 @@ class _LoginPageState extends State<LoginPage> {
                       TextInputType.name, (p0) {},
                       preffixicon: Icon(
                         Icons.lock,
-                        color: Colors.pink,
+                        color: orange,
                       )),
                   SizedBox(
                     height: 30,
                   ),
-                  GestureDetector(
+                  PrimaryButton(
+                    title: "LOGIN",
+                    width: double.infinity,
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) {
-                          return ChooseInterest();
+                          return LandingScreen();
                         },
                       ));
-                      // Get.to(LoginInput(type: "Sign Up"));
                     },
-                    child: PrimaryButton(
-                      title: "LOGIN",
-                      width: double.infinity,
-                      // screenWidth * .8,
-                      height: 69,
-                    ),
+                    // screenWidth * .8,
+                    height: 50,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Don't have an account?",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16.sp,
+                              color: Colors.white)
+                          // style: GoogleFonts.nunito(
+                          //     color: Colors.grey,
+                          //     fontSize: 18,
+                          //     fontWeight: FontWeight.w500),
+                          ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) {
+                              return LandingScreen();
+                            },
+                          ));
+                          // Get.to(LoginInput(type: "Sign Up"));
+                        },
+                        child: Text("Sign up",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16.sp,
+                                color: grey)
+                            // style: GoogleFonts.nunito(
+                            //     color: Colors.white,
+                            //     decoration: TextDecoration.underline,
+                            //     fontSize: 18,
+                            //     fontWeight: FontWeight.w700),
+                            ),
+                      )
+                    ],
                   ),
                 ],
               ),

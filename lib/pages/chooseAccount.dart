@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:oxoo/colors.dart';
 import 'package:oxoo/screen/landing_screen.dart';
 
 class ChooseAccount extends StatefulWidget {
@@ -52,6 +53,7 @@ class _ChooseAccountState extends State<ChooseAccount> {
               itemCount: whosWatching.length,
               itemBuilder: (context, index) {
                 return InkWell(
+                  
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) {
@@ -97,8 +99,7 @@ class _ChooseAccountState extends State<ChooseAccount> {
                 width: 100,
                 height: 45,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Colors.purple),
+                    borderRadius: BorderRadius.circular(15), color: orange),
                 child:
                     // ElevatedButton(
                     //     style: ElevatedButton.styleFrom(

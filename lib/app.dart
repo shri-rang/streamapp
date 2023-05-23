@@ -5,6 +5,7 @@ import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:oxoo/bloc/bloc.dart';
 import 'package:oxoo/config.dart';
 import 'package:oxoo/pages/CoontinuePage.dart';
+import 'package:oxoo/pages/SwipePage.dart';
 import 'package:provider/provider.dart';
 import '../../bloc/auth/registration_bloc.dart';
 import '../../service/authentication_service.dart';
@@ -78,7 +79,7 @@ class _MyAppState extends State<MyApp> {
             builder: (context, child) {
               return MaterialApp(
                 debugShowCheckedModeBanner: false,
-                title: 'First Method',
+                title: '',
                 routes: Routes.getRoute(),
                 // You can use the library anywhere in the app even in theme
                 theme: ThemeData(
@@ -133,7 +134,7 @@ class RenderFirstScreen extends StatelessWidget {
   Widget renderFirstScreen(bool isMandatoryLogin) {
     print(isMandatoryLogin);
     if (isMandatoryLogin) {
-      return ContinuePage();
+      return SwipePage();
     } else {
       return LandingScreen();
     }

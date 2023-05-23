@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:oxoo/colors.dart';
 
 Widget or(BuildContext context) {
   return Row(
@@ -6,7 +8,7 @@ Widget or(BuildContext context) {
       Container(
           width: MediaQuery.of(context).size.width / 2.3,
           child: Divider(
-            color: Colors.grey,
+            color: grey,
           )),
       Text(
         "or",
@@ -18,7 +20,7 @@ Widget or(BuildContext context) {
       Container(
           width: MediaQuery.of(context).size.width / 2.4,
           child: Divider(
-            color: Colors.grey,
+            color: grey,
           )),
     ],
   );
@@ -57,15 +59,22 @@ Widget textField(
       suffixIcon: suffix,
       prefixIcon: preffixicon,
       filled: true,
-      fillColor: Colors.white.withOpacity(0.2),
+
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10.0),
+        borderSide: BorderSide(width: 2, color: Colors.white),
+      ),
+      fillColor: grey,
       suffixIconConstraints: BoxConstraints(minWidth: 2, minHeight: 10),
-      prefixStyle: TextStyle(color: Colors.white),
+      prefixStyle: TextStyle(
+        color: Colors.white,
+      ),
       // labelText: lableText,
 
-      hintStyle: Theme.of(context)
-          .textTheme
-          .headline6!
-          .copyWith(color: Colors.white.withOpacity(0.4)),
+      hintStyle: TextStyle(
+          color: Colors.white.withOpacity(0.4),
+          fontSize: 15.sp,
+          fontWeight: FontWeight.bold),
       hintText: lableText,
 
       // labelStyle: Theme.of(context)
@@ -75,11 +84,19 @@ Widget textField(
       // border: Border.all()
       // floatingLabelBehavior: FloatingLabelBehavior.always,
       // prefixText: "+91",
-      disabledBorder: InputBorder.none,
-      border: InputBorder.none,
-      focusedBorder: InputBorder.none,
-      enabledBorder: InputBorder.none,
-      errorBorder: InputBorder.none,
+      // disabledBorder: InputBorder.none,
+      // border: InputBorder.none,
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10.0),
+        borderSide: BorderSide(width: 2, color: Colors.white),
+      ),
+
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10.0),
+        borderSide: BorderSide(width: 2, color: grey),
+      ),
+
+      // errorBorder: InputBorder.none,
 
       // focusedBorder: OutlineInputBorder(
       //   borderSide: BorderSide(

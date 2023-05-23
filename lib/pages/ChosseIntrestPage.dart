@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oxoo/colors.dart';
 import 'package:oxoo/pages/CoontinuePage.dart';
 import 'package:oxoo/pages/chooseAccount.dart';
 
@@ -92,13 +93,13 @@ class _ChooseInterestState extends State<ChooseInterest> {
                         // width: 10,
                         decoration: BoxDecoration(
                             color: listOfIntrestBool[index]
-                                ? Colors.purple.withOpacity(0.3)
+                                ? orange.withOpacity(0.3)
                                 : Color.fromARGB(255, 41, 37, 37)
                                     .withOpacity(0.9),
                             borderRadius: BorderRadius.circular(120),
                             border: Border.all(
                                 color: listOfIntrestBool[index]
-                                    ? Colors.purple
+                                    ? orange
                                     : Colors.black,
                                 width: 4)),
                         child: Center(
@@ -156,29 +157,24 @@ class _ChooseInterestState extends State<ChooseInterest> {
             SizedBox(
               height: 10,
             ),
-            GestureDetector(
+            PrimaryButton(
+              title: "CONTINUE",
+              width: double.infinity,
+              height: 69,
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) {
                     return ChooseAccount();
                   },
                 ));
-                // Get.to(LoginInput(type: "Sign Up"));
               },
-              child: PrimaryButton(
-                title: "CONTINUE",
-                width: double.infinity,
-                height: 69,
-              ),
             ),
             TextButton(
               onPressed: () {},
               child: Text(
                 "SKIP",
                 style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.purple),
+                    fontSize: 20, fontWeight: FontWeight.bold, color: orange),
               ),
               style: TextButton.styleFrom(),
             )
