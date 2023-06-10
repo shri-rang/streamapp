@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oxoo/colors.dart';
 import '../../models/home_content.dart';
 import '../../screen/movie_by_genere_id.dart';
 import '../../screen/movie/movie_details_screen.dart';
@@ -66,7 +67,7 @@ class HomeScreenGenreMoviesList extends StatelessWidget {
                         child: Icon(
                           Icons.chevron_right_rounded,
                           size: 35,
-                          color: Colors.purple,
+                          color: red,
                         ),
                         //  Text(
                         //   AppContent.more,

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:oxoo/colors.dart';
 
 abstract class CustomTheme {
-  static const Color primaryColor = const Color(0xFFea202e);
+  static Color primaryColor = red;
   static const Color primaryColorRed = const Color(0xFFea202e);
   static const Color colorAccent = const Color(0xFFDB8501);
   static const Color primaryColorDark = Colors.black;
@@ -88,93 +89,94 @@ abstract class CustomTheme {
     end: Alignment.bottomCenter,
   );
 
-  static const nav_bg_gradient = const LinearGradient(
-    colors: const [primaryColor, colorAccent],
+  final nav_bg_gradient = LinearGradient(
+    colors: [primaryColor, colorAccent],
     stops: const [0.0, 1.0],
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
   );
 
   static TextStyle bodyText1 = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Gill Sans MT Condensed',
     fontWeight: FontWeight.w500,
     color: black_window,
     fontSize: 18,
   );
   static TextStyle bodyText1White = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Gill Sans MT Condensed',
     fontWeight: FontWeight.w500,
     color: Colors.white,
     fontSize: 18,
   );
   static TextStyle bodyText1Bold = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Gill Sans MT Condensed',
     fontWeight: FontWeight.bold,
     color: black_window,
     fontSize: 15,
   );
   static TextStyle bodyText1BoldWhite = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Gill Sans MT Condensed',
     fontWeight: FontWeight.bold,
     color: whiteColor,
     fontSize: 15,
   );
   static TextStyle bodyText2 = TextStyle(
-    // fontFamily: 'NunitoSans',
+    fontFamily: 'Gill Sans MT Condensed',
+    // fontFamily: 'Gill Sans MT Condensed',
     fontWeight: FontWeight.w700,
     color: black_window,
     fontSize: 20,
   );
   static TextStyle bodyText2White = TextStyle(
-    // fontFamily: 'NunitoSans',
+    fontFamily: 'Gill Sans MT Condensed',
     // fontWeight: FontWeight.w700,
     color: whiteColor,
     fontSize: 17,
   );
   static TextStyle bodyTextgray2 = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Gill Sans MT Condensed',
     fontWeight: FontWeight.w700,
     color: grey_60,
     fontSize: 15,
   );
   static TextStyle bodyTextgray = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Gill Sans MT Condensed',
     fontWeight: FontWeight.w300,
     color: Colors.grey.shade500,
     fontSize: 15,
   );
   static TextStyle coloredBodyText1 = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Gill Sans MT Condensed',
     fontWeight: FontWeight.w500,
     color: primaryColor,
     fontSize: 18,
   );
   static TextStyle displayTextColored = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Gill Sans MT Condensed',
     fontWeight: FontWeight.w500,
     color: colorAccent,
     fontSize: 25,
   );
   static TextStyle coloredBodyText2 = TextStyle(
-    // fontFamily: 'NunitoSans',
+    fontFamily: 'Gill Sans MT Condensed',
     fontWeight: FontWeight.w700,
     color: primaryColorRed,
     fontSize: 20,
   );
   static TextStyle orangeColoredBodyText = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Gill Sans MT Condensed',
     fontWeight: FontWeight.w700,
     color: primaryColor,
     fontSize: 15,
   );
   static TextStyle coloredBodyText2Bold = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Gill Sans MT Condensed',
     fontWeight: FontWeight.bold,
     color: colorAccent,
     fontSize: 16,
   );
   static TextStyle coloredBodyText3 = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Gill Sans MT Condensed',
     color: colorAccent,
     fontSize: 12,
   );
@@ -184,6 +186,7 @@ abstract class CustomTheme {
     fontSize: 14,
   );
   static TextStyle bodyText3White = TextStyle(
+    fontFamily: 'Gill Sans MT Condensed',
     fontWeight: FontWeight.w500,
     color: whiteColor,
     fontSize: 14,
@@ -204,110 +207,110 @@ abstract class CustomTheme {
   static TextStyle bodyText2BoldWhite = TextStyle(
       fontWeight: FontWeight.bold, fontSize: 16.0, color: Colors.white);
   static TextStyle subText2 = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Gill Sans MT Condensed',
     color: grey_60,
     fontSize: 12,
   );
   static TextStyle subTextBold = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Gill Sans MT Condensed',
     color: black_window,
     fontWeight: FontWeight.bold,
     fontSize: 12,
   );
   static TextStyle subTextBoldWhite = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Gill Sans MT Condensed',
     color: whiteColor,
     fontWeight: FontWeight.bold,
     fontSize: 12,
   );
 
   static TextStyle coloredSubText = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Gill Sans MT Condensed',
     color: colorAccent,
     fontSize: 14,
   );
 
   static TextStyle authBtnTitle = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Gill Sans MT Condensed',
     color: whiteColor,
     fontSize: 16,
     fontWeight: FontWeight.bold,
   );
   static TextStyle authBtnTitleBlack = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Gill Sans MT Condensed',
     color: Colors.black,
     fontSize: 16,
     fontWeight: FontWeight.bold,
   );
   static TextStyle authTitle = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Gill Sans MT Condensed',
     color: primaryColor,
     fontSize: 18,
     fontWeight: FontWeight.bold,
   );
   static TextStyle authTitleWhite = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Gill Sans MT Condensed',
     color: Colors.white,
     fontSize: 15,
     fontWeight: FontWeight.bold,
   );
   static TextStyle authTitleBlack = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Gill Sans MT Condensed',
     color: Colors.black,
     fontSize: 15,
     fontWeight: FontWeight.bold,
   );
   static TextStyle authTitleGrey = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Gill Sans MT Condensed',
     color: grey_transparent2,
     fontSize: 15,
     fontWeight: FontWeight.bold,
   );
   static TextStyle textFieldTitlePrimaryColored = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Gill Sans MT Condensed',
     color: colorAccent,
     fontSize: 14,
     fontWeight: FontWeight.bold,
   );
 
   static TextStyle textFieldTitlePrimaryWhite = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Gill Sans MT Condensed',
     color: whiteColor,
     fontSize: 14,
     fontWeight: FontWeight.bold,
   );
 
   static TextStyle smallTextGrey = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Gill Sans MT Condensed',
     color: grey_transparent2,
     fontSize: 13,
     fontWeight: FontWeight.normal,
   );
   static TextStyle smallText = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Gill Sans MT Condensed',
     fontSize: 12,
     fontWeight: FontWeight.normal,
   );
   static TextStyle smallTextWhite = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Gill Sans MT Condensed',
     fontSize: 12,
     color: Colors.white,
     fontWeight: FontWeight.normal,
   );
   static TextStyle smallTextStyleColored = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Gill Sans MT Condensed',
     color: primaryColor,
     fontSize: 12,
     fontWeight: FontWeight.bold,
   );
   static TextStyle textStyleWhite15 = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Gill Sans MT Condensed',
     color: whiteColor,
     fontSize: 15,
     fontWeight: FontWeight.normal,
   );
   static TextStyle textStyleBlack15 = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Gill Sans MT Condensed',
     color: Colors.black,
     fontSize: 15,
     fontWeight: FontWeight.normal,

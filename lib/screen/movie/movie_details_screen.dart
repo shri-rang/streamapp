@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:isolate';
 import 'dart:ui';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:oxoo/bloc/movie_details/movie_details_bloc.dart';
+import 'package:oxoo/colors.dart';
 import 'package:oxoo/models/videos.dart';
 import 'package:oxoo/widgets/movie/movie_details_youtube_player.dart';
 import 'package:oxoo/widgets/movie/movie_poster.dart';
@@ -41,7 +43,6 @@ import '../../widgets/tv_series/cast_crew_item_card.dart';
 import 'package:path_provider/path_provider.dart';
 
 class MovieDetailScreen extends StatefulWidget {
-  
   static final String route = "/MovieDetailScreen";
   final String movieID;
   final String? isPaid;
@@ -279,7 +280,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       movieDetailsModel.title,
                       maxLines: 1,
                       style: TextStyle(
-                        fontSize: 25,
+                        fontFamily: 'Gill Sans MT Condensed',
+                        fontSize: 25.sp,
                         color: Colors.white,
                         // fontWeight: FontWeight.bold
                       ),
@@ -382,9 +384,20 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                             width: 50,
                             height: 50,
                             decoration: BoxDecoration(
-                                color: Colors.pink,
+                                // color: red,
+                                gradient: LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [
+                                      // Color(0xffA82324),
+                                      Color.fromRGBO(198, 41, 39, 1),
+                                      Color.fromRGBO(84, 20, 20, 1),
+                                    ]),
                                 borderRadius: BorderRadius.circular(100)),
-                            child: Icon(Icons.play_arrow),
+                            child: Icon(
+                              Icons.play_arrow,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                         SizedBox(
@@ -392,7 +405,10 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         ),
                         Text(
                           "Watch Now",
-                          style: TextStyle(color: Colors.white, fontSize: 17),
+                          style: TextStyle(
+                              fontFamily: 'Gill Sans MT Condensed',
+                              color: Colors.white,
+                              fontSize: 19.sp),
                         ),
                         SizedBox(
                           width: MediaQuery.of(context).size.width / 3.6,
@@ -821,7 +837,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         }
                       },
                       child: Text(AppContent.addComments,
-                          style: TextStyle(color: CustomTheme.primaryColor)),
+                          style: TextStyle(
+                              fontFamily: 'Gill Sans MT Condensed',
+                              color: CustomTheme.primaryColor)),
                     ),
                   ),
                 ),

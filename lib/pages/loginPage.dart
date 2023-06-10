@@ -39,101 +39,111 @@ class _LoginPageState extends State<LoginPage> {
             //   ),
             // ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 17),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 300,
+              padding: EdgeInsets.symmetric(horizontal: 17),
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.center,
+                    end: Alignment.bottomLeft,
+                    stops: [0.1, 0.5, 0.7, 0.9],
+                    colors: [orange, red],
                   ),
-                  Center(
-                    child: Text(
-                      "Login to your",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold),
+                ),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 300,
                     ),
-                  ),
-                  Center(
-                    child: Text(
-                      "account",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold),
+                    Center(
+                      child: Text(
+                        "Login to your",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 40,
-                  ),
-                  textField(context, "Enter your number here", nameCnt,
-                      TextInputType.number, (p0) {},
-                      preffixicon: Icon(
-                        Icons.call,
-                        color: orange,
-                      )),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  textField(context, "Enter your password here", passCnt,
-                      TextInputType.name, (p0) {},
-                      preffixicon: Icon(
-                        Icons.lock,
-                        color: orange,
-                      )),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  PrimaryButton(
-                    title: "LOGIN",
-                    width: double.infinity,
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) {
-                          return LandingScreen();
-                        },
-                      ));
-                    },
-                    // screenWidth * .8,
-                    height: 50,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Don't have an account?",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16.sp,
-                              color: Colors.white)
-                          // style: GoogleFonts.nunito(
-                          //     color: Colors.grey,
-                          //     fontSize: 18,
-                          //     fontWeight: FontWeight.w500),
-                          ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) {
-                              return LandingScreen();
-                            },
-                          ));
-                          // Get.to(LoginInput(type: "Sign Up"));
-                        },
-                        child: Text("Sign up",
+                    Center(
+                      child: Text(
+                        "account",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 40,
+                    ),
+                    textField(context, "Enter your number here", nameCnt,
+                        TextInputType.number, (p0) {},
+                        preffixicon: Icon(
+                          Icons.call,
+                          color: orange,
+                        )),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    textField(context, "Enter your password here", passCnt,
+                        TextInputType.name, (p0) {},
+                        preffixicon: Icon(
+                          Icons.lock,
+                          color: orange,
+                        )),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    PrimaryButton(
+                      title: "LOGIN",
+                      width: double.infinity,
+                      onTap: () {
+                        // Navigator.of(context).push(MaterialPageRoute(
+                        //   builder: (context) {
+                        //     return LandingScreen();
+                        //   },
+                        // ));
+                      },
+                      // screenWidth * .8,
+                      height: 50,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Don't have an account?",
                             style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 16.sp,
-                                color: grey)
+                                color: Colors.white)
                             // style: GoogleFonts.nunito(
-                            //     color: Colors.white,
-                            //     decoration: TextDecoration.underline,
+                            //     color: Colors.grey,
                             //     fontSize: 18,
-                            //     fontWeight: FontWeight.w700),
+                            //     fontWeight: FontWeight.w500),
                             ),
-                      )
-                    ],
-                  ),
-                ],
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) {
+                                return LandingScreen();
+                              },
+                            ));
+                            // Get.to(LoginInput(type: "Sign Up"));
+                          },
+                          child: Text("Sign up",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16.sp,
+                                  color: grey)
+                              // style: GoogleFonts.nunito(
+                              //     color: Colors.white,
+                              //     decoration: TextDecoration.underline,
+                              //     fontSize: 18,
+                              //     fontWeight: FontWeight.w700),
+                              ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

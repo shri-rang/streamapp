@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:oxoo/colors.dart';
+import 'package:oxoo/pages/CoontinuePage.dart';
 import '../../models/password_reset_model.dart';
 import 'package:hive/hive.dart';
 import '../../constants.dart';
@@ -40,48 +43,64 @@ class _ResetPasswordState extends State<ResetPassword> {
   Widget build(BuildContext context) {
     printLog("_ResetPasswordState");
     return new Scaffold(
+        backgroundColor: orange,
         key: _scaffoldKey,
-        appBar: AppBar(
-          elevation: 1.0,
-          backgroundColor: isDark ? CustomTheme.primaryColor : CustomTheme.primaryColor,
-          title: Text(AppContent.resetPassword),
-        ),
+        // appBar: AppBar(
+        //   elevation: 1.0,
+        //   backgroundColor: isDark ? CustomTheme.primaryColor : CustomTheme.primaryColor,
+        //   title: Text(AppContent.resetPassword),
+        // ),
         body: Container(
           height: MediaQuery.of(context).size.height,
-          color: isDark ? CustomTheme.whiteColor : CustomTheme.whiteColor,
+          // height: MediaQuery.of(context).size.height,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.center,
+              end: Alignment.bottomCenter,
+              // stops: [0.1, 0.5, 0.7, 0.9],
+              colors: [orange, red],
+            ),
+          ),
+          // color: isDark ? CustomTheme.whiteColor : CustomTheme.whiteColor,
           child: SingleChildScrollView(
               child: Stack(
             alignment: Alignment.center,
             children: <Widget>[
               Stack(
                 children: <Widget>[
-                  Container(
-                    height: MediaQuery.of(context).size.height / 2.2,
-                    decoration: BoxDecoration(color: isDark ? CustomTheme.primaryColor : CustomTheme.primaryColor),
-                  ),
+                  // Container(
+                  //   height: MediaQuery.of(context).size.height / 2.2,
+                  //   decoration: BoxDecoration(
+                  //       color: isDark
+                  //           ? CustomTheme.primaryColor
+                  //           : CustomTheme.primaryColor),
+                  // ),
                   Column(
                     children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.only(top: 10.0),
-                        child: Image.asset('assets/logo.png', scale: 5),
-                      ),
                       Container(
                         padding: EdgeInsets.only(top: 20.0),
                         child: Container(
-                          margin: EdgeInsets.only(bottom: 30.0, left: 10.0, right: 10.0),
-                          decoration: new BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                            boxShadow: CustomTheme.boxShadow,
-                            color: isDark ? Colors.white : Colors.white,
-                          ),
-                          height: 310,
+                          // margin: EdgeInsets.only(
+                          //     bottom: 30.0, left: 10.0, right: 10.0),
+                          // decoration: new BoxDecoration(
+                          //   borderRadius:
+                          //       BorderRadius.all(Radius.circular(10.0)),
+                          //   boxShadow: CustomTheme.boxShadow,
+                          //   color: isDark ? Colors.white : Colors.white,
+                          // ),
+                          // height: 310,
                           child: Column(
                             children: <Widget>[
-                              SizedBox(height: 20.0),
-                              Text(
-                                AppContent.resetPassword,
-                                style: CustomTheme.authTitle,
-                              ),
+                              SizedBox(height: 250.0),
+                              Text(AppContent.resetPassword,
+                                  style: TextStyle(
+                                      fontFamily: 'Gill Sans MT Condensed',
+                                      color: Colors.white,
+                                      fontSize: 34.sp,
+                                      fontWeight: FontWeight.bold)
+                                  // CustomTheme.authTitle,
+                                  ),
                               SizedBox(height: 25.0),
                               Padding(
                                 padding: const EdgeInsets.symmetric(
@@ -93,41 +112,102 @@ class _ResetPasswordState extends State<ResetPassword> {
                                     children: <Widget>[
                                       EditTextUtils().getCustomEditTextField(
                                           hintValue: AppContent.emailAddress,
-                                          keyboardType: TextInputType.emailAddress,
+                                          lableText:
+                                              "Enter your reset password here",
+                                          prefixWidget: Icon(
+                                            Icons.lock,
+                                            color:
+                                                Colors.white.withOpacity(0.5),
+                                          ),
+                                          keyboardType:
+                                              TextInputType.emailAddress,
                                           controller: resetPassEmailController,
-                                          style: isDark ? CustomTheme.authTitle : CustomTheme.authTitle,
-                                          underLineInputBorderColor: isDark ? CustomTheme.primaryColor : CustomTheme.primaryColor,
+                                          style: isDark
+                                              ? CustomTheme.authTitle
+                                              : CustomTheme.authTitle,
+                                          underLineInputBorderColor: isDark
+                                              ? CustomTheme.primaryColor
+                                              : CustomTheme.primaryColor,
                                           validator: (value) {
                                             return validateEmail(value);
                                           }),
                                       SizedBox(height: 20),
-                                      Text(AppContent.resetNote, style: TextStyle(color: Colors.amber),),
+                                      Text(
+                                        AppContent.resetNote,
+                                        style: TextStyle(
+                                          fontFamily: 'Gill Sans MT Condensed',
+                                          color: Colors.white,
+                                          fontSize: 17.sp,
+                                          // color: Colors.amber
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
                               ),
                               SizedBox(height: 10.0),
                               HelpMe().space(10),
-                              ButtonTheme(
-                                minWidth: 320.0,
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: CustomTheme.primaryColor,
-                                    shape:  RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0),),),
-                                  onPressed: () async {
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 20.0,
+                                ),
+                                child: PrimaryButton(
+                                  title: "Reset Password",
+                                  width: double.infinity,
+                                  onTap: () async {
                                     if (_formKey.currentState!.validate()) {
                                       isLoading = true;
-                                      PasswordResetModel? passwordResetModel = await Repository().passwordReset(userEmail: resetPassEmailController.text);
-                                      if (passwordResetModel != null) showShortToast(passwordResetModel.message!);
+                                      PasswordResetModel? passwordResetModel =
+                                          await Repository().passwordReset(
+                                              userEmail:
+                                                  resetPassEmailController
+                                                      .text);
+                                      if (passwordResetModel != null)
+                                        showShortToast(
+                                            passwordResetModel.message!);
                                       isLoading = false;
                                     }
                                   },
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
-                                    child: Text(AppContent.send, style: TextStyle(color: Colors.white),),),
+                                  // screenWidth * .8,
+                                  height: 50,
                                 ),
                               ),
-                              SizedBox(height: 8.0,),
+                              // ButtonTheme(
+                              //   minWidth: 320.0,
+                              //   child: ElevatedButton(
+                              //     style: ElevatedButton.styleFrom(
+                              //       backgroundColor: CustomTheme.primaryColor,
+                              //       shape: RoundedRectangleBorder(
+                              //         borderRadius: BorderRadius.circular(20.0),
+                              //       ),
+                              //     ),
+                              //     onPressed: () async {
+                              //       if (_formKey.currentState!.validate()) {
+                              //         isLoading = true;
+                              //         PasswordResetModel? passwordResetModel =
+                              //             await Repository().passwordReset(
+                              //                 userEmail:
+                              //                     resetPassEmailController
+                              //                         .text);
+                              //         if (passwordResetModel != null)
+                              //           showShortToast(
+                              //               passwordResetModel.message!);
+                              //         isLoading = false;
+                              //       }
+                              //     },
+                              //     child: Padding(
+                              //       padding: const EdgeInsets.symmetric(
+                              //           vertical: 15.0, horizontal: 20.0),
+                              //       child: Text(
+                              //         AppContent.send,
+                              //         style: TextStyle(color: Colors.white),
+                              //       ),
+                              //     ),
+                              //   ),
+                              // ),
+                              SizedBox(
+                                height: 8.0,
+                              ),
                             ],
                           ),
                         ),

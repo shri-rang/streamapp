@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../constants.dart';
 import '../../utils/button_widget.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -78,28 +79,60 @@ class _AuthScreenState extends State<AuthScreen> {
                   Stack(
                     alignment: Alignment.bottomLeft,
                     children: [
-                      ColorFiltered(
-                        colorFilter: ColorFilter.mode(
-                            Colors.black.withOpacity(0.6), BlendMode.srcOver),
-                        child: Image.asset(
-                          "assets/posterbg.jpg",
-                          height: MediaQuery.of(context).size.height,
-                          fit: BoxFit.cover,
-                          colorBlendMode: BlendMode.srcOver,
-                        ),
-                      ),
+                      // ColorFiltered(
+                      //   colorFilter: ColorFilter.mode(
+                      //       Colors.black.withOpacity(0.6), BlendMode.srcOver),
+                      //   child: Image.asset(
+                      //     "assets/posterbg.jpg",
+                      //     height: MediaQuery.of(context).size.height,
+                      //     fit: BoxFit.cover,
+                      //     colorBlendMode: BlendMode.srcOver,
+                      //   ),
+                      // ),
                       Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        // crossAxisAlignment: CrossAxisAlignment.end,
+                        // mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Center(
-                            child: Image.asset(
-                              "assets/ocuhfilms.png",
-                              width: 170,
-                              // height: MediaQuery.of(context).size.height,
-                              // fit: BoxFit.cover,
-                              // colorBlendMode: BlendMode.srcOver,
-                            ),
+                          // Center(
+                          //   child: Image.asset(
+                          //     "assets/ocuhfilms.png",
+                          //     width: 170,
+                          //     // height: MediaQuery.of(context).size.height,
+                          //     // fit: BoxFit.cover,
+                          //     // colorBlendMode: BlendMode.srcOver,
+                          //   ),
+                          // ),
+                          SizedBox(
+                            height:
+                                // 240
+
+                                MediaQuery.of(context).size.height / 2.8,
+                          ),
+                          Text(
+                            "Let's you in",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: 40,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) {
+                                  return LandingScreen();
+                                },
+                              ));
+                            },
+                            child: radiusContainerWithIcon(
+                                "Continue with Google",
+                                "assets/google_logo.png",
+                                context),
+                          ),
+                          SizedBox(
+                            height: 20,
                           ),
                           if (Config.enablePhoneAuth)
                             phoneAuthWidget(
@@ -351,6 +384,40 @@ class _AuthScreenState extends State<AuthScreen> {
     final User currentUser = _auth.currentUser!;
     assert(user.uid == currentUser.uid);
     return user;
+  }
+
+  Widget radiusContainerWithIcon(
+      String title, String img, BuildContext context) {
+    return Container(
+      height: 55,
+      padding: EdgeInsets.only(left: 40),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(color: Colors.white)),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Image.asset(
+            img,
+            height: 30,
+            width: 30,
+            // fit: BoxFit.fill,
+          ),
+          SizedBox(
+            width: 15,
+          ),
+          Text(title,
+              style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16.sp,
+                  color: Colors.white))
+          // smallTexttwo(
+          //   title,
+          //   context,
+          // ),
+        ],
+      ),
+    );
   }
 
   // ignore: missing_return

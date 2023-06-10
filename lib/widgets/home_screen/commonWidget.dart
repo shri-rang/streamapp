@@ -8,19 +8,22 @@ Widget or(BuildContext context) {
       Container(
           width: MediaQuery.of(context).size.width / 2.3,
           child: Divider(
-            color: grey,
+            color: ngrey,
+            thickness: 2,
           )),
-      Text(
-        "or",
-        style: Theme.of(context)
-            .textTheme
-            .bodyMedium!
-            .copyWith(color: Colors.white),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5),
+        child: Text(
+          "or",
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              fontSize: 16.sp, fontFamily: 'Sans Serif', color: Colors.white),
+        ),
       ),
       Container(
-          width: MediaQuery.of(context).size.width / 2.4,
+          width: MediaQuery.of(context).size.width / 2.57,
           child: Divider(
-            color: grey,
+            color: ngrey,
+            thickness: 2,
           )),
     ],
   );

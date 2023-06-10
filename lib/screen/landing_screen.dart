@@ -265,7 +265,7 @@ class _LandingScreenState extends State<LandingScreen>
           height: 60,
 
           // Color.fromARGB(255, 41, 37, 37).withOpacity(0.9),
-          buttonBackgroundColor: orange,
+          buttonBackgroundColor: red,
           animationCurve: Curves.easeInOut,
           color: Color.fromARGB(255, 41, 37, 37),
           items: <Widget>[
@@ -396,7 +396,7 @@ class _LandingScreenState extends State<LandingScreen>
                 drawerListItem.elementAt(index).navItemName,
                 style: TextStyle(
                     color: drawerListItem.elementAt(index).isSelected
-                        ? Colors.red
+                        ? red
                         : CustomTheme.grey_60),
               ),
             ),

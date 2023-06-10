@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:oxoo/colors.dart';
 import 'package:oxoo/screen/tv_series/tv_series_details_screen.dart';
 import '../../models/home_content.dart';
 import '../../screen/movie_screen.dart';
@@ -60,7 +61,7 @@ class HomeScreenMovieList extends StatelessWidget {
                     child: Icon(
                       Icons.chevron_right_rounded,
                       size: 35,
-                      color: Colors.purple,
+                      color: red,
                     ),
                   ),
               ],
@@ -90,7 +91,7 @@ class HomeScreenMovieList extends StatelessWidget {
                           ),
                         );
                       } else {
-                        Navigator.pushNamed(context, MovieDetailScreen.route,   
+                        Navigator.pushNamed(context, MovieDetailScreen.route,
                             arguments: {
                               "movieID": latestMovies![index].videosId
                             });

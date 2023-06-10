@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:oxoo/bloc/bloc.dart';
+import 'package:oxoo/colors.dart';
 import 'package:oxoo/config.dart';
 import 'package:oxoo/pages/CoontinuePage.dart';
 import 'package:oxoo/pages/SwipePage.dart';
@@ -83,6 +84,7 @@ class _MyAppState extends State<MyApp> {
                 routes: Routes.getRoute(),
                 // You can use the library anywhere in the app even in theme
                 theme: ThemeData(
+                  scaffoldBackgroundColor: black,
                   primarySwatch: Colors.blue,
                   textTheme:
                       Typography.englishLike2018.apply(fontSizeFactor: 1.sp),

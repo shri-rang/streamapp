@@ -75,6 +75,7 @@ dependencies:
   curved_navigation_bar: ^1.0.3
   device_preview: ^1.0.0
   flutter_screenutil: ^5.6.0
+  google_fonts: ^4.0.0
 dev_dependencies:
   build_runner: ^2.0.6
   flutter_launcher_icons: ^0.10.0
@@ -100,3 +101,11 @@ flutter:
     - assets/
     - assets/bottom_nav/
     - assets/images/ic_button_apple.png
+
+  fonts:
+    - family: Gill Sans MT Condensed
+      fonts:
+        - asset: assets/fonts/gilc.ttf
+    - family: Sans Serif
+      fonts:
+        - asset: assets/fonts/arabotom.ttf

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oxoo/colors.dart';
 import '../../style/theme.dart';
 import '../strings.dart';
 
@@ -20,7 +21,7 @@ class HomeScreenMoreWidget extends StatelessWidget {
       child: Icon(
         Icons.chevron_right_rounded,
         size: 35,
-        color: Colors.purple,
+        color: red,
       ),
       // Text(AppContent.more, style:CustomTheme.bodyTextgray2)
     );

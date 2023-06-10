@@ -1,6 +1,7 @@
 class Config {
   //set your api server url here
-  static String apiServerUrl = "https://ox.spagreen.net/rest-api/";
+  static String apiServerUrl =
+   "https://ox.spagreen.net/rest-api/";
   //  "https://app.ouchfilms.com/rest-api/";
   //set your api key here
   static String apiKey =

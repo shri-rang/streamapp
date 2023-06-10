@@ -5,7 +5,7 @@ import 'package:oxoo/screen/tv_series/tv_series_details_screen.dart';
 import '../../models/home_content.dart';
 import '../../screen/live_tv_details_screen.dart';
 import '../../screen/movie/movie_details_screen.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../constants.dart';
 
 // ignore: must_be_immutable
@@ -114,8 +114,9 @@ class ImageSlider extends StatelessWidget {
                     Text(
                       slide.title!,
                       style: TextStyle(
+                          fontFamily: 'Gill Sans MT Condensed',
                           color: Colors.white,
-                          fontSize: 19,
+                          fontSize: 20.sp,
                           fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
@@ -137,9 +138,7 @@ class ImageSlider extends StatelessWidget {
                           child: PrimaryButton(
                             title: "PLAY",
                             width: 100,
-                            onTap: () {
-                              
-                            },
+                            onTap: () {},
                             // screenWidth * .8,
                             height: 40,
                           ),
@@ -167,7 +166,10 @@ class ImageSlider extends StatelessWidget {
         Text(
           title,
           style: TextStyle(
-              color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+              fontFamily: 'Gill Sans MT Condensed',
+              color: Colors.white,
+              fontSize: 15.sp,
+              fontWeight: FontWeight.bold),
         ),
       ],
     );
