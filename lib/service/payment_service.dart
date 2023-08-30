@@ -6,7 +6,7 @@ import 'package:oxoo/service/authentication_service.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import '../models/configuration.dart';
 import '../strings.dart';
-import 'package:stripe_checkout/stripe_checkout.dart';
+// import 'package:stripe_checkout/stripe_checkout.dart';
 
 class PaymentService {
   void payWithStripe(
@@ -20,17 +20,18 @@ class PaymentService {
     final String sessionId = await Repository().createStripeSessionId(
         amount.toString(), paymentConfig.stripeSecretKey);
 
-    final result = await redirectToCheckout(
-      context: context,
-      sessionId: sessionId,
-      publishableKey: paymentConfig.stripePublishableKey,
-      successUrl: 'https://checkout.stripe.dev/success',
-      canceledUrl: 'https://checkout.stripe.dev/cancel',
-    );
-    final text = result.when(
-        success: () => onSuccess,
-        canceled: () => onCancel,
-        error: (e) => onError);
+    // final result = await redirectToCheckout(
+    //   context: context,
+    //   sessionId: sessionId,
+    //   publishableKey: paymentConfig.stripePublishableKey,
+    //   successUrl: 'https://checkout.stripe.dev/success',
+    //   canceledUrl: 'https://checkout.stripe.dev/cancel',
+    // );
+    final text = "";
+    //  result.when(
+    //     success: () => oSuccess,
+    //     canceled: () => onCancel,
+    //     error: (e) => onError);
   }
 
   void payWithPaypal({

@@ -22,7 +22,7 @@ class EditTextUtils {
       style: TextStyle(
         color: Colors.white,
         fontSize: 17.sp,
-        fontFamily: 'Gill Sans MT Condensed',
+        // fontFamily: 'Gill Sans MT Condensed',
       ),
       maxLines: maxLines,
       keyboardType: keyboardType,
@@ -37,7 +37,7 @@ class EditTextUtils {
           borderRadius: BorderRadius.circular(10.0),
           borderSide: BorderSide(width: 2, color: Colors.white),
         ),
-        fillColor: Color.fromRGBO(243, 136, 84, 1),
+        fillColor: Color.fromRGBO(39, 40, 41, 1),
         suffixIconConstraints: BoxConstraints(minWidth: 2, minHeight: 10),
         prefixStyle: TextStyle(
           color: Colors.white,
@@ -45,7 +45,7 @@ class EditTextUtils {
         // labelText: lableText,
 
         hintStyle: TextStyle(
-            fontFamily: 'Gill Sans MT Condensed',
+            // fontFamily: 'Gill Sans MT Condensed',
             color: Colors.white.withOpacity(0.4),
             fontSize: 17.sp,
             fontWeight: FontWeight.bold),

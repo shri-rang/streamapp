@@ -43,7 +43,7 @@ class _ResetPasswordState extends State<ResetPassword> {
   Widget build(BuildContext context) {
     printLog("_ResetPasswordState");
     return new Scaffold(
-        backgroundColor: orange,
+        // backgroundColor: orange,
         key: _scaffoldKey,
         // appBar: AppBar(
         //   elevation: 1.0,
@@ -55,12 +55,12 @@ class _ResetPasswordState extends State<ResetPassword> {
           // height: MediaQuery.of(context).size.height,
           width: double.infinity,
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.center,
-              end: Alignment.bottomCenter,
-              // stops: [0.1, 0.5, 0.7, 0.9],
-              colors: [orange, red],
-            ),
+            // gradient: LinearGradient(
+            //   begin: Alignment.center,
+            //   end: Alignment.bottomCenter,
+            //   // stops: [0.1, 0.5, 0.7, 0.9],
+            //   colors: [orange, red],
+            // ),
           ),
           // color: isDark ? CustomTheme.whiteColor : CustomTheme.whiteColor,
           child: SingleChildScrollView(
@@ -95,9 +95,9 @@ class _ResetPasswordState extends State<ResetPassword> {
                               SizedBox(height: 250.0),
                               Text(AppContent.resetPassword,
                                   style: TextStyle(
-                                      fontFamily: 'Gill Sans MT Condensed',
+                                       fontFamily: 'Sans Serif',
                                       color: Colors.white,
-                                      fontSize: 34.sp,
+                                      fontSize: 30.sp,
                                       fontWeight: FontWeight.bold)
                                   // CustomTheme.authTitle,
                                   ),
@@ -135,9 +135,9 @@ class _ResetPasswordState extends State<ResetPassword> {
                                       Text(
                                         AppContent.resetNote,
                                         style: TextStyle(
-                                          fontFamily: 'Gill Sans MT Condensed',
+                                           fontFamily: 'Sans Serif',
                                           color: Colors.white,
-                                          fontSize: 17.sp,
+                                          fontSize: 14.sp,
                                           // color: Colors.amber
                                         ),
                                       ),

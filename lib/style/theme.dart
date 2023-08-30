@@ -97,86 +97,86 @@ abstract class CustomTheme {
   );
 
   static TextStyle bodyText1 = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
     fontWeight: FontWeight.w500,
     color: black_window,
     fontSize: 18,
   );
   static TextStyle bodyText1White = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
     fontWeight: FontWeight.w500,
     color: Colors.white,
     fontSize: 18,
   );
   static TextStyle bodyText1Bold = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
     fontWeight: FontWeight.bold,
     color: black_window,
     fontSize: 15,
   );
   static TextStyle bodyText1BoldWhite = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
     fontWeight: FontWeight.bold,
     color: whiteColor,
     fontSize: 15,
   );
   static TextStyle bodyText2 = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
-    // fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
+    // fontFamily: 'Sans Serif',
     fontWeight: FontWeight.w700,
     color: black_window,
     fontSize: 20,
   );
   static TextStyle bodyText2White = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
     // fontWeight: FontWeight.w700,
     color: whiteColor,
     fontSize: 17,
   );
   static TextStyle bodyTextgray2 = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
     fontWeight: FontWeight.w700,
     color: grey_60,
     fontSize: 15,
   );
   static TextStyle bodyTextgray = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
     fontWeight: FontWeight.w300,
     color: Colors.grey.shade500,
     fontSize: 15,
   );
   static TextStyle coloredBodyText1 = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
     fontWeight: FontWeight.w500,
     color: primaryColor,
     fontSize: 18,
   );
   static TextStyle displayTextColored = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
     fontWeight: FontWeight.w500,
     color: colorAccent,
     fontSize: 25,
   );
   static TextStyle coloredBodyText2 = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
     fontWeight: FontWeight.w700,
     color: primaryColorRed,
     fontSize: 20,
   );
   static TextStyle orangeColoredBodyText = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
     fontWeight: FontWeight.w700,
     color: primaryColor,
     fontSize: 15,
   );
   static TextStyle coloredBodyText2Bold = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
     fontWeight: FontWeight.bold,
     color: colorAccent,
     fontSize: 16,
   );
   static TextStyle coloredBodyText3 = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
     color: colorAccent,
     fontSize: 12,
   );
@@ -186,7 +186,7 @@ abstract class CustomTheme {
     fontSize: 14,
   );
   static TextStyle bodyText3White = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
     fontWeight: FontWeight.w500,
     color: whiteColor,
     fontSize: 14,
@@ -207,110 +207,110 @@ abstract class CustomTheme {
   static TextStyle bodyText2BoldWhite = TextStyle(
       fontWeight: FontWeight.bold, fontSize: 16.0, color: Colors.white);
   static TextStyle subText2 = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
     color: grey_60,
     fontSize: 12,
   );
   static TextStyle subTextBold = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
     color: black_window,
     fontWeight: FontWeight.bold,
     fontSize: 12,
   );
   static TextStyle subTextBoldWhite = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
     color: whiteColor,
     fontWeight: FontWeight.bold,
     fontSize: 12,
   );
 
   static TextStyle coloredSubText = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
     color: colorAccent,
     fontSize: 14,
   );
 
   static TextStyle authBtnTitle = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
     color: whiteColor,
     fontSize: 16,
     fontWeight: FontWeight.bold,
   );
   static TextStyle authBtnTitleBlack = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
     color: Colors.black,
     fontSize: 16,
     fontWeight: FontWeight.bold,
   );
   static TextStyle authTitle = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
     color: primaryColor,
     fontSize: 18,
     fontWeight: FontWeight.bold,
   );
   static TextStyle authTitleWhite = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
     color: Colors.white,
     fontSize: 15,
     fontWeight: FontWeight.bold,
   );
   static TextStyle authTitleBlack = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
     color: Colors.black,
     fontSize: 15,
     fontWeight: FontWeight.bold,
   );
   static TextStyle authTitleGrey = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
     color: grey_transparent2,
     fontSize: 15,
     fontWeight: FontWeight.bold,
   );
   static TextStyle textFieldTitlePrimaryColored = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
     color: colorAccent,
     fontSize: 14,
     fontWeight: FontWeight.bold,
   );
 
   static TextStyle textFieldTitlePrimaryWhite = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
     color: whiteColor,
     fontSize: 14,
     fontWeight: FontWeight.bold,
   );
 
   static TextStyle smallTextGrey = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
     color: grey_transparent2,
     fontSize: 13,
     fontWeight: FontWeight.normal,
   );
   static TextStyle smallText = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
     fontSize: 12,
     fontWeight: FontWeight.normal,
   );
   static TextStyle smallTextWhite = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
     fontSize: 12,
     color: Colors.white,
     fontWeight: FontWeight.normal,
   );
   static TextStyle smallTextStyleColored = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
     color: primaryColor,
     fontSize: 12,
     fontWeight: FontWeight.bold,
   );
   static TextStyle textStyleWhite15 = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
     color: whiteColor,
     fontSize: 15,
     fontWeight: FontWeight.normal,
   );
   static TextStyle textStyleBlack15 = TextStyle(
-    fontFamily: 'Gill Sans MT Condensed',
+    fontFamily: 'Sans Serif',
     color: Colors.black,
     fontSize: 15,
     fontWeight: FontWeight.normal,

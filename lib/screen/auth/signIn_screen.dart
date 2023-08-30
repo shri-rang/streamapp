@@ -132,9 +132,9 @@ class _LoginPageState extends State<LoginPage>
                               child: Text(
                                 "Login to your",
                                 style: TextStyle(
-                                    fontFamily: 'Gill Sans MT Condensed',
+                                    fontFamily: 'Sans Serif',
                                     color: Colors.white,
-                                    fontSize: 34.sp,
+                                    fontSize: 30.sp,
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -142,9 +142,9 @@ class _LoginPageState extends State<LoginPage>
                               child: Text(
                                 "account",
                                 style: TextStyle(
-                                    fontFamily: 'Gill Sans MT Condensed',
+                                    fontFamily: 'Sans Serif',
                                     color: Colors.white,
-                                    fontSize: 34.sp,
+                                    fontSize: 30.sp,
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -266,9 +266,9 @@ class _LoginPageState extends State<LoginPage>
                               children: [
                                 Text("Don't have an account?",
                                     style: TextStyle(
-                                        fontFamily: 'Gill Sans MT Condensed',
+                                        fontFamily: 'Sans Serif',
                                         fontWeight: FontWeight.w500,
-                                        fontSize: 20.sp,
+                                        fontSize: 18.sp,
                                         color: Colors.white)
                                     // style: GoogleFonts.nunito(
                                     //     color: Colors.grey,
@@ -284,11 +284,11 @@ class _LoginPageState extends State<LoginPage>
                                   },
                                   child: Text("Sign up",
                                       style: TextStyle(
-                                          fontFamily: 'Gill Sans MT Condensed',
+                                          fontFamily: 'Sans Serif',
                                           fontWeight: FontWeight.w500,
-                                          fontSize: 20.sp,
-                                          color: grey)
-                                      // style: GoogleFonts.nunito(
+                                          fontSize: 18.sp,
+                                          color: Colors.white.withOpacity(0.5))
+                                     // style: GoogleFonts.nunito(
                                       //     color: Colors.white,
                                       //     decoration: TextDecoration.underline,
                                       //     fontSize: 18,
@@ -326,9 +326,9 @@ class _LoginPageState extends State<LoginPage>
                                 child: Text(
                                   AppContent.forgetPassword,
                                   style: TextStyle(
-                                      fontFamily: 'Gill Sans MT Condensed',
+                                     fontFamily: 'Sans Serif',
                                       color: Colors.amber,
-                                      fontSize: 20.sp,
+                                      fontSize: 18.sp,
                                       fontWeight: FontWeight.bold),
                                 ))
                           ],

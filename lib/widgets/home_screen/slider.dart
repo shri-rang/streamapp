@@ -114,7 +114,7 @@ class ImageSlider extends StatelessWidget {
                     Text(
                       slide.title!,
                       style: TextStyle(
-                          fontFamily: 'Gill Sans MT Condensed',
+                          fontFamily: 'Sans Serif',
                           color: Colors.white,
                           fontSize: 20.sp,
                           fontWeight: FontWeight.bold),
@@ -166,7 +166,7 @@ class ImageSlider extends StatelessWidget {
         Text(
           title,
           style: TextStyle(
-              fontFamily: 'Gill Sans MT Condensed',
+              fontFamily: 'Sans Serif',
               color: Colors.white,
               fontSize: 15.sp,
               fontWeight: FontWeight.bold),

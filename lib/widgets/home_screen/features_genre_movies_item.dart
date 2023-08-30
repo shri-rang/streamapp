@@ -137,7 +137,7 @@ class HomeScreenGenreMoviesList extends StatelessWidget {
                                   child: Image.network(
                                     moviesList[index].thumbnailUrl!,
                                     fit: BoxFit.fitWidth,
-                                    height: 155,
+                                    height: 149,
                                   ),
                                 ),
                                 Container(

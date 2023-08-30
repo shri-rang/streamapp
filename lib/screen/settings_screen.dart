@@ -110,12 +110,12 @@ class _SettingScreenState extends State<SettingScreen> {
                       style: isDark!
                           ? CustomTheme.bodyText2BoldWhite
                           : CustomTheme.bodyText2Bold),
-                  Text(
-                    AppContent.infoAddress,
-                    style: isDark!
-                        ? CustomTheme.bodyText3White
-                        : CustomTheme.bodyText3,
-                  ),
+                  // Text(
+                  //   AppContent.infoAddress,
+                  //   style: isDark!
+                  //       ? CustomTheme.bodyText3White
+                  //       : CustomTheme.bodyText3,
+                  // ),
                 ],
               ),
             ),
@@ -132,12 +132,12 @@ class _SettingScreenState extends State<SettingScreen> {
                           ? CustomTheme.bodyText2BoldWhite
                           : CustomTheme.bodyText2Bold),
                   HelpMe().space(8.0),
-                  Text(
-                    AppContent.copyrightText,
-                    style: isDark!
-                        ? CustomTheme.bodyText3White
-                        : CustomTheme.bodyText3,
-                  ),
+                  // Text(
+                  //   AppContent.copyrightText,
+                  //   style: isDark!
+                  //       ? CustomTheme.bodyText3White
+                  //       : CustomTheme.bodyText3,
+                  // ),
                   HelpMe().space(8.0),
                   Text(
                     AppContent.allRightReserved,
@@ -172,7 +172,7 @@ class _SettingScreenState extends State<SettingScreen> {
             _divider(isDark),
             InkWell(
               onTap: () {
-                Navigator.pushNamed(context, TermsPolices.route);
+                // Navigator.pushNamed(context, TermsPolices.route);
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(
@@ -186,12 +186,12 @@ class _SettingScreenState extends State<SettingScreen> {
             _divider(isDark),
             InkWell(
               onTap: () {
-                AppReview.storeListing.then((onValue) {
-                  setState(() {
-                    output = onValue;
-                  });
-                  print(onValue);
-                });
+                // AppReview.storeListing.then((onValue) {
+                //   setState(() {
+                //     output = onValue;
+                //   });
+                //   print(onValue);
+                // });
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(

@@ -209,10 +209,11 @@ class _LandingScreenState extends State<LandingScreen>
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Image.asset(
-                          'assets/LaiBharee.jpg',
-                          scale: 4,
+                          'assets/pillu.jpg',
+                          // scale: 4,
                           height: 120,
                           width: 140,
+                          fit: BoxFit.cover,
                         ),
                         HelpMe().space(10.0),
                         // Text(
@@ -265,8 +266,9 @@ class _LandingScreenState extends State<LandingScreen>
           height: 60,
 
           // Color.fromARGB(255, 41, 37, 37).withOpacity(0.9),
-          buttonBackgroundColor: red,
-          animationCurve: Curves.easeInOut,
+          buttonBackgroundColor:                 lightpurple,
+
+         animationCurve: Curves.easeInOut,
           color: Color.fromARGB(255, 41, 37, 37),
           items: <Widget>[
             Icon(
@@ -396,7 +398,7 @@ class _LandingScreenState extends State<LandingScreen>
                 drawerListItem.elementAt(index).navItemName,
                 style: TextStyle(
                     color: drawerListItem.elementAt(index).isSelected
-                        ? red
+                        ? lightpurple
                         : CustomTheme.grey_60),
               ),
             ),

@@ -73,7 +73,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     _permissionReady = false;
     _prepare();
-    FlutterDownloader.registerCallback(downloadCallback);
+    // FlutterDownloader.registerCallback(downloadCallback);
   }
 
   static void downloadCallback(
@@ -280,8 +280,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       movieDetailsModel.title,
                       maxLines: 1,
                       style: TextStyle(
-                        fontFamily: 'Gill Sans MT Condensed',
-                        fontSize: 25.sp,
+                        fontFamily: 'Sans Serif',
+                        fontSize: 20.sp,
                         color: Colors.white,
                         // fontWeight: FontWeight.bold
                       ),
@@ -390,8 +390,10 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                     end: Alignment.bottomCenter,
                                     colors: [
                                       // Color(0xffA82324),
-                                      Color.fromRGBO(198, 41, 39, 1),
-                                      Color.fromRGBO(84, 20, 20, 1),
+                                      purple,
+                                     lightpurple
+                                      // Color.fromRGBO(198, 41, 39, 1),
+                                      // Color.fromRGBO(84, 20, 20, 1),
                                     ]),
                                 borderRadius: BorderRadius.circular(100)),
                             child: Icon(
@@ -406,9 +408,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         Text(
                           "Watch Now",
                           style: TextStyle(
-                              fontFamily: 'Gill Sans MT Condensed',
+                              fontFamily: 'Sans Serif',
                               color: Colors.white,
-                              fontSize: 19.sp),
+                              fontSize: 16.sp),
                         ),
                         SizedBox(
                           width: MediaQuery.of(context).size.width / 3.6,
@@ -838,7 +840,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       },
                       child: Text(AppContent.addComments,
                           style: TextStyle(
-                              fontFamily: 'Gill Sans MT Condensed',
+                             fontFamily: 'Sans Serif',
+                             fontSize: 14,
                               color: CustomTheme.primaryColor)),
                     ),
                   ),

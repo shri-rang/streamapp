@@ -39,7 +39,7 @@ class AppContent {
   static final String createNewAccount = "Create New Account";
   static final String resetPassword = "Reset Password";
   static final String resetNote =
-      "[Note: If you created your account with spagreen.net[ex:yourname@spagreen.net] domain mail then you will able to reset your password.\nThank you. Stay with SpaGreen]";
+      "[Note: If you created your account with mail then you will able to reset your password.\nThank you.]";
   static final String watchingLiveOxoo = "Watching live on $appName";
   static final String watchNow = "WATCH NOW";
   static final String nowWatching = "Now Watching";

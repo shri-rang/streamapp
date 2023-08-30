@@ -56,7 +56,7 @@ class MoviePoster extends StatelessWidget {
                     child: FadeInImage.assetNetwork(
                         placeholder: "assets/images/placeholder.png",
                         placeholderScale: 25,
-                        height: 155,
+                        height: 150,
                         fit: BoxFit.fitWidth,
                         imageErrorBuilder: (context, error, stackTrace) =>
                             Image.asset(
