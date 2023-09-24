@@ -93,7 +93,7 @@ class AppContent {
   static final String somethingWentWrong = "Something went wrong";
   static final String radio = "Radio";
   static final String tv = "TV";
-  static final String tvSeries = "TV Series";
+  static final String tvSeries = "Pillu Origsinals";
   static final String tvChannels = "TV Channels";
   static final String enterTheCodeSent = "Enter the code sent to your phone";
   static final String enterBelowCode = "Enter below code on your TV";

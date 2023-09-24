@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:isolate';
 import 'dart:ui';
+import 'package:chewie/chewie.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:oxoo/bloc/movie_details/movie_details_bloc.dart';
 import 'package:oxoo/colors.dart';
@@ -9,6 +10,7 @@ import 'package:oxoo/models/videos.dart';
 import 'package:oxoo/widgets/movie/movie_details_youtube_player.dart';
 import 'package:oxoo/widgets/movie/movie_poster.dart';
 import 'package:oxoo/widgets/movie/paid_controll_dialog.dart';
+import 'package:video_player/video_player.dart';
 import '../../models/favourite_response_model.dart';
 import '../../constants.dart';
 import '../../widgets/player/flick_player.dart';
@@ -64,7 +66,11 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
   String? _localPath;
 
   bool isUserValidSubscriber = false;
-
+     TargetPlatform? _platform;
+  late VideoPlayerController _videoPlayerController1;
+  // late VideoPlayerController _videoPlayerController2;
+  ChewieController? _chewieController;
+  int? bufferDelay;
   @override
   void initState() {
     super.initState();
@@ -72,8 +78,69 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     isUserValidSubscriber = appModeBox.get('isUserValidSubscriber') ?? false;
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     _permissionReady = false;
+ 
     _prepare();
+    //   initializePlayer("https://vz-1bd8696b-cfc.b-cdn.net/c4f58b99-f8c8-40f9-a8be-b58e2ea0bc2c/playlist.m3u8");
     // FlutterDownloader.registerCallback(downloadCallback);
+  }
+
+
+     Future<void> initializePlayer(String url) async{
+    
+        _videoPlayerController1 =
+        VideoPlayerController.networkUrl(Uri.parse(url));
+ 
+    await Future.wait([
+      _videoPlayerController1.initialize(),
+   
+    ]);
+    _createChewieController();
+    setState(() {});
+
+  }
+
+
+     @override
+  void dispose() {
+      _videoPlayerController1.dispose();
+  
+    _chewieController?.dispose();
+    printLog("-------------flick player dispose()");
+    // flickManager!.dispose();
+    // setAllOrientations();
+    super.dispose();
+  }
+
+
+   void _createChewieController() {
+
+
+    _chewieController = ChewieController(
+      videoPlayerController: _videoPlayerController1,
+      autoPlay: true,
+      looping: true,
+      showOptions: false,
+      showControls: true,
+      // fullScreenByDefault: true,
+
+        
+      progressIndicatorDelay:
+          bufferDelay != null ? Duration(milliseconds: bufferDelay!) : null,
+
+      additionalOptions: (context) {
+        return <OptionItem>[
+          OptionItem(
+            onTap: () {
+              
+            },
+            iconData: Icons.live_tv_sharp,
+            
+            title: 'Toggle Video Src',
+          ),
+        ];
+      },
+
+    );
   }
 
   static void downloadCallback(
@@ -263,12 +330,17 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                     margin: new EdgeInsets.symmetric(
                         vertical: 10.0, horizontal: 15),
                     width: 360,
-                    height: 400.0,
+                    height: 290.0,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(6.0)),
-                        image: DecorationImage(
-                            image: NetworkImage(movieDetailsModel.thumbnailUrl),
-                            fit: BoxFit.fill)),
+                        // image: DecorationImage(
+                        //     image: NetworkImage(movieDetailsModel.thumbnailUrl),
+                        //     fit: BoxFit.fill)
+                            ),
+                     child:        Center(
+                       child:
+                         FlickPlayer(type: "type", url: "sd")
+                     ),       
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -322,106 +394,107 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: Row(
-                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        InkWell(
-                          onTap: () {
-                            if (isUserValidSubscriber ||
-                                movieDetailsModel.isPaid == "0") {
-                              if (movieDetailsModel.videos!.length == 1) {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => FlickPlayer(
-                                              subtitles: movieDetailsModel
-                                                          .videos!
-                                                          .elementAt(0)
-                                                          .subtitle!
-                                                          .length !=
-                                                      0
-                                                  ? movieDetailsModel.videos!
-                                                      .elementAt(0)
-                                                      .subtitle
-                                                  : null,
-                                              url: movieDetailsModel.videos!
-                                                  .elementAt(0)
-                                                  .fileUrl!,
-                                              type: movieDetailsModel.videos!
-                                                      .elementAt(0)
-                                                      .fileType ??
-                                                  "mp4",
-                                            )));
-                              } else {
-                                SelectServerDialog().createDialog(
-                                    context, movieDetailsModel.videos!, isDark);
-                              }
-                            } else {
-                              // user is not logged in
-                              //send user to login screen
-                              if (authUser == null) {
-                                SchedulerBinding.instance
-                                    .addPostFrameCallback((_) {
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => AuthScreen(
-                                              fromPaidScreen: true,
-                                            )),
-                                  );
-                                });
-                              } else {
-                                //user logged in
-                                //but he/she hasn't any active subscription plan
-                                PaidControllDialog().createDialog(
-                                    context,
-                                    isDark!,
-                                    authUser.userId.toString(),
-                                    widget.movieID);
-                              }
-                            }
-                          },
-                          child: Container(
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                                // color: red,
-                                gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: [
-                                      // Color(0xffA82324),
-                                      purple,
-                                     lightpurple
-                                      // Color.fromRGBO(198, 41, 39, 1),
-                                      // Color.fromRGBO(84, 20, 20, 1),
-                                    ]),
-                                borderRadius: BorderRadius.circular(100)),
-                            child: Icon(
-                              Icons.play_arrow,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "Watch Now",
-                          style: TextStyle(
-                              fontFamily: 'Sans Serif',
-                              color: Colors.white,
-                              fontSize: 16.sp),
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width / 3.6,
-                        ),
+                        // InkWell(
+                        //   onTap: () {
+                        //     if (isUserValidSubscriber ||
+                        //         movieDetailsModel.isPaid == "0") {
+                        //       // if (movieDetailsModel.videos!.length == 1) {
+                        //         Navigator.push(
+                        //             context,
+                        //             MaterialPageRoute(
+                        //                 builder: (context) => FlickPlayer(
+                        //                       // subtitles: movieDetailsModel
+                        //                       //             .videos!
+                        //                       //             .elementAt(0)
+                        //                       //             .subtitle!
+                        //                       //             .length !=
+                        //                       //         0
+                        //                       //     ? movieDetailsModel.videos!
+                        //                       //         .elementAt(0)
+                        //                       //         .subtitle
+                        //                       //     : null,
+                        //                       url: movieDetailsModel.videos!
+                        //                           .elementAt(0)
+                        //                           .fileUrl!,
+                        //                       type: movieDetailsModel.videos!
+                        //                               .elementAt(0)
+                        //                               .fileType ??
+                        //                           "mp4",
+                        //                     )));
+                        //       // }
+                        //       //  else {
+                        //       //   SelectServerDialog().createDialog(
+                        //       //       context, movieDetailsModel.videos!, isDark);
+                        //       // }
+                        //     } else {
+                        //       // user is not logged in
+                        //       //send user to login screen
+                        //       if (authUser == null) {
+                        //         SchedulerBinding.instance
+                        //             .addPostFrameCallback((_) {
+                        //           Navigator.pushReplacement(
+                        //             context,
+                        //             MaterialPageRoute(
+                        //                 builder: (context) => AuthScreen(
+                        //                       fromPaidScreen: true,
+                        //                     )),
+                        //           );
+                        //         });
+                        //       } else {
+                        //         //user logged in
+                        //         //but he/she hasn't any active subscription plan
+                        //         PaidControllDialog().createDialog(
+                        //             context,
+                        //             isDark!,
+                        //             authUser.userId.toString(),
+                        //             widget.movieID);
+                        //       }
+                        //     }
+                        //   },
+                        //   child: Container(
+                        //     width: 50,
+                        //     height: 50,
+                        //     decoration: BoxDecoration(
+                        //         // color: red,
+                        //         gradient: LinearGradient(
+                        //             begin: Alignment.topCenter,
+                        //             end: Alignment.bottomCenter,
+                        //             colors: [
+                        //               // Color(0xffA82324),
+                        //               purple,
+                        //              lightpurple
+                        //               // Color.fromRGBO(198, 41, 39, 1),
+                        //               // Color.fromRGBO(84, 20, 20, 1),
+                        //             ]),
+                        //         borderRadius: BorderRadius.circular(100)),
+                        //     child: Icon(
+                        //       Icons.play_arrow,
+                        //       color: Colors.white,
+                        //     ),
+                        //   ),
+                        // ),
+                        // SizedBox(
+                        //   width: 10,
+                        // ),
+                        // Text(
+                        //   "Watch Now",
+                        //   style: TextStyle(
+                        //       fontFamily: 'Sans Serif',
+                        //       color: Colors.white,
+                        //       fontSize: 16.sp),
+                        // ),
+                        // SizedBox(
+                        //   width: MediaQuery.of(context).size.width / 3.6,
+                        // ),
                         InkWell(
                             onTap: () {
-                              SelectDownloadDialog().createDialog(
-                                  context,
-                                  movieDetailsModel.downloadLinks!,
-                                  isDark,
-                                  downloadVideo);
+                              // SelectDownloadDialog().createDialog(
+                              //     context,
+                              //     movieDetailsModel.downloadLinks!,
+                              //     isDark,
+                              //     downloadVideo);
                             },
                             child: iconWTitle(Icons.download, "")),
                         SizedBox(
@@ -949,8 +1022,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
           context,
           MaterialPageRoute(
               builder: (context) => FlickPlayer(
-                    subtitles:
-                        video.subtitle!.length != 0 ? video.subtitle : null,
+                    // subtitles:
+                    //     video.subtitle!.length != 0 ? video.subtitle : null,
                     url: video.fileUrl!,
                     type: video.fileType ?? "mp4",
                   )));

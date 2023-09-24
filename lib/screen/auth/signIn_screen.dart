@@ -212,14 +212,20 @@ class _LoginPageState extends State<LoginPage>
                                 title: "LOGIN",
                                 width: double.infinity,
                                 onTap: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    isLoading = true;
-                                    bloc.add(LoginCompletingStarted());
-                                    bloc.add(LoginCompleting(
-                                      email: loginEmailController.text,
-                                      password: loginPasswordController.text,
-                                    ));
-                                  }
+                                    
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) {
+                            return LandingScreen();
+                          },
+                        ));
+                                  // if (_formKey.currentState!.validate()) {
+                                  //   isLoading = true;
+                                  //   bloc.add(LoginCompletingStarted());
+                                  //   bloc.add(LoginCompleting(
+                                  //     email: loginEmailController.text,
+                                  //     password: loginPasswordController.text,
+                                  //   ));
+                                  // }
                                 },
                                 // screenWidth * .8,
                                 height: 50,

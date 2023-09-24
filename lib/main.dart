@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:admob_flutter/admob_flutter.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -20,6 +22,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await FlutterDownloader.initialize();
+  // HttpOverrides.global = MyHttpOverrides();
   // Stripe.publishableKey = Config.stripepublishableKey;
   Admob.initialize(testDeviceIds: ["17A3B83DAC6AB3357062439AAD33FEA3"]);
   final document = await getApplicationDocumentsDirectory();
@@ -49,9 +52,11 @@ Future<void> main() async {
     await InAppPurchase.instance.restorePurchases().then((value) => {});
   }
   runApp(MyApp()
+  
       // DevicePreview(
       //   enabled: true,
       //   builder: (context) => MyApp(),
       // ),
       );
 }
+

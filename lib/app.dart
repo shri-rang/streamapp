@@ -1,3 +1,4 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -89,7 +90,13 @@ class _MyAppState extends State<MyApp> {
                   textTheme:
                       Typography.englishLike2018.apply(fontSizeFactor: 1.sp),
                 ),
-                home: child,
+                home: AnimatedSplashScreen(
+                   splash: "assets/pillu.png",
+                   splashIconSize: 800,
+
+                   backgroundColor: Color.fromRGBO(236, 142, 28, 1),
+
+                   nextScreen: child!),
               );
             },
             child: RenderFirstScreen(),

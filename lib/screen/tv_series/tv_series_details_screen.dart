@@ -647,7 +647,7 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
         builder: (context) => FlickPlayer(
           type: _fileType!,
           url: _url!,
-          subtitles: subtitles,
+          // subtitles: subtitles,
         ),
       ));
     }

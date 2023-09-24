@@ -197,37 +197,40 @@ class _LandingScreenState extends State<LandingScreen>
         // appBar: _renderAppBar() as PreferredSizeWidget?,
         drawer: Drawer(
           child: Container(
+          
             color: isDark
                 ? CustomTheme.primaryColorDark
                 : CustomTheme.primaryColorRed,
             child: ListView(
-              padding: EdgeInsets.zero,
+              // padding: EdgeInsets.zero,
               children: <Widget>[
                 DrawerHeader(
+
+                  padding:EdgeInsets.zero ,
+                   margin: EdgeInsets.zero,
                   child: Align(
                     child: Column(
-                      mainAxisSize: MainAxisSize.min,
+                      // mainAxisSize: MainAxisSize.min,
                       children: [
-                        Image.asset(
-                          'assets/pillu.jpg',
-                          // scale: 4,
-                          height: 120,
-                          width: 140,
-                          fit: BoxFit.cover,
-                        ),
-                        HelpMe().space(10.0),
-                        // Text(
-
-                        //   AppContent.oxooLiveTV,
-                        //   style: CustomTheme.bodyText1White,
-                        // ),
+                  
                       ],
                     ),
                   ),
                   decoration: BoxDecoration(
-                      color: isDark
-                          ? Colors.grey.shade900
-                          : CustomTheme.primaryColorRed),
+                    image: DecorationImage(
+
+                         fit: BoxFit.cover,
+                      image:   AssetImage('assets/pillu.png'
+                     
+                    )
+                     ),
+                      color:
+                      // isDark
+                         // ? Colors.grey.shade900
+                      //   :
+                          
+                           CustomTheme.primaryColorRed
+                          ),
                 ),
                 Container(
                   color: isDark ? Colors.transparent : Colors.white,
@@ -520,7 +523,7 @@ class _LandingScreenState extends State<LandingScreen>
         physics: const NeverScrollableScrollPhysics(),
         itemCount: drawerListItem.length,
         itemBuilder: (BuildContext context, int index) {
-          if (index == 9)
+          if (index == 5)
             return ListTile(
               leading: SvgPicture.asset(
                 'assets/drawer_icon/${drawerListItem.elementAt(index).navItemIcon}',
@@ -530,7 +533,7 @@ class _LandingScreenState extends State<LandingScreen>
                   color: drawerListItem.elementAt(index).isSelected
                       ? Colors.red
                       : Colors.transparent,
-                  child: Text(drawerListItem.elementAt(9).navItemName,
+                  child: Text(drawerListItem.elementAt(5).navItemName,
                       style: TextStyle(color: CustomTheme.grey_60))),
               trailing: Switch(
                 value: isDark,
@@ -547,6 +550,7 @@ class _LandingScreenState extends State<LandingScreen>
             );
           return InkWell(
             child: ListTile(
+                visualDensity: VisualDensity(horizontal: 0, vertical: -1),
               tileColor: drawerListItem.elementAt(index).isSelected
                   ? isDark
                       ? Colors.grey.shade900
@@ -560,7 +564,7 @@ class _LandingScreenState extends State<LandingScreen>
                 drawerListItem.elementAt(index).navItemName,
                 style: TextStyle(
                     color: drawerListItem.elementAt(index).isSelected
-                        ? Colors.red
+                        ? red
                         : CustomTheme.grey_60),
               ),
             ),
@@ -589,32 +593,32 @@ class _LandingScreenState extends State<LandingScreen>
                   Navigator.pushNamed(context, TvSeriesScreen.route,
                       arguments: true);
                   break;
-                case 3:
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, LiveTvScreen.route,
-                      arguments: true);
-                  break;
-                case 4:
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, GenreScreen.route,
-                      arguments: true);
-                  break;
-                case 5:
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, AllCountryScreen.route,
-                      arguments: true);
-                  break;
+                // case 3:
+                //   Navigator.pop(context);
+                //   Navigator.pushNamed(context, LiveTvScreen.route,
+                //       arguments: true);
+                //   break;
+                // case 4:
+                //   Navigator.pop(context);
+                //   Navigator.pushNamed(context, GenreScreen.route,
+                //       arguments: true);
+                //   break;
+                // case 5:
+                //   Navigator.pop(context);
+                //   Navigator.pushNamed(context, AllCountryScreen.route,
+                //       arguments: true);
+                //   break;
 
-                case 6:
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, FavouriteScreen.route,
-                      arguments: true);
-                  break;
-                case 7:
+                // case 6:
+                //   Navigator.pop(context);
+                //   Navigator.pushNamed(context, FavouriteScreen.route,
+                //       arguments: true);
+                //   break;
+                case 3:
                   Navigator.pop(context);
                   Navigator.pushNamed(context, SettingScreen.route);
                   break;
-                case 8:
+                case 4:
                   Navigator.pop(context);
                   // Navigator.of(context).push(MaterialPageRoute(
                   //   builder: (context) {
@@ -623,7 +627,7 @@ class _LandingScreenState extends State<LandingScreen>
                   // ));
                   Navigator.pushNamed(context, AuthScreen.route);
                   break;
-                case 10:
+                case 5:
                   Navigator.pop(context);
                   Navigator.pushNamed(context, DownloadScreen.route,
                       arguments: {'isDark': isDark});

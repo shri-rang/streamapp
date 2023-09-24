@@ -86,7 +86,7 @@ class _SwipePageState extends State<SwipePage> {
               child: Container(
                 child: Text(
                   textAlign: TextAlign.center,
-                  "Watch lai Bhari anywhere. Cancel at any time",
+                  "Watch Pillu anywhere. Cancel at any time",
                   style: TextStyle(
                       fontFamily: 'Sans Serif',
                       fontSize: 16.sp,

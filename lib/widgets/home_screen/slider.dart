@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:oxoo/pages/CoontinuePage.dart';
 import 'package:oxoo/screen/tv_series/tv_series_details_screen.dart';
+import 'package:oxoo/widgets/player/flick_player.dart';
 import '../../models/home_content.dart';
 import '../../screen/live_tv_details_screen.dart';
 import '../../screen/movie/movie_details_screen.dart';
@@ -138,7 +139,41 @@ class ImageSlider extends StatelessWidget {
                           child: PrimaryButton(
                             title: "PLAY",
                             width: 100,
-                            onTap: () {},
+                            onTap: () {
+                                            switch (slide.actionType) {
+                    case "movie":
+                      Navigator.pushNamed(context, MovieDetailScreen.route,
+                          arguments: {"movieID": slide.actionId});
+                      break;
+                    case "tv":
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LiveTvDetailsScreen(
+                            liveTvId: slide.actionId,
+                            isPaid: "0",
+                          ),
+                        ),
+                      );
+                      break;
+                    case "tvseries":
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TvSerisDetailsScreen(
+                            seriesID: slide.id,
+                            isPaid: '',
+                          ),
+                        ),
+                      );
+                      break;
+
+                    default:
+                      {
+                        printLog("Inside_others!");
+                      }
+                  }
+                            },
                             // screenWidth * .8,
                             height: 40,
                           ),
