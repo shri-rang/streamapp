@@ -2,7 +2,7 @@ class AppContent {
   static final String appName = "OUCH";
   static final String oxooLiveTV = "$appName";
   static final String home = "Home";
-  static final String movies = "Movies";
+  static final String movies = "Pillu Originals";
   static final String live = "Live";
   static final String series = "Series";
   static final String favourite = "Favourite";
@@ -48,7 +48,7 @@ class AppContent {
   static final String releaseOn = "Release On: ";
   static final String director = "Director: ";
   static final String castCrew = "Cast and Crew";
-  static final String youMayAlsoLike = "You may also like";
+  static final String youMayAlsoLike = "Pillu Originals";
   static final String allEvents = "All Events";
   static final String loginCancelled = "Login cancelled by the user.";
   static final String backToLogin = "Back to login ";
@@ -64,7 +64,7 @@ class AppContent {
   static final String featuredTvChannels = "Featured TV Channels";
   static final String featuredRadio = "Featured Radio ";
   static final String liveEvents = "Live Events";
-  static final String latestMovies = "Latest Movies";
+  static final String latestMovies = "Pillu Originals";
   static final String latestTvSeries = "Latest TV Series";
   static final String movieScreen = "Movie";
   static final String eventScreen = "Events";
@@ -93,7 +93,7 @@ class AppContent {
   static final String somethingWentWrong = "Something went wrong";
   static final String radio = "Radio";
   static final String tv = "TV";
-  static final String tvSeries = "Pillu Origsinals";
+  static final String tvSeries = "Pillu Originals";
   static final String tvChannels = "TV Channels";
   static final String enterTheCodeSent = "Enter the code sent to your phone";
   static final String enterBelowCode = "Enter below code on your TV";

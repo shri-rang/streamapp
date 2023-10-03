@@ -25,7 +25,7 @@ List<DrawerModel> drawerListItemFirst = [DrawerModel(id: 1,navItemName: AppConte
 
 List<DrawerModel> drawerListItemWithoutLogin = [DrawerModel(id: 1,navItemName: AppContent.home,navItemIcon: "outline_home_24.svg",                      isSelected:true),
                                                 DrawerModel(id: 2,navItemName: AppContent.movies,navItemIcon: "outline_movie_24.svg",                   isSelected:false),
-                                                DrawerModel(id: 3,navItemName: AppContent.tvSeries,navItemIcon: "outline_local_movies_24.svg",         isSelected:false),
+                                               // DrawerModel(id: 3,navItemName: AppContent.tvSeries,navItemIcon: "outline_local_movies_24.svg",         isSelected:false),
                                                 // DrawerModel(id: 4,navItemName: AppContent.liveTV,navItemIcon: "outline_live_tv_24.svg",                isSelected:false),
                                                 // DrawerModel(id: 5,navItemName: AppContent.genre,navItemIcon: "outline_folder_24.svg",                   isSelected:false),
                                                 // DrawerModel(id: 6,navItemName: AppContent.country,navItemIcon: "outline_outlined_flag_24.svg",          isSelected:false),

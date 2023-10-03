@@ -20,6 +20,7 @@ class FlickPlayer extends StatefulWidget {
   final String type;
   final bool isFullScreen;
   final List<sub.Subtitle>? subtitles;
+  
   FlickPlayer(
       {Key? key,
       required this.type,
@@ -119,6 +120,7 @@ class _FlickPlayerState extends State<FlickPlayer> {
       looping: true,
       showOptions: false,
       showControls: true,
+      allowPlaybackSpeedChanging: false,
       
       // fullScreenByDefault: true,
 
@@ -236,7 +238,8 @@ class _FlickPlayerState extends State<FlickPlayer> {
           children: <Widget>[
             Expanded(
               child: Center(
-                child: _chewieController != null &&
+                child:
+                 _chewieController != null &&
                         _chewieController!
                             .videoPlayerController.value.isInitialized
                     ?

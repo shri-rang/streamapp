@@ -1,14 +1,22 @@
+import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:oxoo/models/home_content.dart';
 import 'package:oxoo/screen/movie/movie_details_screen.dart';
 import 'package:oxoo/screen/tv_series/tv_series_details_screen.dart';
 import 'package:oxoo/style/theme.dart';
+import 'package:video_player/video_player.dart';
 
 // ignore: must_be_immutable
 class MoviePoster extends StatelessWidget {
   Movie movie;
   bool isDark = false;
-  MoviePoster({Key? key, required this.movie, required this.isDark})
+ VideoPlayerController videoPlayerController1;
+  // late VideoPlayerController _videoPlayerController2;
+  ChewieController? chewieController;
+  MoviePoster({Key? key, required this.movie, 
+   required this.chewieController,
+   required this.videoPlayerController1,
+  required this.isDark})
       : super(key: key);
 
   double? cardWidth;
@@ -21,6 +29,9 @@ class MoviePoster extends StatelessWidget {
       margin: EdgeInsets.only(right: 2),
       child: InkWell(
         onTap: () {
+            // videoPlayerController1.dispose();
+  
+               chewieController!.pause();
           if (movie.isTvseries == "1") {
             Navigator.push(
               context,

@@ -105,8 +105,8 @@ class _LandingScreenState extends State<LandingScreen>
   final List<Widget> bottomBarPages = [
     HomeScreen(),
     MoviesScreen(),
-    LiveTvScreen(),
-    TvSeriesScreen(),
+    SettingScreen(),
+  //  TvSeriesScreen(),
     // FavouriteScreen()
   ];
 
@@ -225,9 +225,9 @@ class _LandingScreenState extends State<LandingScreen>
                     )
                      ),
                       color:
-                      // isDark
-                         // ? Colors.grey.shade900
-                      //   :
+                      isDark
+                         ? Colors.grey.shade900
+                        :
                           
                            CustomTheme.primaryColorRed
                           ),
@@ -279,21 +279,29 @@ class _LandingScreenState extends State<LandingScreen>
               color: Colors.white,
               size: 35,
             ),
-            Icon(
-              Icons.search,
-              color: Colors.white,
-              size: 35,
+            SvgPicture.asset("assets/drawer_icon/outline_movie_24.svg",
+             width: 35,
+             height: 35,
             ),
-            Icon(
-              Icons.download,
-              color: Colors.white,
-              size: 35,
+            // Icon(
+            //   ,
+            //   color: Colors.white,
+            //   size: 35,
+            // ),
+            // Icon(
+            //   Icons.download,
+            //   color: Colors.white,
+            //   size: 35,
+            // ),
+            SvgPicture.asset("assets/drawer_icon/outline_settings_24.svg",
+             width: 35,
+             height: 35,
             ),
-            Icon(
-              Icons.person,
-              color: Colors.white,
-              size: 35,
-            ),
+            // Icon(
+            //   Icons.person,
+            //   color: Colors.white,
+            //   size: 35,
+            // ),
             Icon(
               Icons.menu_rounded,
               color: Colors.white,
@@ -305,7 +313,7 @@ class _LandingScreenState extends State<LandingScreen>
           ],
           onTap: (index) {
             //Handle button tap
-            if (index == 4) {
+            if (index ==  3 ) {
               _scaffoldKey.currentState!.openDrawer();
             } else {
               _pageController.animateToPage(
@@ -523,7 +531,7 @@ class _LandingScreenState extends State<LandingScreen>
         physics: const NeverScrollableScrollPhysics(),
         itemCount: drawerListItem.length,
         itemBuilder: (BuildContext context, int index) {
-          if (index == 5)
+          if (index == 4)
             return ListTile(
               leading: SvgPicture.asset(
                 'assets/drawer_icon/${drawerListItem.elementAt(index).navItemIcon}',
@@ -533,7 +541,7 @@ class _LandingScreenState extends State<LandingScreen>
                   color: drawerListItem.elementAt(index).isSelected
                       ? Colors.red
                       : Colors.transparent,
-                  child: Text(drawerListItem.elementAt(5).navItemName,
+                  child: Text(drawerListItem.elementAt(4).navItemName,
                       style: TextStyle(color: CustomTheme.grey_60))),
               trailing: Switch(
                 value: isDark,
@@ -588,11 +596,11 @@ class _LandingScreenState extends State<LandingScreen>
                   Navigator.pushNamed(context, MoviesScreen.route,
                       arguments: true);
                   break;
-                case 2:
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, TvSeriesScreen.route,
-                      arguments: true);
-                  break;
+                // case 2:
+                //   Navigator.pop(context);
+                //   Navigator.pushNamed(context, TvSeriesScreen.route,
+                //       arguments: true);
+                //   break;
                 // case 3:
                 //   Navigator.pop(context);
                 //   Navigator.pushNamed(context, LiveTvScreen.route,
@@ -614,20 +622,20 @@ class _LandingScreenState extends State<LandingScreen>
                 //   Navigator.pushNamed(context, FavouriteScreen.route,
                 //       arguments: true);
                 //   break;
-                case 3:
+                case 2:
                   Navigator.pop(context);
                   Navigator.pushNamed(context, SettingScreen.route);
                   break;
-                case 4:
+                case 3:
                   Navigator.pop(context);
-                  // Navigator.of(context).push(MaterialPageRoute(
-                  //   builder: (context) {
-                  //     return ContinuePage();
-                  //   },
-                  // ));
-                  Navigator.pushNamed(context, AuthScreen.route);
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) {
+                      return ContinuePage();
+                    },
+                  ));
+                  // Navigator.pushNamed(context, AuthScreen.route);
                   break;
-                case 5:
+                case 4:
                   Navigator.pop(context);
                   Navigator.pushNamed(context, DownloadScreen.route,
                       arguments: {'isDark': isDark});

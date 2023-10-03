@@ -91,8 +91,9 @@ class _MyAppState extends State<MyApp> {
                       Typography.englishLike2018.apply(fontSizeFactor: 1.sp),
                 ),
                 home: AnimatedSplashScreen(
-                   splash: "assets/pillu.png",
-                   splashIconSize: 800,
+                   splash: "assets/ps26.jpg",
+                   splashIconSize: 700,
+
 
                    backgroundColor: Color.fromRGBO(236, 142, 28, 1),
 

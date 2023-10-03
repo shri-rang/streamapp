@@ -171,23 +171,23 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         //latest tv series
-        if (homeContent.latestTvseries!.isNotEmpty)
-          SliverToBoxAdapter(
-            child: Container(
-              margin: EdgeInsets.only(top: 2, bottom: 15),
-              child: HomeScreenSeriesList(
-                latestTvSeries: homeContent.latestTvseries,
-                title: AppContent.latestTvSeries,
-                // context: context,
-                // authUser: authUser,
-                isDark: isDark,
-              ),
-            ),
-          ),
-        HomeScreenGenreMoviesList(
-          genreMoviesList: homeContent.featuresGenreAndMovie,
-          isDark: isDark,
-        ),
+        // if (homeContent.latestTvseries!.isNotEmpty)
+        //   SliverToBoxAdapter(
+        //     child: Container(
+        //       margin: EdgeInsets.only(top: 2, bottom: 15),
+        //       child: HomeScreenSeriesList(
+        //         latestTvSeries: homeContent.latestTvseries,
+        //         title: AppContent.latestTvSeries,
+        //         // context: context,
+        //         // authUser: authUser,
+        //         isDark: isDark,
+        //       ),
+        //     ),
+        //   ),
+        // HomeScreenGenreMoviesList(
+        //   genreMoviesList: homeContent.featuresGenreAndMovie,
+        //   isDark: isDark,
+        // ),
       ],
     );
   }

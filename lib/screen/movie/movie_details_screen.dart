@@ -1,4 +1,4 @@
-import 'dart:async';
+
 import 'dart:io';
 import 'dart:isolate';
 import 'dart:ui';
@@ -78,9 +78,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     isUserValidSubscriber = appModeBox.get('isUserValidSubscriber') ?? false;
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     _permissionReady = false;
- 
+      
     _prepare();
-    //   initializePlayer("https://vz-1bd8696b-cfc.b-cdn.net/c4f58b99-f8c8-40f9-a8be-b58e2ea0bc2c/playlist.m3u8");
+      initializePlayer("https://vz-1bd8696b-cfc.b-cdn.net/c4f58b99-f8c8-40f9-a8be-b58e2ea0bc2c/playlist.m3u8");
     // FlutterDownloader.registerCallback(downloadCallback);
   }
 
@@ -102,9 +102,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
 
      @override
   void dispose() {
-      _videoPlayerController1.dispose();
+     _videoPlayerController1.dispose();
   
-    _chewieController?.dispose();
+   _chewieController?.dispose();
     printLog("-------------flick player dispose()");
     // flickManager!.dispose();
     // setAllOrientations();
@@ -117,28 +117,30 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
 
     _chewieController = ChewieController(
       videoPlayerController: _videoPlayerController1,
-      autoPlay: true,
+      autoPlay: false,
       looping: true,
       showOptions: false,
       showControls: true,
+      allowPlaybackSpeedChanging: false,
+      
       // fullScreenByDefault: true,
 
         
       progressIndicatorDelay:
           bufferDelay != null ? Duration(milliseconds: bufferDelay!) : null,
 
-      additionalOptions: (context) {
-        return <OptionItem>[
-          OptionItem(
-            onTap: () {
+      // additionalOptions: (context) {
+      //   return <OptionItem>[
+      //     OptionItem(
+      //       onTap: () {
               
-            },
-            iconData: Icons.live_tv_sharp,
+      //       },
+      //       iconData: Icons.live_tv_sharp,
             
-            title: 'Toggle Video Src',
-          ),
-        ];
-      },
+      //       title: 'Toggle Video Src',
+      //     ),
+      //   ];
+      // },
 
     );
   }
@@ -327,9 +329,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   //   ],
                   // ),
                   Container(
-                    margin: new EdgeInsets.symmetric(
-                        vertical: 10.0, horizontal: 15),
-                    width: 360,
+                    // margin: new EdgeInsets.symmetric(
+                    //     vertical: 10.0, horizontal: 15),
+                    width: double.infinity,
                     height: 290.0,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(6.0)),
@@ -339,7 +341,28 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                             ),
                      child:        Center(
                        child:
-                         FlickPlayer(type: "type", url: "sd")
+                                  _chewieController != null &&
+                        _chewieController!
+                            .videoPlayerController.value.isInitialized
+                    ?
+                     Theme(
+                       data: ThemeData.light().copyWith(
+    platform: TargetPlatform.iOS,
+  ),
+                       child: Chewie(
+                          controller: _chewieController!,
+                     
+                        ),
+                     )
+                    :  Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CircularProgressIndicator(),
+                          SizedBox(height: 20),
+                          Text('Loading'),
+                        ],
+                      ),
+                        // FlickPlayer(type: "type", url: "sd")
                      ),       
                   ),
                   Padding(
@@ -488,23 +511,23 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         // SizedBox(
                         //   width: MediaQuery.of(context).size.width / 3.6,
                         // ),
-                        InkWell(
-                            onTap: () {
-                              // SelectDownloadDialog().createDialog(
-                              //     context,
-                              //     movieDetailsModel.downloadLinks!,
-                              //     isDark,
-                              //     downloadVideo);
-                            },
-                            child: iconWTitle(Icons.download, "")),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        iconWTitle(Icons.share, ""),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        iconWTitle(Icons.bookmark_add_outlined, ""),
+                        // InkWell(
+                        //     onTap: () {
+                        //       // SelectDownloadDialog().createDialog(
+                        //       //     context,
+                        //       //     movieDetailsModel.downloadLinks!,
+                        //       //     isDark,
+                        //       //     downloadVideo);
+                        //     },
+                        //     child: iconWTitle(Icons.download, "")),
+                        // SizedBox(
+                        //   width: 10,
+                        // ),
+                        // iconWTitle(Icons.share, ""),
+                        // SizedBox(
+                        //   width: 10,
+                        // ),
+                        // iconWTitle(Icons.bookmark_add_outlined, ""),
                       ],
                     ),
                   ),
@@ -832,9 +855,13 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         shrinkWrap: true,
                         itemCount: movieDetailsModel.relatedMovie!.length,
                         scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) => MoviePoster(
+                        itemBuilder: (context, index) =>
+                         MoviePoster(
                             movie: movieDetailsModel.relatedMovie![index],
-                            isDark: isDark!),
+                            isDark: isDark!,
+                            chewieController: _chewieController,
+                            videoPlayerController1: _videoPlayerController1,
+                            ),
                       ),
                     ),
                     SizedBox(
@@ -920,86 +947,87 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   ),
                 ),
               ),
-            if (allCommentModelList.data != null)
-              SliverList(
-                  delegate: SliverChildListDelegate(List.generate(
-                allCommentModelList.data!.commentsList!.length,
-                (index) => Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
-                  child: Card(
-                    color: isDark! ? CustomTheme.colorAccentDark : Colors.white,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          ClipRRect(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(25.0)),
-                            child: Image.network(
-                              allCommentModelList.data!.commentsList!
-                                  .elementAt(index)
-                                  .userImgUrl!,
-                              width: 50.0,
-                              height: 50.0,
-                            ),
-                          ),
-                          SizedBox(width: 10.0),
-                          Flexible(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  allCommentModelList.data!.commentsList!
-                                      .elementAt(index)
-                                      .userName!,
-                                  style: isDark!
-                                      ? CustomTheme.bodyText2White
-                                      : CustomTheme.bodyTextgray2,
-                                ),
-                                SizedBox(
-                                  height: 5.0,
-                                ),
-                                Text(
-                                  allCommentModelList.data!.commentsList!
-                                      .elementAt(index)
-                                      .comments!,
-                                  style: CustomTheme.smallTextGrey,
-                                ),
-                                SizedBox(
-                                  height: 5.0,
-                                ),
-                                InkWell(
-                                    onTap: () {
-                                      Navigator.pushNamed(
-                                          context, MovieReplyScreen.route,
-                                          arguments: {
-                                            'commentsID': allCommentModelList
-                                                .data!.commentsList!
-                                                .elementAt(index)
-                                                .commentsId,
-                                            'videosID': allCommentModelList
-                                                .data!.commentsList!
-                                                .elementAt(index)
-                                                .videosId,
-                                            'userId': "1",
-                                            'isDark': true,
-                                          });
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(AppContent.reply,
-                                          style: CustomTheme.coloredBodyText3),
-                                    ))
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ).toList())),
+
+            // if (allCommentModelList.data != null)
+            //   SliverList(
+            //       delegate: SliverChildListDelegate(List.generate(
+            //     allCommentModelList.data!.commentsList!.length,
+            //     (index) => Padding(
+            //       padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
+            //       child: Card(
+            //         color: isDark! ? CustomTheme.colorAccentDark : Colors.white,
+            //         child: Padding(
+            //           padding: const EdgeInsets.all(8.0),
+            //           child: Row(
+            //             children: [
+            //               ClipRRect(
+            //                 borderRadius:
+            //                     BorderRadius.all(Radius.circular(25.0)),
+            //                 child: Image.network(
+            //                   allCommentModelList.data!.commentsList!
+            //                       .elementAt(index)
+            //                       .userImgUrl!,
+            //                   width: 50.0,
+            //                   height: 50.0,
+            //                 ),
+            //               ),
+            //               SizedBox(width: 10.0),
+            //               Flexible(
+            //                 child: Column(
+            //                   mainAxisSize: MainAxisSize.min,
+            //                   crossAxisAlignment: CrossAxisAlignment.start,
+            //                   children: [
+            //                     Text(
+            //                       allCommentModelList.data!.commentsList!
+            //                           .elementAt(index)
+            //                           .userName!,
+            //                       style: isDark!
+            //                           ? CustomTheme.bodyText2White
+            //                           : CustomTheme.bodyTextgray2,
+            //                     ),
+            //                     SizedBox(
+            //                       height: 5.0,
+            //                     ),
+            //                     Text(
+            //                       allCommentModelList.data!.commentsList!
+            //                           .elementAt(index)
+            //                           .comments!,
+            //                       style: CustomTheme.smallTextGrey,
+            //                     ),
+            //                     SizedBox(
+            //                       height: 5.0,
+            //                     ),
+            //                     InkWell(
+            //                         onTap: () {
+            //                           Navigator.pushNamed(
+            //                               context, MovieReplyScreen.route,
+            //                               arguments: {
+            //                                 'commentsID': allCommentModelList
+            //                                     .data!.commentsList!
+            //                                     .elementAt(index)
+            //                                     .commentsId,
+            //                                 'videosID': allCommentModelList
+            //                                     .data!.commentsList!
+            //                                     .elementAt(index)
+            //                                     .videosId,
+            //                                 'userId': "1",
+            //                                 'isDark': true,
+            //                               });
+            //                         },
+            //                         child: Padding(
+            //                           padding: const EdgeInsets.all(8.0),
+            //                           child: Text(AppContent.reply,
+            //                               style: CustomTheme.coloredBodyText3),
+            //                         ))
+            //                   ],
+            //                 ),
+            //               )
+            //             ],
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //   ).toList())),
           ],
         );
       },

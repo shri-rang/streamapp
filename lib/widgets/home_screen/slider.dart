@@ -126,7 +126,7 @@ class ImageSlider extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        iconWTitle(Icons.bookmark_add_outlined, "My List"),
+                    //    iconWTitle(Icons.bookmark_add_outlined, "My List"),
                         GestureDetector(
                           onTap: () {
                             // Navigator.of(context).push(MaterialPageRoute(
@@ -178,7 +178,7 @@ class ImageSlider extends StatelessWidget {
                             height: 40,
                           ),
                         ),
-                        iconWTitle(Icons.download, "Download"),
+                  //      iconWTitle(Icons.download, "Download"),
                       ],
                     )
                   ],
