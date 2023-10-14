@@ -1,4 +1,4 @@
-package com.lai.bhari
+package com.pillu.originals
 
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.android.FlutterFragmentActivity

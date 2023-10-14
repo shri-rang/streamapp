@@ -91,13 +91,13 @@ class _ContinuePageState extends State<ContinuePage> {
                     ),
                     GestureDetector(
                       onTap: () {
-                       // _signInWithGoogle();
+                       _signInWithGoogle();
 
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) {
-                            return LandingScreen();
-                          },
-                        ));
+                        // Navigator.of(context).push(MaterialPageRoute(
+                        //   builder: (context) {
+                        //     return LandingScreen();
+                        //   },
+                        // ));
                       },
                       child: radiusContainerWithIcon("Continue with Google",
                           "assets/google_logo.png", context),

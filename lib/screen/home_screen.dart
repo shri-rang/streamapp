@@ -113,14 +113,14 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
 
         //country
-        if (appConfig!.countryVisible)
-          SliverToBoxAdapter(
-            child: Container(
-              margin: EdgeInsets.only(top: 5, bottom: 5),
-              child: HomeScreenCountryList(
-                  countryList: homeContent.allCountry, isDark: isDark!),
-            ),
-          ),
+        // if (appConfig!.countryVisible)
+        //   SliverToBoxAdapter(
+        //     child: Container(
+        //       margin: EdgeInsets.only(top: 5, bottom: 5),
+        //       child: HomeScreenCountryList(
+        //           countryList: homeContent.allCountry, isDark: isDark!),
+        //     ),
+        //   ),
 
         //genre
         // if (appConfig.genreVisible)

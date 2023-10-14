@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "981194937059",
-    "project_id": "lai-bhari",
-    "storage_bucket": "lai-bhari.appspot.com"
+    "project_number": "1011238996916",
+    "project_id": "pillu-85168",
+    "storage_bucket": "pillu-85168.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:981194937059:android:a6f15778193471457aebd6",
+        "mobilesdk_app_id": "1:1011238996916:android:2429ed2b1e5744a19280e1",
         "android_client_info": {
-          "package_name": "com.lai.bhari"
+          "package_name": "com.pillu.originals"
         }
       },
       "oauth_client": [
         {
-          "client_id": "981194937059-lph7hk29dr33r7tk2t41klsrk653131t.apps.googleusercontent.com",
+          "client_id": "1011238996916-om5pm6m74r98p6bp9qdickt6gobb4s4l.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.lai.bhari",
-            "certificate_hash": "2a6dd6ce52973c3b692f79655ef004186281bed9"
+            "package_name": "com.pillu.originals",
+            "certificate_hash": "a978e68055435de02ea19243c97420ecd38d47b5"
           }
         },
         {
-          "client_id": "981194937059-0d2cof9d6uvsic6pmoggpem21vuqihho.apps.googleusercontent.com",
+          "client_id": "1011238996916-ksc3mlgrnjuu9fuai7b6geb8k1041jvm.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDgiUxVyo31FwZ-8H4zHQufQ-LnUV6xT3Q"
+          "current_key": "AIzaSyDUUQJszzuq5393nDxhCqb2jqIiT5Hd04k"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "981194937059-0d2cof9d6uvsic6pmoggpem21vuqihho.apps.googleusercontent.com",
+              "client_id": "1011238996916-ksc3mlgrnjuu9fuai7b6geb8k1041jvm.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
