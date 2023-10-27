@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
+import 'package:oxoo/pages/CoontinuePage.dart';
 import 'package:oxoo/server/repository.dart';
 import 'package:oxoo/widgets/home_screen/country_item.dart';
 import 'package:oxoo/widgets/home_screen/popular_star.dart';
@@ -46,49 +48,109 @@ class _HomeScreenState extends State<HomeScreen> {
     PaymentConfig? paymentConfig = configService.paymentConfig();
     AppConfig? appConfig = configService.appConfig();
 
-    return Scaffold(
-      backgroundColor:
-          isDark! ? CustomTheme.primaryColorDark : Colors.transparent,
-      body: FutureBuilder<HomeContent>(
-        future: _homeContent,
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.hasData) {
-            return buildUI(
-                context: context,
-                authUser: authUser,
-                paymentConfig: paymentConfig,
-                appConfig: appConfig,
-                homeContent: snapshot.data);
-          } else if (snapshot.hasError) {
-            return Center(
-              child: Text(
-                AppContent.somethingWentWrong,
-                style: TextStyle(color: Colors.white),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          shadowColor: Colors.white,
+               backgroundColor:
+            isDark! ? CustomTheme.primaryColorDark : Colors.transparent,   
+            automaticallyImplyLeading: false,
+            title:  Center(
+              child: Text("Gold Safe",
+               style: TextStyle(
+                        fontFamily: 'Sans Serif',
+                        fontSize: 18.sp,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold )
               ),
-            );
-          }
-
-          return Center(
-            child: spinkit,
-          );
-        },
+            ),
+                bottom: TabBar(
+          tabs: [
+            Tab(icon: Icon(Icons.flight)),
+            Tab(icon: Icon(Icons.directions_transit)),
+            // Tab(icon: Icon(Icons.directions_car)),
+          ],
+        ),
+          actions: [
+                   Padding(
+                  padding:  EdgeInsets.symmetric(  horizontal: 6, vertical: 10),
+                  child: PrimaryButton(
+                          title: "SIGN UP",
+                          width:95,
+                          onTap: () {
+                           
+                          },
+                          // screenWidth * .8,
+                          height: 25,
+                        ),
+                ),
+             
+                Padding(
+                  padding:  EdgeInsets.symmetric(  horizontal: 11, vertical: 10),
+                  child: PrimaryButton(
+                          title: "LOGIN",
+                          width:80,
+                          onTap: () {
+                           
+                          },
+                          // screenWidth * .8,
+                          height: 25,
+                        ),
+                ),
+          ],
+        ),
+        backgroundColor:
+            isDark! ? CustomTheme.primaryColorDark : Colors.transparent,
+        body:
+          TabBarView(
+        children: [
+          Icon(Icons.flight, size: 350),
+          Icon(Icons.directions_transit, size: 350),
+          // Icon(Icons.directions_car, size: 350),
+        ],
       ),
-      // body: BlocBuilder<HomeContentBloc, HomeContentState>(
-      //   builder: (context, state) {
-      //     if (state is HomeContentLoadingState) {
-      //       BlocProvider.of<HomeContentBloc>(context)..add(FetchHomeContentData());
-      //     } else if (state is HomeContentErrorState) {
-      //       return Center(
-      //         child: Text(AppContent.somethingWentWrong),
-      //       );
-      //     } else if (state is HomeContentLoadedState) {
-      //       printLog("--------home content data loaded");
-
-      //       return buildUI(context: context, authUser: authUser, paymentConfig: paymentConfig, homeContent: state.homeContent);
-      //     }
-      //     return Center(child: spinkit);
-      //   },
-      // ),
+        // FutureBuilder<HomeContent>(
+        //   future: _homeContent,
+        //   builder: (BuildContext context, AsyncSnapshot snapshot) {
+        //     if (snapshot.hasData) {
+        //       return buildUI(
+        //           context: context,
+        //           authUser: authUser,
+        //           paymentConfig: paymentConfig,
+        //           appConfig: appConfig,
+        //           homeContent: snapshot.data);
+        //     } else if (snapshot.hasError) {
+        //       return Center(
+        //         child: Text(
+        //           AppContent.somethingWentWrong,
+        //           style: TextStyle(color: Colors.white),
+        //         ),
+        //       );
+        //     }
+    
+        //     return Center(
+        //       child: spinkit,
+        //     );
+        //   },
+        // ),
+        // body: BlocBuilder<HomeContentBloc, HomeContentState>(
+        //   builder: (context, state) {
+        //     if (state is HomeContentLoadingState) {
+        //       BlocProvider.of<HomeContentBloc>(context)..add(FetchHomeContentData());
+        //     } else if (state is HomeContentErrorState) {
+        //       return Center(
+        //         child: Text(AppContent.somethingWentWrong),
+        //       );
+        //     } else if (state is HomeContentLoadedState) {
+        //       printLog("--------home content data loaded");
+    
+        //       return buildUI(context: context, authUser: authUser, paymentConfig: paymentConfig, homeContent: state.homeContent);
+        //     }
+        //     return Center(child: spinkit);
+        //   },
+        // ),
+      ),
     );
   }
 

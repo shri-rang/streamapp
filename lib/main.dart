@@ -24,7 +24,7 @@ Future<void> main() async {
   await FlutterDownloader.initialize();
   // HttpOverrides.global = MyHttpOverrides();
   // Stripe.publishableKey = Config.stripepublishableKey;
-  Admob.initialize(testDeviceIds: ["17A3B83DAC6AB3357062439AAD33FEA3"]);
+ // Admob.initialize(testDeviceIds: ["17A3B83DAC6AB3357062439AAD33FEA3"]);
   final document = await getApplicationDocumentsDirectory();
   Hive.init(document.path);
   Hive.registerAdapter(ConfigurationModelAdapter());

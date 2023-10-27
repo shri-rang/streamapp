@@ -284,7 +284,7 @@ class PrimaryButton extends StatelessWidget {
             child: Text(title,
                 style: TextStyle(
                     fontFamily: 'Sans Serif',
-                    fontSize: 16.sp,
+                    fontSize: 12.sp,
                     color: Colors.white,
                     fontWeight: FontWeight.w400)
                 // style:

@@ -43,7 +43,7 @@ class _MyAppState extends State<MyApp> {
     if (isDark == null) {
       appModeBox.put('isDark', true);
     }
-    initOneSignal();
+    //initOneSignal();
   }
 
   @override
