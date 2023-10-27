@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:oxoo/pages/CoontinuePage.dart';
+import 'package:oxoo/screen/Tabs/Buy.dart';
+import 'package:oxoo/screen/Tabs/Sell.dart';
 import 'package:oxoo/server/repository.dart';
 import 'package:oxoo/widgets/home_screen/country_item.dart';
 import 'package:oxoo/widgets/home_screen/popular_star.dart';
@@ -53,63 +55,68 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         appBar: AppBar(
           shadowColor: Colors.white,
-               backgroundColor:
-            isDark! ? CustomTheme.primaryColorDark : Colors.transparent,   
-            automaticallyImplyLeading: false,
-            title:  Center(
-              child: Text("Gold Safe",
-               style: TextStyle(
-                        fontFamily: 'Sans Serif',
-                        fontSize: 18.sp,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold )
+          backgroundColor:
+              isDark! ? CustomTheme.primaryColorDark : Colors.transparent,
+          automaticallyImplyLeading: false,
+          title: Center(
+            child: Text("Gold Safe",
+                style: TextStyle(
+                    fontFamily: 'Sans Serif',
+                    fontSize: 18.sp,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold)),
+          ),
+          bottom: TabBar(
+            tabs: [
+              Tab(
+                  icon: Text("Buy",
+                      style: TextStyle(
+                          fontFamily: 'Sans Serif',
+                          fontSize: 15.sp,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold))) ,
+              Tab(
+                  icon: Text("Sell",
+                      style: TextStyle(
+                          fontFamily: 'Sans Serif',
+                          fontSize: 15.sp,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold))),
+              // Tab(icon: Icon(Icons.directions_car)),
+            ],
+          ),
+          actions: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 6, vertical: 10),
+              child: PrimaryButton(
+                title: "SIGN UP",
+                width: 95,
+                onTap: () {},
+                // screenWidth * .8,
+                height: 25,
               ),
             ),
-                bottom: TabBar(
-          tabs: [
-            Tab(icon: Icon(Icons.flight)),
-            Tab(icon: Icon(Icons.directions_transit)),
-            // Tab(icon: Icon(Icons.directions_car)),
-          ],
-        ),
-          actions: [
-                   Padding(
-                  padding:  EdgeInsets.symmetric(  horizontal: 6, vertical: 10),
-                  child: PrimaryButton(
-                          title: "SIGN UP",
-                          width:95,
-                          onTap: () {
-                           
-                          },
-                          // screenWidth * .8,
-                          height: 25,
-                        ),
-                ),
-             
-                Padding(
-                  padding:  EdgeInsets.symmetric(  horizontal: 11, vertical: 10),
-                  child: PrimaryButton(
-                          title: "LOGIN",
-                          width:80,
-                          onTap: () {
-                           
-                          },
-                          // screenWidth * .8,
-                          height: 25,
-                        ),
-                ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 11, vertical: 10),
+              child: PrimaryButton(
+                title: "LOGIN",
+                width: 80,
+                onTap: () {},
+                // screenWidth * .8,
+                height: 25,
+              ),
+            ),
           ],
         ),
         backgroundColor:
             isDark! ? CustomTheme.primaryColorDark : Colors.transparent,
-        body:
-          TabBarView(
-        children: [
-          Icon(Icons.flight, size: 350),
-          Icon(Icons.directions_transit, size: 350),
-          // Icon(Icons.directions_car, size: 350),
-        ],
-      ),
+        body: TabBarView(
+          children: [
+            BuyScreen(),
+            SellScreen()
+            // Icon(Icons.directions_car, size: 350),
+          ],
+        ),
         // FutureBuilder<HomeContent>(
         //   future: _homeContent,
         //   builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -128,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
         //         ),
         //       );
         //     }
-    
+
         //     return Center(
         //       child: spinkit,
         //     );
@@ -144,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
         //       );
         //     } else if (state is HomeContentLoadedState) {
         //       printLog("--------home content data loaded");
-    
+
         //       return buildUI(context: context, authUser: authUser, paymentConfig: paymentConfig, homeContent: state.homeContent);
         //     }
         //     return Center(child: spinkit);
