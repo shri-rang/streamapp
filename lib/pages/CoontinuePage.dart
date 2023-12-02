@@ -262,7 +262,7 @@ class PrimaryButton extends StatelessWidget {
         height: height,
         decoration: BoxDecoration(
           // color: grey,
-          borderRadius: BorderRadius.all(Radius.circular(16)),
+          borderRadius: BorderRadius.all(Radius.circular(8)),
           gradient: LinearGradient(
               begin: Alignment.bottomLeft,
               end: Alignment.bottomRight,
@@ -285,7 +285,7 @@ class PrimaryButton extends StatelessWidget {
                 style: TextStyle(
                     fontFamily: 'Sans Serif',
                     fontSize: 12.sp,
-                    color: Colors.white,
+                    color: Colors.black,
                     fontWeight: FontWeight.w400)
                 // style:
                 // GoogleFonts.araboto(

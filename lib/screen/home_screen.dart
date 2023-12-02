@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
+import 'package:oxoo/colors.dart';
 import 'package:oxoo/pages/CoontinuePage.dart';
 import 'package:oxoo/screen/Tabs/Buy.dart';
 import 'package:oxoo/screen/Tabs/Sell.dart';
@@ -29,16 +30,25 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   var appModeBox = Hive.box('appModeBox');
   bool? isDark;
   late Future<HomeContent> _homeContent;
+  TabController? _controller; 
+  int _selectedIndex = 0;
 
   @override
   void initState() {
     super.initState();
     isDark = appModeBox.get('isDark') ?? false;
     _homeContent = Repository().getHomeContent();
+    _controller = TabController(length: 2, vsync: this); 
+      _controller!.addListener(() {
+    setState(() {
+      _selectedIndex = _controller!.index;
+    });
+    print("Selected Index: " + _controller!.index.toString());
+  });
   }
 
   @override
@@ -66,57 +76,126 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.white,
                     fontWeight: FontWeight.bold)),
           ),
-          bottom: TabBar(
-            tabs: [
-              Tab(
-                  icon: Text("Buy",
-                      style: TextStyle(
-                          fontFamily: 'Sans Serif',
-                          fontSize: 15.sp,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold))) ,
-              Tab(
-                  icon: Text("Sell",
-                      style: TextStyle(
-                          fontFamily: 'Sans Serif',
-                          fontSize: 15.sp,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold))),
-              // Tab(icon: Icon(Icons.directions_car)),
-            ],
-          ),
+         // bottom: TabBar(
+          //   indicatorColor: purple,
+          //   tabs: [
+          //     Tab(
+          //         icon: Text("Buy",
+          //             style: TextStyle(
+          //                 fontFamily: 'Sans Serif',
+          //                 fontSize: 15.sp,
+          //                 color: Colors.white,
+          //                 fontWeight: FontWeight.bold))) ,
+          //     Tab(
+          //         icon: Text("Sell",
+          //             style: TextStyle(
+          //                 fontFamily: 'Sans Serif',
+          //                 fontSize: 15.sp,
+          //                 color: Colors.white,
+          //                 fontWeight: FontWeight.bold))),
+          //     // Tab(icon: Icon(Icons.directions_car)),
+          //   ],
+          // ),
           actions: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 6, vertical: 10),
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 2),
               child: PrimaryButton(
                 title: "SIGN UP",
-                width: 95,
+                width: 110,
                 onTap: () {},
                 // screenWidth * .8,
-                height: 25,
+                height: 40,
               ),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 11, vertical: 10),
-              child: PrimaryButton(
-                title: "LOGIN",
-                width: 80,
-                onTap: () {},
-                // screenWidth * .8,
-                height: 25,
-              ),
-            ),
+            // Padding(
+            //   padding: EdgeInsets.symmetric(horizontal: 11, vertical: 10),
+            //   child: PrimaryButton(
+            //     title: "LOGIN",
+            //     width: 80,
+            //     onTap: () {},
+            //     // screenWidth * .8,
+            //     height: 25,
+            //   ),
+            // ),
           ],
         ),
         backgroundColor:
-            isDark! ? CustomTheme.primaryColorDark : Colors.transparent,
-        body: TabBarView(
-          children: [
-            BuyScreen(),
-            SellScreen()
-            // Icon(Icons.directions_car, size: 350),
-          ],
-        ),
+         //   isDark! ?
+
+            CustomTheme.primaryColorDark,
+
+                ///: Colors.transparent,
+        body:
+           SingleChildScrollView(
+             child: Padding(
+               padding: const EdgeInsets.symmetric( horizontal: 16, vertical:  16 ),
+               child: Column(
+                 crossAxisAlignment: CrossAxisAlignment.start,
+                 children: [
+                    Text("Hello, Shrirang",
+                     style:  TextStyle( fontSize: 18),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    header(),
+                    SizedBox(
+                      height: 40,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 350,
+                      
+                      decoration: BoxDecoration(
+                        color: purple,
+                         borderRadius: BorderRadius.circular(8)
+             
+                      ),
+                      child: Column(
+                        children: [
+                             TabBar(
+                              indicatorSize: TabBarIndicatorSize.label,
+                              controller: _controller,
+                 //                           indicator: BoxDecoration(
+             
+                 // // borderRadius: BorderRadius.circular(50), // Creates border
+                 // color: CustomTheme.primaryColorDark,),
+                             indicatorWeight: 2,
+             
+                               indicatorColor: Colors.black,
+                              labelColor: purple,
+                              labelStyle:  TextStyle( 
+                                color: Colors.black
+                              ),
+                              tabs: [
+                                Tab(icon:  Text("Buy", style:   TextStyle( 
+                                color: Colors.black
+                              ) ,  )  ),
+                                 Tab(icon: Text("Sell")   ),
+                             ]),
+                              Container(
+                                height: 300,
+                                child: TabBarView(
+                                  controller: _controller,
+                                  children: [
+                                          buy(),
+                                          sell()
+                                ] ),
+                              ),
+                        ],
+                      ),
+                    )
+                 ],
+               ),
+             ),
+           )
+        // TabBarView(
+        //   children: [
+        //     BuyScreen(),
+        //     SellScreen()
+        //     // Icon(Icons.directions_car, size: 350),
+        //   ],
+        // ),
         // FutureBuilder<HomeContent>(
         //   future: _homeContent,
         //   builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -160,6 +239,175 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
+ int? selectedVal;
+ 
+ Widget buy(){
+   return Padding(
+     padding: const EdgeInsets.all(16.0),
+     child: Container(
+      height: 300,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+         color: Color(0xff212121),
+      ),
+          
+         child: Column(
+          children: [
+             SizedBox(
+              height: 20,
+             ),
+             Row(
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                  select("Buy in Rupees", 1),
+            select("Buy in Gram", 2)
+              ],
+             ),
+              SizedBox(
+              height: 20,
+             ),
+           Padding(
+             padding: const EdgeInsets.symmetric( horizontal: 16),
+             child: TextFormField(
+              decoration: InputDecoration(
+                 enabledBorder: OutlineInputBorder(
+                   borderSide: BorderSide(
+                    color: Colors.white
+                   )
+                 ),
+                 focusedBorder: 
+                 OutlineInputBorder(
+                   borderSide: BorderSide(
+                    color: purple
+                   )
+                 ),
+                border: OutlineInputBorder(
+                borderSide: BorderSide(
+
+                )
+                )
+              ),
+             ),
+           ),
+            SizedBox(
+              height: 20,
+             ),
+            PrimaryButton(
+                title: "SIGN UP",
+                width: 110,
+                onTap: () {},
+                // screenWidth * .8,
+                height: 40,
+              ),
+
+          ],
+         ),
+     ),
+   );
+
+ }
+
+
+ Widget select(String title, int val ){
+
+     return  Row(
+              children: [
+                 
+                 Radio(
+                  activeColor: Colors.white,
+                  value: val, groupValue: selectedVal, onChanged: (v){
+                 selectedVal  = v ;
+                 setState(() {
+                   
+                 });
+                 }),
+
+                 Text(title,
+                  style:   TextStyle(color:  Colors.white, ),
+                 )
+
+              ],
+            );
+
+ }
+ Widget sell(){
+   return Container(
+    height: 300,
+    
+   );
+
+ }
+
+  Widget header(){
+
+    return   Container(
+                     width: double.infinity,
+                     height: 150,
+                     decoration: BoxDecoration(
+                         color: purple,
+                      border: Border.all(
+                        color: purple
+                      ),
+                      borderRadius: BorderRadius.circular(8),
+                     
+                    ),
+                    child: Row(
+                      children: [
+                         ClipRRect(
+                            borderRadius: BorderRadius.only( topLeft: Radius.circular(8), bottomLeft: Radius.circular(8)),
+                           child: Image.asset('assets/gold.jpeg',
+                            width: 170,
+                             height: 150,
+                             fit: BoxFit.fill,
+                           ),
+
+                         ),
+                          SizedBox(
+                            width: 15,
+                          ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: 22,
+                            ),
+                             Text("GOLD Price",
+                              style:  TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black.withOpacity(0.7)
+                              ),
+                             ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text("24k/999",
+                              style:  TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black.withOpacity(0.7)
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text("₹ 6356.40 /gm ",
+                              style:  TextStyle(
+                                  fontSize: 24,
+                                 // fontWeight: FontWeight.bold,
+                                 color: Colors.black.withOpacity(0.7)
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  );
+  }
+
+
+
 
   Widget buildUI(
       {BuildContext? context,

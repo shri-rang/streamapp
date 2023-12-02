@@ -5,7 +5,7 @@ abstract class CustomTheme {
   static Color primaryColor = red;
   static const Color primaryColorRed = const Color(0xFFea202e);
   static const Color colorAccent = const Color(0xFFDB8501);
-  static const Color primaryColorDark = Colors.black;
+  static const Color primaryColorDark = Color(0xff1b1b1b);
   static const Color colorAccentDark = Colors.black87;
   static const Color paypalColor = const Color(0xff009cde);
   static const Color paypalColorDark = const Color(0xffD39916);

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:oxoo/colors.dart';
 import 'package:oxoo/pages/CoontinuePage.dart';
+import 'package:oxoo/style/theme.dart';
 
 class BuyScreen extends StatefulWidget {
   const BuyScreen({super.key});
@@ -17,6 +18,7 @@ class _BuyScreenState extends State<BuyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: CustomTheme.primaryColorDark ,
       body: Column(
         children: [
           Container(
@@ -139,7 +141,7 @@ class PrimaryButtonT extends StatelessWidget {
         height: height,
         decoration: BoxDecoration(
           // color: grey,
-          borderRadius: BorderRadius.all(Radius.circular(30)),
+          borderRadius: BorderRadius.all(Radius.circular(8)),
           gradient: LinearGradient(
               begin: Alignment.bottomLeft,
               end: Alignment.bottomRight,
@@ -154,7 +156,7 @@ class PrimaryButtonT extends StatelessWidget {
               backgroundColor: Colors.transparent,
               shadowColor: Colors.transparent,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12), // <-- Radius
+                borderRadius: BorderRadius.circular(8), // <-- Radius
               ),
             ),
             onPressed: onTap,
@@ -162,7 +164,7 @@ class PrimaryButtonT extends StatelessWidget {
                 style: TextStyle(
                     fontFamily: 'Sans Serif',
                     fontSize: 15.sp,
-                    color: Colors.white,
+                    color: Colors.black,
                     fontWeight: FontWeight.w400)
                 // style:
                 // GoogleFonts.araboto(
