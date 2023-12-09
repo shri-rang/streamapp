@@ -8,6 +8,8 @@ import 'package:oxoo/colors.dart';
 import 'package:oxoo/config.dart';
 import 'package:oxoo/pages/CoontinuePage.dart';
 import 'package:oxoo/pages/SwipePage.dart';
+import 'package:oxoo/screen/home_screen.dart';
+import 'package:oxoo/style/theme.dart';
 import 'package:provider/provider.dart';
 import '../../bloc/auth/registration_bloc.dart';
 import '../../service/authentication_service.dart';
@@ -91,16 +93,19 @@ class _MyAppState extends State<MyApp> {
                       Typography.englishLike2018.apply(fontSizeFactor: 1.sp),
                 ),
                 home: AnimatedSplashScreen(
-                   splash: "assets/ps26.jpg",
-                   splashIconSize: 700,
+                   splash: "assets/logo.png",
+                   splashIconSize: 600,
 
 
-                   backgroundColor: Color.fromRGBO(236, 142, 28, 1),
+                   backgroundColor: CustomTheme.primaryColorDark,
 
                    nextScreen: child!),
               );
             },
-            child: RenderFirstScreen(),
+            child:
+            
+           //  HomeScreen()
+             RenderFirstScreen(),
           )
 
           //  MaterialApp(
@@ -144,7 +149,7 @@ class RenderFirstScreen extends StatelessWidget {
   Widget renderFirstScreen(bool isMandatoryLogin) {
     print(isMandatoryLogin);
     if (isMandatoryLogin) {
-      return SwipePage();
+      return LandingScreen();
     } else {
       return LandingScreen();
     }

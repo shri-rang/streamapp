@@ -216,12 +216,14 @@ class _LandingScreenState extends State<LandingScreen>
                       ],
                     ),
                   ),
+                  
                   decoration: BoxDecoration(
                     image: DecorationImage(
 
                          fit: BoxFit.cover,
-                      image:   AssetImage('assets/pillu.png'
-                     
+
+                      image:   AssetImage('assets/logo.png'
+                      
                     )
                      ),
                       color:
