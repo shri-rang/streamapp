@@ -1,44 +1,26 @@
 {
   "project_info": {
-    "project_number": "981194937059",
-    "project_id": "lai-bhari",
-    "storage_bucket": "lai-bhari.appspot.com"
+    "project_number": "385905731218",
+    "project_id": "goldinvest-a62e0",
+    "storage_bucket": "goldinvest-a62e0.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:981194937059:android:a6f15778193471457aebd6",
+        "mobilesdk_app_id": "1:385905731218:android:9b570ef38a707bf2aaa84b",
         "android_client_info": {
-          "package_name": "com.lai.bhari"
+          "package_name": "com.example.goldinvest"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "981194937059-lph7hk29dr33r7tk2t41klsrk653131t.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.lai.bhari",
-            "certificate_hash": "2a6dd6ce52973c3b692f79655ef004186281bed9"
-          }
-        },
-        {
-          "client_id": "981194937059-0d2cof9d6uvsic6pmoggpem21vuqihho.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDgiUxVyo31FwZ-8H4zHQufQ-LnUV6xT3Q"
+          "current_key": "AIzaSyCA_Mo0nkZpETjo7T93zUjZSkuSEiyBbZg"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "981194937059-0d2cof9d6uvsic6pmoggpem21vuqihho.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
