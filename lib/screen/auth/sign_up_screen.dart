@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oxoo/pages/CoontinuePage.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:oxoo/screen/home_screen.dart';
 import 'package:pinput/pinput.dart';
 import '../../colors.dart';
 import '../../constants.dart';
@@ -36,6 +38,7 @@ class _SignUpScreenState extends State<SignUpScreen>
   TextEditingController loginNameController = new TextEditingController();
   TextEditingController loginEmailController = new TextEditingController();
   TextEditingController loginPasswordController = new TextEditingController();
+  TextEditingController otpVerifyCnt = new TextEditingController();
   late bool _isRegistered;
   late Bloc bloc;
   Bloc? firebaseAuthBloc;
@@ -43,7 +46,10 @@ class _SignUpScreenState extends State<SignUpScreen>
   bool isLoading = false;
   late bool isDark;
   var appModeBox = Hive.box('appModeBox');
+  String smsCode = "";
+  FirebaseAuth auth = FirebaseAuth.instance;
 
+  String verificationId = "";
   @override
   void initState() {
     super.initState();
@@ -224,36 +230,6 @@ class _SignUpScreenState extends State<SignUpScreen>
                                                       //     value);
                                                     }),
                                             SizedBox(height: 10),
-                                            // EditTextUtils()
-                                            //     .getCustomEditTextField(
-                                            //         lableText:
-                                            //             "Enter your password here",
-                                            //         prefixWidget: Icon(
-                                            //           Icons.lock,
-                                            //           color: Colors.white
-                                            //               .withOpacity(0.5),
-                                            //         ),
-                                            //         hintValue:
-                                            //             AppContent.password,
-                                            //         keyboardType:
-                                            //             TextInputType.text,
-                                            //         style: isDark
-                                            //             ? CustomTheme
-                                            //                 .authTitleGrey
-                                            //             : CustomTheme.authTitle,
-                                            //         underLineInputBorderColor:
-                                            //             isDark
-                                            //                 ? CustomTheme
-                                            //                     .grey_transparent2
-                                            //                 : CustomTheme
-                                            //                     .primaryColor,
-                                            //         controller:
-                                            //             loginPasswordController,
-                                            //         obscureValue: true,
-                                            //         validator: (value) {
-                                            //           return validateMinLength(
-                                            //               value);
-                                            //         }),
                                           ],
                                         ),
                                       ),
@@ -266,9 +242,14 @@ class _SignUpScreenState extends State<SignUpScreen>
                                       child: PrimaryButton(
                                         title: "SIGN UP",
                                         width: double.infinity,
-                                        onTap: () {
+                                        onTap: () async {
                                           if (_signUpFormkey.currentState!
                                               .validate()) {
+                                            await _phoneAuth(
+                                                    loginEmailController.text)
+                                                .then((value) =>
+                                                    _displayTextInputDialog(
+                                                        context));
                                             // isLoading = true;
                                             // AuthUser user = AuthUser(
                                             //     name: loginNameController.text,
@@ -281,7 +262,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                                             //     password:
                                             //         loginPasswordController
                                             //             .text));
-                                            _displayTextInputDialog(context);
+                                            //   _displayTextInputDialog(context);
                                           }
                                         },
                                         // screenWidth * .8,
@@ -363,6 +344,29 @@ class _SignUpScreenState extends State<SignUpScreen>
     );
   }
 
+  Future<void> verify(String otp) async {
+    PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.credential(
+        verificationId: verificationId, smsCode: otp);
+
+    signInWithPhoneAuthCredential(phoneAuthCredential);
+  }
+
+  void signInWithPhoneAuthCredential(
+      PhoneAuthCredential phoneAuthCredential) async {
+    try {
+      final authCredential =
+          await auth.signInWithCredential(phoneAuthCredential);
+
+      if (authCredential.user != null) {
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => LandingScreen()),
+            (Route<dynamic> route) => false);
+      }
+    } on FirebaseAuthException catch (e) {
+      print("catch");
+    }
+  }
+
   Future<PersistentBottomSheetController> _displayTextInputDialog(
       BuildContext context) async {
     return showBottomSheet(
@@ -407,6 +411,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                     height: 20,
                   ),
                   Pinput(
+                    controller: otpVerifyCnt,
                     length: 6,
                   ),
                   SizedBox(
@@ -420,7 +425,9 @@ class _SignUpScreenState extends State<SignUpScreen>
                       title: "Submit",
                       width: double.infinity,
                       onTap: () {
-                        if (_signUpFormkey.currentState!.validate()) {}
+                        if (otpVerifyCnt.text.isNotEmpty) {
+                          verify(otpVerifyCnt.text);
+                        }
                       },
                       // screenWidth * .8,
                       height: 50,
@@ -432,7 +439,70 @@ class _SignUpScreenState extends State<SignUpScreen>
           );
         });
   }
+
+  Future<void> _phoneAuth(String phoneNumber) async {
+    String error = '';
+    // if (kIsWeb) {
+    //   final confirmationResult =
+    //       await auth.signInWithPhoneNumber(phoneController.text);
+    //   final smsCode = await getSmsCodeFromUser(context);
+
+    //   if (smsCode != null) {
+    //     await confirmationResult.confirm(smsCode);
+    //   }
+    // }
+    // else {
+
+    await auth.verifyPhoneNumber(
+      phoneNumber: "+91$phoneNumber",
+      verificationCompleted: (_) {},
+      verificationFailed: (e) {
+        setState(() {
+          error = '${e.message}';
+        });
+      },
+      codeSent: (String verificationId, int? resendToken) async {
+        print("verfication id $verificationId");
+        this.verificationId = verificationId;
+        setState(() {});
+        // final smsCodee = smsCode;
+
+        // if (smsCodee != null) {
+        //   // Create a PhoneAuthCredential with the code
+        //   final credential = PhoneAuthProvider.credential(
+        //     verificationId: verificationId,
+        //     smsCode: smsCodee,
+        //   );
+
+        //   try {
+        //     // Sign the user in (or link) with the credential
+        //     await auth.signInWithCredential(credential);
+        //   } on FirebaseAuthException catch (e) {
+        //     setState(() {
+        //       error = e.message ?? '';
+        //     });
+        //   }
+        // }
+      },
+      codeAutoRetrievalTimeout: (e) {
+        setState(() {
+          error = e;
+        });
+      },
+    );
+  }
 }
+
+
+
+ 
+
+// }
+
+
+
+
+
 //     Column(children: [
 //              Text('TextField in Dialog'),
 //               TextField(
