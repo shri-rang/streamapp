@@ -1,4 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
@@ -31,6 +33,11 @@ import '../widgets/home_screen/tv_series_item.dart';
 import '../strings.dart';
 
 class HomeScreen extends StatefulWidget {
+  UserCredential? userCredential;
+
+  HomeScreen({
+    this.userCredential,
+  });
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -45,6 +52,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+
     isDark = appModeBox.get('isDark') ?? false;
     _homeContent = Repository().getHomeContent();
     _controller = TabController(length: 2, vsync: this);
@@ -54,6 +62,27 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       });
       print("Selected Index: " + _controller!.index.toString());
     });
+    createData();
+  }
+
+  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+
+  Future createData() async {
+    await firebaseFirestore.doc(widget.userCredential!.user!.uid).set({
+      'userId': 'shri',
+    });
+    // firebaseFirestore.
+    // doc(widget.userCredential!.user!.uid);
+    // var res = firebaseFirestore
+    //     .collection('status/')
+    //     .doc('status/' + widget.userCredential!.user!.uid);
+    //print("res $res");
+    // firebaseFirestore.collection("ads").add({
+    //   // 'category': '$category',
+    //   // 'location': '$location',
+    //   // 'subject': '$adName',
+    //   'userId': '${widget.userCredential!.user!.uid}',
+    // });
   }
 
   @override
@@ -99,21 +128,25 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             //   ],
             // ),
             actions: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 2),
-                child: PrimaryButton(
-                  title: "SIGN UP",
-                  width: 110,
-                  onTap: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) {
-                      return SignUpScreen();
-                    }));
-                  },
-                  // screenWidth * .8,
-                  height: 40,
-                ),
-              ),
+              widget.userCredential != null
+                  ? Container()
+                  : Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+                      child: PrimaryButton(
+                        title: "SIGN UP",
+                        width: 110,
+                        onTap: () {
+                          print("dsd ${widget.userCredential}");
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (context) {
+                            return SignUpScreen();
+                          }));
+                        },
+                        // screenWidth * .8,
+                        height: 40,
+                      ),
+                    ),
               // Padding(
               //   padding: EdgeInsets.symmetric(horizontal: 11, vertical: 10),
               //   child: PrimaryButton(
@@ -351,7 +384,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 PrimaryButton(
                   title: "BUY",
                   width: 110,
-                  onTap: () {},
+                  onTap: () {
+                    createData();
+                  },
                   // screenWidth * .8,
                   height: 40,
                 ),

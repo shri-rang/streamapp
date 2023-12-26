@@ -42,7 +42,11 @@ import 'home_screen.dart';
 
 class LandingScreen extends StatefulWidget {
   static final String route = "LandingScreen";
+  UserCredential? userCredential;
 
+  LandingScreen({
+    this.userCredential,
+  });
   @override
   _LandingScreenState createState() => _LandingScreenState();
 }
@@ -71,7 +75,7 @@ class _LandingScreenState extends State<LandingScreen>
     _controller = new TabController(vsync: this, length: 5, initialIndex: 1);
     super.initState();
     myFocusNode = FocusNode();
-
+    print("dsd ${widget.userCredential}");
     isDark = appModeBox.get('isDark') ?? false;
     initStoreInfo();
     SchedulerBinding.instance
@@ -101,14 +105,22 @@ class _LandingScreenState extends State<LandingScreen>
     TvSeriesScreen(),
     FavouriteScreen()
   ];
+  List<Widget> bottomBarPages = [];
 
-  final List<Widget> bottomBarPages = [
-    HomeScreen(),
-    MoviesScreen(),
-    SettingScreen(),
-  //  TvSeriesScreen(),
-    // FavouriteScreen()
-  ];
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    bottomBarPages = [
+      HomeScreen(
+        userCredential: widget.userCredential,
+      ),
+      MoviesScreen(),
+      SettingScreen(),
+      //  TvSeriesScreen(),
+      // FavouriteScreen()
+    ];
+  }
 
   @override
   void dispose() {
@@ -197,7 +209,6 @@ class _LandingScreenState extends State<LandingScreen>
         // appBar: _renderAppBar() as PreferredSizeWidget?,
         drawer: Drawer(
           child: Container(
-          
             color: isDark
                 ? CustomTheme.primaryColorDark
                 : CustomTheme.primaryColorRed,
@@ -205,34 +216,21 @@ class _LandingScreenState extends State<LandingScreen>
               // padding: EdgeInsets.zero,
               children: <Widget>[
                 DrawerHeader(
-
-                  padding:EdgeInsets.zero ,
-                   margin: EdgeInsets.zero,
+                  padding: EdgeInsets.zero,
+                  margin: EdgeInsets.zero,
                   child: Align(
                     child: Column(
                       // mainAxisSize: MainAxisSize.min,
-                      children: [
-                  
-                      ],
+                      children: [],
                     ),
                   ),
-                  
                   decoration: BoxDecoration(
-                    image: DecorationImage(
-
-                         fit: BoxFit.cover,
-
-                      image:   AssetImage('assets/logo.png'
-                      
-                    )
-                     ),
-                      color:
-                      isDark
-                         ? Colors.grey.shade900
-                        :
-                          
-                           CustomTheme.primaryColorRed
-                          ),
+                      image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage('assets/logo.png')),
+                      color: isDark
+                          ? Colors.grey.shade900
+                          : CustomTheme.primaryColorRed),
                 ),
                 Container(
                   color: isDark ? Colors.transparent : Colors.white,
@@ -271,9 +269,9 @@ class _LandingScreenState extends State<LandingScreen>
           height: 60,
 
           // Color.fromARGB(255, 41, 37, 37).withOpacity(0.9),
-          buttonBackgroundColor:                 lightpurple,
+          buttonBackgroundColor: lightpurple,
 
-         animationCurve: Curves.easeInOut,
+          animationCurve: Curves.easeInOut,
           color: Color.fromARGB(255, 41, 37, 37),
           items: <Widget>[
             Icon(
@@ -281,9 +279,10 @@ class _LandingScreenState extends State<LandingScreen>
               color: Colors.white,
               size: 35,
             ),
-            SvgPicture.asset("assets/drawer_icon/outline_movie_24.svg",
-             width: 35,
-             height: 35,
+            SvgPicture.asset(
+              "assets/drawer_icon/outline_movie_24.svg",
+              width: 35,
+              height: 35,
             ),
             // Icon(
             //   ,
@@ -295,9 +294,10 @@ class _LandingScreenState extends State<LandingScreen>
             //   color: Colors.white,
             //   size: 35,
             // ),
-            SvgPicture.asset("assets/drawer_icon/outline_settings_24.svg",
-             width: 35,
-             height: 35,
+            SvgPicture.asset(
+              "assets/drawer_icon/outline_settings_24.svg",
+              width: 35,
+              height: 35,
             ),
             // Icon(
             //   Icons.person,
@@ -315,7 +315,7 @@ class _LandingScreenState extends State<LandingScreen>
           ],
           onTap: (index) {
             //Handle button tap
-            if (index ==  3 ) {
+            if (index == 3) {
               _scaffoldKey.currentState!.openDrawer();
             } else {
               _pageController.animateToPage(
@@ -560,7 +560,7 @@ class _LandingScreenState extends State<LandingScreen>
             );
           return InkWell(
             child: ListTile(
-                visualDensity: VisualDensity(horizontal: 0, vertical: -1),
+              visualDensity: VisualDensity(horizontal: 0, vertical: -1),
               tileColor: drawerListItem.elementAt(index).isSelected
                   ? isDark
                       ? Colors.grey.shade900

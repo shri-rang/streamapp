@@ -356,10 +356,13 @@ class _SignUpScreenState extends State<SignUpScreen>
     try {
       final authCredential =
           await auth.signInWithCredential(phoneAuthCredential);
-
+      //    auth.
       if (authCredential.user != null) {
         Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => LandingScreen()),
+            MaterialPageRoute(
+                builder: (context) => LandingScreen(
+                      userCredential: authCredential,
+                    )),
             (Route<dynamic> route) => false);
       }
     } on FirebaseAuthException catch (e) {
