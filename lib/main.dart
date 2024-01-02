@@ -20,11 +20,11 @@ import 'service/locator.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
- await Firebase.initializeApp();
- await FlutterDownloader.initialize();
+  await Firebase.initializeApp();
+  await FlutterDownloader.initialize();
   // HttpOverrides.global = MyHttpOverrides();
   // Stripe.publishableKey = Config.stripepublishableKey;
- // Admob.initialize(testDeviceIds: ["17A3B83DAC6AB3357062439AAD33FEA3"]);
+  // Admob.initialize(testDeviceIds: ["17A3B83DAC6AB3357062439AAD33FEA3"]);
   final document = await getApplicationDocumentsDirectory();
   Hive.init(document.path);
   Hive.registerAdapter(ConfigurationModelAdapter());
@@ -51,12 +51,5 @@ Future<void> main() async {
   if (defaultTargetPlatform == TargetPlatform.android) {
     await InAppPurchase.instance.restorePurchases().then((value) => {});
   }
-  runApp(MyApp()
-  
-      // DevicePreview(
-      //   enabled: true,
-      //   builder: (context) => MyApp(),
-      // ),
-      );
+  runApp(MyApp());
 }
-

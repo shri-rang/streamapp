@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:oxoo/colors.dart';
 import 'package:oxoo/pages/CoontinuePage.dart';
+import 'package:oxoo/screen/gold/profile.dart';
+import 'package:oxoo/screen/gold/wallet.dart';
 import '../../screen/auth/auth_screen.dart';
 import '../../server/repository.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
@@ -115,8 +117,10 @@ class _LandingScreenState extends State<LandingScreen>
       HomeScreen(
         userCredential: widget.userCredential,
       ),
-      MoviesScreen(),
-      SettingScreen(),
+      Wallet(),
+      Profile()
+      //    MoviesScreen(),
+      //  SettingScreen(),
       //  TvSeriesScreen(),
       // FavouriteScreen()
     ];
@@ -279,11 +283,16 @@ class _LandingScreenState extends State<LandingScreen>
               color: Colors.white,
               size: 35,
             ),
-            SvgPicture.asset(
-              "assets/drawer_icon/outline_movie_24.svg",
-              width: 35,
-              height: 35,
+            Icon(
+              Icons.wallet,
+              color: Colors.white,
+              size: 35,
             ),
+            // SvgPicture.asset(
+            //   "assets/drawer_icon/outline_movie_24.svg",
+            //   width: 35,
+            //   height: 35,
+            // ),
             // Icon(
             //   ,
             //   color: Colors.white,
@@ -294,36 +303,36 @@ class _LandingScreenState extends State<LandingScreen>
             //   color: Colors.white,
             //   size: 35,
             // ),
-            SvgPicture.asset(
-              "assets/drawer_icon/outline_settings_24.svg",
-              width: 35,
-              height: 35,
+            Icon(
+              Icons.person,
+              color: Colors.white,
+              size: 35,
             ),
             // Icon(
             //   Icons.person,
             //   color: Colors.white,
             //   size: 35,
             // ),
-            Icon(
-              Icons.menu_rounded,
-              color: Colors.white,
-              size: 35,
-            ),
+            // Icon(
+            //   Icons.menu_rounded,
+            //   color: Colors.white,
+            //   size: 35,
+            // ),
             // Icon(Icons.add, size: 30),
             // Icon(Icons.list, size: 30),
             // Icon(Icons.compare_arrows, size: 30),
           ],
           onTap: (index) {
             //Handle button tap
-            if (index == 3) {
-              _scaffoldKey.currentState!.openDrawer();
-            } else {
-              _pageController.animateToPage(
-                index,
-                duration: const Duration(milliseconds: 500),
-                curve: Curves.easeIn,
-              );
-            }
+            // if (index == 3) {
+            //   _scaffoldKey.currentState!.openDrawer();
+            // } else {
+            _pageController.animateToPage(
+              index,
+              duration: const Duration(milliseconds: 500),
+              curve: Curves.easeIn,
+            );
+            // }
           },
         ),
       ),

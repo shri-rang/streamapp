@@ -458,7 +458,9 @@ class _SignUpScreenState extends State<SignUpScreen>
 
     await auth.verifyPhoneNumber(
       phoneNumber: "+91$phoneNumber",
-      verificationCompleted: (_) {},
+      verificationCompleted: (auth) {
+        return print("objectttttt$auth");
+      },
       verificationFailed: (e) {
         setState(() {
           error = '${e.message}';

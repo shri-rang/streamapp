@@ -20,6 +20,7 @@ import '../../models/configuration.dart';
 import '../../models/home_content.dart';
 import '../../widgets/banner_ads.dart';
 import '../models/user_model.dart';
+import '../rayzorpay/rayzor.dart';
 import '../service/authentication_service.dart';
 import '../service/get_config_service.dart';
 import '../style/theme.dart';
@@ -48,11 +49,28 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late Future<HomeContent> _homeContent;
   TabController? _controller;
   int _selectedIndex = 0;
+  final RazorPayIntegration _integration = RazorPayIntegration();
+  TextEditingController amountCnt = TextEditingController();
+  dynamic data;
+
+  Future<dynamic> getData() async {
+    final DocumentReference document = firebaseFirestore
+        .collection("users")
+        .doc(widget.userCredential!.user!.uid);
+
+    await document.get().then((DocumentSnapshot snapshot) async {
+      setState(() {
+        data = snapshot.data()!;
+        //firestoreDate = snapshot.data()!['date'];
+      });
+    });
+    print("sdklfjs ${data['amount']} ");
+  }
 
   @override
   void initState() {
     super.initState();
-
+    _integration.intiateRazorPay();
     isDark = appModeBox.get('isDark') ?? false;
     _homeContent = Repository().getHomeContent();
     _controller = TabController(length: 2, vsync: this);
@@ -62,14 +80,18 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       });
       print("Selected Index: " + _controller!.index.toString());
     });
-    createData();
+    //  createData();
   }
 
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
-  Future createData() async {
-    await firebaseFirestore.doc(widget.userCredential!.user!.uid).set({
+  Future createData(String amount) async {
+    await firebaseFirestore
+        .collection('users')
+        .doc(widget.userCredential!.user!.uid)
+        .set({
       'userId': 'shri',
+      'amount': amount,
     });
     // firebaseFirestore.
     // doc(widget.userCredential!.user!.uid);
@@ -368,6 +390,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: TextFormField(
+                    controller: amountCnt,
                     decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -385,7 +408,19 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   title: "BUY",
                   width: 110,
                   onTap: () {
-                    createData();
+                    // getData();
+                    //
+                    if (widget.userCredential == null) {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (context) {
+                        return SignUpScreen();
+                      }));
+                    } else {
+                      if (amountCnt.text.isNotEmpty) {
+                        _integration.openSession(amount: 100);
+                        // createData(amountCnt.text);
+                      }
+                    }
                   },
                   // screenWidth * .8,
                   height: 40,
