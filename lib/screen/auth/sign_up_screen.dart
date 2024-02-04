@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -344,6 +345,7 @@ class _SignUpScreenState extends State<SignUpScreen>
     );
   }
 
+  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   Future<void> verify(String otp) async {
     PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.credential(
         verificationId: verificationId, smsCode: otp);
@@ -358,6 +360,13 @@ class _SignUpScreenState extends State<SignUpScreen>
           await auth.signInWithCredential(phoneAuthCredential);
       //    auth.
       if (authCredential.user != null) {
+        await firebaseFirestore
+            .collection('users')
+            .doc(authCredential!.user!.uid)!
+            .update({
+          // 'userId': 'shri',
+          'name': loginNameController.text,
+        });
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
                 builder: (context) => LandingScreen(

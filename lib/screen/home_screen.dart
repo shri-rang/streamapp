@@ -88,8 +88,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Future createData(String amount) async {
     await firebaseFirestore
         .collection('users')
-        .doc(widget.userCredential!.user!.uid)
-        .set({
+        .doc(widget.userCredential!.user!.uid)!
+        .update({
       'userId': 'shri',
       'amount': amount,
     });
@@ -244,15 +244,23 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold),
                             controller: _controller,
-                            indicator: BoxDecoration(
-                              // borderRadius: BorderRadius.circular(50), // Creates border
-                              color: Color(0xff212121),
+                            // indicator: BoxDecoration(
+                            //   // borderRadius: BorderRadius.circular(50), // Creates border
+                            //   color: purple,
+                            // ),
+                            indicatorWeight: 4,
+                            indicatorColor: black,
+                            indicator: UnderlineTabIndicator(
+                              borderSide: BorderSide(
+                                color: black,
+                                width: 2.0,
+                              ),
                             ),
-                            indicatorWeight: 2,
-                            indicatorColor: Colors.black,
-                            labelColor: purple,
+
+                            // indicatorColor: purple,
+                            labelColor: black,
                             labelStyle: TextStyle(
-                                color: Colors.white54,
+                                color: Colors.black,
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold),
                             dividerColor: purple,
@@ -417,8 +425,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       }));
                     } else {
                       if (amountCnt.text.isNotEmpty) {
-                        _integration.openSession(amount: 100);
-                        // createData(amountCnt.text);
+                        //   _integration.openSession(amount: 100);
+                        createData(amountCnt.text);
                       }
                     }
                   },
