@@ -331,32 +331,32 @@ class _LandingScreenState extends State<LandingScreen>
             // if (index == 3) {
             //   _scaffoldKey.currentState!.openDrawer();
             // } else {
-            if (index == 1) {
-              if (widget.userCredential!.credential == null)
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return Expanded(
-                      child: AlertDialog(
-                        title: Text('Welcome'),
-                        content: Text('GeeksforGeeks'),
-                        actions: [
-                          ElevatedButton(
-                            //textColor: Colors.black,
-                            onPressed: () {},
-                            child: Text('CANCEL'),
-                          ),
-                          ElevatedButton(
-                            //textColor: Colors.black,
-                            onPressed: () {},
-                            child: Text('ACCEPT'),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                );
-            }
+            // if (index == 1) {
+            //   if (widget.userCredential!.credential == null)
+            //     showDialog(
+            //       context: context,
+            //       builder: (BuildContext context) {
+            //         return Expanded(
+            //           child: AlertDialog(
+            //             title: Text('Welcome'),
+            //             content: Text('GeeksforGeeks'),
+            //             actions: [
+            //               ElevatedButton(
+            //                 //textColor: Colors.black,
+            //                 onPressed: () {},
+            //                 child: Text('CANCEL'),
+            //               ),
+            //               ElevatedButton(
+            //                 //textColor: Colors.black,
+            //                 onPressed: () {},
+            //                 child: Text('ACCEPT'),
+            //               ),
+            //             ],
+            //           ),
+            //         );
+            //       },
+            //     );
+            // }
             // if (widget.userCredential!.user != null) {
             _pageController.animateToPage(
               index,

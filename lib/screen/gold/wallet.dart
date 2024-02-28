@@ -32,29 +32,44 @@ class _WalletState extends State<Wallet> {
               fontSize: 25, fontWeight: FontWeight.bold, color: lightpurple),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          children: [
-            SizedBox(
-              height: 30,
-            ),
-            StreamBuilder(
-              stream: firebaseFirestore
-                  .collection("users")
-                  .doc(widget.userCredential!.user!.uid)
-                  .snapshots(),
-              builder: (context, snapshot) {
-                return !snapshot.hasData
-                    ? Center(
-                        child: CircularProgressIndicator(),
-                      )
-                    : headerContainer(snapshot.data);
-              },
+      body: widget.userCredential == null
+          ? Column(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              // crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height / 3,
+                ),
+                Center(
+                    child: Text(
+                  "Please Sign in to check wallet",
+                  style: TextStyle(fontSize: 20),
+                ))
+              ],
             )
-          ],
-        ),
-      ),
+          : Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 30,
+                  ),
+                  StreamBuilder(
+                    stream: firebaseFirestore
+                        .collection("users")
+                        .doc(widget.userCredential!.user!.uid)
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      return !snapshot.hasData
+                          ? Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          : headerContainer(snapshot.data);
+                    },
+                  )
+                ],
+              ),
+            ),
     );
   }
 

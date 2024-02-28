@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 import 'api_service.dart';
 
 class RazorPayIntegration {
+  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   final Razorpay _razorpay = Razorpay(); //Instance of razor pay
   final razorPayKey = "rzp_test_6NAZGNJLeX9tve";
   // dotenv.get("RAZOR_KEY");
@@ -25,8 +27,11 @@ class RazorPayIntegration {
   void _handleExternalWallet(ExternalWalletResponse response) {
     // Do something when an external wallet is selected
   }
-  openSession({required num amount}) {
-    createOrder(amount: amount).then((orderId) {
+  openSession({
+    required num amount,
+    required String uid,
+  }) {
+    createOrder(amount: amount, uid: uid).then((orderId) {
       print(orderId);
       if (orderId.toString().isNotEmpty) {
         var options = {
@@ -49,13 +54,34 @@ class RazorPayIntegration {
 
   createOrder({
     required num amount,
+    required String uid,
   }) async {
     final myData = await ApiServices().razorPayApi(amount, "rcp_id_1");
     if (myData["status"] == "success") {
+      createData(amount.toString(), uid);
       print(myData);
       return myData["body"]["id"];
     } else {
       return "";
     }
+  }
+
+  Future createData(String amount, String uid) async {
+    await firebaseFirestore.collection('users').doc(uid)!.update({
+      'userId': 'shri',
+      'amount': amount,
+    });
+    // firebaseFirestore.
+    // doc(widget.userCredential!.user!.uid);
+    // var res = firebaseFirestore
+    //     .collection('status/')
+    //     .doc('status/' + widget.userCredential!.user!.uid);
+    //print("res $res");
+    // firebaseFirestore.collection("ads").add({
+    //   // 'category': '$category',
+    //   // 'location': '$location',
+    //   // 'subject': '$adName',
+    //   'userId': '${widget.userCredential!.user!.uid}',
+    // });
   }
 }

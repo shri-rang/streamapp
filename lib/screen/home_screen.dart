@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:oxoo/colors.dart';
@@ -51,8 +52,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   int _selectedIndex = 0;
   final RazorPayIntegration _integration = RazorPayIntegration();
   TextEditingController amountCnt = TextEditingController();
+  TextEditingController gramCnt = TextEditingController();
   dynamic data;
-
+  double inGram = 0.0;
+  double inRupee = 0.0;
   Future<dynamic> getData() async {
     final DocumentReference document = firebaseFirestore
         .collection("users")
@@ -74,6 +77,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     isDark = appModeBox.get('isDark') ?? false;
     _homeContent = Repository().getHomeContent();
     _controller = TabController(length: 2, vsync: this);
+    selectedVal = 1;
     _controller!.addListener(() {
       setState(() {
         _selectedIndex = _controller!.index;
@@ -395,20 +399,113 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 SizedBox(
                   height: 20,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: TextFormField(
-                    controller: amountCnt,
-                    decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                          color: Colors.white.withOpacity(0.7),
-                        )),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: purple)),
-                        border: OutlineInputBorder(borderSide: BorderSide())),
-                  ),
-                ),
+                selectedVal == 1
+                    ? Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: TextFormField(
+                          controller: amountCnt,
+                          keyboardType: TextInputType.number,
+                          onChanged: (value) {
+                            if (value.isEmpty) {
+                              inGram = 0.0;
+                            } else {
+                              inGram = int.parse(value) / 6356.40;
+                            }
+
+                            setState(() {});
+                          },
+                          inputFormatters: [
+                            //  TextInputFormatter.d
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
+                          decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                color: Colors.white.withOpacity(0.7),
+                              )),
+                              // prefixText: '\u{20B9}',
+                              // prefixStyle:
+                              //     TextStyle(color: Colors.white, fontSize: 35),
+                              prefixIcon: Container(
+                                padding: EdgeInsets.all(7),
+                                height: 45,
+                                width: 45,
+                                child: Text(
+                                  '\u{20B9}',
+                                  style: TextStyle(fontSize: 35),
+                                ),
+                              ),
+                              suffixIcon: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 4, vertical: 15),
+                                child: Text(
+                                  '${inGram.toStringAsFixed(2)} gm',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+
+                              //suffixText: "sdfsd",
+                              //  suffixStyle: TextStyle(color: Colors.white),
+                              //Icon(Icons.r),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: purple)),
+                              border:
+                                  OutlineInputBorder(borderSide: BorderSide())),
+                        ),
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: TextFormField(
+                          controller: gramCnt,
+                          keyboardType: TextInputType.number,
+                          onChanged: (value) {
+                            if (value.isEmpty) {
+                              inRupee = 0.0;
+                            } else {
+                              inRupee = int.parse(value) * 6356.40;
+                            }
+
+                            setState(() {});
+                          },
+                          inputFormatters: [
+                            //  TextInputFormatter.d
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
+                          decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                color: Colors.white.withOpacity(0.7),
+                              )),
+                              // prefixText: '\u{20B9}',
+                              // prefixStyle:
+                              //     TextStyle(color: Colors.white, fontSize: 35),
+                              // prefixIcon: Container(
+                              //   padding: EdgeInsets.all(7),
+                              //   height: 45,
+                              //   width: 45,
+                              //   child: Text(
+                              //     '\u{20B9}',
+                              //     style: TextStyle(fontSize: 35),
+                              //   ),
+                              // ),
+                              suffixIcon: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 4, vertical: 15),
+                                child: Text(
+                                  "\u{20B9} ${inRupee.toStringAsFixed(2)}",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+
+                              //suffixText: "sdfsd",
+                              //  suffixStyle: TextStyle(color: Colors.white),
+                              //Icon(Icons.r),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: purple)),
+                              border:
+                                  OutlineInputBorder(borderSide: BorderSide())),
+                        ),
+                      ),
                 SizedBox(
                   height: 20,
                 ),
@@ -425,7 +522,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       }));
                     } else {
                       if (amountCnt.text.isNotEmpty) {
-                        //   _integration.openSession(amount: 100);
+                        _integration.openSession(
+                            amount: int.parse(amountCnt.text),
+                            uid: widget.userCredential!.user!.uid);
                         createData(amountCnt.text);
                       }
                     }

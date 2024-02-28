@@ -150,7 +150,6 @@ class _SignUpScreenState extends State<SignUpScreen>
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ),
-
                                     SizedBox(height: 10),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
@@ -244,14 +243,19 @@ class _SignUpScreenState extends State<SignUpScreen>
                                         title: "SIGN UP",
                                         width: double.infinity,
                                         onTap: () async {
+                                          print(isCodeSent);
                                           if (_signUpFormkey.currentState!
                                               .validate()) {
                                             await _phoneAuth(
                                                     loginEmailController.text)
-                                                .then((value) =>
-                                                    _displayTextInputDialog(
-                                                        context));
-                                            // isLoading = true;
+                                                .then((value) {
+                                              // isCodeSent
+                                              // ?
+
+                                              _displayTextInputDialog(context);
+                                            });
+
+                                            // is Loading = true;
                                             // AuthUser user = AuthUser(
                                             //     name: loginNameController.text,
                                             //     email:
@@ -270,58 +274,6 @@ class _SignUpScreenState extends State<SignUpScreen>
                                         height: 50,
                                       ),
                                     ),
-                                    // Padding(
-                                    //   padding: const EdgeInsets.symmetric(
-                                    //     horizontal: 20.0,
-                                    //   ),
-                                    //   child: ElevatedButton(
-                                    //     style: ElevatedButton.styleFrom(
-                                    //       backgroundColor:
-                                    //           CustomTheme.primaryColor,
-                                    //       shape: RoundedRectangleBorder(
-                                    //         borderRadius:
-                                    //             BorderRadius.circular(20.0),
-                                    //       ),
-                                    //     ),
-                                    //     onPressed: () {
-                                    //       if (_signUpFormkey.currentState!
-                                    //           .validate()) {
-                                    //         isLoading = true;
-                                    //         AuthUser user = AuthUser(
-                                    //             name:
-                                    //                 loginNameController.text,
-                                    //             email: loginEmailController
-                                    //                 .text);
-                                    //         // Registration started bloc
-                                    //         bloc.add(RegistrationStarted());
-                                    //         bloc.add(RegistrationCompleting(
-                                    //             user: user,
-                                    //             password:
-                                    //                 loginPasswordController
-                                    //                     .text));
-                                    //       }
-                                    //     },
-                                    //     child: Container(
-                                    //       width: MediaQuery.of(context)
-                                    //           .size
-                                    //           .width,
-                                    //       child: Padding(
-                                    //         padding:
-                                    //             const EdgeInsets.symmetric(
-                                    //           horizontal: 20.0,
-                                    //           vertical: 15.0,
-                                    //         ),
-                                    //         child: Center(
-                                    //           child: Text(
-                                    //             AppContent.register,
-                                    //             style: CustomTheme
-                                    //                 .authTitleWhite,
-                                    //           ),
-                                    //         ),
-                                    //       ),
-                                    //     ),
-                                    //   ),
-                                    // ),
                                     SizedBox(height: 10.0),
                                   ],
                                 ),
@@ -345,8 +297,45 @@ class _SignUpScreenState extends State<SignUpScreen>
     );
   }
 
+  alertDailog(
+    BuildContext context,
+  ) {
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            // title: Text('Welcome'),
+            content: Container(
+              height: 100,
+              width: 100,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Center(
+                    child: Container(
+                      height: 40,
+                      width: 40,
+                      child: CircularProgressIndicator(
+                        color: orange,
+                        backgroundColor: purple,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ));
+      },
+    );
+  }
+
+  // bool isVerify = false;
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   Future<void> verify(String otp) async {
+    alertDailog(context);
     PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.credential(
         verificationId: verificationId, smsCode: otp);
 
@@ -367,6 +356,7 @@ class _SignUpScreenState extends State<SignUpScreen>
           // 'userId': 'shri',
           'name': loginNameController.text,
         });
+        Navigator.of(context).pop();
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
                 builder: (context) => LandingScreen(
@@ -375,7 +365,8 @@ class _SignUpScreenState extends State<SignUpScreen>
             (Route<dynamic> route) => false);
       }
     } on FirebaseAuthException catch (e) {
-      print("catch");
+      Navigator.of(context).pop();
+      print("catch $e");
     }
   }
 
@@ -452,6 +443,7 @@ class _SignUpScreenState extends State<SignUpScreen>
         });
   }
 
+  bool isCodeSent = false;
   Future<void> _phoneAuth(String phoneNumber) async {
     String error = '';
     // if (kIsWeb) {
@@ -464,7 +456,7 @@ class _SignUpScreenState extends State<SignUpScreen>
     //   }
     // }
     // else {
-
+    alertDailog(context);
     await auth.verifyPhoneNumber(
       phoneNumber: "+91$phoneNumber",
       verificationCompleted: (auth) {
@@ -474,10 +466,14 @@ class _SignUpScreenState extends State<SignUpScreen>
         setState(() {
           error = '${e.message}';
         });
+        Navigator.of(context).pop();
       },
       codeSent: (String verificationId, int? resendToken) async {
         print("verfication id $verificationId");
         this.verificationId = verificationId;
+
+        Navigator.of(context).pop();
+
         setState(() {});
         // final smsCodee = smsCode;
 
@@ -502,6 +498,7 @@ class _SignUpScreenState extends State<SignUpScreen>
         setState(() {
           error = e;
         });
+        Navigator.of(context).pop();
       },
     );
   }

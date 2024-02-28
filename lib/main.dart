@@ -43,10 +43,10 @@ Future<void> main() async {
   await Hive.openBox<AuthUser>('oxooUser');
   await Hive.openBox('appModeBox');
 
-  ConfigurationModel? configurationModel;
-  configurationModel =
-      await ConfigurationRepositoryImpl().getConfigurationData();
-  GetConfigService().updateGetConfig(configurationModel);
+  // ConfigurationModel? configurationModel;
+  // configurationModel =
+  //     await ConfigurationRepositoryImpl().getConfigurationData();
+  //GetConfigService().updateGetConfig(configurationModel);
   setupLocator();
   if (defaultTargetPlatform == TargetPlatform.android) {
     await InAppPurchase.instance.restorePurchases().then((value) => {});
