@@ -56,6 +56,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   dynamic data;
   double inGram = 0.0;
   double inRupee = 0.0;
+  final _formKey = GlobalKey<FormState>();
   Future<dynamic> getData() async {
     final DocumentReference document = firebaseFirestore
         .collection("users")
@@ -154,7 +155,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             //   ],
             // ),
             actions: [
-              widget.userCredential != null
+              appModeBox.get("uid") != null
                   ? Container()
                   : Padding(
                       padding:
@@ -207,7 +208,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
                   CarouselSlider(
                     options:
-                        CarouselOptions(aspectRatio: 2, viewportFraction: 1.01
+                        CarouselOptions(aspectRatio: 2.4, viewportFraction: 1.01
                             // height: 200.0
 
                             ),
@@ -232,11 +233,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     }).toList(),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 0.022.sh,
                   ),
                   Container(
                     width: double.infinity,
-                    height: 450,
+                    height: 0.56.sh,
                     decoration: BoxDecoration(
                         color: purple, borderRadius: BorderRadius.circular(8)),
                     child: Column(
@@ -245,7 +246,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             indicatorSize: TabBarIndicatorSize.tab,
                             unselectedLabelStyle: TextStyle(
                                 color: Colors.black,
-                                fontSize: 16,
+                                fontSize: 15.sp,
                                 fontWeight: FontWeight.bold),
                             controller: _controller,
                             // indicator: BoxDecoration(
@@ -265,7 +266,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             labelColor: black,
                             labelStyle: TextStyle(
                                 color: Colors.black,
-                                fontSize: 16,
+                                fontSize: 15.sp,
                                 fontWeight: FontWeight.bold),
                             dividerColor: purple,
                             tabs: [
@@ -283,7 +284,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               )),
                             ]),
                         Container(
-                          height: 400,
+                          height: 0.5.sh,
                           child: TabBarView(
                               controller: _controller,
                               children: [buy(), sell()]),
@@ -352,189 +353,212 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Container(
-        height: 300,
+        height: 0.3.sh,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           color: purple,
         ),
-        child: Column(
-          children: [
-            Container(
-              height: 100,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: Color(0xff212121),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    colunm("Gold Price", "₹ 6356.40 /gm "),
-                    colunm("Purity", "24 K /999 "),
-                  ],
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              Container(
+                height: 0.112.sh,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: Color(0xff212121),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      colunm("Gold Price", "₹ 6356.40 /gm "),
+                      colunm("Purity", "24 K /999 "),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              height: 248,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: Color(0xff212121),
+              SizedBox(
+                height: 0.025.sh,
               ),
-              child: Column(children: [
-                SizedBox(
-                  height: 20,
+              Container(
+                height: 0.32.sh,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: Color(0xff212121),
                 ),
-                Row(
-                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    select("Buy in Rupees", 1),
-                    select("Buy in GramS", 2)
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                selectedVal == 1
-                    ? Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: TextFormField(
-                          controller: amountCnt,
-                          keyboardType: TextInputType.number,
-                          onChanged: (value) {
-                            if (value.isEmpty) {
-                              inGram = 0.0;
-                            } else {
-                              inGram = int.parse(value) / 6356.40;
-                            }
+                child: Column(children: [
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      select("Buy in Rupees", 1),
+                      select("Buy in GramS", 2)
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  selectedVal == 1
+                      ? Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: TextFormField(
+                            controller: amountCnt,
+                            keyboardType: TextInputType.number,
+                            onChanged: (value) {
+                              if (value.isEmpty) {
+                                inGram = 0.0;
+                              } else {
+                                inGram = int.parse(value) / 6356.40;
+                              }
 
-                            setState(() {});
-                          },
-                          inputFormatters: [
-                            //  TextInputFormatter.d
-                            FilteringTextInputFormatter.digitsOnly,
-                          ],
-                          decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                color: Colors.white.withOpacity(0.7),
-                              )),
-                              // prefixText: '\u{20B9}',
-                              // prefixStyle:
-                              //     TextStyle(color: Colors.white, fontSize: 35),
-                              prefixIcon: Container(
-                                padding: EdgeInsets.all(7),
-                                height: 45,
-                                width: 45,
-                                child: Text(
-                                  '\u{20B9}',
-                                  style: TextStyle(fontSize: 35),
-                                ),
-                              ),
-                              suffixIcon: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 4, vertical: 15),
-                                child: Text(
-                                  '${inGram.toStringAsFixed(2)} gm',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
+                              setState(() {});
+                            },
+                            inputFormatters: [
+                              //  TextInputFormatter.d
+                              FilteringTextInputFormatter.digitsOnly,
+                            ],
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return null;
+                              } else if (int.parse(value!) > 200000) {
+                                return "You can't buy worth more than 2 lac. of gold";
+                              }
 
-                              //suffixText: "sdfsd",
-                              //  suffixStyle: TextStyle(color: Colors.white),
-                              //Icon(Icons.r),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: purple)),
-                              border:
-                                  OutlineInputBorder(borderSide: BorderSide())),
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                  color: Colors.white.withOpacity(0.7),
+                                )),
+
+                                // prefixText: '\u{20B9}',
+                                // prefixStyle:
+                                //     TextStyle(color: Colors.white, fontSize: 35),
+                                prefixIcon: Container(
+                                  padding: EdgeInsets.all(10),
+                                  height: 35,
+                                  width: 35,
+                                  child: Text(
+                                    '\u{20B9}',
+                                    style: TextStyle(fontSize: 25),
+                                  ),
+                                ),
+                                suffixIcon: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 4, vertical: 15),
+                                  child: Text(
+                                    '= ${inGram.toStringAsFixed(2)} gm',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+
+                                //suffixText: "sdfsd",
+                                //  suffixStyle: TextStyle(color: Colors.white),
+                                //Icon(Icons.r),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: purple)),
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide())),
+                          ),
+                        )
+                      : Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: TextFormField(
+                            controller: gramCnt,
+                            keyboardType: TextInputType.number,
+                            onChanged: (value) {
+                              if (value.isEmpty) {
+                                inRupee = 0.0;
+                              } else {
+                                inRupee = int.parse(value) * 6356.40;
+                              }
+
+                              setState(() {});
+                            },
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return null;
+                              } else if (int.parse(value) > 31.46) {
+                                return "You can't buy worth more than 31 gm. of gold";
+                              }
+
+                              return null;
+                            },
+                            inputFormatters: [
+                              //  TextInputFormatter.d
+                              FilteringTextInputFormatter.digitsOnly,
+                            ],
+                            decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                  color: Colors.white.withOpacity(0.7),
+                                )),
+                                // prefixText: '\u{20B9}',
+                                // prefixStyle:
+                                //     TextStyle(color: Colors.white, fontSize: 35),
+                                // prefixIcon: Container(
+                                //   padding: EdgeInsets.all(7),
+                                //   height: 45,
+                                //   width: 45,
+                                //   child: Text(
+                                //     '\u{20B9}',
+                                //     style: TextStyle(fontSize: 35),
+                                //   ),
+                                // ),
+                                suffixIcon: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 4, vertical: 15),
+                                  child: Text(
+                                    "= \u{20B9} ${inRupee.toStringAsFixed(2)}",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+
+                                //suffixText: "sdfsd",
+                                //  suffixStyle: TextStyle(color: Colors.white),
+                                //Icon(Icons.r),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: purple)),
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide())),
+                          ),
                         ),
-                      )
-                    : Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: TextFormField(
-                          controller: gramCnt,
-                          keyboardType: TextInputType.number,
-                          onChanged: (value) {
-                            if (value.isEmpty) {
-                              inRupee = 0.0;
-                            } else {
-                              inRupee = int.parse(value) * 6356.40;
-                            }
-
-                            setState(() {});
-                          },
-                          inputFormatters: [
-                            //  TextInputFormatter.d
-                            FilteringTextInputFormatter.digitsOnly,
-                          ],
-                          decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                color: Colors.white.withOpacity(0.7),
-                              )),
-                              // prefixText: '\u{20B9}',
-                              // prefixStyle:
-                              //     TextStyle(color: Colors.white, fontSize: 35),
-                              // prefixIcon: Container(
-                              //   padding: EdgeInsets.all(7),
-                              //   height: 45,
-                              //   width: 45,
-                              //   child: Text(
-                              //     '\u{20B9}',
-                              //     style: TextStyle(fontSize: 35),
-                              //   ),
-                              // ),
-                              suffixIcon: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 4, vertical: 15),
-                                child: Text(
-                                  "\u{20B9} ${inRupee.toStringAsFixed(2)}",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
-
-                              //suffixText: "sdfsd",
-                              //  suffixStyle: TextStyle(color: Colors.white),
-                              //Icon(Icons.r),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: purple)),
-                              border:
-                                  OutlineInputBorder(borderSide: BorderSide())),
-                        ),
-                      ),
-                SizedBox(
-                  height: 20,
-                ),
-                PrimaryButton(
-                  title: "BUY",
-                  width: 110,
-                  onTap: () {
-                    // getData();
-                    //
-                    if (widget.userCredential == null) {
-                      Navigator.of(context)
-                          .push(MaterialPageRoute(builder: (context) {
-                        return SignUpScreen();
-                      }));
-                    } else {
-                      if (amountCnt.text.isNotEmpty) {
-                        _integration.openSession(
-                            amount: int.parse(amountCnt.text),
-                            uid: widget.userCredential!.user!.uid);
-                        createData(amountCnt.text);
-                      }
-                    }
-                  },
-                  // screenWidth * .8,
-                  height: 40,
-                ),
-              ]),
-            ),
-          ],
+                  SizedBox(
+                    height: 0.04.sh,
+                  ),
+                  PrimaryButton(
+                      title: "Buy Gold",
+                      width: 140,
+                      onTap: () {
+                        // getData();
+                        //
+                        if (appModeBox.get("uid") == null) {
+                          if (_formKey.currentState!.validate()) {
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (context) {
+                              return SignUpScreen();
+                            }));
+                          }
+                        } else {
+                          if (_formKey.currentState!.validate()) {
+                            _integration.openSession(
+                                amount: int.parse(amountCnt.text),
+                                uid: widget.userCredential!.user!.uid);
+                            createData(amountCnt.text);
+                          }
+                        }
+                      },
+                      // screenWidth * .8,
+                      height: 45),
+                ]),
+              ),
+            ],
+          ),
         ),
       ),
     );

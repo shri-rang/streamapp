@@ -37,6 +37,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   var appModeBox = Hive.box('appModeBox');
   static bool? isDark = true;
+  String? uid = "";
 
   @override
   void initState() {
@@ -45,6 +46,9 @@ class _MyAppState extends State<MyApp> {
     if (isDark == null) {
       appModeBox.put('isDark', true);
     }
+
+     uid = appModeBox.get("uid");
+
     //initOneSignal();
   }
 
@@ -93,19 +97,16 @@ class _MyAppState extends State<MyApp> {
                       Typography.englishLike2018.apply(fontSizeFactor: 1.sp),
                 ),
                 home: AnimatedSplashScreen(
-                   splash: "assets/logo.png",
-                   splashIconSize: 600,
-
-
-                   backgroundColor: CustomTheme.primaryColorDark,
-
-                   nextScreen: child!),
+                    splash: "assets/logo.png",
+                    splashIconSize: 600,
+                    backgroundColor: CustomTheme.primaryColorDark,
+                    nextScreen: child!),
               );
             },
             child:
-            
-           //  HomeScreen()
-             RenderFirstScreen(),
+
+                //  HomeScreen()
+                RenderFirstScreen(),
           )
 
           //  MaterialApp(
@@ -139,7 +140,8 @@ class RenderFirstScreen extends StatelessWidget {
       valueListenable: Hive.box<ConfigurationModel>('configBox').listenable(),
       builder: (context, dynamic box, widget) {
         isMandatoryLogin = true;
-        //  box.get(0).appConfig.mandatoryLogin;
+        // box.get(0).appConfig.
+        // box.get(0).appConfig.mandatoryLogin;
         printLog("isMandatoryLogin " + "$isMandatoryLogin");
         return renderFirstScreen(isMandatoryLogin!);
       },

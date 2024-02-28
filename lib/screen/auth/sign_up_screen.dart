@@ -349,6 +349,7 @@ class _SignUpScreenState extends State<SignUpScreen>
           await auth.signInWithCredential(phoneAuthCredential);
       //    auth.
       if (authCredential.user != null) {
+        appModeBox.put("uid", authCredential.user!.uid);
         await firebaseFirestore
             .collection('users')
             .doc(authCredential!.user!.uid)!
