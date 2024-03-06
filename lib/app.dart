@@ -1,7 +1,9 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:oxoo/bloc/bloc.dart';
 import 'package:oxoo/colors.dart';
@@ -37,7 +39,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   var appModeBox = Hive.box('appModeBox');
   static bool? isDark = true;
-  String? uid = "";
+  UserCredential? uid;
 
   @override
   void initState() {
@@ -47,7 +49,7 @@ class _MyAppState extends State<MyApp> {
       appModeBox.put('isDark', true);
     }
 
-     uid = appModeBox.get("uid");
+    uid = appModeBox.get("uid");
 
     //initOneSignal();
   }
@@ -85,7 +87,7 @@ class _MyAppState extends State<MyApp> {
             minTextAdapt: true,
             splitScreenMode: true,
             builder: (context, child) {
-              return MaterialApp(
+              return GetMaterialApp(
                 debugShowCheckedModeBanner: false,
                 title: '',
                 routes: Routes.getRoute(),
@@ -106,7 +108,9 @@ class _MyAppState extends State<MyApp> {
             child:
 
                 //  HomeScreen()
-                RenderFirstScreen(),
+                RenderFirstScreen(
+              uid: uid,
+            ),
           )
 
           //  MaterialApp(
@@ -131,9 +135,10 @@ class _MyAppState extends State<MyApp> {
 
 // ignore: must_be_immutable
 class RenderFirstScreen extends StatelessWidget {
+  RenderFirstScreen({this.uid});
   static final String route = "/RenderFirstScreen";
   bool? isMandatoryLogin = false;
-
+  UserCredential? uid;
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(

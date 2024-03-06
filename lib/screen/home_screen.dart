@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:oxoo/colors.dart';
 import 'package:oxoo/pages/CoontinuePage.dart';
@@ -13,6 +14,7 @@ import 'package:oxoo/screen/Tabs/Sell.dart';
 import 'package:oxoo/screen/auth/auth_screen.dart';
 import 'package:oxoo/screen/auth/signIn_screen.dart';
 import 'package:oxoo/screen/auth/sign_up_screen.dart';
+import 'package:oxoo/screen/landing_screen.dart';
 import 'package:oxoo/server/repository.dart';
 import 'package:oxoo/widgets/home_screen/country_item.dart';
 import 'package:oxoo/widgets/home_screen/popular_star.dart';
@@ -57,6 +59,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   double inGram = 0.0;
   double inRupee = 0.0;
   final _formKey = GlobalKey<FormState>();
+  UserCredential? userCredential;
+
   Future<dynamic> getData() async {
     final DocumentReference document = firebaseFirestore
         .collection("users")
@@ -75,6 +79,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     _integration.intiateRazorPay();
+    print("object${appModeBox.get("uid")} ");
+
     isDark = appModeBox.get('isDark') ?? false;
     _homeContent = Repository().getHomeContent();
     _controller = TabController(length: 2, vsync: this);
@@ -114,6 +120,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    userCredential = appModeBox.get("uid");
     final authService = Provider.of<AuthService>(context);
     final configService = Provider.of<GetConfigService>(context);
 
@@ -155,8 +162,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             //   ],
             // ),
             actions: [
-              appModeBox.get("uid") != null
-                  ? Container()
+              widget.userCredential != null
+                  ? IconButton(
+                      color: purple,
+                      onPressed: () {
+                        appModeBox.clear();
+                        Get.offAll(LandingScreen());
+                      },
+                      icon: Icon(Icons.logout),
+                    )
                   : Padding(
                       padding:
                           EdgeInsets.symmetric(horizontal: 16, vertical: 2),
@@ -537,7 +551,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       onTap: () {
                         // getData();
                         //
-                        if (appModeBox.get("uid") == null) {
+                        if (widget.userCredential == null) {
                           if (_formKey.currentState!.validate()) {
                             Navigator.of(context)
                                 .push(MaterialPageRoute(builder: (context) {
