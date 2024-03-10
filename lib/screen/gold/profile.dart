@@ -54,60 +54,74 @@ class _ProfileState extends State<Profile> {
                   SizedBox(
                     height: 40,
                   ),
-                  StreamBuilder(
-                    stream: firebaseFirestore
-                        .collection("users")
-                        .doc(widget.userCredential!.user!.uid)
-                        .snapshots(),
-                    builder: (context, snapshot) {
-                      return !snapshot.hasData
-                          ? Center(
-                              child: CircularProgressIndicator(),
-                            )
-                          : headerContainer(snapshot.data);
-                    },
+                  Text(
+                    "Besic Details",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  //  headerContainer(),
+
                   SizedBox(
                     height: 40,
                   ),
-                  Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: Color(0xff212121),
-                      ),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 20,
-                          ),
-                          subHeader("Pan card", "BCGPJ1834C"),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          subHeader("Aadhar card", "720232384238"),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          subHeader("State", "Maharashtra"),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          subHeader("City", "Mumbai"),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          subHeader("Pin code", "400086"),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          subHeader("Address", "201 kaladham"),
-                          SizedBox(
-                            height: 20,
-                          ),
-                        ],
-                      )),
+                  header(),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  header2()
+
+                  // StreamBuilder(
+                  //   stream: firebaseFirestore
+                  //       .collection("users")
+                  //       .doc(widget.userCredential!.user!.uid)
+                  //       .snapshots(),
+                  //   builder: (context, snapshot) {
+                  //     return !snapshot.hasData
+                  //         ? Center(
+                  //             child: CircularProgressIndicator(),
+                  //           )
+                  //         : headerContainer(snapshot.data);
+                  //   },
+                  // ),
+                  // //  headerContainer(),
+                  // SizedBox(
+                  //   height: 40,
+                  // ),
+                  // Container(
+                  //     padding: EdgeInsets.symmetric(horizontal: 10),
+                  //     decoration: BoxDecoration(
+                  //       borderRadius: BorderRadius.circular(8),
+                  //       color: Color(0xff212121),
+                  //     ),
+                  //     child: Column(
+                  //       children: [
+                  //         SizedBox(
+                  //           height: 20,
+                  //         ),
+                  //         subHeader("Pan card", "BCGPJ1834C"),
+                  //         SizedBox(
+                  //           height: 10,
+                  //         ),
+                  //         subHeader("Aadhar card", "720232384238"),
+                  //         SizedBox(
+                  //           height: 10,
+                  //         ),
+                  //         subHeader("State", "Maharashtra"),
+                  //         SizedBox(
+                  //           height: 10,
+                  //         ),
+                  //         subHeader("City", "Mumbai"),
+                  //         SizedBox(
+                  //           height: 10,
+                  //         ),
+                  //         subHeader("Pin code", "400086"),
+                  //         SizedBox(
+                  //           height: 10,
+                  //         ),
+                  //         subHeader("Address", "201 kaladham"),
+                  //         SizedBox(
+                  //           height: 20,
+                  //         ),
+                  //       ],
+                  //     )),
                 ],
               ),
             ),
@@ -137,6 +151,107 @@ class _ProfileState extends State<Profile> {
                 // fontWeight: FontWeight.bold,
                 color: Colors.white.withOpacity(0.7)),
           )
+        ],
+      ),
+    );
+  }
+
+  bool light = true;
+  header() {
+    return Container(
+      padding: EdgeInsets.all(14),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: purple.withOpacity(0.8)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Icon(
+                Icons.call,
+                size: 26,
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Text(
+                " Phone Number",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xff212121),
+                ),
+              )
+            ],
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Text(
+            "8097267015",
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: Color(0xff212121),
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Image.asset(
+                "assets/gold/whatsapp_logo.png",
+                width: 25,
+                height: 25,
+              ),
+              Text(
+                "would like to receive updates on WhatsApp",
+                style: TextStyle(
+                  fontSize: 13,
+                  color: Color(0xff212121),
+                ),
+              ),
+              Switch(
+                // This bool value toggles the switch.
+                value: light,
+                activeColor: Colors.green,
+                onChanged: (bool value) {
+                  // This is called when the user toggles the switch.
+                  setState(() {
+                    light = value;
+                  });
+                },
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  header2() {
+    return Container(
+      padding: EdgeInsets.all(14),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: purple.withOpacity(0.8)),
+      child: Column(
+        children: [
+          Row(
+            children: [Icon(Icons.call), Text("Email Address")],
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Text("jangamshrirang@gmail.com"),
+          SizedBox(
+            height: 10,
+          ),
+          Text("Verify Email id"),
         ],
       ),
     );

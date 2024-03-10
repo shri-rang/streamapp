@@ -7,6 +7,25 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:385905731218:android:e5c41fe312730fdaaaa84b",
+        "android_client_info": {
+          "package_name": "com.digital.gold"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCA_Mo0nkZpETjo7T93zUjZSkuSEiyBbZg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:385905731218:android:9b570ef38a707bf2aaa84b",
         "android_client_info": {
           "package_name": "com.example.goldinvest"

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../colors.dart';
 import '../../style/theme.dart';
@@ -66,6 +67,55 @@ class _WalletState extends State<Wallet> {
                             )
                           : headerContainer(snapshot.data);
                     },
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Container(
+                    // padding: EdgeInsets.all(9),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: purple.withOpacity(0.8),
+                    ),
+                    child: ListTile(
+                      contentPadding: EdgeInsets.all(8),
+                      tileColor: Color(0xff212121),
+                      leading: SvgPicture.asset("assets/gold/gold.svg",
+                          // colorFilter: ColorFilter.mode(Colors.red, BlendMode.srcIn),
+                          semanticsLabel: 'A red up arrow'),
+                      title: Text(
+                        "Get Delivary",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    // padding: EdgeInsets.all(9),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: purple.withOpacity(0.8),
+                    ),
+                    child: ListTile(
+                      contentPadding: EdgeInsets.all(8),
+                      tileColor: Color(0xff212121),
+                      leading: SvgPicture.asset("assets/gold/jewellery.svg",
+                          // color: purple,
+                          // colorFilter: ColorFilter.mode(Colors.red, BlendMode.srcIn),
+                          semanticsLabel: 'A red up arrow'),
+                      title: Text(
+                        "Reedem as Jewellery",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
                   )
                 ],
               ),
@@ -79,14 +129,14 @@ class _WalletState extends State<Wallet> {
       height: 100,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: Color(0xff212121),
+        color: purple.withOpacity(0.8),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          colunm("Invested Amount :", "₹ ${data!['amount']}"),
-          colunm("Current Amount :", "₹ 6000 "),
+          colunm("Available balance :", "₹ ${data!['amount']}"),
+          // colunm("Current Amount :", "₹ 6000 "),
         ],
       ),
     );
@@ -96,29 +146,37 @@ class _WalletState extends State<Wallet> {
     return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            // SizedBox(
-            //   height: 25,
-            // ),
-            Text(
-              title,
-              style: TextStyle(
-                color: Colors.white60,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            //  Spacer(),
-            Text(
-              subtitle,
-              style: TextStyle(
-                  fontSize: 16,
+        child: Container(
+          padding: EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            border: Border.all(),
+            borderRadius: BorderRadius.circular(6),
+            // color: purple,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // SizedBox(
+              //   height: 25,
+              // ),
+              Text(
+                title,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white.withOpacity(0.7)),
-            )
-          ],
+                ),
+              ),
+              //  Spacer(),
+              Text(
+                subtitle,
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
+              )
+            ],
+          ),
         ),
       ),
     );
