@@ -49,13 +49,12 @@ class _MyAppState extends State<MyApp> {
       appModeBox.put('isDark', true);
     }
 
-    uid = appModeBox.get("uid");
-
     //initOneSignal();
   }
 
   @override
   Widget build(BuildContext context) {
+    uid = appModeBox.get("uid");
     return MultiProvider(
       providers: [
         Provider<AuthService>(

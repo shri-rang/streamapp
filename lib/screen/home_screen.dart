@@ -82,6 +82,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     print("object${appModeBox.get("uid")} ");
 
     isDark = appModeBox.get('isDark') ?? false;
+    if (widget.userCredential != null) {
+      amountCnt.text = appModeBox.get("inGram") == null
+          ? ""
+          : appModeBox.get("inGram").toString();
+      gramCnt.text = appModeBox.get("inRepee") == null
+          ? ""
+          : appModeBox.get("inRepee").toString();
+    }
+
     _homeContent = Repository().getHomeContent();
     _controller = TabController(length: 2, vsync: this);
     selectedVal = 1;
@@ -427,6 +436,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 inGram = 0.0;
                               } else {
                                 inGram = int.parse(value) / 6356.40;
+                                if (widget.userCredential == null) {
+                                  appModeBox.put('inGram', value);
+                                }
                               }
 
                               setState(() {});
@@ -490,6 +502,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 inRupee = 0.0;
                               } else {
                                 inRupee = int.parse(value) * 6356.40;
+
+                                if (widget.userCredential == null) {
+                                  appModeBox.put('inRepee', value);
+                                }
                               }
 
                               setState(() {});

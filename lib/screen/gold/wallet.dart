@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../colors.dart';
+import '../../pages/CoontinuePage.dart';
 import '../../style/theme.dart';
+import '../auth/sign_up_screen.dart';
 
 class Wallet extends StatefulWidget {
   UserCredential? userCredential;
@@ -45,7 +47,26 @@ class _WalletState extends State<Wallet> {
                     child: Text(
                   "Please Sign in to check wallet",
                   style: TextStyle(fontSize: 20),
-                ))
+                )),
+                SizedBox(
+                  height: 40,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+                  child: PrimaryButton(
+                    title: "SIGN UP",
+                    width: 110,
+                    onTap: () {
+                      print("dsd ${widget.userCredential}");
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (context) {
+                        return SignUpScreen();
+                      }));
+                    },
+                    // screenWidth * .8,
+                    height: 40,
+                  ),
+                ),
               ],
             )
           : Padding(

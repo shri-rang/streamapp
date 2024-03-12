@@ -3,7 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../colors.dart';
+import '../../pages/CoontinuePage.dart';
 import '../../style/theme.dart';
+import '../auth/sign_up_screen.dart';
 
 class Profile extends StatefulWidget {
   UserCredential? userCredential;
@@ -44,7 +46,26 @@ class _ProfileState extends State<Profile> {
                     child: Text(
                   "Please Sign in to check profile",
                   style: TextStyle(fontSize: 20),
-                ))
+                )),
+                SizedBox(
+                  height: 40,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+                  child: PrimaryButton(
+                    title: "SIGN UP",
+                    width: 110,
+                    onTap: () {
+                      print("dsd ${widget.userCredential}");
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (context) {
+                        return SignUpScreen();
+                      }));
+                    },
+                    // screenWidth * .8,
+                    height: 40,
+                  ),
+                ),
               ],
             )
           : Padding(
