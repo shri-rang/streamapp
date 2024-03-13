@@ -79,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     _integration.intiateRazorPay();
-    print("object${appModeBox.get("uid")} ");
+    print("init object${appModeBox.get("uid")} ");
 
     isDark = appModeBox.get('isDark') ?? false;
     if (widget.userCredential != null) {

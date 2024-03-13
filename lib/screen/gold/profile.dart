@@ -75,9 +75,21 @@ class _ProfileState extends State<Profile> {
                   SizedBox(
                     height: 40,
                   ),
-                  Text(
-                    "Besic Details",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  Container(
+                    width: double.infinity,
+                    height: 40,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: purple.withOpacity(0.8)),
+                    child: Center(
+                      child: Text(
+                        "Basic Details",
+                        style: TextStyle(
+                            color: Color(0xff212121),
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
                   ),
 
                   SizedBox(
@@ -261,18 +273,46 @@ class _ProfileState extends State<Profile> {
           borderRadius: BorderRadius.circular(8),
           color: purple.withOpacity(0.8)),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            children: [Icon(Icons.call), Text("Email Address")],
+            children: [
+              Icon(Icons.email),
+              SizedBox(
+                width: 10,
+              ),
+              Text(
+                "Email Address",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xff212121),
+                ),
+              )
+            ],
           ),
           SizedBox(
             height: 10,
           ),
-          Text("jangamshrirang@gmail.com"),
+          Text(
+            "jangamshrirang@gmail.com",
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: Color(0xff212121),
+            ),
+          ),
           SizedBox(
             height: 10,
           ),
-          Text("Verify Email id"),
+          Text(
+            "Verify Email id",
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: Color(0xff212121),
+            ),
+          ),
         ],
       ),
     );

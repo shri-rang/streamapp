@@ -48,13 +48,13 @@ class _MyAppState extends State<MyApp> {
     if (isDark == null) {
       appModeBox.put('isDark', true);
     }
-
+    uid = appModeBox.get("uid");
+    print("object ${appModeBox.get("uid")}");
     //initOneSignal();
   }
 
   @override
   Widget build(BuildContext context) {
-    uid = appModeBox.get("uid");
     return MultiProvider(
       providers: [
         Provider<AuthService>(
@@ -134,10 +134,11 @@ class _MyAppState extends State<MyApp> {
 
 // ignore: must_be_immutable
 class RenderFirstScreen extends StatelessWidget {
+  UserCredential? uid;
   RenderFirstScreen({this.uid});
   static final String route = "/RenderFirstScreen";
   bool? isMandatoryLogin = false;
-  UserCredential? uid;
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
@@ -147,17 +148,21 @@ class RenderFirstScreen extends StatelessWidget {
         // box.get(0).appConfig.
         // box.get(0).appConfig.mandatoryLogin;
         printLog("isMandatoryLogin " + "$isMandatoryLogin");
-        return renderFirstScreen(isMandatoryLogin!);
+        return renderFirstScreen(isMandatoryLogin!, uid);
       },
     );
   }
 
-  Widget renderFirstScreen(bool isMandatoryLogin) {
+  Widget renderFirstScreen(bool isMandatoryLogin, UserCredential? uid) {
     print(isMandatoryLogin);
     if (isMandatoryLogin) {
-      return LandingScreen();
+      return LandingScreen(
+        userCredential: uid,
+      );
     } else {
-      return LandingScreen();
+      return LandingScreen(
+        userCredential: uid,
+      );
     }
   }
 }

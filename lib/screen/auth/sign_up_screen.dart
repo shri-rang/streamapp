@@ -350,6 +350,7 @@ class _SignUpScreenState extends State<SignUpScreen>
       //    auth.
       if (authCredential.user != null) {
         appModeBox.put("uid", authCredential);
+        print("signnnnnnn${appModeBox.get("uid")} ");
         await firebaseFirestore
             .collection('users')
             .doc(authCredential!.user!.uid)!

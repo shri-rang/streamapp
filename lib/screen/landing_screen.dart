@@ -77,7 +77,7 @@ class _LandingScreenState extends State<LandingScreen>
     _controller = new TabController(vsync: this, length: 5, initialIndex: 1);
     super.initState();
     myFocusNode = FocusNode();
-    widget.userCredential = appModeBox.get("uid");
+    // widget.userCredential = appModeBox.get("uid");
     print("dsd ${widget.userCredential}");
     isDark = appModeBox.get('isDark') ?? false;
     initStoreInfo();
