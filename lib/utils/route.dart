@@ -19,7 +19,7 @@ import '../../screen/subscription/premium_subscription_screen.dart';
 import '../../screen/tv_series_screen.dart';
 import '../../screen/auth/auth_screen.dart';
 import '../../screen/auth/signIn_screen.dart';
-import '../../screen/auth/sign_up_screen.dart';
+import '../screen/auth/sign_in_screen.dart';
 import '../../screen/profile/my_profile_screen.dart';
 import '../../screen/settings_screen.dart';
 import '../../screen/subscription/my_subscription_screen.dart';
@@ -29,12 +29,13 @@ import '../../widgets/live_tv/live_tv_channels_card.dart';
 import '../app.dart';
 
 class Routes {
-  static final userRepository = UserRepository(firebaseAuth: FirebaseAuth.instance);
+  static final userRepository =
+      UserRepository(firebaseAuth: FirebaseAuth.instance);
 
   static Map<String, WidgetBuilder> getRoute() {
     return <String, WidgetBuilder>{
       LoginPage.route: (_) => LoginPage(),
-      SignUpScreen.route: (_) => SignUpScreen(),
+      SignInScreen.route: (_) => SignInScreen(),
       AuthScreen.route: (_) => AuthScreen(),
       MoviesScreen.route: (_) => MoviesScreen(),
       MoviesScreenByGenereID.route: (_) => MoviesScreenByGenereID(),
@@ -50,7 +51,9 @@ class Routes {
       PremiumSubscriptionScreen.route: (_) => PremiumSubscriptionScreen(),
       ContentCountryBasedScreen.route: (_) => ContentCountryBasedScreen(),
       MovieReplyScreen.route: (_) => MovieReplyScreen(),
-      MovieDetailScreen.route: (_) => MovieDetailScreen(movieID: "",),
+      MovieDetailScreen.route: (_) => MovieDetailScreen(
+            movieID: "",
+          ),
       TermsPolices.route: (_) => TermsPolices(),
       PhoneAuthScreen.route: (_) => PhoneAuthScreen(
             userRepository: userRepository,

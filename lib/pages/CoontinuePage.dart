@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:oxoo/colors.dart';
 import 'package:oxoo/screen/auth/signIn_screen.dart';
-import 'package:oxoo/screen/auth/sign_up_screen.dart';
+import 'package:oxoo/screen/auth/sign_in_screen.dart';
 import 'package:oxoo/screen/landing_screen.dart';
 import 'package:oxoo/widgets/home_screen/commonWidget.dart';
 
@@ -91,7 +91,7 @@ class _ContinuePageState extends State<ContinuePage> {
                     ),
                     GestureDetector(
                       onTap: () {
-                       // _signInWithGoogle();
+                        // _signInWithGoogle();
 
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) {
@@ -154,7 +154,7 @@ class _ContinuePageState extends State<ContinuePage> {
                             ),
                         TextButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, SignUpScreen.route);
+                            // Navigator.pushNamed(context, SignUpScreen.route);
                             // Navigator.of(context).push(MaterialPageRoute(
                             //   builder: (context) {
                             //     return LandingScreen();

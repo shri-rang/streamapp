@@ -3,8 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:oxoo/pages/CoontinuePage.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:oxoo/screen/auth/sign_in_screen.dart';
 import 'package:oxoo/screen/home_screen.dart';
 import 'package:pinput/pinput.dart';
 import '../../colors.dart';
@@ -36,8 +38,9 @@ class _SignUpScreenState extends State<SignUpScreen>
     with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final _signUpFormkey = GlobalKey<FormState>();
-  TextEditingController loginNameController = new TextEditingController();
-  TextEditingController loginEmailController = new TextEditingController();
+  TextEditingController loginNameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController loginEmailController = TextEditingController();
   TextEditingController loginPasswordController = new TextEditingController();
   TextEditingController otpVerifyCnt = new TextEditingController();
   late bool _isRegistered;
@@ -196,6 +199,40 @@ class _SignUpScreenState extends State<SignUpScreen>
                                             SizedBox(height: 10),
                                             EditTextUtils()
                                                 .getCustomEditTextField(
+                                                    inputFormatters: <TextInputFormatter>[
+                                                  FilteringTextInputFormatter
+                                                      .allow(
+                                                          RegExp("[0-9a-zA-Z]"))
+                                                ],
+                                                    lableText:
+                                                        "Enter your email here",
+                                                    prefixWidget: Icon(
+                                                      Icons.email,
+                                                      color: Colors.white
+                                                          .withOpacity(0.5),
+                                                    ),
+                                                    hintValue:
+                                                        AppContent.fullName,
+                                                    keyboardType:
+                                                        TextInputType.text,
+                                                    controller: emailController,
+                                                    style: isDark
+                                                        ? CustomTheme
+                                                            .authTitleGrey
+                                                        : CustomTheme.authTitle,
+                                                    // underLineInputBorderColor:
+                                                    //     isDark
+                                                    //         ? CustomTheme
+                                                    //             .grey_transparent2
+                                                    //         : CustomTheme
+                                                    //             .primaryColor,
+                                                    validator: (value) {
+                                                      return validateEmail(
+                                                          value);
+                                                    }),
+                                            SizedBox(height: 10),
+                                            EditTextUtils()
+                                                .getCustomEditTextField(
                                                     maxLength: 10,
                                                     inputFormatters: [
                                                       FilteringTextInputFormatter
@@ -225,9 +262,8 @@ class _SignUpScreenState extends State<SignUpScreen>
                                                     controller:
                                                         loginEmailController,
                                                     validator: (value) {
-                                                      // return
-                                                      // validateEmail(
-                                                      //     value);
+                                                      return validatePhone(
+                                                          value);
                                                     }),
                                             SizedBox(height: 10),
                                           ],
@@ -275,6 +311,43 @@ class _SignUpScreenState extends State<SignUpScreen>
                                       ),
                                     ),
                                     SizedBox(height: 10.0),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text("Already have an account?",
+                                            style: TextStyle(
+                                                fontFamily: 'Sans Serif',
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 18.sp,
+                                                color: Colors.white)
+                                            // style: GoogleFonts.nunito(
+                                            //     color: Colors.grey,
+                                            //     fontSize: 18,
+                                            //     fontWeight: FontWeight.w500),
+                                            ),
+                                        TextButton(
+                                          onPressed: () {
+                                            Get.to(SignInScreen());
+
+                                            // Get.to(LoginInput(type: "Sign Up"));
+                                          },
+                                          child: Text("Sign in",
+                                              style: TextStyle(
+                                                  fontFamily: 'Sans Serif',
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 18.sp,
+                                                  color: Colors.white
+                                                      .withOpacity(0.5))
+                                              // style: GoogleFonts.nunito(
+                                              //     color: Colors.white,
+                                              //     decoration: TextDecoration.underline,
+                                              //     fontSize: 18,
+                                              //     fontWeight: FontWeight.w700),
+                                              ),
+                                        )
+                                      ],
+                                    ),
                                   ],
                                 ),
                               ],
@@ -356,6 +429,8 @@ class _SignUpScreenState extends State<SignUpScreen>
             .update({
           // 'userId': 'shri',
           'name': loginNameController.text,
+          'email': emailController.text,
+          'mobileNo': loginEmailController.text
         });
         Navigator.of(context).pop();
         Navigator.of(context).pushAndRemoveUntil(

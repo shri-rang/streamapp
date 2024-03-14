@@ -11,7 +11,7 @@ import '../../bloc/auth/login_state.dart';
 import '../../constants.dart';
 import '../../models/user_model.dart';
 import '../../screen/landing_screen.dart';
-import '../../screen/auth/sign_up_screen.dart';
+import 'sign_in_screen.dart';
 import '../../service/authentication_service.dart';
 import '../../style/theme.dart';
 import '../../utils/button_widget.dart';
@@ -212,12 +212,11 @@ class _LoginPageState extends State<LoginPage>
                                 title: "LOGIN",
                                 width: double.infinity,
                                 onTap: () {
-                                    
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) {
-                            return LandingScreen();
-                          },
-                        ));
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) {
+                                      return LandingScreen();
+                                    },
+                                  ));
                                   // if (_formKey.currentState!.validate()) {
                                   //   isLoading = true;
                                   //   bloc.add(LoginCompletingStarted());
@@ -284,7 +283,7 @@ class _LoginPageState extends State<LoginPage>
                                 TextButton(
                                   onPressed: () {
                                     Navigator.pushNamed(
-                                        context, SignUpScreen.route);
+                                        context, SignInScreen.route);
 
                                     // Get.to(LoginInput(type: "Sign Up"));
                                   },
@@ -294,7 +293,7 @@ class _LoginPageState extends State<LoginPage>
                                           fontWeight: FontWeight.w500,
                                           fontSize: 18.sp,
                                           color: Colors.white.withOpacity(0.5))
-                                     // style: GoogleFonts.nunito(
+                                      // style: GoogleFonts.nunito(
                                       //     color: Colors.white,
                                       //     decoration: TextDecoration.underline,
                                       //     fontSize: 18,
@@ -332,7 +331,7 @@ class _LoginPageState extends State<LoginPage>
                                 child: Text(
                                   AppContent.forgetPassword,
                                   style: TextStyle(
-                                     fontFamily: 'Sans Serif',
+                                      fontFamily: 'Sans Serif',
                                       color: Colors.amber,
                                       fontSize: 18.sp,
                                       fontWeight: FontWeight.bold),

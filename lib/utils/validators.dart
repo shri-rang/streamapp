@@ -2,7 +2,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 String? validateNotEmpty(String value) {
   if (value.length == 0)
-    return 'field is required!';
+    return 'Name is required!';
   else
     return null;
 }
@@ -13,6 +13,7 @@ String? validateMinLength(String value, {int length = 6}) {
   else
     return null;
 }
+
 String? validateMeetingCode(String value, {int length = 9}) {
   if (value.length != length)
     return 'Meeting code must be of $length digit !';
@@ -45,7 +46,5 @@ String? validateDelete(String value) {
 
 void showShortToast(String message) {
   Fluttertoast.showToast(
-      msg: message,
-      toastLength: Toast.LENGTH_SHORT,
-      timeInSecForIosWeb: 1);
+      msg: message, toastLength: Toast.LENGTH_SHORT, timeInSecForIosWeb: 1);
 }

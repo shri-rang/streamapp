@@ -13,7 +13,7 @@ import 'package:oxoo/screen/Tabs/Buy.dart';
 import 'package:oxoo/screen/Tabs/Sell.dart';
 import 'package:oxoo/screen/auth/auth_screen.dart';
 import 'package:oxoo/screen/auth/signIn_screen.dart';
-import 'package:oxoo/screen/auth/sign_up_screen.dart';
+import 'package:oxoo/screen/auth/sign_in_screen.dart';
 import 'package:oxoo/screen/landing_screen.dart';
 import 'package:oxoo/server/repository.dart';
 import 'package:oxoo/widgets/home_screen/country_item.dart';
@@ -181,7 +181,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           print("dsd ${widget.userCredential}");
                           Navigator.of(context)
                               .push(MaterialPageRoute(builder: (context) {
-                            return SignUpScreen();
+                            return SignInScreen();
                           }));
                         },
                         // screenWidth * .8,
@@ -555,7 +555,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           if (_formKey.currentState!.validate()) {
                             Navigator.of(context)
                                 .push(MaterialPageRoute(builder: (context) {
-                              return SignUpScreen();
+                              return SignInScreen();
                             }));
                           }
                         } else {
