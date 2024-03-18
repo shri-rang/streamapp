@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:oxoo/pages/CoontinuePage.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:oxoo/screen/auth/sign_up.dart';
+import 'package:oxoo/screen/auth/sign_in_screen.dart';
 import 'package:oxoo/screen/home_screen.dart';
 import 'package:pinput/pinput.dart';
 import '../../colors.dart';
@@ -24,22 +24,23 @@ import '../../utils/edit_text_utils.dart';
 import '../../utils/validators.dart';
 import '../../strings.dart';
 
-class SignInScreen extends StatefulWidget {
-  static final String route = '/SignInScreen';
-  SignInScreen({Key? key}) : super(key: key);
+class SignUpScreen extends StatefulWidget {
+  static final String route = '/SignUpScreen';
+  SignUpScreen({Key? key}) : super(key: key);
 
   @override
-  _SignInScreenState createState() {
-    return _SignInScreenState();
+  _SignUpScreenState createState() {
+    return _SignUpScreenState();
   }
 }
 
-class _SignInScreenState extends State<SignInScreen>
+class _SignUpScreenState extends State<SignUpScreen>
     with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final _signUpFormkey = GlobalKey<FormState>();
-  TextEditingController loginNameController = new TextEditingController();
-  TextEditingController loginEmailController = new TextEditingController();
+  TextEditingController loginNameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController loginEmailController = TextEditingController();
   TextEditingController loginPasswordController = new TextEditingController();
   TextEditingController otpVerifyCnt = new TextEditingController();
   late bool _isRegistered;
@@ -142,7 +143,7 @@ class _SignInScreenState extends State<SignInScreen>
                                     ),
                                     Center(
                                       child: Text(
-                                        "SIGN IN",
+                                        "SIGN UP",
                                         style: TextStyle(
                                             fontFamily: 'Sans Serif',
                                             color: purple,
@@ -161,42 +162,75 @@ class _SignInScreenState extends State<SignInScreen>
                                         key: _signUpFormkey,
                                         child: Column(
                                           children: <Widget>[
-                                            // EditTextUtils()
-                                            //     .getCustomEditTextField(
-                                            //         inputFormatters: <TextInputFormatter>[
-                                            //       FilteringTextInputFormatter
-                                            //           .allow(
-                                            //               RegExp("[0-9a-zA-Z]"))
-                                            //     ],
-                                            //         lableText:
-                                            //             "Enter your name here",
-                                            //         prefixWidget: Icon(
-                                            //           Icons.person,
-                                            //           color: Colors.white
-                                            //               .withOpacity(0.5),
-                                            //         ),
-                                            //         hintValue:
-                                            //             AppContent.fullName,
-                                            //         keyboardType:
-                                            //             TextInputType.text,
-                                            //         controller:
-                                            //             loginNameController,
-                                            //         style: isDark
-                                            //             ? CustomTheme
-                                            //                 .authTitleGrey
-                                            //             : CustomTheme.authTitle,
-                                            //         // underLineInputBorderColor:
-                                            //         //     isDark
-                                            //         //         ? CustomTheme
-                                            //         //             .grey_transparent2
-                                            //         //         : CustomTheme
-                                            //         //             .primaryColor,
-                                            //         validator: (value) {
-                                            //           return validateNotEmpty(
-                                            //               value);
-                                            //         }
-                                            // ),
-                                            // SizedBox(height: 10),
+                                            EditTextUtils()
+                                                .getCustomEditTextField(
+                                                    inputFormatters: <TextInputFormatter>[
+                                                  FilteringTextInputFormatter
+                                                      .allow(
+                                                          RegExp("[0-9a-zA-Z]"))
+                                                ],
+                                                    lableText:
+                                                        "Enter your name here",
+                                                    prefixWidget: Icon(
+                                                      Icons.person,
+                                                      color: Colors.white
+                                                          .withOpacity(0.5),
+                                                    ),
+                                                    hintValue:
+                                                        AppContent.fullName,
+                                                    keyboardType:
+                                                        TextInputType.text,
+                                                    controller:
+                                                        loginNameController,
+                                                    style: isDark
+                                                        ? CustomTheme
+                                                            .authTitleGrey
+                                                        : CustomTheme.authTitle,
+                                                    // underLineInputBorderColor:
+                                                    //     isDark
+                                                    //         ? CustomTheme
+                                                    //             .grey_transparent2
+                                                    //         : CustomTheme
+                                                    //             .primaryColor,
+                                                    validator: (value) {
+                                                      return validateNotEmpty(
+                                                          value);
+                                                    }),
+                                            SizedBox(height: 10),
+                                            EditTextUtils()
+                                                .getCustomEditTextField(
+                                                    inputFormatters: <TextInputFormatter>[
+                                                  FilteringTextInputFormatter
+                                                      .allow(RegExp(
+                                                          "[0-9a-zA-Z@.]"))
+                                                ],
+                                                    lableText:
+                                                        "Enter your email here",
+                                                    prefixWidget: Icon(
+                                                      Icons.email,
+                                                      color: Colors.white
+                                                          .withOpacity(0.5),
+                                                    ),
+                                                    hintValue:
+                                                        AppContent.fullName,
+                                                    keyboardType:
+                                                        TextInputType.text,
+                                                    controller: emailController,
+                                                    style: isDark
+                                                        ? CustomTheme
+                                                            .authTitleGrey
+                                                        : CustomTheme.authTitle,
+                                                    // underLineInputBorderColor:
+                                                    //     isDark
+                                                    //         ? CustomTheme
+                                                    //             .grey_transparent2
+                                                    //         : CustomTheme
+                                                    //             .primaryColor,
+                                                    validator: (value) {
+                                                      return validateEmail(
+                                                          value);
+                                                    }),
+                                            SizedBox(height: 10),
                                             EditTextUtils()
                                                 .getCustomEditTextField(
                                                     maxLength: 10,
@@ -242,7 +276,7 @@ class _SignInScreenState extends State<SignInScreen>
                                         horizontal: 20.0,
                                       ),
                                       child: PrimaryButton(
-                                        title: "SIGN IN",
+                                        title: "SIGN UP",
                                         width: double.infinity,
                                         onTap: () async {
                                           print(isCodeSent);
@@ -281,7 +315,7 @@ class _SignInScreenState extends State<SignInScreen>
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        Text("Don't have an account?",
+                                        Text("Already have an account?",
                                             style: TextStyle(
                                                 fontFamily: 'Sans Serif',
                                                 fontWeight: FontWeight.w500,
@@ -294,11 +328,11 @@ class _SignInScreenState extends State<SignInScreen>
                                             ),
                                         TextButton(
                                           onPressed: () {
-                                            Get.to(SignUpScreen());
+                                            Get.to(SignInScreen());
 
                                             // Get.to(LoginInput(type: "Sign Up"));
                                           },
-                                          child: Text("Sign up",
+                                          child: Text("Sign in",
                                               style: TextStyle(
                                                   fontFamily: 'Sans Serif',
                                                   fontWeight: FontWeight.w500,
@@ -395,6 +429,8 @@ class _SignInScreenState extends State<SignInScreen>
             .update({
           // 'userId': 'shri',
           'name': loginNameController.text,
+          'email': emailController.text,
+          'mobileNo': loginEmailController.text
         });
         Navigator.of(context).pop();
         Navigator.of(context).pushAndRemoveUntil(

@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:oxoo/pages/CoontinuePage.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:oxoo/screen/auth/sign_up.dart';
+// import 'package:oxoo/screen/auth/sign_up.dart';
 import 'package:oxoo/screen/home_screen.dart';
 import 'package:pinput/pinput.dart';
 import '../../colors.dart';
@@ -294,7 +294,7 @@ class _SignInScreenState extends State<SignInScreen>
                                             ),
                                         TextButton(
                                           onPressed: () {
-                                            Get.to(SignUpScreen());
+                                            //    Get.to(SignUpScreen());
 
                                             // Get.to(LoginInput(type: "Sign Up"));
                                           },

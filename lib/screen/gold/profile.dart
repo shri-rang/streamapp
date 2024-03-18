@@ -53,13 +53,13 @@ class _ProfileState extends State<Profile> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 2),
                   child: PrimaryButton(
-                    title: "SIGN UP",
+                    title: "SIGN IN",
                     width: 110,
                     onTap: () {
                       print("dsd ${widget.userCredential}");
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (context) {
-                        return SignUpScreen();
+                        return SignInScreen();
                       }));
                     },
                     // screenWidth * .8,
@@ -68,96 +68,171 @@ class _ProfileState extends State<Profile> {
                 ),
               ],
             )
-          : Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 40,
-                  ),
-                  Container(
-                    width: double.infinity,
-                    height: 40,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: purple.withOpacity(0.8)),
-                    child: Center(
-                      child: Text(
-                        "Basic Details",
-                        style: TextStyle(
-                            color: Color(0xff212121),
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
+          : StreamBuilder(
+              stream: firebaseFirestore
+                  .collection("users")
+                  .doc(widget.userCredential!.user!.uid)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                return !snapshot.hasData
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Text(
+                              snapshot.data!["name"],
+                              style: TextStyle(
+                                  color: purple,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 24),
+                            ),
 
-                  SizedBox(
-                    height: 40,
-                  ),
-                  header(),
-                  SizedBox(
-                    height: 40,
-                  ),
-                  header2()
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Container(
+                              width: double.infinity,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: purple.withOpacity(0.8)),
+                              child: Center(
+                                child: Text(
+                                  "Basic Details",
+                                  style: TextStyle(
+                                      color: Color(0xff212121),
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
 
-                  // StreamBuilder(
-                  //   stream: firebaseFirestore
-                  //       .collection("users")
-                  //       .doc(widget.userCredential!.user!.uid)
-                  //       .snapshots(),
-                  //   builder: (context, snapshot) {
-                  //     return !snapshot.hasData
-                  //         ? Center(
-                  //             child: CircularProgressIndicator(),
-                  //           )
-                  //         : headerContainer(snapshot.data);
-                  //   },
-                  // ),
-                  // //  headerContainer(),
-                  // SizedBox(
-                  //   height: 40,
-                  // ),
-                  // Container(
-                  //     padding: EdgeInsets.symmetric(horizontal: 10),
-                  //     decoration: BoxDecoration(
-                  //       borderRadius: BorderRadius.circular(8),
-                  //       color: Color(0xff212121),
-                  //     ),
-                  //     child: Column(
-                  //       children: [
-                  //         SizedBox(
-                  //           height: 20,
-                  //         ),
-                  //         subHeader("Pan card", "BCGPJ1834C"),
-                  //         SizedBox(
-                  //           height: 10,
-                  //         ),
-                  //         subHeader("Aadhar card", "720232384238"),
-                  //         SizedBox(
-                  //           height: 10,
-                  //         ),
-                  //         subHeader("State", "Maharashtra"),
-                  //         SizedBox(
-                  //           height: 10,
-                  //         ),
-                  //         subHeader("City", "Mumbai"),
-                  //         SizedBox(
-                  //           height: 10,
-                  //         ),
-                  //         subHeader("Pin code", "400086"),
-                  //         SizedBox(
-                  //           height: 10,
-                  //         ),
-                  //         subHeader("Address", "201 kaladham"),
-                  //         SizedBox(
-                  //           height: 20,
-                  //         ),
-                  //       ],
-                  //     )),
-                ],
-              ),
-            ),
+                            SizedBox(
+                              height: 40,
+                            ),
+                            header(snapshot.data),
+                            SizedBox(
+                              height: 40,
+                            ),
+                            header2(snapshot.data),
+                            SizedBox(
+                              height: 40,
+                            ),
+                            Container(
+                              width: double.infinity,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: purple.withOpacity(0.8)),
+                              child: Center(
+                                child: Text(
+                                  "KYC Status",
+                                  style: TextStyle(
+                                      color: Color(0xff212121),
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                PrimaryButton(
+                                  title: "Verify PAN",
+                                  width: 150,
+                                  onTap: () {
+                                    print("dsd ${widget.userCredential}");
+                                    // Navigator.of(context).push(
+                                    //     MaterialPageRoute(builder: (context) {
+                                    //   return SignInScreen();
+                                    // }));
+                                  },
+                                  // screenWidth * .8,
+                                  height: 40,
+                                ),
+                                PrimaryButton(
+                                  title: "Verify Aadhaar",
+                                  width: 170,
+                                  onTap: () {
+                                    print("dsd ${widget.userCredential}");
+                                    // Navigator.of(context).push(
+                                    //     MaterialPageRoute(builder: (context) {
+                                    //   return SignInScreen();
+                                    // }));
+                                  },
+                                  // screenWidth * .8,
+                                  height: 40,
+                                ),
+                              ],
+                            ),
+                            // StreamBuilder(
+                            //   stream: firebaseFirestore
+                            //       .collection("users")
+                            //       .doc(widget.userCredential!.user!.uid)
+                            //       .snapshots(),
+                            //   builder: (context, snapshot) {
+                            //     return !snapshot.hasData
+                            //         ? Center(
+                            //             child: CircularProgressIndicator(),
+                            //           )
+                            //         : headerContainer(snapshot.data);
+                            //   },
+                            // ),
+                            // //  headerContainer(),
+                            // SizedBox(
+                            //   height: 40,
+                            // ),
+                            // Container(
+                            //     padding: EdgeInsets.symmetric(horizontal: 10),
+                            //     decoration: BoxDecoration(
+                            //       borderRadius: BorderRadius.circular(8),
+                            //       color: Color(0xff212121),
+                            //     ),
+                            //     child: Column(
+                            //       children: [
+                            //         SizedBox(
+                            //           height: 20,
+                            //         ),
+                            //         subHeader("Pan card", "BCGPJ1834C"),
+                            //         SizedBox(
+                            //           height: 10,
+                            //         ),
+                            //         subHeader("Aadhar card", "720232384238"),
+                            //         SizedBox(
+                            //           height: 10,
+                            //         ),
+                            //         subHeader("State", "Maharashtra"),
+                            //         SizedBox(
+                            //           height: 10,
+                            //         ),
+                            //         subHeader("City", "Mumbai"),
+                            //         SizedBox(
+                            //           height: 10,
+                            //         ),
+                            //         subHeader("Pin code", "400086"),
+                            //         SizedBox(
+                            //           height: 10,
+                            //         ),
+                            //         subHeader("Address", "201 kaladham"),
+                            //         SizedBox(
+                            //           height: 20,
+                            //         ),
+                            //       ],
+                            //     )),
+                          ],
+                        ),
+                      );
+              }),
     );
   }
 
@@ -190,7 +265,7 @@ class _ProfileState extends State<Profile> {
   }
 
   bool light = true;
-  header() {
+  header(DocumentSnapshot<Map<String, dynamic>>? data) {
     return Container(
       padding: EdgeInsets.all(14),
       decoration: BoxDecoration(
@@ -223,7 +298,7 @@ class _ProfileState extends State<Profile> {
             height: 10,
           ),
           Text(
-            "8097267015",
+            data!['mobileNo'],
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
@@ -266,7 +341,7 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  header2() {
+  header2(DocumentSnapshot<Map<String, dynamic>>? data) {
     return Container(
       padding: EdgeInsets.all(14),
       decoration: BoxDecoration(
@@ -295,7 +370,7 @@ class _ProfileState extends State<Profile> {
             height: 10,
           ),
           Text(
-            "jangamshrirang@gmail.com",
+            data!['email'],
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,

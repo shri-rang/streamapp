@@ -91,7 +91,7 @@ class _ContinuePageState extends State<ContinuePage> {
                     ),
                     GestureDetector(
                       onTap: () {
-                       // _signInWithGoogle();
+                        // _signInWithGoogle();
 
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) {
@@ -154,7 +154,7 @@ class _ContinuePageState extends State<ContinuePage> {
                             ),
                         TextButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, SignUpScreen.route);
+                            // Navigator.pushNamed(context, SignUpScreen.route);
                             // Navigator.of(context).push(MaterialPageRoute(
                             //   builder: (context) {
                             //     return LandingScreen();

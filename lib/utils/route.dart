@@ -29,12 +29,13 @@ import '../../widgets/live_tv/live_tv_channels_card.dart';
 import '../app.dart';
 
 class Routes {
-  static final userRepository = UserRepository(firebaseAuth: FirebaseAuth.instance);
+  static final userRepository =
+      UserRepository(firebaseAuth: FirebaseAuth.instance);
 
   static Map<String, WidgetBuilder> getRoute() {
     return <String, WidgetBuilder>{
       LoginPage.route: (_) => LoginPage(),
-      SignUpScreen.route: (_) => SignUpScreen(),
+      SignInScreen.route: (_) => SignInScreen(),
       AuthScreen.route: (_) => AuthScreen(),
       MoviesScreen.route: (_) => MoviesScreen(),
       MoviesScreenByGenereID.route: (_) => MoviesScreenByGenereID(),
@@ -50,7 +51,9 @@ class Routes {
       PremiumSubscriptionScreen.route: (_) => PremiumSubscriptionScreen(),
       ContentCountryBasedScreen.route: (_) => ContentCountryBasedScreen(),
       MovieReplyScreen.route: (_) => MovieReplyScreen(),
-      MovieDetailScreen.route: (_) => MovieDetailScreen(movieID: "",),
+      MovieDetailScreen.route: (_) => MovieDetailScreen(
+            movieID: "",
+          ),
       TermsPolices.route: (_) => TermsPolices(),
       PhoneAuthScreen.route: (_) => PhoneAuthScreen(
             userRepository: userRepository,

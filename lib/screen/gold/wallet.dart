@@ -54,13 +54,13 @@ class _WalletState extends State<Wallet> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 2),
                   child: PrimaryButton(
-                    title: "SIGN UP",
+                    title: "SIGN IN",
                     width: 110,
                     onTap: () {
                       print("dsd ${widget.userCredential}");
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (context) {
-                        return SignUpScreen();
+                        return SignInScreen();
                       }));
                     },
                     // screenWidth * .8,

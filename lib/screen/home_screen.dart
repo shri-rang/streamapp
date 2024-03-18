@@ -184,13 +184,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       padding:
                           EdgeInsets.symmetric(horizontal: 16, vertical: 2),
                       child: PrimaryButton(
-                        title: "SIGN UP",
+                        title: "SIGN IN",
                         width: 110,
                         onTap: () {
                           print("dsd ${widget.userCredential}");
                           Navigator.of(context)
                               .push(MaterialPageRoute(builder: (context) {
-                            return SignUpScreen();
+                            return SignInScreen();
                           }));
                         },
                         // screenWidth * .8,
@@ -571,7 +571,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           if (_formKey.currentState!.validate()) {
                             Navigator.of(context)
                                 .push(MaterialPageRoute(builder: (context) {
-                              return SignUpScreen();
+                              return SignInScreen();
                             }));
                           }
                         } else {
