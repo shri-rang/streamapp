@@ -1,4 +1,3 @@
-
 import 'dart:io';
 import 'dart:isolate';
 import 'dart:ui';
@@ -66,7 +65,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
   String? _localPath;
 
   bool isUserValidSubscriber = false;
-     TargetPlatform? _platform;
+  TargetPlatform? _platform;
   late VideoPlayerController _videoPlayerController1;
   // late VideoPlayerController _videoPlayerController2;
   ChewieController? _chewieController;
@@ -78,43 +77,34 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     isUserValidSubscriber = appModeBox.get('isUserValidSubscriber') ?? false;
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     _permissionReady = false;
-      
+
     _prepare();
-      initializePlayer("https://vz-1bd8696b-cfc.b-cdn.net/c4f58b99-f8c8-40f9-a8be-b58e2ea0bc2c/playlist.m3u8");
+    initializePlayer();
     // FlutterDownloader.registerCallback(downloadCallback);
   }
 
+  Future<void> initializePlayer() async {
+    _videoPlayerController1 = VideoPlayerController.asset("assets/jalsa.mp4");
 
-     Future<void> initializePlayer(String url) async{
-    
-        _videoPlayerController1 =
-        VideoPlayerController.networkUrl(Uri.parse(url));
- 
     await Future.wait([
       _videoPlayerController1.initialize(),
-   
     ]);
     _createChewieController();
     setState(() {});
-
   }
 
-
-     @override
+  @override
   void dispose() {
-     _videoPlayerController1.dispose();
-  
-   _chewieController?.dispose();
+    _videoPlayerController1.dispose();
+
+    _chewieController?.dispose();
     printLog("-------------flick player dispose()");
     // flickManager!.dispose();
     // setAllOrientations();
     super.dispose();
   }
 
-
-   void _createChewieController() {
-
-
+  void _createChewieController() {
     _chewieController = ChewieController(
       videoPlayerController: _videoPlayerController1,
       autoPlay: false,
@@ -122,10 +112,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
       showOptions: false,
       showControls: true,
       allowPlaybackSpeedChanging: false,
-      
+
       // fullScreenByDefault: true,
 
-        
       progressIndicatorDelay:
           bufferDelay != null ? Duration(milliseconds: bufferDelay!) : null,
 
@@ -133,15 +122,14 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
       //   return <OptionItem>[
       //     OptionItem(
       //       onTap: () {
-              
+
       //       },
       //       iconData: Icons.live_tv_sharp,
-            
+
       //       title: 'Toggle Video Src',
       //     ),
       //   ];
       // },
-
     );
   }
 
@@ -334,36 +322,33 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                     width: double.infinity,
                     height: 290.0,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(6.0)),
-                        // image: DecorationImage(
-                        //     image: NetworkImage(movieDetailsModel.thumbnailUrl),
-                        //     fit: BoxFit.fill)
+                      borderRadius: BorderRadius.all(Radius.circular(6.0)),
+                      // image: DecorationImage(
+                      //     image: NetworkImage(movieDetailsModel.thumbnailUrl),
+                      //     fit: BoxFit.fill)
+                    ),
+                    child: Center(
+                      child: _chewieController != null &&
+                              _chewieController!
+                                  .videoPlayerController.value.isInitialized
+                          ? Theme(
+                              data: ThemeData.light().copyWith(
+                                platform: TargetPlatform.iOS,
+                              ),
+                              child: Chewie(
+                                controller: _chewieController!,
+                              ),
+                            )
+                          : Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                CircularProgressIndicator(),
+                                SizedBox(height: 20),
+                                Text('Loading'),
+                              ],
                             ),
-                     child:        Center(
-                       child:
-                                  _chewieController != null &&
-                        _chewieController!
-                            .videoPlayerController.value.isInitialized
-                    ?
-                     Theme(
-                       data: ThemeData.light().copyWith(
-    platform: TargetPlatform.iOS,
-  ),
-                       child: Chewie(
-                          controller: _chewieController!,
-                     
-                        ),
-                     )
-                    :  Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CircularProgressIndicator(),
-                          SizedBox(height: 20),
-                          Text('Loading'),
-                        ],
-                      ),
-                        // FlickPlayer(type: "type", url: "sd")
-                     ),       
+                      // FlickPlayer(type: "type", url: "sd")
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -855,13 +840,12 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         shrinkWrap: true,
                         itemCount: movieDetailsModel.relatedMovie!.length,
                         scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) =>
-                         MoviePoster(
-                            movie: movieDetailsModel.relatedMovie![index],
-                            isDark: isDark!,
-                            chewieController: _chewieController,
-                            videoPlayerController1: _videoPlayerController1,
-                            ),
+                        itemBuilder: (context, index) => MoviePoster(
+                          movie: movieDetailsModel.relatedMovie![index],
+                          isDark: isDark!,
+                          chewieController: _chewieController,
+                          videoPlayerController1: _videoPlayerController1,
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -940,8 +924,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       },
                       child: Text(AppContent.addComments,
                           style: TextStyle(
-                             fontFamily: 'Sans Serif',
-                             fontSize: 14,
+                              fontFamily: 'Sans Serif',
+                              fontSize: 14,
                               color: CustomTheme.primaryColor)),
                     ),
                   ),

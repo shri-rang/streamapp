@@ -5,6 +5,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:oxoo/colors.dart';
 import 'package:oxoo/pages/CoontinuePage.dart';
 import '../../screen/auth/auth_screen.dart';
@@ -106,7 +107,7 @@ class _LandingScreenState extends State<LandingScreen>
     HomeScreen(),
     MoviesScreen(),
     SettingScreen(),
-  //  TvSeriesScreen(),
+    //  TvSeriesScreen(),
     // FavouriteScreen()
   ];
 
@@ -197,40 +198,31 @@ class _LandingScreenState extends State<LandingScreen>
         // appBar: _renderAppBar() as PreferredSizeWidget?,
         drawer: Drawer(
           child: Container(
-          
             color: isDark
                 ? CustomTheme.primaryColorDark
                 : CustomTheme.primaryColorRed,
             child: ListView(
               // padding: EdgeInsets.zero,
               children: <Widget>[
-                DrawerHeader(
-
-                  padding:EdgeInsets.zero ,
-                   margin: EdgeInsets.zero,
-                  child: Align(
-                    child: Column(
-                      // mainAxisSize: MainAxisSize.min,
-                      children: [
-                  
-                      ],
+                Container(
+                  // width: 300,
+                  child: DrawerHeader(
+                    padding: EdgeInsets.zero,
+                    margin: EdgeInsets.zero,
+                    child: Align(
+                      child: Column(
+                        // mainAxisSize: MainAxisSize.min,
+                        children: [],
+                      ),
                     ),
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: AssetImage('assets/3d.jpg')),
+                        color: isDark
+                            ? Colors.grey.shade900
+                            : CustomTheme.primaryColorRed),
                   ),
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-
-                         fit: BoxFit.cover,
-                      image:   AssetImage('assets/pillu.png'
-                     
-                    )
-                     ),
-                      color:
-                      isDark
-                         ? Colors.grey.shade900
-                        :
-                          
-                           CustomTheme.primaryColorRed
-                          ),
                 ),
                 Container(
                   color: isDark ? Colors.transparent : Colors.white,
@@ -240,6 +232,18 @@ class _LandingScreenState extends State<LandingScreen>
                       : drawerContentWithoutLogin(drawerListItemWithoutLogin),
                 )
               ],
+            ),
+          ),
+        ),
+        appBar: AppBar(
+          backgroundColor: CustomTheme.primaryColorDark,
+          automaticallyImplyLeading: false,
+          toolbarHeight: 0.12.sh,
+          title: Center(
+            child: Image.asset(
+              "assets/splash.jpg",
+              width: 300,
+              height: 300,
             ),
           ),
         ),
@@ -269,9 +273,9 @@ class _LandingScreenState extends State<LandingScreen>
           height: 60,
 
           // Color.fromARGB(255, 41, 37, 37).withOpacity(0.9),
-          buttonBackgroundColor:                 lightpurple,
+          buttonBackgroundColor: CustomTheme.amber_800,
 
-         animationCurve: Curves.easeInOut,
+          animationCurve: Curves.easeInOut,
           color: Color.fromARGB(255, 41, 37, 37),
           items: <Widget>[
             Icon(
@@ -279,9 +283,10 @@ class _LandingScreenState extends State<LandingScreen>
               color: Colors.white,
               size: 35,
             ),
-            SvgPicture.asset("assets/drawer_icon/outline_movie_24.svg",
-             width: 35,
-             height: 35,
+            SvgPicture.asset(
+              "assets/drawer_icon/outline_movie_24.svg",
+              width: 35,
+              height: 35,
             ),
             // Icon(
             //   ,
@@ -293,9 +298,10 @@ class _LandingScreenState extends State<LandingScreen>
             //   color: Colors.white,
             //   size: 35,
             // ),
-            SvgPicture.asset("assets/drawer_icon/outline_settings_24.svg",
-             width: 35,
-             height: 35,
+            SvgPicture.asset(
+              "assets/drawer_icon/outline_settings_24.svg",
+              width: 35,
+              height: 35,
             ),
             // Icon(
             //   Icons.person,
@@ -313,7 +319,7 @@ class _LandingScreenState extends State<LandingScreen>
           ],
           onTap: (index) {
             //Handle button tap
-            if (index ==  3 ) {
+            if (index == 3) {
               _scaffoldKey.currentState!.openDrawer();
             } else {
               _pageController.animateToPage(
@@ -558,7 +564,7 @@ class _LandingScreenState extends State<LandingScreen>
             );
           return InkWell(
             child: ListTile(
-                visualDensity: VisualDensity(horizontal: 0, vertical: -1),
+              visualDensity: VisualDensity(horizontal: 0, vertical: -1),
               tileColor: drawerListItem.elementAt(index).isSelected
                   ? isDark
                       ? Colors.grey.shade900

@@ -19,7 +19,7 @@ abstract class CustomTheme {
   static const Color black_window_light = const Color(0xff000000);
   static const Color grey_transparent2 = const Color(0xE97C7C7C);
   static const Color black_transparent = const Color(0x2D000000);
-  static const Color amber_800 = const Color(0xffFF8F00);
+  static const Color amber_800 = const Color(0xfff6ad1b);
   static const Color bottomNavBGColor = const Color(0xffFCFCFF);
   static const Color bottomNavTextColor = const Color(0xff97AAC3);
   static const Color overlayDark = const Color(0x208F94FB);
@@ -129,7 +129,7 @@ abstract class CustomTheme {
   );
   static TextStyle bodyText2White = TextStyle(
     fontFamily: 'Sans Serif',
-    // fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.bold,
     color: whiteColor,
     fontSize: 17,
   );

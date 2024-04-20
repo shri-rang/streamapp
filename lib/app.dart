@@ -1,4 +1,5 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -90,14 +91,15 @@ class _MyAppState extends State<MyApp> {
                   textTheme:
                       Typography.englishLike2018.apply(fontSizeFactor: 1.sp),
                 ),
-                home: AnimatedSplashScreen(
-                   splash: "assets/ps26.jpg",
-                   splashIconSize: 700,
-
-
-                   backgroundColor: Color.fromRGBO(236, 142, 28, 1),
-
-                   nextScreen: child!),
+                home: FlutterSplashScreen.fadeIn(
+                    childWidget: Image.asset(
+                      "assets/splash.jpg",
+                      width: 400,
+                      height: 400,
+                      fit: BoxFit.fitHeight,
+                    ),
+                    backgroundColor: Colors.black.withOpacity(0.9),
+                    nextScreen: child!),
               );
             },
             child: RenderFirstScreen(),

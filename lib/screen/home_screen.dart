@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:oxoo/server/repository.dart';
 import 'package:oxoo/widgets/home_screen/country_item.dart';
@@ -101,9 +102,16 @@ class _HomeScreenState extends State<HomeScreen> {
     return CustomScrollView(
       slivers: <Widget>[
         SliverToBoxAdapter(
-          child: Container(
-            margin: EdgeInsets.only(top: 5.0, bottom: 5),
-            child: ImageSlider(homeContent.slider),
+          child: Column(
+            children: [
+              Container(
+                margin: EdgeInsets.only(top: 5.0, bottom: 5),
+                child: ImageSlider(homeContent.slider),
+              ),
+              SizedBox(
+                height: 0.012.sh,
+              ),
+            ],
           ),
         ),
         SliverToBoxAdapter(

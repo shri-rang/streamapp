@@ -12,8 +12,9 @@ class ConfigurationRepositoryImpl implements ConfigurationRepository {
   @override
   Future<ConfigurationModel> getConfigurationData() async {
     var url = ConfigApi().getApiUrl() + "/config";
-    var response = await http.get(Uri.parse(url), headers: ConfigApi().getHeaders());
-    printLog(response.statusCode);
+    var response =
+        await http.get(Uri.parse(url), headers: ConfigApi().getHeaders());
+    printLog("name ${response.statusCode}");
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
       ConfigurationModel configuration = ConfigurationModel.fromJson(data);

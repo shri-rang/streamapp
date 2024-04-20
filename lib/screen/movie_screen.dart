@@ -134,57 +134,66 @@ class _MoviesScreenState extends State<MoviesScreen> {
         borderRadius: BorderRadius.circular(5.0),
         child: ClipRRect(
             borderRadius: BorderRadius.circular(5.0),
-            child: Card(
-              color: isDark! ? CustomTheme.darkGrey : Colors.white,
-              elevation: 1,
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Expanded(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(5.0),
-                          topRight: Radius.circular(5.0)),
-                      child: Image.network(
-                        model.thumbnailUrl!,
-                        fit: BoxFit.fitWidth,
-                        height: 145,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        border:
+                            Border.all(width: 1, color: CustomTheme.amber_800),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: Image.network(
+                          model.thumbnailUrl!,
+                          fit: BoxFit.fitWidth,
+                          height: 145,
+                        ),
                       ),
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(left: 2),
-                    padding: EdgeInsets.only(right: 2, top: 2, bottom: 2),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          model.title!,
-                          overflow: TextOverflow.ellipsis,
-                          style: isDark!
-                              ? CustomTheme.smallTextWhite
-                                  .copyWith(fontSize: 13)
-                              : CustomTheme.smallText.copyWith(fontSize: 13),
-                        ),
-                        Row(
-                          children: [
-                            Text(model.videoQuality!,
-                                textAlign: TextAlign.start,
-                                style: isDark!
-                                    ? CustomTheme.smallTextWhite
-                                    : CustomTheme.smallText),
-                            Expanded(
-                              child: Text(model.release!,
-                                  textAlign: TextAlign.end,
-                                  style: isDark!
-                                      ? CustomTheme.smallTextWhite
-                                      : CustomTheme.smallText),
-                            ),
-                          ],
-                        )
-                      ],
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Center(
+                    child: Container(
+                      margin: EdgeInsets.only(left: 2),
+                      padding: EdgeInsets.only(right: 2, top: 2, bottom: 2),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            model.title!,
+                            overflow: TextOverflow.ellipsis,
+                            style: isDark!
+                                ? CustomTheme.smallTextWhite.copyWith(
+                                    fontSize: 13, color: CustomTheme.amber_800)
+                                : CustomTheme.smallText.copyWith(fontSize: 13),
+                          ),
+                          // Row(
+                          //   children: [
+                          //     Text(model.videoQuality!,
+                          //         textAlign: TextAlign.start,
+                          //         style: isDark!
+                          //             ? CustomTheme.smallTextWhite
+                          //             : CustomTheme.smallText),
+                          //     Expanded(
+                          //       child: Text(model.release!,
+                          //           textAlign: TextAlign.end,
+                          //           style: isDark!
+                          //               ? CustomTheme.smallTextWhite
+                          //               : CustomTheme.smallText),
+                          //     ),
+                          //   ],
+                          // )
+                        ],
+                      ),
                     ),
                   )
                 ],
