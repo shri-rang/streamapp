@@ -42,7 +42,8 @@ Future<void> main() async {
   await Hive.openBox<PaymentConfig>('paymentConfigbox');
   await Hive.openBox<AuthUser>('oxooUser');
   await Hive.openBox('appModeBox');
-
+  await Hive.openBox('onboard');
+  await Hive.openBox('login');
   ConfigurationModel? configurationModel;
   configurationModel =
       await ConfigurationRepositoryImpl().getConfigurationData();

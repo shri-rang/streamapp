@@ -79,12 +79,16 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     _permissionReady = false;
 
     _prepare();
-    initializePlayer();
+    // initializePlayer();
     // FlutterDownloader.registerCallback(downloadCallback);
   }
 
-  Future<void> initializePlayer() async {
-    _videoPlayerController1 = VideoPlayerController.asset("assets/jalsa.mp4");
+  Future<void> initializePlayer(String url) async {
+    url.isEmpty
+        ? _videoPlayerController1 =
+            VideoPlayerController.asset("assets/jalsa.mp4")
+        : _videoPlayerController1 =
+            VideoPlayerController.networkUrl(Uri.parse(url));
 
     await Future.wait([
       _videoPlayerController1.initialize(),
@@ -214,7 +218,10 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
             builder: (context, state) {
               if (state is MovieDetailsLoadedState) {
                 movieDetailsModel = state.movieDetails;
-
+                // movieDetailsModel.videos!.isNotEmpty
+                print("url${movieDetailsModel.videos![0].fileUrl}");
+                initializePlayer(movieDetailsModel.videos![0].fileUrl!);
+                // : initializePlayer('');
                 isDownloadEnable =
                     movieDetailsModel.enableDownload.toString() == "1";
                 return buildUI(context, authUser, paymentConfig,
@@ -320,7 +327,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                     // margin: new EdgeInsets.symmetric(
                     //     vertical: 10.0, horizontal: 15),
                     width: double.infinity,
-                    height: 290.0,
+                    height: 320.0,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(6.0)),
                       // image: DecorationImage(
@@ -349,6 +356,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                             ),
                       // FlickPlayer(type: "type", url: "sd")
                     ),
+                  ),
+                  SizedBox(
+                    height: 18,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -702,10 +712,17 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(movieDetailsModel.description,
-                    style: isDark!
-                        ? CustomTheme.bodyText2White
-                        : CustomTheme.bodyText2),
+                child: Column(
+                  children: [
+                    Text(movieDetailsModel.description,
+                        style: isDark!
+                            ? CustomTheme.bodyText2White
+                            : CustomTheme.bodyText2),
+                    SizedBox(
+                      height: 20,
+                    ),
+                  ],
+                ),
               ),
             ),
             // if (movieDetailsModel.director!.length > 0)
@@ -833,8 +850,11 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    SizedBox(
+                      height: 20,
+                    ),
                     Container(
-                      height: 200,
+                      height: 225,
                       margin: EdgeInsets.only(top: 2, bottom: 15, left: 15),
                       child: ListView.builder(
                         shrinkWrap: true,
@@ -856,81 +876,81 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
               ),
 
             //comment
-            if (authUser != null)
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    AppContent.comments,
-                    style: isDark!
-                        ? CustomTheme.bodyText2White
-                        : CustomTheme.bodyText2,
-                  ),
-                ),
-              ),
-            if (authUser != null)
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: TextField(
-                    controller: commentsController,
-                    style: isDark!
-                        ? CustomTheme.bodyText2White
-                        : CustomTheme.bodyText2,
-                    decoration: InputDecoration(
-                      hintText: AppContent.yourComments,
-                      filled: true,
-                      hintStyle: CustomTheme.bodyTextgray2,
-                      fillColor:
-                          isDark! ? Colors.black54 : Colors.grey.shade200,
-                      focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.grey.shade200, width: 0.0),
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.grey.shade200, width: 0.0),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.grey.shade200, width: 0.0),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            if (authUser != null)
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Align(
-                    alignment: Alignment.bottomRight,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: isDark!
-                            ? CustomTheme.grey_transparent2
-                            : Colors.grey.shade300,
-                      ),
-                      onPressed: () async {
-                        String comments = commentsController.text.toString();
-                        AddCommentsModel? addCommentsModel = await Repository()
-                            .addComments(movieDetailsModel.videosId,
-                                authUser.userId, comments);
-                        commentsController.clear();
-                        if (addCommentsModel != null) {
-                          showShortToast(addCommentsModel.message!);
-                          setState(() {});
-                        }
-                      },
-                      child: Text(AppContent.addComments,
-                          style: TextStyle(
-                              fontFamily: 'Sans Serif',
-                              fontSize: 14,
-                              color: CustomTheme.primaryColor)),
-                    ),
-                  ),
-                ),
-              ),
+            // if (authUser != null)
+            //   SliverToBoxAdapter(
+            //     child: Padding(
+            //       padding: const EdgeInsets.all(8.0),
+            //       child: Text(
+            //         AppContent.comments,
+            //         style: isDark!
+            //             ? CustomTheme.bodyText2White
+            //             : CustomTheme.bodyText2,
+            //       ),
+            //     ),
+            //   ),
+            // if (authUser != null)
+            //   SliverToBoxAdapter(
+            //     child: Padding(
+            //       padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            //       child: TextField(
+            //         controller: commentsController,
+            //         style: isDark!
+            //             ? CustomTheme.bodyText2White
+            //             : CustomTheme.bodyText2,
+            //         decoration: InputDecoration(
+            //           hintText: AppContent.yourComments,
+            //           filled: true,
+            //           hintStyle: CustomTheme.bodyTextgray2,
+            //           fillColor:
+            //               isDark! ? Colors.black54 : Colors.grey.shade200,
+            //           focusedBorder: OutlineInputBorder(
+            //             borderSide:
+            //                 BorderSide(color: Colors.grey.shade200, width: 0.0),
+            //           ),
+            //           border: OutlineInputBorder(
+            //             borderSide:
+            //                 BorderSide(color: Colors.grey.shade200, width: 0.0),
+            //           ),
+            //           enabledBorder: OutlineInputBorder(
+            //             borderSide:
+            //                 BorderSide(color: Colors.grey.shade200, width: 0.0),
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // if (authUser != null)
+            //   SliverToBoxAdapter(
+            //     child: Padding(
+            //       padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            //       child: Align(
+            //         alignment: Alignment.bottomRight,
+            //         child: ElevatedButton(
+            //           style: ElevatedButton.styleFrom(
+            //             backgroundColor: isDark!
+            //                 ? CustomTheme.grey_transparent2
+            //                 : Colors.grey.shade300,
+            //           ),
+            //           onPressed: () async {
+            //             String comments = commentsController.text.toString();
+            //             AddCommentsModel? addCommentsModel = await Repository()
+            //                 .addComments(movieDetailsModel.videosId,
+            //                     authUser.userId, comments);
+            //             commentsController.clear();
+            //             if (addCommentsModel != null) {
+            //               showShortToast(addCommentsModel.message!);
+            //               setState(() {});
+            //             }
+            //           },
+            //           child: Text(AppContent.addComments,
+            //               style: TextStyle(
+            //                   fontFamily: 'Sans Serif',
+            //                   fontSize: 14,
+            //                   color: CustomTheme.primaryColor)),
+            //         ),
+            //       ),
+            //     ),
+            //   ),
 
             // if (allCommentModelList.data != null)
             //   SliverList(

@@ -57,39 +57,39 @@ class _SettingScreenState extends State<SettingScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
-              child: Text(
-                AppContent.notification,
-                style: CustomTheme.coloredBodyText1,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    AppContent.pushNotification,
-                    style: isDark!
-                        ? CustomTheme.bodyText2White
-                        : CustomTheme.bodyText2Bold,
-                  ),
-                  Switch(
-                    activeColor: CustomTheme.primaryColor,
-                    inactiveThumbColor: Colors.grey.shade100,
-                    inactiveTrackColor: Colors.grey,
-                    value: _switchValue,
-                    onChanged: (value) {
-                      setState(() {
-                        _switchValue = value;
-                      });
-                    },
-                  ),
-                ],
-              ),
-            ),
+            // Padding(
+            //   padding:
+            //       const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+            //   child: Text(
+            //     AppContent.notification,
+            //     style: CustomTheme.coloredBodyText1,
+            //   ),
+            // ),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //     children: [
+            //       Text(
+            //         AppContent.pushNotification,
+            //         style: isDark!
+            //             ? CustomTheme.bodyText2White
+            //             : CustomTheme.bodyText2Bold,
+            //       ),
+            //       Switch(
+            //         activeColor: CustomTheme.primaryColor,
+            //         inactiveThumbColor: Colors.grey.shade100,
+            //         inactiveTrackColor: Colors.grey,
+            //         value: _switchValue,
+            //         onChanged: (value) {
+            //           setState(() {
+            //             _switchValue = value;
+            //           });
+            //         },
+            //       ),
+            //     ],
+            //   ),
+            // ),
             _divider(isDark),
             Padding(
               padding:
@@ -172,7 +172,7 @@ class _SettingScreenState extends State<SettingScreen> {
             _divider(isDark),
             InkWell(
               onTap: () {
-                // Navigator.pushNamed(context, TermsPolices.route);
+                Navigator.pushNamed(context, TermsPolices.route);
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(

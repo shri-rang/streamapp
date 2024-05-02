@@ -10,6 +10,7 @@ import 'package:oxoo/config.dart';
 import 'package:oxoo/pages/CoontinuePage.dart';
 import 'package:oxoo/pages/SwipePage.dart';
 import 'package:provider/provider.dart';
+import 'package:video_player/video_player.dart';
 import '../../bloc/auth/registration_bloc.dart';
 import '../../service/authentication_service.dart';
 import 'bloc/auth/firebase_auth/firebase_auth_bloc.dart';
@@ -35,15 +36,30 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   var appModeBox = Hive.box('appModeBox');
-  static bool? isDark = true;
+  var onboard = Hive.box('onboard');
 
+  static bool? isDark = true;
+  static bool? isFirstTime = true;
+  VideoPlayerController? _controller;
+  late Future<void> _initializeVideoPlayerFuture;
   @override
   void initState() {
     super.initState();
+
     isDark = appModeBox.get('isDark');
     if (isDark == null) {
       appModeBox.put('isDark', true);
     }
+    isFirstTime = onboard.get('isFirstTime');
+    if (isFirstTime == null) {
+      onboard.put('isFirstTime', true);
+    }
+    _controller = VideoPlayerController.asset(
+      "assets/jalsasplash.mp4",
+    );
+
+    _initializeVideoPlayerFuture = _controller!.initialize();
+    _controller!.play();
     initOneSignal();
   }
 
@@ -91,15 +107,24 @@ class _MyAppState extends State<MyApp> {
                   textTheme:
                       Typography.englishLike2018.apply(fontSizeFactor: 1.sp),
                 ),
+
                 home: FlutterSplashScreen.fadeIn(
-                    childWidget: Image.asset(
-                      "assets/splash.jpg",
-                      width: 400,
-                      height: 400,
-                      fit: BoxFit.fitHeight,
-                    ),
-                    backgroundColor: Colors.black.withOpacity(0.9),
-                    nextScreen: child!),
+                  childWidget: AspectRatio(
+                    aspectRatio: 0.48,
+
+                    // Use the VideoPlayer widget to display the video.
+                    child: VideoPlayer(_controller!),
+                  ),
+                  // Image.asset(
+                  //   "assets/jalsasplash.mp4",
+                  //   width: 400,
+                  //   height: 400,
+                  //   fit: BoxFit.fitHeight,
+                  // ),
+                  backgroundColor: Colors.black.withOpacity(0.9),
+                  nextScreen: child!,
+                  duration: Duration(seconds: 6),
+                ),
               );
             },
             child: RenderFirstScreen(),
@@ -133,10 +158,9 @@ class RenderFirstScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-      valueListenable: Hive.box<ConfigurationModel>('configBox').listenable(),
+      valueListenable: Hive.box('onboard').listenable(),
       builder: (context, dynamic box, widget) {
-        isMandatoryLogin = true;
-        //  box.get(0).appConfig.mandatoryLogin;
+        isMandatoryLogin = box.get('isFirstTime');
         printLog("isMandatoryLogin " + "$isMandatoryLogin");
         return renderFirstScreen(isMandatoryLogin!);
       },
@@ -144,11 +168,17 @@ class RenderFirstScreen extends StatelessWidget {
   }
 
   Widget renderFirstScreen(bool isMandatoryLogin) {
-    print(isMandatoryLogin);
+    // print(isMandatoryLogin);
+    bool isLogin = false;
     if (isMandatoryLogin) {
       return SwipePage();
     } else {
-      return LandingScreen();
+      return ValueListenableBuilder(
+          valueListenable: Hive.box('login').listenable(),
+          builder: (context, dynamic box, widget) {
+            isLogin = box.get('isLogin');
+            return isLogin ? LandingScreen() : ContinuePage();
+          });
     }
   }
 }

@@ -61,18 +61,24 @@ class _LandingScreenState extends State<LandingScreen>
   static bool isDark = false;
   bool activeSearch = false;
   var appModeBox = Hive.box('appModeBox');
+  var onboard = Hive.box('onboard');
+  var login = Hive.box('login');
   String? userID;
   AuthUser? authUser = AuthService().getUser();
   final InAppPurchase _connection = InAppPurchase.instance;
   List<String> _kProductIdSubscription = <String>['com.oxoo.flutter.allaccess'];
-
+  static bool? isLogin = true;
   @override
   void initState() {
     appModeBox.delete("isUserValidSubscriber");
     _controller = new TabController(vsync: this, length: 5, initialIndex: 1);
     super.initState();
     myFocusNode = FocusNode();
-
+    onboard.put('isFirstTime', false);
+    isLogin = login.get('isLogin');
+    if (isLogin == null || isLogin == false) {
+      login.put('isLogin', true);
+    }
     isDark = appModeBox.get('isDark') ?? false;
     initStoreInfo();
     SchedulerBinding.instance
@@ -439,45 +445,45 @@ class _LandingScreenState extends State<LandingScreen>
                   Navigator.pushNamed(context, MoviesScreen.route,
                       arguments: true);
                   break;
-                case 2:
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, TvSeriesScreen.route,
-                      arguments: true);
-                  break;
-                case 3:
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, LiveTvScreen.route,
-                      arguments: true);
-                  break;
-                case 4:
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, GenreScreen.route,
-                      arguments: true);
+                // case 2:
+                //   Navigator.pop(context);
+                //   Navigator.pushNamed(context, TvSeriesScreen.route,
+                //       arguments: true);
+                //   break;
+                // case 3:
+                //   Navigator.pop(context);
+                //   Navigator.pushNamed(context, LiveTvScreen.route,
+                //       arguments: true);
+                //   break;
+                // case 4:
+                //   Navigator.pop(context);
+                //   Navigator.pushNamed(context, GenreScreen.route,
+                //       arguments: true);
 
-                  break;
-                case 5:
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, AllCountryScreen.route,
-                      arguments: true);
-                  break;
-                case 6:
+                //   break;
+                // case 5:
+                //   Navigator.pop(context);
+                //   Navigator.pushNamed(context, AllCountryScreen.route,
+                //       arguments: true);
+                //   break;
+                case 2:
                   Navigator.pop(context);
                   Navigator.pushNamed(context, MyProfileScreen.route);
                   break;
-                case 7:
+                case 3:
                   Navigator.pop(context);
                   Navigator.pushNamed(context, FavouriteScreen.route,
                       arguments: true);
                   break;
-                case 8:
+                case 4:
                   Navigator.pop(context);
                   Navigator.pushNamed(context, MySubscriptionScreen.route);
                   break;
-                case 9:
+                case 5:
                   Navigator.pop(context);
                   Navigator.pushNamed(context, SettingScreen.route);
                   break;
-                case 10:
+                case 6:
                   // Navigator.pop(context);
                   showDialog(
                       context: context,
@@ -498,6 +504,8 @@ class _LandingScreenState extends State<LandingScreen>
                                   await _auth.signOut();
                                   if (authService.getUser() != null)
                                     authService.deleteUser();
+                                  login.put('isLogin', false);
+                                  // login.clear();
                                   //subscription key will be deleted here
                                   Navigator.of(dialogContext)
                                       .pushAndRemoveUntil(
@@ -520,11 +528,11 @@ class _LandingScreenState extends State<LandingScreen>
                           ],
                         );
                       });
-                  break;
-                case 12:
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, DownloadScreen.route);
-                  break;
+                //   break;
+                // case 7:
+                //   Navigator.pop(context);
+                //   Navigator.pushNamed(context, DownloadScreen.route);
+                //   break;
               }
             },
           );

@@ -15,10 +15,17 @@ class ImageSlider extends StatelessWidget {
   HomeContentSlider? _slider;
   ImageSlider(this._slider);
   List<Slide>? _list;
+  List image = [
+    "assets/poster.jpg",
+    "assets/sairab.png",
+    "assets/sindur.png",
+    "assets/whatsapp.png"
+  ];
 
   @override
   Widget build(BuildContext context) {
     _list = _slider!.slide;
+    print("idddddddddd${_slider!.slide![0].id}");
     return CarouselSlider(
       options: CarouselOptions(
         initialPage: 0,
@@ -42,6 +49,8 @@ class ImageSlider extends StatelessWidget {
                   const EdgeInsets.symmetric(horizontal: 0.0, vertical: 2.0),
               child: InkWell(
                 onTap: () {
+                  // Navigator.pushNamed(context, MovieDetailScreen.route,
+                  //     arguments: {"movieID": "9"});
                   switch (slide.actionType) {
                     case "movie":
                       Navigator.pushNamed(context, MovieDetailScreen.route,
@@ -92,12 +101,12 @@ class ImageSlider extends StatelessWidget {
                           child: Stack(
                             fit: StackFit.expand,
                             children: <Widget>[
-                              if (slide.imageLink != null)
-                                Image.asset(
-                                  "assets/poster.jpg",
-                                  // slide.imageLink!,
-                                  fit: BoxFit.fitHeight,
-                                ),
+                              // if (slide.imageLink != null)
+                              Image.network(
+                                slide.imageLink!,
+                                // slide.imageLink!,
+                                fit: BoxFit.fitHeight,
+                              ),
                               /*if(slide.thumbnailUrl != null)
                               Image.network(
                                 slide.thumbnailUrl,

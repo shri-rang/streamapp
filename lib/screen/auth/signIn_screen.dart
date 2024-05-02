@@ -43,7 +43,8 @@ class _LoginPageState extends State<LoginPage>
   bool isLoading = false;
   bool _isLogged = false, isDark = false;
   var appModeBox = Hive.box('appModeBox');
-
+  var login = Hive.box('login');
+  static bool? isLogin = true;
   @override
   void initState() {
     super.initState();
@@ -212,12 +213,11 @@ class _LoginPageState extends State<LoginPage>
                                 title: "LOGIN",
                                 width: double.infinity,
                                 onTap: () {
-                                    
-                        // Navigator.of(context).push(MaterialPageRoute(
-                        //   builder: (context) {
-                        //     return LandingScreen();
-                        //   },
-                        // ));
+                                  // Navigator.of(context).push(MaterialPageRoute(
+                                  //   builder: (context) {
+                                  //     return LandingScreen();
+                                  //   },
+                                  // ));
                                   if (_formKey.currentState!.validate()) {
                                     isLoading = true;
                                     bloc.add(LoginCompletingStarted());
@@ -225,6 +225,7 @@ class _LoginPageState extends State<LoginPage>
                                       email: loginEmailController.text,
                                       password: loginPasswordController.text,
                                     ));
+                                 
                                   }
                                 },
                                 // screenWidth * .8,
@@ -294,7 +295,7 @@ class _LoginPageState extends State<LoginPage>
                                           fontWeight: FontWeight.w500,
                                           fontSize: 18.sp,
                                           color: Colors.white.withOpacity(0.5))
-                                     // style: GoogleFonts.nunito(
+                                      // style: GoogleFonts.nunito(
                                       //     color: Colors.white,
                                       //     decoration: TextDecoration.underline,
                                       //     fontSize: 18,
@@ -332,7 +333,7 @@ class _LoginPageState extends State<LoginPage>
                                 child: Text(
                                   AppContent.forgetPassword,
                                   style: TextStyle(
-                                     fontFamily: 'Sans Serif',
+                                      fontFamily: 'Sans Serif',
                                       color: Colors.amber,
                                       fontSize: 18.sp,
                                       fontWeight: FontWeight.bold),

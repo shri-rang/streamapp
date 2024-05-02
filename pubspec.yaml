@@ -68,7 +68,7 @@ dependencies:
   sign_in_with_apple: ^4.1.0
   # stripe_checkout: ^0.1.0
   url_launcher: ^6.1.6
-  video_player: ^2.4.7
+  video_player: ^2.7.2
   visibility_detector: ^0.3.3
   wakelock: ^0.6.2
   webview_flutter: ^2.1.1

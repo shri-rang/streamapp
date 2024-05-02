@@ -48,7 +48,7 @@ class AppContent {
   static final String releaseOn = "Release On: ";
   static final String director = "Director: ";
   static final String castCrew = "Cast and Crew";
-  static final String youMayAlsoLike = "Pillu Originals";
+  static final String youMayAlsoLike = "Jalsa Originals";
   static final String allEvents = "All Events";
   static final String loginCancelled = "Login cancelled by the user.";
   static final String backToLogin = "Back to login ";

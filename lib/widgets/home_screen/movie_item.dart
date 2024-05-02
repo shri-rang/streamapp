@@ -15,7 +15,6 @@ class HomeScreenMovieList extends StatelessWidget {
   final String? title;
   final bool isSearchWidget;
   final bool? isDark;
-  double? cardWidth;
   final bool? isLength;
 
   HomeScreenMovieList(
@@ -27,9 +26,12 @@ class HomeScreenMovieList extends StatelessWidget {
       this.isDark});
   var context;
 
+  double? cardWidth;
+
   @override
   Widget build(BuildContext context) {
     cardWidth = MediaQuery.of(context).size.width / 3.1;
+
     return Container(
         color: isDark! ? CustomTheme.primaryColorDark : null,
         padding: EdgeInsets.only(left: 2),
@@ -86,8 +88,9 @@ class HomeScreenMovieList extends StatelessWidget {
             Expanded(
               child: ListView.builder(
                 shrinkWrap: true,
-                itemCount: latestMovies!.length,
-                //itemCount:latestMovies!.length<=6?latestMovies!.length:5,
+                itemCount:
+                    //  list!.length,
+                    latestMovies!.length <= 6 ? latestMovies!.length : 6,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) => Container(
                   width: cardWidth,
@@ -121,6 +124,7 @@ class HomeScreenMovieList extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: <Widget>[
                               Container(
+                                height: 190,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(16),
                                   border: Border.all(
@@ -133,20 +137,20 @@ class HomeScreenMovieList extends StatelessWidget {
                                   //   fit: BoxFit.fitWidth,
                                   //   height: 155,
                                   // ),
-                                  child: FadeInImage.assetNetwork(
-                                      placeholder:
-                                          "assets/images/placeholder.png",
-                                      placeholderScale: 25,
-                                      height: 180,
-                                      fit: BoxFit.fitWidth,
-                                      imageErrorBuilder:
-                                          (context, error, stackTrace) =>
-                                              Image.asset(
-                                                "assets/images/placeholder.png",
-                                                fit: BoxFit.cover,
-                                              ),
-                                      image:
-                                          latestMovies![index].thumbnailUrl!),
+                                  child: Image.network(
+                                      // placeholder:
+                                      //     "assets/images/placeholder.png",
+                                      // placeholderScale: 25,
+                                      // height: 180,
+                                      fit: BoxFit.fitHeight,
+                                      // imageErrorBuilder:
+                                      //     (context, error, stackTrace) =>
+                                      //         Image.asset(
+                                      //           "assets/images/placeholder.png",
+                                      //           fit: BoxFit.cover,
+                                      //         ),
+                                      // image:
+                                      latestMovies![index].thumbnailUrl!),
                                 ),
                               ),
                               SizedBox(
@@ -205,4 +209,11 @@ class HomeScreenMovieList extends StatelessWidget {
           ],
         ));
   }
+}
+
+class Movies {
+  String? name;
+  String? image;
+
+  Movies({this.image, this.name});
 }

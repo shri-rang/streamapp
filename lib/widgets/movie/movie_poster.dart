@@ -58,6 +58,7 @@ class MoviePoster extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     Container(
+                      height: 190,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
                         border:
@@ -74,7 +75,7 @@ class MoviePoster extends StatelessWidget {
                             placeholder: "assets/images/placeholder.png",
                             placeholderScale: 25,
                             height: 150,
-                            fit: BoxFit.fitWidth,
+                            fit: BoxFit.fitHeight,
                             imageErrorBuilder: (context, error, stackTrace) =>
                                 Image.asset(
                                   "assets/images/placeholder.png",
