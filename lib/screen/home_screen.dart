@@ -30,6 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
   var appModeBox = Hive.box('appModeBox');
   bool? isDark;
   late Future<HomeContent> _homeContent;
+  
 
   @override
   void initState() {
@@ -100,6 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
       AppConfig? appConfig,
       required HomeContent homeContent}) {
     return CustomScrollView(
+      
       slivers: <Widget>[
         SliverToBoxAdapter(
           child: Column(
