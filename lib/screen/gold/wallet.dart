@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../colors.dart';
+import '../../models/goldModel/options_model.dart';
 import '../../style/theme.dart';
 
 class Wallet extends StatefulWidget {
@@ -15,6 +17,7 @@ class Wallet extends StatefulWidget {
 
 class _WalletState extends State<Wallet> {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,6 +69,37 @@ class _WalletState extends State<Wallet> {
                             )
                           : headerContainer(snapshot.data);
                     },
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  ListView.builder(
+                    itemCount: optionList.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: purple,
+                              borderRadius: BorderRadius.circular(6)),
+                          child: ListTile(
+                            leading: Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: SvgPicture.asset(optionList[index].image!),
+                            ),
+                            title: Text(
+                              optionList[index].name!,
+                              style: TextStyle(
+                                color: Colors.white60,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
                   )
                 ],
               ),
@@ -75,6 +109,7 @@ class _WalletState extends State<Wallet> {
 
   headerContainer(DocumentSnapshot<Map<String, dynamic>>? data) {
     print("some adta ${data!['amount']}");
+    var inGram = int.parse(data!['amount']) / 6356.40;
     return Container(
       height: 100,
       decoration: BoxDecoration(
@@ -85,8 +120,8 @@ class _WalletState extends State<Wallet> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          colunm("Invested Amount :", "₹ ${data!['amount']}"),
-          colunm("Current Amount :", "₹ 6000 "),
+          colunm("Available Balance :", "₹ ${inGram.toStringAsFixed(2)} gm"),
+          // colunm("Current Amount :", "₹ 6000 "),
         ],
       ),
     );

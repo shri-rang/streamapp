@@ -175,7 +175,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       padding:
                           EdgeInsets.symmetric(horizontal: 16, vertical: 2),
                       child: PrimaryButton(
-                        title: "SIGN UP",
+                        title: "SIGN IN",
                         width: 110,
                         onTap: () {
                           print("dsd ${widget.userCredential}");
