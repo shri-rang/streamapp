@@ -1,14 +1,13 @@
 class Config {
   //set your api server url here
-  static String apiServerUrl = 
-  "http://65.0.249.28/rest-api/";
+  static String apiServerUrl = "http://15.206.117.132/rest-api/";
   // "https://ox.spagreen.net/rest-api/";
   //  "https://app.ouchfilms.com/rest-api/";
   //set your api key here
   static String apiKey =
       //  "af01c9d88636465";
-          //  "af01c9d88636465";
-     "af01c9d88636465";
+      //  "af01c9d88636465";
+      "e2ada97e8683274";
   //set your onesignalID here
   static String oneSignalID = "2d48cea4-09c0-4c76-bcd9-23146a882853";
   //set stripe secret key
@@ -24,7 +23,8 @@ class Config {
   static final bool enableGoogleAuth = true;
   static final bool enablePhoneAuth = true;
   static final bool enableAppleAuthForIOS = true;
-   static final videoLink =    "https://assets.afcdn.com/video49/20210722/v_645516.m3u8";
+  static final videoLink =
+      "https://assets.afcdn.com/video49/20210722/v_645516.m3u8";
   //publicKeyBase64 from play store to implement in app purchase
   static final String publicKeyBase64 =
       "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmXabTbO4NPnGS4ntejfjZz+ix4HxOOELGAXuHk4/Tjx9zasovTBDx3GqtbsSwOWmMdAbz00/+hjLIz92NwUmgkTXDJIQwI4D7bPBC+9fGiCnBE4KQzffm/VXfxS8hzgDIrSpQwQSDgyNOey/rLHFx/GIoayNdhU1EjVm5wOcMsrJuAvVCWLcoGUVCy5pgolEUpsKioDU67C/gWyC+P6ZN2CCJeHwBbpyJnpdo/kPalXnKDfHObKWRp7eqWxECQQFtQGOJ2pnhhbnXdO4OPd3yCO3HXR0b2t3qLWjobFHT3tSv1HDT/N8qonAGT4I4zU5/oKLAnP7QAdVcgFEXaSpbwIDAQAB";
