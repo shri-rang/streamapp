@@ -1,4 +1,3 @@
-import 'package:app_review/app_review.dart';
 import 'package:flutter/material.dart';
 import '../../service/authentication_service.dart';
 import 'package:hive/hive.dart';
@@ -184,25 +183,25 @@ class _SettingScreenState extends State<SettingScreen> {
               ),
             ),
             _divider(isDark),
-            InkWell(
-              onTap: () {
-                // AppReview.storeListing.then((onValue) {
-                //   setState(() {
-                //     output = onValue;
-                //   });
-                //   print(onValue);
-                // });
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 10.0, horizontal: 10.0),
-                child: Text(AppContent.shareThisApp,
-                    style: isDark!
-                        ? CustomTheme.bodyText2BoldWhite
-                        : CustomTheme.bodyText2Bold),
-              ),
-            ),
-            _divider(isDark),
+            // InkWell(
+            //   onTap: () {
+            //     // AppReview.storeListing.then((onValue) {
+            //     //   setState(() {
+            //     //     output = onValue;
+            //     //   });
+            //     //   print(onValue);
+            //     // });
+            //   },
+            //   child: Padding(
+            //     padding: const EdgeInsets.symmetric(
+            //         vertical: 10.0, horizontal: 10.0),
+            //     child: Text(AppContent.shareThisApp,
+            //         style: isDark!
+            //             ? CustomTheme.bodyText2BoldWhite
+            //             : CustomTheme.bodyText2Bold),
+            //   ),
+            // ),
+            // _divider(isDark),
           ],
         ),
       ),

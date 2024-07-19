@@ -470,20 +470,20 @@ class _LandingScreenState extends State<LandingScreen>
                   Navigator.pop(context);
                   Navigator.pushNamed(context, MyProfileScreen.route);
                   break;
+                // case 3:
+                //   Navigator.pop(context);
+                //   Navigator.pushNamed(context, FavouriteScreen.route,
+                //       arguments: true);
+                //   break;
+                // case 4:
+                //   Navigator.pop(context);
+                //   Navigator.pushNamed(context, MySubscriptionScreen.route);
+                //   break;
                 case 3:
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, FavouriteScreen.route,
-                      arguments: true);
-                  break;
-                case 4:
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, MySubscriptionScreen.route);
-                  break;
-                case 5:
                   Navigator.pop(context);
                   Navigator.pushNamed(context, SettingScreen.route);
                   break;
-                case 6:
+                case 4:
                   // Navigator.pop(context);
                   showDialog(
                       context: context,

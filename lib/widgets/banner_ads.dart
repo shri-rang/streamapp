@@ -1,4 +1,4 @@
-import 'package:admob_flutter/admob_flutter.dart';
+// import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import '../../models/configuration.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -19,14 +19,16 @@ class BannerAds extends StatelessWidget {
         if (adsConfig!.adsEnable == "1")
           return Container(
             width: MediaQuery.of(context).size.width,
-            color: isDark! ? CustomTheme.primaryColorDark : CustomTheme.whiteColor,
+            color:
+                isDark! ? CustomTheme.primaryColorDark : CustomTheme.whiteColor,
             child: Container(
-              child: AdmobBanner(
-                // adUnitId: adsConfig.admobBannerAdsId,
-                adUnitId: "ca-app-pub-3940256099942544/6300978111",
-                adSize: AdmobBannerSize.BANNER,
-              ),
-            ),
+                // child:
+                // AdmobBanner(
+                //   // adUnitId: adsConfig.admobBannerAdsId,
+                //   adUnitId: "ca-app-pub-3940256099942544/6300978111",
+                //   adSize: AdmobBannerSize.BANNER,
+                // ),
+                ),
           );
         return Container(
           height: 0.0,

@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "642223377409-05m03itucv12g2m8qqfqil14esoisq1j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "jalsa.tv.com",
+            "certificate_hash": "38ab81aefe71c3e2a7610c38612005c03d756cc3"
+          }
+        },
+        {
           "client_id": "642223377409-s56idp7kgpamh5oa644qh4ggg96lsh94.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

@@ -70,6 +70,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
   // late VideoPlayerController _videoPlayerController2;
   ChewieController? _chewieController;
   int? bufferDelay;
+  bool isInit = true;
   @override
   void initState() {
     super.initState();
@@ -89,12 +90,11 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
             VideoPlayerController.asset("assets/jalsa.mp4")
         : _videoPlayerController1 =
             VideoPlayerController.networkUrl(Uri.parse(url));
-
+    print("objectSfdsgsf;fsdkfsdfsd");
     await Future.wait([
       _videoPlayerController1.initialize(),
-    ]);
+    ]).then((value) => setState(() {}));
     _createChewieController();
-    setState(() {});
   }
 
   @override
@@ -115,6 +115,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
       looping: true,
       showOptions: false,
       showControls: true,
+      allowedScreenSleep: false,
       allowPlaybackSpeedChanging: false,
 
       // fullScreenByDefault: true,
@@ -220,7 +221,11 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                 movieDetailsModel = state.movieDetails;
                 // movieDetailsModel.videos!.isNotEmpty
                 print("url${movieDetailsModel.videos![0].fileUrl}");
-                initializePlayer(movieDetailsModel.videos![0].fileUrl!);
+                if (isInit) {
+                  initializePlayer(movieDetailsModel.videos![0].fileUrl!);
+                  isInit = false;
+                }
+
                 // : initializePlayer('');
                 isDownloadEnable =
                     movieDetailsModel.enableDownload.toString() == "1";
@@ -251,6 +256,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
             child: Container(),
           );
         }
+
         return CustomScrollView(
           slivers: [
             SliverToBoxAdapter(

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:admob_flutter/admob_flutter.dart';
+// import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,7 +35,7 @@ class LiveTvDetailsScreen extends StatefulWidget {
 class _LiveTvDetailsScreenState extends State<LiveTvDetailsScreen> {
   LiveTvDetailsModel? liveTvDetailsModel;
   String? currentliveTvID;
-  late AdmobInterstitial admobInterstitial;
+  // late AdmobInterstitial admobInterstitial;
   AdsConfig? adsConfig;
   static late bool isDark;
   var appModeBox = Hive.box('appModeBox');
@@ -46,33 +46,33 @@ class _LiveTvDetailsScreenState extends State<LiveTvDetailsScreen> {
     isDark = appModeBox.get('isDark') ?? false;
     isUserValidSubscriber = appModeBox.get('isUserValidSubscriber') ?? false;
     adsConfig = GetConfigService().adsConfig();
-    admobInterstitial = AdmobInterstitial(
-        adUnitId: adsConfig!.admobInterstitialAdsId,
-        listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
-          if (event == AdmobAdEvent.closed) admobInterstitial.load();
-          handleAdMobEvent(event, args, 'Interstitial');
-        });
-    admobInterstitial.load();
+    // admobInterstitial = AdmobInterstitial(
+    //     adUnitId: adsConfig!.admobInterstitialAdsId,
+    //     listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
+    //       if (event == AdmobAdEvent.closed) admobInterstitial.load();
+    //       handleAdMobEvent(event, args, 'Interstitial');
+    //     });
+    // admobInterstitial.load();
     super.initState();
   }
 
   //AdmobAdEvent will be handled here
-  void handleAdMobEvent(
-      AdmobAdEvent event, Map<String, dynamic>? args, String adType) {
-    switch (event) {
-      case AdmobAdEvent.closed:
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    LiveTvDetailsScreen(liveTvId: currentliveTvID)));
-        break;
-      case AdmobAdEvent.failedToLoad:
-        print('Admob $adType failed to load. :(');
-        break;
-      default:
-    }
-  }
+  // void handleAdMobEvent(
+  //     AdmobAdEvent event, Map<String, dynamic>? args, String adType) {
+  //   switch (event) {
+  //     case AdmobAdEvent.closed:
+  //       Navigator.pushReplacement(
+  //           context,
+  //           MaterialPageRoute(
+  //               builder: (context) =>
+  //                   LiveTvDetailsScreen(liveTvId: currentliveTvID)));
+  //       break;
+  //     case AdmobAdEvent.failedToLoad:
+  //       print('Admob $adType failed to load. :(');
+  //       break;
+  //     default:
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -180,7 +180,6 @@ class _LiveTvDetailsScreenState extends State<LiveTvDetailsScreen> {
                                               height: 10.0,
                                             ),
                                             Row(
-                                             
                                               children: [
                                                 Container(
                                                   height: 10.0,
@@ -310,10 +309,10 @@ class _LiveTvDetailsScreenState extends State<LiveTvDetailsScreen> {
                                                                   .elementAt(
                                                                       index)
                                                                   .isPaid)));
-                                          if (await (admobInterstitial.isLoaded
-                                              as Future<bool>)) {
-                                            admobInterstitial.show();
-                                          }
+                                          // if (await (admobInterstitial.isLoaded
+                                          //     as Future<bool>)) {
+                                          //   admobInterstitial.show();
+                                          // }
                                         },
                                         child: LiveTvChannelsCard(
                                           allTvChannel: liveTvDetailsModel!

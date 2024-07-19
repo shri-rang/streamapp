@@ -110,36 +110,36 @@ class _ContinuePageState extends State<ContinuePage> {
                           //   child: radiusContainerWithIcon("Continue with Whatsapp",
                           //       "assets/whatapp.png", context),
                           // ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          radiusContainerWithIcon(
-                              "Continue with Google",
-                              "assets/google_logo.png",
-                              context,
-                              _signInWithGoogle),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          if (isLoading) spinkit,
-                          SizedBox(
-                            height: 20,
-                          ),
-                          // GestureDetector(
-                          //   onTap: () {
-                          //     Navigator.of(context).push(MaterialPageRoute(
-                          //       builder: (context) {
-                          //         return LandingScreen();
-                          //       },
-                          //     ));
-                          //   },
-                          //   child: radiusContainerWithIcon("Continue with Whatsapp",
-                          //       "assets/apple_logo.png", context),
+                          // SizedBox(
+                          //   height: 20,
                           // ),
-                          SizedBox(
-                            height: 40,
-                          ),
-                          or(context),
+                          // radiusContainerWithIcon(
+                          //     "Continue with Google",
+                          //     "assets/google_logo.png",
+                          //     context,
+                          //     _signInWithGoogle),
+                          // SizedBox(
+                          //   height: 10,
+                          // ),
+                          // if (isLoading) spinkit,
+                          // SizedBox(
+                          //   height: 20,
+                          // ),
+                          // // GestureDetector(
+                          // //   onTap: () {
+                          // //     Navigator.of(context).push(MaterialPageRoute(
+                          // //       builder: (context) {
+                          // //         return LandingScreen();
+                          // //       },
+                          // //     ));
+                          // //   },
+                          // //   child: radiusContainerWithIcon("Continue with Whatsapp",
+                          // //       "assets/apple_logo.png", context),
+                          // // ),
+                          // SizedBox(
+                          //   height: 40,
+                          // ),
+                          // or(context),
                           SizedBox(
                             height: 40,
                           ),

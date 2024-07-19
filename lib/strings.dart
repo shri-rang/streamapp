@@ -121,7 +121,7 @@ class AppContent {
   static final String others = "OTHERS";
   static final String contactUs = "Contact Us";
   static final String infoAddress = "Info@spagreen.net";
-  static final String copyright = "Copyright";
+  static final String copyright = "Copyright JalsaTV@2024";
   static final String copyrightText = "Copyright @ Spagreen";
   static final String allRightReserved = "All right reserved";
   static final String version = "Version";

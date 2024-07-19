@@ -26,6 +26,7 @@ import 'server/repository.dart';
 import 'utils/route.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 // import 'package:get/get.dart';
+import 'package:oxoo/screen/auth/signIn_screen.dart';
 
 class MyApp extends StatefulWidget {
   static final String route = "/MyApp";
@@ -37,9 +38,10 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   var appModeBox = Hive.box('appModeBox');
   var onboard = Hive.box('onboard');
-
+  var login = Hive.box('login');
   static bool? isDark = true;
   static bool? isFirstTime = true;
+  static bool? isLogin = true;
   VideoPlayerController? _controller;
   late Future<void> _initializeVideoPlayerFuture;
   @override
@@ -53,6 +55,11 @@ class _MyAppState extends State<MyApp> {
     isFirstTime = onboard.get('isFirstTime');
     if (isFirstTime == null) {
       onboard.put('isFirstTime', true);
+    }
+    isLogin = login.get('isLogin');
+    print("lgoung$isLogin");
+    if (isLogin == null) {
+      login.put('isLogin', false);
     }
     _controller = VideoPlayerController.asset(
       "assets/jalsasplash.mp4",
@@ -109,6 +116,7 @@ class _MyAppState extends State<MyApp> {
                 ),
 
                 home: FlutterSplashScreen.fadeIn(
+                  
                   childWidget: AspectRatio(
                     aspectRatio: 0.48,
 
@@ -158,27 +166,35 @@ class RenderFirstScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-      valueListenable: Hive.box('onboard').listenable(),
+      valueListenable: Hive.box('login').listenable(),
       builder: (context, dynamic box, widget) {
-        isMandatoryLogin = box.get('isFirstTime');
+        isMandatoryLogin = box.get('isLogin');
         printLog("isMandatoryLogin " + "$isMandatoryLogin");
         return renderFirstScreen(isMandatoryLogin!);
       },
     );
   }
 
-  Widget renderFirstScreen(bool isMandatoryLogin) {
+  Widget renderFirstScreen(
+    bool isMandatoryLogin,
+  ) {
     // print(isMandatoryLogin);
-    bool isLogin = false;
+    // bool isLogin = false;
     if (isMandatoryLogin) {
-      return SwipePage();
+      return LandingScreen();
     } else {
-      return ValueListenableBuilder(
-          valueListenable: Hive.box('login').listenable(),
-          builder: (context, dynamic box, widget) {
-            isLogin = box.get('isLogin');
-            return isLogin ? LandingScreen() : ContinuePage();
-          });
+      return
+          // ValueListenableBuilder(
+          //     valueListenable: Hive.box('login').listenable(),
+          //     builder: (context, dynamic box, widget) {
+          //       isLogin = box.get('isLogin');
+          //       if (isLogin == null) {
+          //         box.put('isLogin', false);
+          //       }
+          //       // print("lgoing $isLogin");
+          //       return isLogin ? LandingScreen() :
+          LoginPage();
+      //     });
     }
   }
 }
