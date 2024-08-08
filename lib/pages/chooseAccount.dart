@@ -29,7 +29,7 @@ class _ChooseAccountState extends State<ChooseAccount> {
             Text("Who's Watching?",
                 style: Theme.of(context)
                     .textTheme
-                    .headline4!
+                    .titleLarge!
                     .copyWith(color: Colors.white)),
             SizedBox(
               height: 20,
@@ -37,7 +37,7 @@ class _ChooseAccountState extends State<ChooseAccount> {
             Text("Choose an account",
                 style: Theme.of(context)
                     .textTheme
-                    .headline6!
+                    .titleLarge!
                     .copyWith(color: Colors.white)),
             SizedBox(
               height: 20,
@@ -53,7 +53,6 @@ class _ChooseAccountState extends State<ChooseAccount> {
               itemCount: whosWatching.length,
               itemBuilder: (context, index) {
                 return InkWell(
-                  
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) {

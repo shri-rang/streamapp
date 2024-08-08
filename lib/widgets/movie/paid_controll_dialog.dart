@@ -282,7 +282,7 @@ class PaidControllDialog {
                                           textAlign: TextAlign.center,
                                           style: Theme.of(context)
                                               .textTheme
-                                              .headline3!
+                                              .displaySmall!
                                               .copyWith(
                                                   color: Colors.white,
                                                   fontSize: 18),

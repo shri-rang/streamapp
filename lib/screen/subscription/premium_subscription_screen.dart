@@ -29,10 +29,17 @@ class PremiumSubscriptionScreen extends StatefulWidget {
   final String? liveTvID;
   final String? isPaid;
 
-  const PremiumSubscriptionScreen({Key? key, this.fromRadioScreen, this.fromLiveTvScreen, this.radioId, this.liveTvID, this.isPaid})
+  const PremiumSubscriptionScreen(
+      {Key? key,
+      this.fromRadioScreen,
+      this.fromLiveTvScreen,
+      this.radioId,
+      this.liveTvID,
+      this.isPaid})
       : super(key: key);
   @override
-  _PremiumSubscriptionScreenState createState() => _PremiumSubscriptionScreenState();
+  _PremiumSubscriptionScreenState createState() =>
+      _PremiumSubscriptionScreenState();
 }
 
 class _PremiumSubscriptionScreenState extends State<PremiumSubscriptionScreen> {
@@ -83,7 +90,8 @@ class _PremiumSubscriptionScreenState extends State<PremiumSubscriptionScreen> {
       return;
     }
 
-    ProductDetailsResponse productDetailResponse = await _connection.queryProductDetails(_kProductIds.toSet());
+    ProductDetailsResponse productDetailResponse =
+        await _connection.queryProductDetails(_kProductIds.toSet());
     if (productDetailResponse.error != null) {
       setState(() {
         _isAvailable = isAvailable;
@@ -106,7 +114,6 @@ class _PremiumSubscriptionScreenState extends State<PremiumSubscriptionScreen> {
       return;
     }
 
-    
     final Stream<List<PurchaseDetails>> purchaseUpdated =
         _connection.purchaseStream;
     purchaseUpdated.listen((List<PurchaseDetails> purchaseDetailsList) async {
@@ -115,7 +122,7 @@ class _PremiumSubscriptionScreenState extends State<PremiumSubscriptionScreen> {
           if (await _verifyPurchase(purchase)) {
             print("_verifyPurchase_ok");
             appModeBox.put("isUserValidSubscriber", true);
-             setState(() {
+            setState(() {
               _isAvailable = isAvailable;
               _products = productDetailResponse.productDetails;
               _purchases = purchaseDetailsList;
@@ -126,7 +133,6 @@ class _PremiumSubscriptionScreenState extends State<PremiumSubscriptionScreen> {
         }
       }
     }, onDone: () {}, onError: (error) {});
-   
   }
 
   void _handlePaymentSuccess() async {
@@ -184,13 +190,11 @@ class _PremiumSubscriptionScreenState extends State<PremiumSubscriptionScreen> {
   }
 
   void showPendingUI() {
-    setState(() {
-    });
+    setState(() {});
   }
 
   void handleError(IAPError? error) {
-    setState(() {
-    });
+    setState(() {});
   }
 
   void _handleInvalidPurchase(PurchaseDetails purchaseDetails) {
@@ -217,7 +221,6 @@ class _PremiumSubscriptionScreenState extends State<PremiumSubscriptionScreen> {
         body: Padding(
           padding: const EdgeInsets.all(10.0),
           child: SingleChildScrollView(
-
             child: Column(
               children: [
                 SizedBox(
@@ -312,7 +315,7 @@ class _PremiumSubscriptionScreenState extends State<PremiumSubscriptionScreen> {
                     color: Colors.grey.shade100,
                   ),
                   child: Column(
-                   // shrinkWrap: true,
+                    // shrinkWrap: true,
                     children: [
                       _buildProductList(),
                       SizedBox(
@@ -343,24 +346,29 @@ class _PremiumSubscriptionScreenState extends State<PremiumSubscriptionScreen> {
 
   Card _buildProductList() {
     if (_loading) {
-      return Card(child: (ListTile(leading: CircularProgressIndicator(), title: Text(AppContent.fetchingProducts))));
+      return Card(
+          child: (ListTile(
+              leading: CircularProgressIndicator(),
+              title: Text(AppContent.fetchingProducts))));
     }
     if (!_isAvailable) {
       return Card(
           //child: Text('No Subscription plan available', style: TextStyle(color: ThemeData.light().errorColor)),
-      );
+          );
     }
     List<ListTile> productList = <ListTile>[];
     if (_notFoundIds.isNotEmpty) {
       productList.add(ListTile(
-          title: Text('[${_notFoundIds.join(", ")}] not found', style: TextStyle(color: ThemeData.light().errorColor)),
+          title: Text('[${_notFoundIds.join(", ")}] not found',
+              style: TextStyle(color: ThemeData.light().indicatorColor)),
           subtitle: Text(AppContent.appNeedsConfiguration)));
     }
 
     // This loading previous purchases code is just a demo. Please do not use this as it is.
     // In your app you should always verify the purchase data using the `verificationData` inside the [PurchaseDetails] object before trusting it.
     // We recommend that you use your own server to verify the purchase data.
-    Map<String, PurchaseDetails> purchases = Map.fromEntries(_purchases.map((PurchaseDetails purchase) {
+    Map<String, PurchaseDetails> purchases =
+        Map.fromEntries(_purchases.map((PurchaseDetails purchase) {
       if (purchase.pendingCompletePurchase) {
         InAppPurchase.instance.completePurchase(purchase);
       }
@@ -368,7 +376,7 @@ class _PremiumSubscriptionScreenState extends State<PremiumSubscriptionScreen> {
     }));
 
     productList.addAll(_products.map(
-          (ProductDetails productDetails) {
+      (ProductDetails productDetails) {
         PurchaseDetails? previousPurchase = purchases[productDetails.id];
         return ListTile(
             title: Text(
@@ -380,22 +388,25 @@ class _PremiumSubscriptionScreenState extends State<PremiumSubscriptionScreen> {
             trailing: previousPurchase != null
                 ? Icon(Icons.check)
                 : TextButton(
-              child: Text(productDetails.price),
-              style: TextButton.styleFrom(
-                backgroundColor: CustomTheme.primaryColor,
-                primary: Colors.white,
-              ),
-              onPressed: () {
-                print("trying_to_purchase !");
-                currentProductPrice = productDetails.price;
-                currentPlanID = productDetails.id;
-                PurchaseParam purchaseParam = PurchaseParam(productDetails: productDetails, applicationUserName: null);
-                _connection.buyNonConsumable(purchaseParam: purchaseParam);
-              },
-            ));
+                    child: Text(productDetails.price),
+                    style: TextButton.styleFrom(
+                      backgroundColor: CustomTheme.primaryColor,
+                      // primary: Colors.white,
+                    ),
+                    onPressed: () {
+                      print("trying_to_purchase !");
+                      currentProductPrice = productDetails.price;
+                      currentPlanID = productDetails.id;
+                      PurchaseParam purchaseParam = PurchaseParam(
+                          productDetails: productDetails,
+                          applicationUserName: null);
+                      _connection.buyNonConsumable(
+                          purchaseParam: purchaseParam);
+                    },
+                  ));
       },
     ));
 
-    return Card(child: Column( children: <Widget>[] + productList));
+    return Card(child: Column(children: <Widget>[] + productList));
   }
 }

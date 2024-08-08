@@ -61,7 +61,7 @@ class _ChooseInterestState extends State<ChooseInterest> {
                 "Choose your interest here and get the best movie recommandations. Don't worry you can always change it later.",
                 style: Theme.of(context)
                     .textTheme
-                    .headline6!
+                    .titleLarge!
                     .copyWith(color: Colors.white),
               ),
 
@@ -173,7 +173,7 @@ class _ChooseInterestState extends State<ChooseInterest> {
               onPressed: () {},
               child: Text(
                 "SKIP",
-                style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
                     fontSize: 20, fontWeight: FontWeight.bold, color: orange),
               ),
               style: TextButton.styleFrom(),
