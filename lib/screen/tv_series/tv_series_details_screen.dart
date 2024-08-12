@@ -151,7 +151,7 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: CustomTheme.primaryColor,
+                        backgroundColor: CustomTheme.primaryColor,
                       ),
                       onPressed: () {
                         Navigator.of(context).pop();
@@ -468,7 +468,7 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                   alignment: Alignment.bottomRight,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: isDark!
+                      backgroundColor: isDark!
                           ? CustomTheme.grey_transparent2
                           : Colors.grey.shade300,
                     ),
