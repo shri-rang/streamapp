@@ -116,22 +116,22 @@ class _MyAppState extends State<MyApp> {
                 ),
 
                 home: FlutterSplashScreen.fadeIn(
-                  
-                  childWidget: AspectRatio(
-                    aspectRatio: 0.48,
+                  childWidget:
+                      //  AspectRatio(
+                      //   aspectRatio: 0.48,
 
-                    // Use the VideoPlayer widget to display the video.
-                    child: VideoPlayer(_controller!),
+                      //   // Use the VideoPlayer widget to display the video.
+                      //   child: VideoPlayer(_controller!),
+                      // ),
+                      Image.asset(
+                    "assets/yellow.jpeg",
+                    width: 400,
+                    height: 400,
+                    fit: BoxFit.fitHeight,
                   ),
-                  // Image.asset(
-                  //   "assets/jalsasplash.mp4",
-                  //   width: 400,
-                  //   height: 400,
-                  //   fit: BoxFit.fitHeight,
-                  // ),
-                  backgroundColor: Colors.black.withOpacity(0.9),
+                  backgroundColor: Color(0xff3F3735),
                   nextScreen: child!,
-                  duration: Duration(seconds: 6),
+                  //    duration: Duration(seconds: 6),
                 ),
               );
             },

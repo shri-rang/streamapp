@@ -223,11 +223,14 @@ class _LandingScreenState extends State<LandingScreen>
                     ),
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                            fit: BoxFit.fill,
-                            image: AssetImage('assets/3d.jpg')),
-                        color: isDark
-                            ? Colors.grey.shade900
-                            : CustomTheme.primaryColorRed),
+                            // fit: BoxFit.fill,
+                            image: AssetImage('assets/yl.png')),
+                        color:
+                            //  isDark
+                            //     ?
+                            Colors.grey.shade900
+                        //     : CustomTheme.primaryColorRed
+                        ),
                   ),
                 ),
                 Container(
@@ -245,12 +248,24 @@ class _LandingScreenState extends State<LandingScreen>
           backgroundColor: CustomTheme.primaryColorDark,
           automaticallyImplyLeading: false,
           toolbarHeight: 0.12.sh,
-          title: Center(
-            child: Image.asset(
-              "assets/splash.jpg",
-              width: 300,
-              height: 300,
-            ),
+          actions: [
+            IconButton(
+                color: Colors.white60,
+                iconSize: 30,
+                onPressed: () {},
+                icon: Icon(Icons.search)),
+            IconButton(
+                color: Colors.white60,
+                iconSize: 30,
+                onPressed: () {},
+                icon: Icon(Icons.person))
+          ],
+          title: Image.asset(
+            "assets/yl.png",
+            //  "assets/splash.jpg",
+            // width: 100,
+            // height: 70,
+            // fit: BoxFit.fill,
           ),
         ),
         body: PageView(
