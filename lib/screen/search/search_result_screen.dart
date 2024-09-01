@@ -6,6 +6,7 @@ import '../../models/search_result_model.dart';
 import '../../server/repository.dart';
 import '../../strings.dart';
 import '../../style/theme.dart';
+import '../../utils/search_text_field.dart';
 import '../../widgets/home_screen/live_tv_item.dart';
 import '../../widgets/home_screen/movie_item.dart';
 import '../../widgets/home_screen/tv_series_item.dart';
@@ -16,8 +17,7 @@ class SearchResultScreen extends StatelessWidget {
   SearchResultModel? _resultModel;
   final String? queryText;
   final bool? isDark;
-  SearchResultScreen({ this.queryText, this.isDark});
-
+  SearchResultScreen({this.queryText, this.isDark});
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +27,16 @@ class SearchResultScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(
-            color: isDark!?CustomTheme.primaryColor : CustomTheme.whiteColor),
+            color: isDark! ? CustomTheme.primaryColor : CustomTheme.whiteColor),
         backgroundColor:
-        isDark! ? CustomTheme.colorAccentDark : CustomTheme.primaryColor,
-        title: Text(AppContent.searchResult,style: TextStyle(color: isDark!?CustomTheme.primaryColor : CustomTheme.whiteColor),),
+            isDark! ? CustomTheme.colorAccentDark : CustomTheme.primaryColor,
+        title: SearchTextField().getCustomEditTextField(
+          style: CustomTheme.bodyText3White,
+          // focusNode: myFocusNode,
+          hintValue: " ",
+          //onFieldSubmitted: _handleSubmitted
+        ),
+        // Text(AppContent.searchResult,style: TextStyle(color: isDark!?CustomTheme.primaryColor : CustomTheme.whiteColor),),
         leading: InkWell(
             onTap: () {
               Navigator.pop(context);
@@ -41,7 +47,7 @@ class SearchResultScreen extends StatelessWidget {
         color: isDark! ? CustomTheme.primaryColorDark : Colors.transparent,
         child: BlocProvider<SearchBloc>(
           create: (context) =>
-          SearchBloc(Repository())..add(GetSearchEvent(param: queryText)),
+              SearchBloc(Repository())..add(GetSearchEvent(param: queryText)),
           child: BlocBuilder<SearchBloc, SearchState>(
             builder: (context, state) {
               if (state is SearchErrorState) {
@@ -67,9 +73,9 @@ class SearchResultScreen extends StatelessWidget {
     // ignore: unnecessary_null_comparison
     if (_resultModel!.tvChannels!.length == null &&
         // ignore: unnecessary_null_comparison
-         _resultModel!.tvSeries!.length == null &&
+        _resultModel!.tvSeries!.length == null &&
         // ignore: unnecessary_null_comparison
-         _resultModel!.movie!.length == null)
+        _resultModel!.movie!.length == null)
       return Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -77,7 +83,7 @@ class SearchResultScreen extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Padding(
               padding:
-              const EdgeInsets.symmetric(horizontal: 10.0, vertical: 12.0),
+                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 12.0),
               child: Text("${AppContent.showResultFor} $queryText",
                   style: CustomTheme.bodyText1),
             ),
@@ -93,7 +99,7 @@ class SearchResultScreen extends StatelessWidget {
         SliverToBoxAdapter(
           child: Padding(
             padding:
-            const EdgeInsets.symmetric(horizontal: 10.0, vertical: 12.0),
+                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 12.0),
             child: Text("${AppContent.showResultFor}  $queryText",
                 style: isDark!
                     ? CustomTheme.bodyText1White

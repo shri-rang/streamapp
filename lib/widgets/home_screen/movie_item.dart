@@ -1,3 +1,4 @@
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -86,125 +87,142 @@ class HomeScreenMovieList extends StatelessWidget {
             ),
             SizedBox(height: 15),
             Expanded(
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount:
-                    //  list!.length,
-                    latestMovies!.length <= 6 ? latestMovies!.length : 6,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) => Container(
-                  width: cardWidth,
-                  margin: EdgeInsets.only(right: 2),
-                  child: InkWell(
-                    onTap: () {
-                      print(latestMovies![index].videosId);
-
-                      if (latestMovies![index].isTvseries == "1") {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => TvSerisDetailsScreen(
-                              seriesID: latestMovies![index].videosId,
-                              isPaid: latestMovies![index].isPaid,
-                            ),
-                          ),
+              child: title == "New Release"
+                  ? Swiper(
+                      itemBuilder: (BuildContext context, int index) {
+                        return Image.network(
+                          latestMovies![index].thumbnailUrl!,
+                          fit: BoxFit.fill,
                         );
-                      } else {
-                        Navigator.pushNamed(context, MovieDetailScreen.route,
-                            arguments: {
-                              "movieID": latestMovies![index].videosId
-                            });
-                      }
-                    },
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(5.0),
-                        child: Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: <Widget>[
-                              Container(
-                                height: 190,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(16),
-                                  border: Border.all(
-                                      width: 1, color: CustomTheme.amber_800),
-                                ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(16),
-                                  // child: Image.network(
-                                  //   latestMovies![index].thumbnailUrl!,
-                                  //   fit: BoxFit.fitWidth,
-                                  //   height: 155,
-                                  // ),
-                                  child: Image.network(
-                                      // placeholder:
-                                      //     "assets/images/placeholder.png",
-                                      // placeholderScale: 25,
-                                      // height: 180,
-                                      fit: BoxFit.fitHeight,
-                                      // imageErrorBuilder:
-                                      //     (context, error, stackTrace) =>
-                                      //         Image.asset(
-                                      //           "assets/images/placeholder.png",
-                                      //           fit: BoxFit.cover,
-                                      //         ),
-                                      // image:
-                                      latestMovies![index].thumbnailUrl!),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Center(
-                                child: Container(
-                                  margin: EdgeInsets.only(left: 2),
-                                  padding: EdgeInsets.only(
-                                      right: 2, top: 2, bottom: 2),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        latestMovies![index].title!,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: isDark!
-                                            ? CustomTheme.smallTextWhite
-                                                .copyWith(
-                                                    fontSize: 14,
-                                                    color:
-                                                        CustomTheme.amber_800)
-                                            : CustomTheme.smallText
-                                                .copyWith(fontSize: 13),
-                                      ),
-                                      // Row(
-                                      //   children: [
-                                      //     Text(latestMovies![index].videoQuality!,
-                                      //         textAlign: TextAlign.start,
-                                      //         style: isDark!
-                                      //             ? CustomTheme.smallTextWhite
-                                      //             : CustomTheme.smallText),
-                                      //     Expanded(
-                                      //       child: Text(
-                                      //           latestMovies![index].release!,
-                                      //           textAlign: TextAlign.end,
-                                      //           style: isDark!
-                                      //               ? CustomTheme.smallTextWhite
-                                      //               : CustomTheme.smallText),
-                                      //     ),
-                                      //   ],
-                                      // )
-                                    ],
+                      },
+                      itemCount: latestMovies!.length,
+                      itemWidth: 300.0,
+                      // viewportFraction: 0.9,
+                      containerWidth: 100,
+                      layout: SwiperLayout.STACK,
+                    )
+                  : ListView.builder(
+                      shrinkWrap: true,
+                      itemCount:
+                          //  list!.length,
+                          latestMovies!.length <= 6 ? latestMovies!.length : 6,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) => Container(
+                        width: cardWidth,
+                        margin: EdgeInsets.only(right: 2),
+                        child: InkWell(
+                          onTap: () {
+                            print(latestMovies![index].videosId);
+
+                            if (latestMovies![index].isTvseries == "1") {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => TvSerisDetailsScreen(
+                                    seriesID: latestMovies![index].videosId,
+                                    isPaid: latestMovies![index].isPaid,
                                   ),
                                 ),
-                              )
-                            ],
-                          ),
-                        )),
-                  ),
-                ),
-              ),
+                              );
+                            } else {
+                              Navigator.pushNamed(
+                                  context, MovieDetailScreen.route, arguments: {
+                                "movieID": latestMovies![index].videosId
+                              });
+                            }
+                          },
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(5.0),
+                              child: Padding(
+                                padding: const EdgeInsets.all(3.0),
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: <Widget>[
+                                    Container(
+                                      height: 190,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(16),
+                                        border: Border.all(
+                                            width: 1,
+                                            color: CustomTheme.amber_800),
+                                      ),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(16),
+                                        // child: Image.network(
+                                        //   latestMovies![index].thumbnailUrl!,
+                                        //   fit: BoxFit.fitWidth,
+                                        //   height: 155,
+                                        // ),
+                                        child: Image.network(
+                                            // placeholder:
+                                            //     "assets/images/placeholder.png",
+                                            // placeholderScale: 25,
+                                            // height: 180,
+                                            fit: BoxFit.fitHeight,
+                                            // imageErrorBuilder:
+                                            //     (context, error, stackTrace) =>
+                                            //         Image.asset(
+                                            //           "assets/images/placeholder.png",
+                                            //           fit: BoxFit.cover,
+                                            //         ),
+                                            // image:
+                                            latestMovies![index].thumbnailUrl!),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Center(
+                                      child: Container(
+                                        margin: EdgeInsets.only(left: 2),
+                                        padding: EdgeInsets.only(
+                                            right: 2, top: 2, bottom: 2),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              latestMovies![index].title!,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: isDark!
+                                                  ? CustomTheme.smallTextWhite
+                                                      .copyWith(
+                                                          fontSize: 14,
+                                                          color: CustomTheme
+                                                              .amber_800)
+                                                  : CustomTheme.smallText
+                                                      .copyWith(fontSize: 13),
+                                            ),
+                                            // Row(
+                                            //   children: [
+                                            //     Text(latestMovies![index].videoQuality!,
+                                            //         textAlign: TextAlign.start,
+                                            //         style: isDark!
+                                            //             ? CustomTheme.smallTextWhite
+                                            //             : CustomTheme.smallText),
+                                            //     Expanded(
+                                            //       child: Text(
+                                            //           latestMovies![index].release!,
+                                            //           textAlign: TextAlign.end,
+                                            //           style: isDark!
+                                            //               ? CustomTheme.smallTextWhite
+                                            //               : CustomTheme.smallText),
+                                            //     ),
+                                            //   ],
+                                            // )
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )),
+                        ),
+                      ),
+                    ),
             ),
           ],
         ));

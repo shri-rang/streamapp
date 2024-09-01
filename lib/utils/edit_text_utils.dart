@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../style/theme.dart';
 import '../colors.dart';
@@ -17,7 +18,9 @@ class EditTextUtils {
       int maxLines = 1,
       String? lableText,
       Color underLineInputBorderColor = CustomTheme.grey_transparent2,
-      TextInputType? keyboardType}) {
+      TextInputType? keyboardType,
+      List<TextInputFormatter>? inputFormatters,
+      int? maxLength}) {
     return TextFormField(
       style: TextStyle(
         color: Colors.white,
@@ -27,7 +30,8 @@ class EditTextUtils {
       maxLines: maxLines,
       keyboardType: keyboardType,
       controller: controller,
-
+      maxLength: maxLength,
+      inputFormatters: inputFormatters,
       decoration: InputDecoration(
         suffixIcon: suffixWidget,
         prefixIcon: prefixWidget,

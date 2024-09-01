@@ -71,7 +71,11 @@ class _LandingScreenState extends State<LandingScreen>
   @override
   void initState() {
     appModeBox.delete("isUserValidSubscriber");
-    _controller = new TabController(vsync: this, length: 5, initialIndex: 1);
+    _controller = new TabController(
+        animationDuration: Duration(seconds: 4),
+        vsync: this,
+        length: 5,
+        initialIndex: 1);
     super.initState();
     myFocusNode = FocusNode();
     onboard.put('isFirstTime', false);
@@ -252,18 +256,33 @@ class _LandingScreenState extends State<LandingScreen>
             IconButton(
                 color: Colors.white60,
                 iconSize: 30,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) {
+                      return SearchResultScreen(
+                        isDark: false,
+                      );
+                    },
+                  ));
+
+                  //
+                },
                 icon: Icon(Icons.search)),
             IconButton(
                 color: Colors.white60,
                 iconSize: 30,
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    activeSearch = true;
+                    myFocusNode!.requestFocus();
+                  });
+                },
                 icon: Icon(Icons.person))
           ],
           title: Image.asset(
             "assets/yl.png",
             //  "assets/splash.jpg",
-            // width: 100,
+            width: 170,
             // height: 70,
             // fit: BoxFit.fill,
           ),
@@ -356,7 +375,7 @@ class _LandingScreenState extends State<LandingScreen>
   }
 
   //renderAppBar
-  Widget _renderAppBar() {
+  _renderAppBar() {
     return AppBar(
       backgroundColor:
           isDark ? CustomTheme.colorAccentDark : CustomTheme.primaryColor,

@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
@@ -30,7 +33,6 @@ class _HomeScreenState extends State<HomeScreen> {
   var appModeBox = Hive.box('appModeBox');
   bool? isDark;
   late Future<HomeContent> _homeContent;
-  
 
   @override
   void initState() {
@@ -100,8 +102,10 @@ class _HomeScreenState extends State<HomeScreen> {
       AuthUser? authUser,
       AppConfig? appConfig,
       required HomeContent homeContent}) {
+    var screenWidth = MediaQuery.of(context!).size.width;
+    var screenHeight = MediaQuery.of(context).size.height;
+
     return CustomScrollView(
-      
       slivers: <Widget>[
         SliverToBoxAdapter(
           child: Column(
@@ -167,7 +171,8 @@ class _HomeScreenState extends State<HomeScreen> {
         //       ),
         //     ),
         //   ),
-
+    
+        // )
         //Latest movies
         SliverToBoxAdapter(
           child: Container(
@@ -175,11 +180,45 @@ class _HomeScreenState extends State<HomeScreen> {
             child: HomeScreenMovieList(
               latestMovies: homeContent.latestMovies,
               context: context,
-              title: AppContent.latestMovies,
+              title: "Trending On Yellow",
               isDark: isDark,
             ),
           ),
         ),
+        SliverToBoxAdapter(
+          child: Container(
+            margin: EdgeInsets.only(top: 2, bottom: 15),
+            child: HomeScreenMovieList(
+              latestMovies: homeContent.latestMovies,
+              context: context,
+              title: "New Release",
+              isDark: isDark,
+            ),
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: Container(
+            margin: EdgeInsets.only(top: 2, bottom: 15),
+            child: HomeScreenMovieList(
+              latestMovies: homeContent.latestMovies,
+              context: context,
+              title: "Yellow Originals",
+              isDark: isDark,
+            ),
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: Container(
+            margin: EdgeInsets.only(top: 2, bottom: 15),
+            child: HomeScreenMovieList(
+              latestMovies: homeContent.latestMovies,
+              context: context,
+              title: "Must Watch",
+              isDark: isDark,
+            ),
+          ),
+        ),
+
         //latest tv series
         // if (homeContent.latestTvseries!.isNotEmpty)
         //   SliverToBoxAdapter(
@@ -201,4 +240,17 @@ class _HomeScreenState extends State<HomeScreen> {
       ],
     );
   }
+
+  List<Widget> widgets = List.generate(
+    10,
+    (index) => ClipRRect(
+      borderRadius: const BorderRadius.all(
+        Radius.circular(5.0),
+      ),
+      child: Image.asset(
+        'assets/pillu.png', //Images stored in assets folder
+        fit: BoxFit.fill,
+      ),
+    ),
+  );
 }

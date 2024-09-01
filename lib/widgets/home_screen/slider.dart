@@ -36,7 +36,7 @@ class ImageSlider extends StatelessWidget {
         autoPlay: true,
 
         // enlargeStrategy: CenterPageEnlargeStrategy.height,
-        autoPlayInterval: Duration(seconds: 2),
+        autoPlayInterval: Duration(seconds: 4),
         scrollDirection: Axis.horizontal,
         viewportFraction: 1,
         height: 0.43.sh,

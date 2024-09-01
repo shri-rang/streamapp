@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
@@ -20,6 +21,7 @@ import '../../utils/loadingIndicator.dart';
 import '../../utils/validators.dart';
 import '../../strings.dart';
 import '../pass_reset_screen.dart';
+import 'otp_screen.dart';
 
 class LoginPage extends StatefulWidget {
   static final String route = '/LoginScreen';
@@ -123,32 +125,47 @@ class _LoginPageState extends State<LoginPage>
                         // ),
                         ),
                     child: Column(
+                      // crossAxisAlignment: CrossAxisAlignment.start,
+                      // mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
                         Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          // mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
                             SizedBox(
-                              height: 250,
+                              height: 100,
                             ),
                             Center(
+                              child: Image.asset(
+                                "assets/yl.png",
+                                width: 300,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 80,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16),
                               child: Text(
-                                "Login to your",
+                                "Sign to your account",
                                 style: TextStyle(
                                     fontFamily: 'Sans Serif',
                                     color: Colors.white,
-                                    fontSize: 30.sp,
+                                    fontSize: 25.sp,
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
-                            Center(
-                              child: Text(
-                                "account",
-                                style: TextStyle(
-                                    fontFamily: 'Sans Serif',
-                                    color: Colors.white,
-                                    fontSize: 30.sp,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
+                            // Center(
+                            //   child: Text(
+                            //     "account",
+                            //     style: TextStyle(
+                            //         fontFamily: 'Sans Serif',
+                            //         color: Colors.white,
+                            //         fontSize: 30.sp,
+                            //         fontWeight: FontWeight.bold),
+                            //   ),
+                            // ),
                             SizedBox(
                               height: 40,
                             ),
@@ -161,45 +178,72 @@ class _LoginPageState extends State<LoginPage>
                                 key: _formKey,
                                 child: Column(
                                   children: <Widget>[
-                                    EditTextUtils().getCustomEditTextField(
-                                        lableText: "Enter your email here",
-                                        hintValue: AppContent.emailAddress,
-                                        keyboardType:
-                                            TextInputType.emailAddress,
-                                        controller: loginEmailController,
-                                        prefixWidget: Icon(
-                                          Icons.email,
-                                          color: Colors.white.withOpacity(0.5),
-                                        ),
-                                        style: isDark
-                                            ? CustomTheme.authTitleGrey
-                                            : CustomTheme.authTitle,
-                                        underLineInputBorderColor: isDark
-                                            ? CustomTheme.grey_transparent2
-                                            : CustomTheme.primaryColor,
-                                        validator: (value) {
-                                          return validateEmail(value);
-                                        }),
+                                    // EditTextUtils().getCustomEditTextField(
+                                    //     lableText: "Enter your email here",
+                                    //     hintValue: AppContent.emailAddress,
+                                    //     keyboardType:
+                                    //         TextInputType.emailAddress,
+                                    //     controller: loginEmailController,
+                                    //     prefixWidget: Icon(
+                                    //       Icons.email,
+                                    //       color: Colors.white.withOpacity(0.5),
+                                    //     ),
+                                    //     style: isDark
+                                    //         ? CustomTheme.authTitleGrey
+                                    //         : CustomTheme.authTitle,
+                                    //     underLineInputBorderColor: isDark
+                                    //         ? CustomTheme.grey_transparent2
+                                    //         : CustomTheme.primaryColor,
+                                    //     validator: (value) {
+                                    //       return validateEmail(value);
+                                    //     }),
                                     SizedBox(height: 10),
                                     EditTextUtils().getCustomEditTextField(
-                                        lableText: "Enter your password here",
-                                        hintValue: AppContent.password,
+                                        maxLength: 10,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter.digitsOnly
+                                        ],
+                                        lableText: "Enter your moblie no here",
+                                        hintValue: AppContent.emailAddress,
                                         prefixWidget: Icon(
-                                          Icons.lock,
+                                          Icons.phone,
                                           color: Colors.white.withOpacity(0.5),
                                         ),
-                                        keyboardType: TextInputType.text,
-                                        controller: loginPasswordController,
-                                        underLineInputBorderColor: isDark
-                                            ? CustomTheme.grey_transparent2
-                                            : CustomTheme.primaryColor,
+                                        keyboardType: TextInputType.phone,
                                         style: isDark
                                             ? CustomTheme.authTitleGrey
                                             : CustomTheme.authTitle,
-                                        obscureValue: true,
+                                        underLineInputBorderColor: isDark
+                                            ? CustomTheme.grey_transparent2
+                                            : CustomTheme.primaryColor,
+                                        controller: loginEmailController,
                                         validator: (value) {
-                                          return validateMinLength(value);
+                                          return validatePhone(value);
                                         }),
+                                    SizedBox(height: 10),
+                                    // ],
+                                    // ),
+                                    // ),
+                                    // ),),
+                                    // EditTextUtils().getCustomEditTextField(
+                                    //     lableText: "Enter your password here",
+                                    //     hintValue: AppContent.password,
+                                    //     prefixWidget: Icon(
+                                    //       Icons.lock,
+                                    //       color: Colors.white.withOpacity(0.5),
+                                    //     ),
+                                    //     keyboardType: TextInputType.text,
+                                    //     controller: loginPasswordController,
+                                    //     underLineInputBorderColor: isDark
+                                    //         ? CustomTheme.grey_transparent2
+                                    //         : CustomTheme.primaryColor,
+                                    //     style: isDark
+                                    //         ? CustomTheme.authTitleGrey
+                                    //         : CustomTheme.authTitle,
+                                    //     obscureValue: true,
+                                    //     validator: (value) {
+                                    //       return validateMinLength(value);
+                                    //     }),
                                   ],
                                 ),
                               ),
@@ -219,13 +263,18 @@ class _LoginPageState extends State<LoginPage>
                                   //   },
                                   // ));
                                   if (_formKey.currentState!.validate()) {
-                                    isLoading = true;
-                                    bloc.add(LoginCompletingStarted());
-                                    bloc.add(LoginCompleting(
-                                      email: loginEmailController.text,
-                                      password: loginPasswordController.text,
+                                    Navigator.of(context)
+                                        .push(MaterialPageRoute(
+                                      builder: (context) {
+                                        return otpScreen();
+                                      },
                                     ));
-                                 
+                                    // isLoading = true;
+                                    // bloc.add(LoginCompletingStarted());
+                                    // bloc.add(LoginCompleting(
+                                    //   email: loginEmailController.text,
+                                    //   password: loginPasswordController.text,
+                                    // ));
                                   }
                                 },
                                 // screenWidth * .8,
@@ -330,13 +379,15 @@ class _LoginPageState extends State<LoginPage>
                                   Navigator.pushNamed(
                                       context, ResetPassword.route);
                                 },
-                                child: Text(
-                                  AppContent.forgetPassword,
-                                  style: TextStyle(
-                                      fontFamily: 'Sans Serif',
-                                      color: Colors.amber,
-                                      fontSize: 18.sp,
-                                      fontWeight: FontWeight.bold),
+                                child: Center(
+                                  child: Text(
+                                    AppContent.forgetPassword,
+                                    style: TextStyle(
+                                        fontFamily: 'Sans Serif',
+                                        color: Colors.amber,
+                                        fontSize: 18.sp,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ))
                           ],
                         ),
