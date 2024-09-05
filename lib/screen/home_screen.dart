@@ -112,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Container(
                 margin: EdgeInsets.only(top: 5.0, bottom: 5),
-                child: ImageSlider(homeContent.slider),
+                child: ImageSlider(homeContent.slider, ""),
               ),
               SizedBox(
                 height: 0.012.sh,
@@ -171,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
         //       ),
         //     ),
         //   ),
-    
+
         // )
         //Latest movies
         SliverToBoxAdapter(
@@ -191,9 +191,15 @@ class _HomeScreenState extends State<HomeScreen> {
             child: HomeScreenMovieList(
               latestMovies: homeContent.latestMovies,
               context: context,
-              title: "New Release",
+              title: "New Releases",
               isDark: isDark,
             ),
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: Container(
+            margin: EdgeInsets.only(top: 5.0, bottom: 5),
+            child: ImageSlider(homeContent.slider, "Coming Soon"),
           ),
         ),
         SliverToBoxAdapter(

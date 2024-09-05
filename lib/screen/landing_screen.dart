@@ -310,7 +310,7 @@ class _LandingScreenState extends State<LandingScreen>
         // floatingActionButtonLocation: FloatingActionButtonLocation.startDocked,
         bottomNavigationBar: CurvedNavigationBar(
           backgroundColor: Colors.transparent,
-          height: 60,
+          height: 50,
 
           // Color.fromARGB(255, 41, 37, 37).withOpacity(0.9),
           buttonBackgroundColor: CustomTheme.amber_800,
