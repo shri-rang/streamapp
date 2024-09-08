@@ -1,52 +1,26 @@
 {
   "project_info": {
-    "project_number": "642223377409",
-    "project_id": "jalsatv-3d1ee",
-    "storage_bucket": "jalsatv-3d1ee.appspot.com"
+    "project_number": "188970946979",
+    "project_id": "jalsatv-295a4",
+    "storage_bucket": "jalsatv-295a4.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:642223377409:android:48ee80e88c1f67ba3a4400",
+        "mobilesdk_app_id": "1:188970946979:android:5dc0f9e1940f5beb37ca16",
         "android_client_info": {
-          "package_name": "jalsa.tv.com"
+          "package_name": "jalsatv.app.com"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "642223377409-05m03itucv12g2m8qqfqil14esoisq1j.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "jalsa.tv.com",
-            "certificate_hash": "38ab81aefe71c3e2a7610c38612005c03d756cc3"
-          }
-        },
-        {
-          "client_id": "642223377409-s56idp7kgpamh5oa644qh4ggg96lsh94.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "jalsa.tv.com",
-            "certificate_hash": "89678c09177782d17d6002647cfe73aec9889f6c"
-          }
-        },
-        {
-          "client_id": "642223377409-cgfb0cvlidpgml19t5m1fc0c5sak2scp.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyC51HZOjaBwcqu5GBg30uEtYYS6-95v5Lc"
+          "current_key": "AIzaSyB_cC7vKpNhk_X6P5IkRyGzvjSGa9QpV6I"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "642223377409-cgfb0cvlidpgml19t5m1fc0c5sak2scp.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
