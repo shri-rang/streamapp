@@ -90,9 +90,12 @@ class HomeScreenMovieList extends StatelessWidget {
               child: title == "New Releases"
                   ? Swiper(
                       itemBuilder: (BuildContext context, int index) {
-                        return Image.network(
-                          latestMovies![index].thumbnailUrl!,
-                          fit: BoxFit.fill,
+                        return ClipRRect(
+                          borderRadius: BorderRadius.circular(16.0),
+                          child: Image.network(
+                            latestMovies![index].thumbnailUrl!,
+                            fit: BoxFit.fill,
+                          ),
                         );
                       },
                       itemCount: latestMovies!.length,
@@ -103,7 +106,7 @@ class HomeScreenMovieList extends StatelessWidget {
                     )
                   : title == "Trending On Yellow"
                       ? Container(
-                          color: Color(0xffFEC400),
+                          color: CustomTheme.amber_800,
                           child: ListView.builder(
                             shrinkWrap: true,
                             itemCount:
@@ -119,7 +122,7 @@ class HomeScreenMovieList extends StatelessWidget {
                                       horizontal: 6, vertical: 10),
                                   child: Container(
                                     width: cardWidth,
-                                    margin: EdgeInsets.only(right: 4, left: 20),
+                                    margin: EdgeInsets.only(right: 4, left: 3),
                                     child: InkWell(
                                       onTap: () {
                                         print(latestMovies![index].videosId);
@@ -262,11 +265,13 @@ class HomeScreenMovieList extends StatelessWidget {
                                   ),
                                 ),
                                 Positioned(
-                                    bottom: 50,
-                                    left: 0,
+                                    bottom: 21.h,
+                                    right: 82.w,
+                                    // left: 0,
                                     child: Text(" ${index + 1} ",
                                         style: TextStyle(
-                                            fontSize: 50,
+                                            fontFamily: 'Sans Serif',
+                                            fontSize: 60,
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold)))
                               ],

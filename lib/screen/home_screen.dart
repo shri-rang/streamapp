@@ -219,7 +219,40 @@ class _HomeScreenState extends State<HomeScreen> {
             child: HomeScreenMovieList(
               latestMovies: homeContent.latestMovies,
               context: context,
-              title: "Must Watch",
+              title: "Movies and Short Films",
+              isDark: isDark,
+            ),
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: Container(
+            margin: EdgeInsets.only(top: 2, bottom: 15),
+            child: HomeScreenMovieList(
+              latestMovies: homeContent.latestMovies,
+              context: context,
+              title: "Horror and Thriller",
+              isDark: isDark,
+            ),
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: Container(
+            margin: EdgeInsets.only(top: 2, bottom: 15),
+            child: HomeScreenMovieList(
+              latestMovies: homeContent.latestMovies,
+              context: context,
+              title: "Comedy & Romance",
+              isDark: isDark,
+            ),
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: Container(
+            margin: EdgeInsets.only(top: 2, bottom: 15),
+            child: HomeScreenMovieList(
+              latestMovies: homeContent.latestMovies,
+              context: context,
+              title: "Hot Yellow",
               isDark: isDark,
             ),
           ),

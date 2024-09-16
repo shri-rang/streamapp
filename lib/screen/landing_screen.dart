@@ -254,7 +254,7 @@ class _LandingScreenState extends State<LandingScreen>
           toolbarHeight: 0.12.sh,
           actions: [
             IconButton(
-                color: Colors.white60,
+                color: Colors.white,
                 iconSize: 30,
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
@@ -268,16 +268,22 @@ class _LandingScreenState extends State<LandingScreen>
                   //
                 },
                 icon: Icon(Icons.search)),
-            IconButton(
-                color: Colors.white60,
-                iconSize: 30,
-                onPressed: () {
-                  setState(() {
-                    activeSearch = true;
-                    myFocusNode!.requestFocus();
-                  });
-                },
-                icon: Icon(Icons.person))
+            Container(
+              color: CustomTheme.amber_800,
+              child: IconButton(
+                  color: Colors.white,
+                  iconSize: 30,
+                  onPressed: () {
+                    setState(() {
+                      activeSearch = true;
+                      myFocusNode!.requestFocus();
+                    });
+                  },
+                  icon: Icon(Icons.person)),
+            ),
+            SizedBox(
+              width: 16,
+            )
           ],
           title: Image.asset(
             "assets/yl.png",

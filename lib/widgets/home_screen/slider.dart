@@ -42,20 +42,45 @@ class _ImageSliderState extends State<ImageSlider> {
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(widget.title!,
-                  textAlign: TextAlign.start,
-                  style:
-                      //  TextStyle(fontSize: 20, color: Colors.white)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(widget.title!,
+                        textAlign: TextAlign.start,
+                        style:
+                            //  TextStyle(fontSize: 20, color: Colors.white)
 
-                      // isDark!
-                      //     ? CustomTheme.bodyText2White
-                      //     : isSearchWidget
-                      //         ?
-                      CustomTheme.bodyText2
-                          .copyWith(color: CustomTheme.whiteColor)
-                  // :
-                  // CustomTheme.coloredBodyText2,
-                  ),
+                            // isDark!
+                            //     ?
+                            //
+                            CustomTheme.bodyText2White
+                        //     : isSearchWidget
+                        //         ?
+                        //CustomTheme.bodyText2
+
+                        //  :
+                        // CustomTheme.coloredBodyText2,
+                        ),
+                    Spacer(),
+                  ],
+                ),
+              ),
+              // Text(widget.title!,
+              //     textAlign: TextAlign.start,
+              //     style:
+              //         //  TextStyle(fontSize: 20, color: Colors.white)
+
+              //         // isDark!
+              //         //     ? CustomTheme.bodyText2White
+              //         //     : isSearchWidget
+              //         //         ?
+              //         CustomTheme.bodyText2
+              //             .copyWith(color: CustomTheme.whiteColor)
+              //     // :
+              //     // CustomTheme.coloredBodyText2,
+              //     ),
               CarouselSlider(
                 options: CarouselOptions(
                   initialPage: 0,
