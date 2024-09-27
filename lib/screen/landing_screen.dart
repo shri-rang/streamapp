@@ -268,18 +268,25 @@ class _LandingScreenState extends State<LandingScreen>
                   //
                 },
                 icon: Icon(Icons.search)),
-            Container(
-              color: CustomTheme.amber_800,
-              child: IconButton(
-                  color: Colors.white,
-                  iconSize: 30,
-                  onPressed: () {
-                    setState(() {
-                      activeSearch = true;
-                      myFocusNode!.requestFocus();
-                    });
-                  },
-                  icon: Icon(Icons.person)),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  activeSearch = true;
+                  myFocusNode!.requestFocus();
+                });
+              },
+              child: Container(
+                width: 40,
+                height: 40,
+                color: CustomTheme.amber_800,
+                child: Icon(
+                    color: Colors.white,
+                    size: 30,
+                    // onPressed: () {
+
+                    // },
+                    (Icons.person)),
+              ),
             ),
             SizedBox(
               width: 16,

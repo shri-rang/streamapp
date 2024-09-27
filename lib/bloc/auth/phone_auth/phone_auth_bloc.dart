@@ -22,7 +22,9 @@ class PhoneAuthBloc extends Bloc<PhoneAuthEvent, PhoneAuthState> {
   ) async* {
     if (event is SendOtpEvent) {
       yield LoadingState();
-      subscription = sendOtp(event.phoNo!).listen((event) {
+      subscription = sendOtp(
+        
+        event.phoNo!).listen((event) {
         add(event);
       });
     } else if (event is OtpSendEvent) {
@@ -90,6 +92,7 @@ class PhoneAuthBloc extends Bloc<PhoneAuthEvent, PhoneAuthState> {
     };
 
     await _userRepository.sendOtp(
+      
         phoNo, Duration(seconds: 1), phoneVerificationFailed, phoneVerificationCompleted, phoneCodeSent, phoneCodeAutoRetrievalTimeout);
 
     yield* eventStream.stream;

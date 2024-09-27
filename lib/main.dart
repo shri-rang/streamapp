@@ -53,7 +53,7 @@ Future<void> main() async {
     await InAppPurchase.instance.restorePurchases().then((value) => {});
   }
   runApp(
-    // MyApp()
+    //MyApp()
 
     DevicePreview(
       enabled: true,

@@ -134,12 +134,12 @@ class _AuthScreenState extends State<AuthScreen> {
                           SizedBox(
                             height: 20,
                           ),
-                          // if (Config.enablePhoneAuth)
-                          //   phoneAuthWidget(
-                          //     color: CustomTheme.springGreen,
-                          //     title: AppContent.loginWithPhone,
-                          //     imagePath: "ic_button_phone",
-                          //   ),
+                          if (Config.enablePhoneAuth)
+                            phoneAuthWidget(
+                              color: CustomTheme.springGreen,
+                              title: AppContent.loginWithPhone,
+                              imagePath: "ic_button_phone",
+                            ),
                           if (Config.enableFacebookAuth)
                             socialAuthWidget(
                                 color: CustomTheme.royalBlue,

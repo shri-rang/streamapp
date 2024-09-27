@@ -1,4 +1,4 @@
-package jalsa.tv.com
+package jalsatv.app.com
 
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.android.FlutterFragmentActivity

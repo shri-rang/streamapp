@@ -13,7 +13,6 @@ class UserRepository {
       PhoneVerificationCompleted phoneVerificationCompleted,
       PhoneCodeSent phoneCodeSent,
       PhoneCodeAutoRetrievalTimeout autoRetrievalTimeout) async {
-
     _firebaseAuth.verifyPhoneNumber(
         phoneNumber: phoneNumber,
         timeout: timeOut,
@@ -23,8 +22,7 @@ class UserRepository {
         codeAutoRetrievalTimeout: autoRetrievalTimeout);
   }
 
-   verifyAndLogin(
-      String verificationId, String smsCode) async {
+  verifyAndLogin(String verificationId, String smsCode) async {
     AuthCredential authCredential = PhoneAuthProvider.credential(
         verificationId: verificationId, smsCode: smsCode);
 
@@ -32,7 +30,7 @@ class UserRepository {
   }
 
   Future<User?> getUser() async {
-    var user =  _firebaseAuth.currentUser;
+    var user = _firebaseAuth.currentUser;
     return user;
   }
 }

@@ -1,5 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,6 +19,7 @@ import 'bloc/auth/login_bloc.dart';
 import 'bloc/auth/phone_auth/phone_auth_bloc.dart';
 import 'constants.dart';
 import 'screen/landing_screen.dart';
+import 'screen/phon_auth_screen.dart';
 import 'service/get_config_service.dart';
 import 'models/configuration.dart';
 import 'screen/auth/auth_screen.dart';
@@ -162,13 +164,17 @@ class _MyAppState extends State<MyApp> {
 class RenderFirstScreen extends StatelessWidget {
   static final String route = "/RenderFirstScreen";
   bool? isMandatoryLogin = false;
+  static final userRepository =
+      UserRepository(firebaseAuth: FirebaseAuth.instance);
 
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
       valueListenable: Hive.box('login').listenable(),
       builder: (context, dynamic box, widget) {
-        isMandatoryLogin = box.get('isLogin');
+        isMandatoryLogin = false;
+
+        // box.get('isLogin');
         printLog("isMandatoryLogin " + "$isMandatoryLogin");
         return renderFirstScreen(isMandatoryLogin!);
       },
@@ -193,7 +199,9 @@ class RenderFirstScreen extends StatelessWidget {
           //       }
           //       // print("lgoing $isLogin");
           //       return isLogin ? LandingScreen() :
-          LoginPage();
+          LoginPage(
+              // userRepository: userRepository,
+              );
       //     });
     }
   }

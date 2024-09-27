@@ -57,12 +57,15 @@ class _HomeScreenState extends State<HomeScreen> {
         future: _homeContent,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
-            return buildUI(
-                context: context,
-                authUser: authUser,
-                paymentConfig: paymentConfig,
-                appConfig: appConfig,
-                homeContent: snapshot.data);
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 25),
+              child: buildUI(
+                  context: context,
+                  authUser: authUser,
+                  paymentConfig: paymentConfig,
+                  appConfig: appConfig,
+                  homeContent: snapshot.data),
+            );
           } else if (snapshot.hasError) {
             return Center(
               child: Text(
@@ -137,7 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
         //   ),
 
         //genre
-        // if (appConfig.genreVisible)
+        // if (appConfig!.genreVisible)
         //   SliverToBoxAdapter(
         //     child: Container(
         //       margin: EdgeInsets.only(top: 5, bottom: 5),
@@ -199,7 +202,14 @@ class _HomeScreenState extends State<HomeScreen> {
         SliverToBoxAdapter(
           child: Container(
             margin: EdgeInsets.only(top: 5.0, bottom: 5),
-            child: ImageSlider(homeContent.slider, "Coming Soon"),
+            child:
+                //  HomeScreenMovieList(
+                //   latestMovies: homeContent.latestMovies,
+                //   context: context,
+                //   title: "Coming Soon",
+                //   isDark: isDark,
+                // ),
+                ImageSlider(homeContent.slider, "Coming Soon"),
           ),
         ),
         SliverToBoxAdapter(

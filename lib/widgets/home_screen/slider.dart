@@ -93,7 +93,7 @@ class _ImageSliderState extends State<ImageSlider> {
                   // enlargeStrategy: CenterPageEnlargeStrategy.height,
                   autoPlayInterval: Duration(seconds: 4),
                   scrollDirection: Axis.horizontal,
-                  viewportFraction: 0.8,
+                  viewportFraction: 1,
                   height: 0.33.sh,
                   onPageChanged: (index, reason) {
                     setState(() {
@@ -154,12 +154,12 @@ class _ImageSliderState extends State<ImageSlider> {
                                 Container(
                                   height: 0.27.sh,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(16),
+                                    borderRadius: BorderRadius.circular(8),
                                     border: Border.all(
                                         width: 2, color: CustomTheme.amber_800),
                                   ),
                                   child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(16.0),
+                                    borderRadius: BorderRadius.circular(8.0),
                                     child: Stack(
                                       fit: StackFit.expand,
                                       children: <Widget>[
