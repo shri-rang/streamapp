@@ -116,7 +116,6 @@ class _MyAppState extends State<MyApp> {
                 ),
 
                 home: FlutterSplashScreen.fadeIn(
-                  
                   childWidget: AspectRatio(
                     aspectRatio: 0.48,
 
@@ -193,7 +192,7 @@ class RenderFirstScreen extends StatelessWidget {
           //       }
           //       // print("lgoing $isLogin");
           //       return isLogin ? LandingScreen() :
-          LoginPage();
+          ContinuePage();
       //     });
     }
   }

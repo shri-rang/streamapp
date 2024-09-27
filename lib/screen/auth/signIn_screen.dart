@@ -225,7 +225,6 @@ class _LoginPageState extends State<LoginPage>
                                       email: loginEmailController.text,
                                       password: loginPasswordController.text,
                                     ));
-                                 
                                   }
                                 },
                                 // screenWidth * .8,

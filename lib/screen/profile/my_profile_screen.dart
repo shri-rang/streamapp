@@ -466,12 +466,15 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: new Text(AppContent.deactivateAccount),
+                title: Text(
+                  AppContent.deactivateAccount,
+                  style: CustomTheme.bodyText2,
+                ),
                 content: accountDeactivateContent(),
                 backgroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(15)),
-                actionsPadding: EdgeInsets.only(right: 15.0),
+                    borderRadius: BorderRadius.circular(15)),
+                actionsPadding: EdgeInsets.all(8),
                 actions: <Widget>[
                   GestureDetector(
                       onTap: () {
@@ -511,11 +514,12 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   //render accountDeactivate
   Widget accountDeactivateContent() {
     return Container(
+      height: 190,
       child: Form(
         key: deactivateFormKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
+          // mainAxisSize: MainAxisSize.,
           children: <Widget>[
             Text(
               AppContent.doYouWantToProceed,
@@ -524,39 +528,34 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
             SizedBox(
               height: 10.0,
             ),
-            Container(
-              height: 40.0,
-              child: EditTextUtils().getCustomEditTextField(
-                  prefixWidget: Container(
-                    width: 1.0,
-                    height: 1.0,
-                  ),
-                  hintValue: AppContent.reasonText,
-                  maxLines: 2,
-                  keyboardType: TextInputType.multiline,
-                  controller: accountDeactivateReasonController,
-                  style: CustomTheme.coloredSubText,
-                  validator: (value) {
-                    return validateMinLength(value);
-                  }),
-            ),
+            EditTextUtils().getCustomEditTextField(
+                // prefixWidget: Container(
+                //   width: 1.0,
+                //   height: 1.0,
+                // ),
+                hintValue: AppContent.reasonText,
+                maxLines: 1,
+                keyboardType: TextInputType.multiline,
+                controller: accountDeactivateReasonController,
+                style: CustomTheme.coloredSubText,
+                validator: (value) {
+                  return validateMinLength(value);
+                }),
             SizedBox(
               height: 10.0,
             ),
-            Container(
-              height: 40.0,
-              child: EditTextUtils().getCustomEditTextField(
-                  hintValue: AppContent.deleteConfirm,
-                  controller: deleteController,
-                  prefixWidget: Container(
-                    width: 5.0,
-                    height: 5.0,
-                  ),
-                  style: CustomTheme.coloredBodyText2,
-                  validator: (value) {
-                    return validateDelete(value);
-                  }),
-            ),
+            EditTextUtils().getCustomEditTextField(
+                hintValue: AppContent.deleteConfirm,
+                controller: deleteController,
+                maxLines: 1,
+                // prefixWidget: Container(
+                //   width: 5.0,
+                //   height: 5.0,
+                // ),
+                style: CustomTheme.coloredBodyText2,
+                validator: (value) {
+                  return validateDelete(value);
+                }),
           ],
         ),
       ),

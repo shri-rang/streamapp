@@ -113,11 +113,11 @@ class _ContinuePageState extends State<ContinuePage> {
                           // SizedBox(
                           //   height: 20,
                           // ),
-                          // radiusContainerWithIcon(
-                          //     "Continue with Google",
-                          //     "assets/google_logo.png",
-                          //     context,
-                          //     _signInWithGoogle),
+                          radiusContainerWithIcon(
+                              "Continue with Google",
+                              "assets/google_logo.png",
+                              context,
+                              _signInWithGoogle),
                           // SizedBox(
                           //   height: 10,
                           // ),
@@ -219,11 +219,11 @@ class _ContinuePageState extends State<ContinuePage> {
     final User user = (await _auth.signInWithCredential(credential)).user!;
     if (user.email != null && user.email != "") {
       assert(user.email != null);
-      // Navigator.of(context).push(MaterialPageRoute(
-      //   builder: (context) {
-      //     return LandingScreen();
-      //   },
-      // ));
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) {
+          return LandingScreen();
+        },
+      ));
     }
     assert(user.displayName != null);
     assert(!user.isAnonymous);
