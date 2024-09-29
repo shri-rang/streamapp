@@ -42,30 +42,27 @@ class _ImageSliderState extends State<ImageSlider> {
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(widget.title!,
-                        textAlign: TextAlign.start,
-                        style:
-                            //  TextStyle(fontSize: 20, color: Colors.white)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(widget.title!,
+                      textAlign: TextAlign.start,
+                      style:
+                          //  TextStyle(fontSize: 20, color: Colors.white)
 
-                            // isDark!
-                            //     ?
-                            //
-                            CustomTheme.bodyText2White
-                        //     : isSearchWidget
-                        //         ?
-                        //CustomTheme.bodyText2
+                          // isDark!
+                          //     ?
+                          //
+                          CustomTheme.bodyText2White
+                      //     : isSearchWidget
+                      //         ?
+                      //CustomTheme.bodyText2
 
-                        //  :
-                        // CustomTheme.coloredBodyText2,
-                        ),
-                    Spacer(),
-                  ],
-                ),
+                      //  :
+                      // CustomTheme.coloredBodyText2,
+                      ),
+                  Spacer(),
+                ],
               ),
               // Text(widget.title!,
               //     textAlign: TextAlign.start,

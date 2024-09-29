@@ -251,7 +251,7 @@ class _LandingScreenState extends State<LandingScreen>
         appBar: AppBar(
           backgroundColor: CustomTheme.primaryColorDark,
           automaticallyImplyLeading: false,
-          toolbarHeight: 0.12.sh,
+          // toolbarHeight: 0.12.sh,
           actions: [
             IconButton(
                 color: Colors.white,
@@ -278,10 +278,13 @@ class _LandingScreenState extends State<LandingScreen>
               child: Container(
                 width: 40,
                 height: 40,
-                color: CustomTheme.amber_800,
+                padding: EdgeInsetsDirectional.only(top: 5),
+                decoration: BoxDecoration(
+                    color: CustomTheme.amber_800,
+                    borderRadius: BorderRadius.circular(8)),
                 child: Icon(
                     color: Colors.white,
-                    size: 30,
+                    size: 40,
                     // onPressed: () {
 
                     // },
@@ -390,6 +393,7 @@ class _LandingScreenState extends State<LandingScreen>
   //renderAppBar
   _renderAppBar() {
     return AppBar(
+      // toolbarHeight: 60,
       backgroundColor:
           isDark ? CustomTheme.colorAccentDark : CustomTheme.primaryColor,
       title: activeSearch

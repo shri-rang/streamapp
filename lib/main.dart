@@ -52,12 +52,11 @@ Future<void> main() async {
   if (defaultTargetPlatform == TargetPlatform.android) {
     await InAppPurchase.instance.restorePurchases().then((value) => {});
   }
-  runApp(
-    //MyApp()
+  runApp(MyApp()
 
-    DevicePreview(
-      enabled: true,
-      builder: (context) => MyApp(),
-    ),
-  );
+      // DevicePreview(
+      //   enabled: true,
+      //   builder: (context) => MyApp(),
+      // ),
+      );
 }
