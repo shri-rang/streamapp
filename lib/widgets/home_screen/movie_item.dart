@@ -36,7 +36,7 @@ class HomeScreenMovieList extends StatelessWidget {
     return Container(
         color: isDark! ? CustomTheme.primaryColorDark : null,
         padding: EdgeInsets.only(left: 2),
-        height: 0.29.sh,
+        height: 0.30.sh,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -119,7 +119,7 @@ class HomeScreenMovieList extends StatelessWidget {
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 2, vertical: 9),
+                                      horizontal: 2, vertical: 10),
                                   child: Container(
                                     width: cardWidth,
                                     // margin: EdgeInsets.only(right: 4, left: 3),
@@ -265,7 +265,7 @@ class HomeScreenMovieList extends StatelessWidget {
                                   ),
                                 ),
                                 Positioned(
-                                    bottom: 3.h,
+                                    bottom: 2.h,
                                     right: 71.w,
                                     // left: 0,
                                     child: Text(" ${index + 1} ",

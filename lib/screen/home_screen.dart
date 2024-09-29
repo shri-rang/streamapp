@@ -201,7 +201,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         SliverToBoxAdapter(
           child: Container(
-            margin: EdgeInsets.only(top: 2, bottom: 5),
+            margin: EdgeInsets.only(top: 2, bottom: 15),
             child: HomeScreenMovieList(
               latestMovies: homeContent.latestMovies,
               context: context,
@@ -212,7 +212,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         SliverToBoxAdapter(
           child: Container(
-            margin: EdgeInsets.only(top: 5.0, bottom: 5),
+            margin: EdgeInsets.only(top: 2, bottom: 15),
             child:
                 //  HomeScreenMovieList(
                 //   latestMovies: homeContent.latestMovies,
@@ -226,7 +226,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
         SliverToBoxAdapter(
           child: Container(
-            // margin: EdgeInsets.only(top: 2, bottom: 5),
+            margin: EdgeInsets.only(top: 2, bottom: 15),
             child: HomeScreenMovieList(
               latestMovies: homeContent.latestMovies,
               context: context,
@@ -237,7 +237,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         SliverToBoxAdapter(
           child: Container(
-            //   margin: EdgeInsets.only(top: 2, bottom: 5),
+            margin: EdgeInsets.only(top: 2, bottom: 15),
             child: HomeScreenMovieList(
               latestMovies: homeContent.latestMovies,
               context: context,
@@ -248,7 +248,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         SliverToBoxAdapter(
           child: Container(
-            //   margin: EdgeInsets.only(top: 2, bottom: 15),
+            margin: EdgeInsets.only(top: 2, bottom: 15),
             child: HomeScreenMovieList(
               latestMovies: homeContent.latestMovies,
               context: context,
@@ -264,6 +264,17 @@ class _HomeScreenState extends State<HomeScreen> {
               latestMovies: homeContent.latestMovies,
               context: context,
               title: "Hot Yellow",
+              isDark: isDark,
+            ),
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: Container(
+            margin: EdgeInsets.only(top: 2, bottom: 19.w),
+            child: HomeScreenMovieList(
+              latestMovies: homeContent.latestMovies,
+              context: context,
+              title: "Free To Watch",
               isDark: isDark,
             ),
           ),
