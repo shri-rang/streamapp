@@ -31,6 +31,7 @@ class _RazorpayPaymentScreenState extends State<RazorpayPaymentScreen> {
     super.initState();
 
     PaymentService().payWithRazorpay(
+      
         amount: widget.amount,
         paymentConfig: widget.paymentConfig,
         authService: widget.authService,

@@ -179,6 +179,9 @@ class Repository {
     try {
       final response = await dio
           .post("${ConfigApi().getApiUrl()}/update_profile", data: formData);
+
+      print("profile update $response");
+
       if (response.statusCode == 200) {
         return SubmitResponseModel.fromJson(response.data);
       }

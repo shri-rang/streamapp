@@ -93,7 +93,7 @@ class _ChoosePlanScreenState extends State<ChoosePlanScreen> {
                                             children: [
                                               FittedBox(
                                                 child: Text(
-                                                  "\$${data.package![index].price}",
+                                                  "\₹${data.package![index].price}",
                                                   textAlign: TextAlign.center,
                                                   style: CustomTheme
                                                       .bodyText1White

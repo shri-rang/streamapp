@@ -17,6 +17,7 @@ class PaidControllDialog {
   void createDialog(
       BuildContext context, bool isDark, String userId, String movieId) {
     showDialog(
+        barrierDismissible: false,
         context: context,
         builder: (BuildContext context) {
           return Center(
@@ -134,7 +135,8 @@ class PaidControllDialog {
                         ),
                         InkWell(
                           onTap: () async {
-                            printLog("-----razor pay payment selected");
+                            printLog(
+                                "-----razor pay payment selected ${authService}");
                             Navigator.of(context).pop();
                             Navigator.push(
                               context,
