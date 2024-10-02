@@ -19,6 +19,9 @@ class _ChoosePlanScreenState extends State<ChoosePlanScreen> {
   var appModeBox = Hive.box('appModeBox');
   bool isDark = true;
 
+  int? selectedIndex;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   void initState() {
     super.initState();
@@ -28,6 +31,7 @@ class _ChoosePlanScreenState extends State<ChoosePlanScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: _scaffoldKey,
         backgroundColor:
             isDark ? CustomTheme.colorAccentDark : CustomTheme.whiteColor,
         appBar: AppBar(
@@ -58,16 +62,19 @@ class _ChoosePlanScreenState extends State<ChoosePlanScreen> {
                           ),
                           HelpMe().space(10),
                           if (data!.package != null)
-                            Container(
-                              height: 70,
-                              child: ListView.builder(
-                                itemCount: data.package!.length,
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return InkWell(
+                            ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: data.package!.length,
+                              scrollDirection: Axis.vertical,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: InkWell(
                                     onTap: () {
+                                      selectedIndex = index;
+                                      setState(() {});
                                       PaidControllDialog().showPaymentDialog(
-                                          context,
+                                          _scaffoldKey.currentContext!,
                                           isDark,
                                           double.parse(
                                               data.package![index].price!),
@@ -75,18 +82,40 @@ class _ChoosePlanScreenState extends State<ChoosePlanScreen> {
                                     },
                                     child: Container(
                                       margin: EdgeInsets.all(3),
-                                      height: 70,
-                                      width: 110,
+                                      height: 194,
+                                      width: 350,
                                       decoration: BoxDecoration(
                                           borderRadius:
-                                              BorderRadius.circular(5),
+                                              BorderRadius.circular(8),
+                                          border: Border.all(
+                                              width: selectedIndex == index
+                                                  ? 2
+                                                  : 0,
+                                              color: selectedIndex == index
+                                                  ? CustomTheme.primaryColor
+                                                  : Colors.transparent),
                                           color: CustomTheme.darkGrey),
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        // mainAxisAlignment:
+                                        //     MainAxisAlignment.center,
                                         children: [
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                          Text(
+                                            data.package![index].name ?? "",
+                                            style: CustomTheme.bodyText2White
+                                                .copyWith(
+                                                    fontSize: 18,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: CustomTheme
+                                                        .primaryColor),
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
@@ -98,19 +127,19 @@ class _ChoosePlanScreenState extends State<ChoosePlanScreen> {
                                                   style: CustomTheme
                                                       .bodyText1White
                                                       .copyWith(
-                                                          fontSize: 14,
+                                                          fontSize: 16,
                                                           fontWeight:
                                                               FontWeight.bold),
                                                 ),
                                               ),
                                               FittedBox(
                                                 child: Text(
-                                                  "   /${data.package![index].day} days",
+                                                  "   /  ${data.package![index].day} days",
                                                   textAlign: TextAlign.center,
                                                   style: CustomTheme
                                                       .bodyText1White
                                                       .copyWith(
-                                                          fontSize: 10,
+                                                          fontSize: 16,
                                                           fontWeight:
                                                               FontWeight.bold),
                                                 ),
@@ -118,118 +147,160 @@ class _ChoosePlanScreenState extends State<ChoosePlanScreen> {
                                             ],
                                           ),
                                           HelpMe().space(5),
-                                          Text(
-                                            data.package![index].name ?? "",
-                                            style: CustomTheme.bodyText1White
-                                                .copyWith(
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: CustomTheme
-                                                        .primaryColor),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 20),
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Container(
+                                                  height: 10,
+                                                  width: 10,
+                                                  decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      color: CustomTheme
+                                                          .primaryColor),
+                                                ),
+                                                SizedBox(width: 10),
+                                                Text(
+                                                  "No Ads",
+                                                  style: CustomTheme
+                                                      .bodyText1BoldWhite
+                                                      .copyWith(
+                                                          fontSize: 13,
+                                                          color: isDark
+                                                              ? Colors.white
+                                                              : Colors.black),
+                                                )
+                                              ],
+                                            ),
                                           ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 20),
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Container(
+                                                  height: 10,
+                                                  width: 10,
+                                                  decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      color: CustomTheme
+                                                          .primaryColor),
+                                                ),
+                                                SizedBox(width: 10),
+                                                Text(
+                                                  "Unlimited screens",
+                                                  style: CustomTheme
+                                                      .bodyText1BoldWhite
+                                                      .copyWith(
+                                                          fontSize: 13,
+                                                          color: isDark
+                                                              ? Colors.white
+                                                              : Colors.black),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 20),
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Container(
+                                                  height: 10,
+                                                  width: 10,
+                                                  decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      color: CustomTheme
+                                                          .primaryColor),
+                                                ),
+                                                SizedBox(width: 10),
+                                                Text(
+                                                  "Download Access",
+                                                  style: CustomTheme
+                                                      .bodyText1BoldWhite
+                                                      .copyWith(
+                                                          fontSize: 13,
+                                                          color: isDark
+                                                              ? Colors.white
+                                                              : Colors.black),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 20),
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Container(
+                                                  height: 10,
+                                                  width: 10,
+                                                  decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      color: CustomTheme
+                                                          .primaryColor),
+                                                ),
+                                                SizedBox(width: 10),
+                                                Text(
+                                                  "All premium movies and series",
+                                                  style: CustomTheme
+                                                      .bodyText1BoldWhite
+                                                      .copyWith(
+                                                          fontSize: 13,
+                                                          color: isDark
+                                                              ? Colors.white
+                                                              : Colors.black),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 20),
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Container(
+                                                  height: 10,
+                                                  width: 10,
+                                                  decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      color: CustomTheme
+                                                          .primaryColor),
+                                                ),
+                                                SizedBox(width: 10),
+                                                Text(
+                                                  "All premium live TV channels",
+                                                  style: CustomTheme
+                                                      .bodyText1BoldWhite
+                                                      .copyWith(
+                                                          fontSize: 13,
+                                                          color: isDark
+                                                              ? Colors.white
+                                                              : Colors.black),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                          HelpMe().space(5),
                                         ],
                                       ),
                                     ),
-                                  );
-                                },
-                              ),
+                                  ),
+                                );
+                              },
                             ),
                           HelpMe().space(40),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: 10,
-                                width: 10,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: CustomTheme.primaryColor),
-                              ),
-                              SizedBox(width: 10),
-                              Text(
-                                "No Ads",
-                                style: CustomTheme.bodyText2.copyWith(
-                                    color:
-                                        isDark ? Colors.white : Colors.black),
-                              )
-                            ],
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: 10,
-                                width: 10,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: CustomTheme.primaryColor),
-                              ),
-                              SizedBox(width: 10),
-                              Text(
-                                "Unlimited screens",
-                                style: CustomTheme.bodyText2.copyWith(
-                                    color:
-                                        isDark ? Colors.white : Colors.black),
-                              )
-                            ],
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: 10,
-                                width: 10,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: CustomTheme.primaryColor),
-                              ),
-                              SizedBox(width: 10),
-                              Text(
-                                "Download Access",
-                                style: CustomTheme.bodyText2.copyWith(
-                                    color:
-                                        isDark ? Colors.white : Colors.black),
-                              )
-                            ],
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: 10,
-                                width: 10,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: CustomTheme.primaryColor),
-                              ),
-                              SizedBox(width: 10),
-                              Text(
-                                "All premium movies and series",
-                                style: CustomTheme.bodyText2.copyWith(
-                                    color:
-                                        isDark ? Colors.white : Colors.black),
-                              )
-                            ],
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: 10,
-                                width: 10,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: CustomTheme.primaryColor),
-                              ),
-                              SizedBox(width: 10),
-                              Text(
-                                "All premium live TV channels",
-                                style: CustomTheme.bodyText2.copyWith(
-                                    color:
-                                        isDark ? Colors.white : Colors.black),
-                              )
-                            ],
-                          )
                         ],
                       ),
                     ],

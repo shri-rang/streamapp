@@ -205,6 +205,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     final configService = Provider.of<GetConfigService>(context);
     PaymentConfig? paymentConfig = configService.paymentConfig();
     platform = Theme.of(context).platform;
+    print("some of the $authUser");
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 41, 37, 37).withOpacity(0.9),
       body: Container(
@@ -228,22 +229,22 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                 } else {
                   // user is not logged in
                   //send user to login screen
-                  if (authUser == null) {
-                    SchedulerBinding.instance.addPostFrameCallback((_) {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => AuthScreen(
-                                  fromPaidScreen: true,
-                                )),
-                      );
-                    });
-                  } else {
-                    //user logged in
-                    //but he/she hasn't any active subscription plan
-                    PaidControllDialog().createDialog(context, isDark!,
-                        authUser.userId.toString(), widget.movieID);
-                  }
+                  // if (authUser == null) {
+                  //   SchedulerBinding.instance.addPostFrameCallback((_) {
+                  //     Navigator.pushReplacement(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //           builder: (context) => AuthScreen(
+                  //                 fromPaidScreen: true,
+                  //               )),
+                  //     );
+                  //   });
+                  // } else {
+                  //user logged in
+                  //but he/she hasn't any active subscription plan
+                  PaidControllDialog().createDialog(context, isDark!,
+                      authUser!.userId.toString(), widget.movieID);
+                  // }
                 }
               }
             },
