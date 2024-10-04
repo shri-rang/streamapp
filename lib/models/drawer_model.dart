@@ -33,11 +33,11 @@ List<DrawerModel> drawerListItemFirst = [
   //     navItemName: AppContent.favorite,
   //     navItemIcon: "outline_favorite_border_24.svg",
   //     isSelected: false),
-  // DrawerModel(
-  //     id: 9,
-  //     navItemName: AppContent.purchases,
-  //     navItemIcon: "ic_subscriptions_black_24dp.svg",
-  //     isSelected: false),
+  DrawerModel(
+      id: 9,
+      navItemName: AppContent.purchases,
+      navItemIcon: "ic_subscriptions_black_24dp.svg",
+      isSelected: false),
   DrawerModel(
       id: 10,
       navItemName: AppContent.settings,

@@ -18,6 +18,7 @@ import 'bloc/auth/firebase_auth/firebase_auth_bloc.dart';
 import 'bloc/auth/login_bloc.dart';
 import 'bloc/auth/phone_auth/phone_auth_bloc.dart';
 import 'constants.dart';
+import 'screen/auth/sign_up_screen.dart';
 import 'screen/landing_screen.dart';
 import 'screen/phon_auth_screen.dart';
 import 'service/get_config_service.dart';
@@ -199,7 +200,7 @@ class RenderFirstScreen extends StatelessWidget {
           //       }
           //       // print("lgoing $isLogin");
           //       return isLogin ? LandingScreen() :
-          LoginPage(
+          SignUpScreen(
               // userRepository: userRepository,
               );
       //     });

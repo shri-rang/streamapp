@@ -215,7 +215,38 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                 ..add(GetMovieDetailsEvent(
                     movieID: routes!['movieID'] ?? widget.movieID,
                     userID: authUser != null ? authUser.userId : null)),
-          child: BlocBuilder<MovieDetailsBloc, MovieDetailsState>(
+          child: BlocConsumer<MovieDetailsBloc, MovieDetailsState>(
+            listener: (context, state) {
+                    if (state is MovieDetailsLoadedState) {
+                movieDetailsModel = state.movieDetails;
+                if (isUserValidSubscriber || movieDetailsModel.isPaid == "0") {
+                  if (movieDetailsModel.videos!.length == 1) {
+                  } else {
+                    SelectServerDialog().createDialog(
+                        context, movieDetailsModel.videos!, isDark);
+                  }
+                } else {
+                  // user is not logged in
+                  //send user to login screen
+                  // if (authUser == null) {
+                  //   SchedulerBinding.instance.addPostFrameCallback((_) {
+                  //     Navigator.pushReplacement(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //           builder: (context) => AuthScreen(
+                  //                 fromPaidScreen: true,
+                  //               )),
+                  //     );
+                  //   });
+                  // } else {
+                  //user logged in
+                  //but he/she hasn't any active subscription plan
+                  PaidControllDialog().createDialog(context, isDark!,
+                      authUser!.userId.toString(), widget.movieID);
+                  // }
+                }
+              }
+            },
             builder: (context, state) {
               if (state is MovieDetailsLoadedState) {
                 movieDetailsModel = state.movieDetails;

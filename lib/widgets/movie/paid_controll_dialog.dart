@@ -96,7 +96,7 @@ class PaidControllDialog {
     final AuthService authService =
         Provider.of<AuthService>(context, listen: false);
 
-    showModalBottomSheet(
+        showModalBottomSheet(
         context: context,
         backgroundColor: Colors.transparent,
         shape: RoundedRectangleBorder(
@@ -117,24 +117,31 @@ class PaidControllDialog {
             //so you don't have to change MaterialApp canvasColor
             child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: CustomTheme.darkGrey,
                 ),
                 child: Center(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ListView(
                       children: [
+                        SizedBox(
+                          height: 20,
+                        ),
                         Text(
                           "Select Your Payment Method",
                           textAlign: TextAlign.center,
                           style: TextStyle(fontSize: 18),
+                        ),
+                        SizedBox(
+                          height: 20,
                         ),
                         Divider(
                           color: Colors.grey,
                         ),
                         InkWell(
                           onTap: () async {
-                            printLog("-----razor pay payment selected");
+                            printLog(
+                                "-----razor pay payment selected ${authService}");
                             Navigator.of(context).pop();
                             Navigator.push(
                               context,
@@ -168,9 +175,10 @@ class PaidControllDialog {
                             ],
                           ),
                         ),
-                        Divider(
-                          color: Colors.grey,
-                        ),
+                        if (paymentConfig!.paypalEnable == true)
+                          Divider(
+                            color: Colors.grey,
+                          ),
                         if (paymentConfig!.paypalEnable == true)
                           InkWell(
                             onTap: () async {
@@ -210,9 +218,10 @@ class PaidControllDialog {
                               ],
                             ),
                           ),
-                        Divider(
-                          color: Colors.grey,
-                        ),
+                        if (paymentConfig.stripeEnable == true)
+                          Divider(
+                            color: Colors.grey,
+                          ),
                         if (paymentConfig.stripeEnable == true)
                           InkWell(
                             onTap: () async {
@@ -254,9 +263,10 @@ class PaidControllDialog {
                           ),
 
                         //offline
-                        Divider(
-                          color: Colors.grey,
-                        ),
+                        if (paymentConfig.stripeEnable == true)
+                          Divider(
+                            color: Colors.grey,
+                          ),
                         if (paymentConfig.stripeEnable == true)
                           InkWell(
                             onTap: () async {
@@ -298,9 +308,9 @@ class PaidControllDialog {
                               ],
                             ),
                           ),
-                        Divider(
-                          color: Colors.grey,
-                        ),
+                        // Divider(
+                        //   color: Colors.grey,
+                        // ),
                       ],
                     ),
                   ),
