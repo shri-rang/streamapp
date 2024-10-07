@@ -22,9 +22,7 @@ class PhoneAuthBloc extends Bloc<PhoneAuthEvent, PhoneAuthState> {
   ) async* {
     if (event is SendOtpEvent) {
       yield LoadingState();
-      subscription = sendOtp(
-        
-        event.phoNo!).listen((event) {
+      subscription = sendOtp(event.phoNo!).listen((event) {
         add(event);
       });
     } else if (event is OtpSendEvent) {
@@ -36,7 +34,8 @@ class PhoneAuthBloc extends Bloc<PhoneAuthEvent, PhoneAuthState> {
     } else if (event is VerifyOtpEvent) {
       yield LoadingState();
       try {
-        UserCredential result = await _userRepository.verifyAndLogin(verID, event.otp!);
+        UserCredential result =
+            await _userRepository.verifyAndLogin(verID, event.otp!);
         if (result.user != null) {
           yield LoginCompleteState(result.user);
         } else {
@@ -90,10 +89,14 @@ class PhoneAuthBloc extends Bloc<PhoneAuthEvent, PhoneAuthState> {
       this.verID = verid;
       eventStream.close();
     };
-
+    
     await _userRepository.sendOtp(
-      
-        phoNo, Duration(seconds: 1), phoneVerificationFailed, phoneVerificationCompleted, phoneCodeSent, phoneCodeAutoRetrievalTimeout);
+        "+91$phoNo",
+        Duration(seconds: 1),
+        phoneVerificationFailed,
+        phoneVerificationCompleted,
+        phoneCodeSent,
+        phoneCodeAutoRetrievalTimeout);
 
     yield* eventStream.stream;
   }

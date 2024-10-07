@@ -13,6 +13,7 @@ class UserRepository {
       PhoneVerificationCompleted phoneVerificationCompleted,
       PhoneCodeSent phoneCodeSent,
       PhoneCodeAutoRetrievalTimeout autoRetrievalTimeout) async {
+    print("pno $phoneNumber");
     _firebaseAuth.verifyPhoneNumber(
         phoneNumber: phoneNumber,
         timeout: timeOut,

@@ -1,44 +1,26 @@
 {
   "project_info": {
-    "project_number": "188970946979",
-    "project_id": "jalsatv-295a4",
-    "storage_bucket": "jalsatv-295a4.appspot.com"
+    "project_number": "677705301142",
+    "project_id": "yellow-app-2e706",
+    "storage_bucket": "yellow-app-2e706.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:188970946979:android:5dc0f9e1940f5beb37ca16",
+        "mobilesdk_app_id": "1:677705301142:android:46514735cff6640b6d96b7",
         "android_client_info": {
-          "package_name": "jalsatv.app.com"
+          "package_name": "yellow.app.com"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "188970946979-oijrri001od03cn088b88117es15ij92.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "jalsatv.app.com",
-            "certificate_hash": "89678c09177782d17d6002647cfe73aec9889f6c"
-          }
-        },
-        {
-          "client_id": "188970946979-clmverc5k5tvbrtge1c6j0dobcho2vpi.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyB_cC7vKpNhk_X6P5IkRyGzvjSGa9QpV6I"
+          "current_key": "AIzaSyBUdNqg-RjvWbALp-udpElIdOOVOPpmuAU"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "188970946979-clmverc5k5tvbrtge1c6j0dobcho2vpi.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

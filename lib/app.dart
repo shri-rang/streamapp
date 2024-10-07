@@ -200,9 +200,9 @@ class RenderFirstScreen extends StatelessWidget {
           //       }
           //       // print("lgoing $isLogin");
           //       return isLogin ? LandingScreen() :
-          SignUpScreen(
-              // userRepository: userRepository,
-              );
+          PhoneAuthScreen(
+        userRepository: userRepository,
+      );
       //     });
     }
   }

@@ -39,7 +39,6 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     printLog("_PhoneAuthScreenState");
@@ -57,21 +56,19 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
           }
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(builder: (context) => LandingScreen()),
-                  (Route<dynamic> route) => false);
+              (Route<dynamic> route) => false);
         }
       },
       child: BlocProvider<PhoneAuthBloc>(
-        create: (context) => PhoneAuthBloc(userRepository: widget.userRepository!),
+        create: (context) =>
+            PhoneAuthBloc(userRepository: widget.userRepository!),
         child: Scaffold(
-          body: Container(
-              color: Colors.red,
-              child: LoginForm()),
+          body: Container(color: Colors.red, child: LoginForm()),
         ),
       ),
     );
   }
 }
-
 
 class LoginForm extends StatefulWidget {
   @override
@@ -105,27 +102,28 @@ class _LoginFormState extends State<LoginForm> {
           }
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
-            ..showSnackBar( SnackBar(
-               content: Text(message!),
-               backgroundColor: Colors.red,
-          ));
-
+            ..showSnackBar(SnackBar(
+              content: Text(message!),
+              backgroundColor: Colors.red,
+            ));
         }
       },
       child: BlocBuilder<PhoneAuthBloc, PhoneAuthState>(
         builder: (context, state) {
           return Scaffold(
-            appBar: AppBar(
-              title: Text(AppContent.phoneAuthTitle),
-              backgroundColor:isDark!? CustomTheme.darkGrey:CustomTheme.primaryColor,
-              leading: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Icon(Icons.arrow_back_ios)),
-            ),
+            // appBar: AppBar(
+            //   title: Text(AppContent.phoneAuthTitle),
+            //   backgroundColor:isDark!? CustomTheme.darkGrey:CustomTheme.primaryColor,
+            //   leading: GestureDetector(
+            //       onTap: () {
+            //         Navigator.of(context).pop();
+            //       },
+            //       child: Icon(Icons.arrow_back_ios)),
+            // ),
             body: Container(
-              color:isDark!? CustomTheme.primaryColorDark:CustomTheme.whiteColor,
+              color: isDark!
+                  ? CustomTheme.primaryColorDark
+                  : CustomTheme.whiteColor,
               child: SingleChildScrollView(
                 child: Container(
                   height: MediaQuery.of(context).size.height,
@@ -147,6 +145,7 @@ class _LoginFormState extends State<LoginForm> {
       ),
     );
   }
+
   //renderViewsPerState
   getViewAsPerState(PhoneAuthState state) {
     if (state is OtpSentState || state is OtpExceptionState) {
@@ -163,7 +162,7 @@ class _LoginFormState extends State<LoginForm> {
         phone: fbUser.phoneNumber,
         email: fbUser.email,
       ));
-      return LoadingIndicator();
+      return Center(child: LoadingIndicator());
     } else {
       return NumberInput(isDark: isDark);
     }
