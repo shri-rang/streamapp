@@ -19,6 +19,7 @@ class FirebaseAuthBloc extends Bloc<FirebaseAuthEvent, FirebaseAuthState> {
         email: event.email,
         phone: event.phone,
       );
+      
       yield FirebaseAuthStateCompleted(userServerData);
     } else if (event is FirebaseAuthNotStarted) {
       yield FirebaseAuthIsNotStartState();

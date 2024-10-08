@@ -1,14 +1,16 @@
 class Config {
   //set your api server url here
- static String apiServerUrl = "https://yellowapp.in/rest-api/";
+  static String apiServerUrl = "http://3.6.31.69/rest-api/";
+
+  //"http://65.0.249.28/rest-api/";
   // "https://ox.spagreen.net/rest-api/";
   //  "https://app.ouchfilms.com/rest-api/";
   //set your api key here
   static String apiKey =
       //  "af01c9d88636465";
       //  "af01c9d88636465";
- //     "af01c9d88636465";
-   "0334c0755f4d448";
+      //   "af01c9d88636465";
+      "qcnqw2uxfc4c31u0pvhda0j5";
   //set your onesignalID here
   static String oneSignalID = "2d48cea4-09c0-4c76-bcd9-23146a882853";
   //set stripe secret key

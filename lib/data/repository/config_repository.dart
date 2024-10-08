@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:http/http.dart' as http;
 import '../../models/configuration.dart';
 import '../../network/api_configuration.dart';
@@ -12,9 +13,10 @@ class ConfigurationRepositoryImpl implements ConfigurationRepository {
   @override
   Future<ConfigurationModel> getConfigurationData() async {
     var url = ConfigApi().getApiUrl() + "/config";
+
     var response =
         await http.get(Uri.parse(url), headers: ConfigApi().getHeaders());
-    printLog("name ${response.statusCode}");
+    log("name ${response.body}");
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
       ConfigurationModel configuration = ConfigurationModel.fromJson(data);

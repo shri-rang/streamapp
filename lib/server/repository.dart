@@ -91,11 +91,11 @@ class Repository {
       "email": email,
       "phone": phone,
     });
-      print("this is api call");
+    print("this is api call");
     try {
       final response = await dio
           .post("${ConfigApi().getApiUrl()}/firebase_auth", data: formData);
-             print("this is api call $response");
+      print("this is api call $response");
       AuthUser user = AuthUser.fromJson(response.data);
       if (user.status == 'success') {
         return user;
@@ -368,6 +368,7 @@ class Repository {
 
     final response = await dio.get(
         "${ConfigApi().getApiUrl()}/single_details?type=movie&id=$movieId");
+    print("moves dta${response.data}");
     if (response.statusCode == 200) {
       MovieDetailsModel movieDetailsModel =
           MovieDetailsModel.fromJson(response.data);
