@@ -98,7 +98,14 @@ class OtpInput extends StatelessWidget {
               horizontal: 20.0,
             ),
             child: PrimaryButton(
-              title: "SUBMIT",
+              title: Text("Reset Password",
+                  style: TextStyle(
+                      fontFamily: 'Sans Serif',
+                      fontSize: 16.sp,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w400)),
+
+              // "SUBMIT",
               width: double.infinity,
               onTap: () {
                 if (_pinPutController.text.isNotEmpty) {

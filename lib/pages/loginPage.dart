@@ -94,7 +94,14 @@ class _LoginPageState extends State<LoginPage> {
                       height: 30,
                     ),
                     PrimaryButton(
-                      title: "LOGIN",
+                      title: Text("LOGIN",
+                          style: TextStyle(
+                              fontFamily: 'Sans Serif',
+                              fontSize: 16.sp,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w400)),
+
+                      //"LOGIN",
                       width: double.infinity,
                       onTap: () {
                         // Navigator.of(context).push(MaterialPageRoute(

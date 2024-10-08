@@ -133,7 +133,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                                       child: Text(
                                         "SIGN UP",
                                         style: TextStyle(
-                                             fontFamily: 'Sans Serif',
+                                            fontFamily: 'Sans Serif',
                                             color: Colors.white,
                                             fontSize: 30.sp,
                                             // color: Colors.white,
@@ -251,7 +251,14 @@ class _SignUpScreenState extends State<SignUpScreen>
                                         horizontal: 20.0,
                                       ),
                                       child: PrimaryButton(
-                                        title: "SIGN UP",
+                                        title: Text("SIGN UP",
+                                            style: TextStyle(
+                                                fontFamily: 'Sans Serif',
+                                                fontSize: 16.sp,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w400)),
+
+                                        //"SIGN UP",
                                         width: double.infinity,
                                         onTap: () {
                                           if (_signUpFormkey.currentState!

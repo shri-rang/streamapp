@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:oxoo/pages/CoontinuePage.dart';
+import 'package:oxoo/utils/loadingIndicator.dart';
 import 'package:pinput/pinput.dart';
+import 'package:provider/provider.dart';
 
+import '../../bloc/auth/phone_auth/auth_repo.dart';
+import '../../service/authentication_service.dart';
 import '../landing_screen.dart';
 
 class otpScreen extends StatefulWidget {
@@ -14,8 +18,11 @@ class otpScreen extends StatefulWidget {
 
 class _otpScreenState extends State<otpScreen> {
   TextEditingController otpVerifyCnt = new TextEditingController();
+   bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -76,15 +83,32 @@ class _otpScreenState extends State<otpScreen> {
                 horizontal: 20.0,
               ),
               child: PrimaryButton(
-                title: "SUBMIT",
+                title: 
+                 isLoading ? 
+                  LoadingIndicator() :
+                Text("SUBMIT",
+                    style: TextStyle(
+                        fontFamily: 'Sans Serif',
+                        fontSize: 16.sp,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400)),
+                //"SUBMIT",
                 width: double.infinity,
-                onTap: () {
+                onTap: () async {
                   if (otpVerifyCnt.text.isNotEmpty) {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) {
-                        return LandingScreen();
-                      },
-                    ));
+                         isLoading =true;
+                         setState(() {
+                           
+                         });
+                     await  AuthRepo.submitOtp(context, otpVerifyCnt.text);
+                          isLoading = false;
+                    // Navigator.of(context).push(MaterialPageRoute(
+                    //   builder: (context) {
+                    //     return LandingScreen();
+                    //   },
+                    // ));
+
+                    // authService.updateUser(AuthRepo.userServerData!);
                   }
                   // Navigator.of(context).push(MaterialPageRoute(
                   //   builder: (context) {

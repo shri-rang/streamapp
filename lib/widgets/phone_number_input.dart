@@ -116,7 +116,14 @@ class NumberInput extends StatelessWidget {
           // ),
           SizedBox(height: 20),
           PrimaryButton(
-            title: "LOGIN",
+            title: Text("LOGIN",
+                style: TextStyle(
+                    fontFamily: 'Sans Serif',
+                    fontSize: 16.sp,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w400)),
+
+            //"LOGIN",
             width: double.infinity,
             onTap: () {
               if (_formKey.currentState!.validate()) {

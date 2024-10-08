@@ -148,6 +148,7 @@ class _LoginFormState extends State<LoginForm> {
 
   //renderViewsPerState
   getViewAsPerState(PhoneAuthState state) {
+     print("objec t $state ");
     if (state is OtpSentState || state is OtpExceptionState) {
       return OtpInput();
     } else if (state is LoadingState) {

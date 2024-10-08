@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -144,7 +145,14 @@ class _ContinuePageState extends State<ContinuePage> {
                             height: 40,
                           ),
                           PrimaryButton(
-                            title: "SIGN IN WITH PASSWORD",
+                            title: Text("SIGN IN WITH PASSWORD",
+                                style: TextStyle(
+                                    fontFamily: 'Sans Serif',
+                                    fontSize: 16.sp,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w400)),
+
+                            //"SIGN IN WITH PASSWORD",
                             width: double.infinity,
                             height: 53,
                             onTap: () {
@@ -317,7 +325,7 @@ class PrimaryButton extends StatelessWidget {
       required this.height,
       required this.onTap})
       : super(key: key);
-  String title;
+  Widget title;
   double width;
   double height;
   VoidCallback? onTap;
@@ -347,16 +355,7 @@ class PrimaryButton extends StatelessWidget {
               ),
             ),
             onPressed: onTap,
-            child: Text(title,
-                style: TextStyle(
-                    fontFamily: 'Sans Serif',
-                    fontSize: 16.sp,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w400)
-                // style:
-                // GoogleFonts.araboto(
-                //     fontWeight: FontWeight.w700, color: Colors.white),
-                ))
+            child: title)
         //  Center(
         //     child: Text(title,
         //         style: TextStyle(

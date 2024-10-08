@@ -15,7 +15,7 @@ class UserRepository {
       PhoneCodeAutoRetrievalTimeout autoRetrievalTimeout) async {
     print("pno $phoneNumber");
     _firebaseAuth.verifyPhoneNumber(
-        phoneNumber: phoneNumber,
+        phoneNumber:  '+91$phoneNumber',
         timeout: timeOut,
         verificationCompleted: phoneVerificationCompleted,
         verificationFailed: phoneVerificationFailed,

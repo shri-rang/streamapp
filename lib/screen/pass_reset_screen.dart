@@ -55,13 +55,13 @@ class _ResetPasswordState extends State<ResetPassword> {
           // height: MediaQuery.of(context).size.height,
           width: double.infinity,
           decoration: BoxDecoration(
-            // gradient: LinearGradient(
-            //   begin: Alignment.center,
-            //   end: Alignment.bottomCenter,
-            //   // stops: [0.1, 0.5, 0.7, 0.9],
-            //   colors: [orange, red],
-            // ),
-          ),
+              // gradient: LinearGradient(
+              //   begin: Alignment.center,
+              //   end: Alignment.bottomCenter,
+              //   // stops: [0.1, 0.5, 0.7, 0.9],
+              //   colors: [orange, red],
+              // ),
+              ),
           // color: isDark ? CustomTheme.whiteColor : CustomTheme.whiteColor,
           child: SingleChildScrollView(
               child: Stack(
@@ -95,7 +95,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                               SizedBox(height: 250.0),
                               Text(AppContent.resetPassword,
                                   style: TextStyle(
-                                       fontFamily: 'Sans Serif',
+                                      fontFamily: 'Sans Serif',
                                       color: Colors.white,
                                       fontSize: 30.sp,
                                       fontWeight: FontWeight.bold)
@@ -135,7 +135,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                                       Text(
                                         AppContent.resetNote,
                                         style: TextStyle(
-                                           fontFamily: 'Sans Serif',
+                                          fontFamily: 'Sans Serif',
                                           color: Colors.white,
                                           fontSize: 14.sp,
                                           // color: Colors.amber
@@ -152,7 +152,14 @@ class _ResetPasswordState extends State<ResetPassword> {
                                   horizontal: 20.0,
                                 ),
                                 child: PrimaryButton(
-                                  title: "Reset Password",
+                                  title: Text("Reset Password",
+                                      style: TextStyle(
+                                          fontFamily: 'Sans Serif',
+                                          fontSize: 16.sp,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w400)),
+
+                                  // "Reset Password",
                                   width: double.infinity,
                                   onTap: () async {
                                     if (_formKey.currentState!.validate()) {

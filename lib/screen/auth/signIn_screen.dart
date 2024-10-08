@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../../bloc/auth/login_bloc.dart';
 import '../../bloc/auth/login_event.dart';
 import '../../bloc/auth/login_state.dart';
+import '../../bloc/auth/phone_auth/auth_repo.dart';
 import '../../constants.dart';
 import '../../models/user_model.dart';
 import '../../screen/landing_screen.dart';
@@ -81,38 +82,12 @@ class _LoginPageState extends State<LoginPage>
                 // color: isDark
                 //     ? CustomTheme.primaryColorDark
                 //     : CustomTheme.whiteColor,
-                child: _renderLoginWidget(authService)))
-        : LandingScreen();
-  }
-
-  Widget _renderLoginWidget(authService) {
-    return BlocListener<LoginBloc, LoginState>(
-      listener: (context, state) {
-        if (state is LoginCompletingStateCompleted) {
-          isLoading = false;
-          AuthUser? user = state.getUser;
-          if (user == null) {
-            bloc.add(LoginCompletingFailed());
-          } else {
-            authService.updateUser(user);
-          }
-          if (authService.getUser() != null) {
-            Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => LandingScreen()),
-                (Route<dynamic> route) => false);
-          }
-        }
-      },
-      child: BlocBuilder<LoginBloc, LoginState>(
-        builder: (context, state) {
-          return SingleChildScrollView(
+                child: 
+                SingleChildScrollView(
               child: Stack(
-            alignment: Alignment.center,
-            children: <Widget>[
-              Stack(
                 children: <Widget>[
                   //app logo bg
-
+              
                   Container(
                     height: MediaQuery.of(context).size.height,
                     width: double.infinity,
@@ -254,21 +229,47 @@ class _LoginPageState extends State<LoginPage>
                                 horizontal: 20.0,
                               ),
                               child: PrimaryButton(
-                                title: "LOGIN",
+                                title:
+                                 isLoading ?     
+                                   CircularProgressIndicator(
+                                     color: CustomTheme.whiteColor,
+                                   ) :
+                Text("LOGIN",
+                style: TextStyle(
+                    fontFamily: 'Sans Serif',
+                    fontSize: 16.sp,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w400)
+                ),
                                 width: double.infinity,
-                                onTap: () {
+                                onTap: ()async {
                                   // Navigator.of(context).push(MaterialPageRoute(
                                   //   builder: (context) {
                                   //     return LandingScreen();
                                   //   },
                                   // ));
                                   if (_formKey.currentState!.validate()) {
-                                    Navigator.of(context)
-                                        .push(MaterialPageRoute(
-                                      builder: (context) {
-                                        return otpScreen();
-                                      },
-                                    ));
+                                         isLoading = true;
+                                            setState(() {
+                           
+                                               });
+                                            //  Future.delayed(Duration(seconds: 4 ));
+                                  await  AuthRepo.verifyPhoneNumber(context, loginEmailController.text,
+                                   (v){
+                                     isLoading = v;
+                                   }
+                                  );
+                                  // .then( 
+                                  //   (v)=>  
+                                  //  );
+                                    //     isLoading = false;
+                                    // Navigator.of(context)
+                                    //     .push(MaterialPageRoute(
+                                    //   builder: (context) {
+                                    //     return otpScreen();
+                                    //   },
+                                    // ));
+                                    // print(isLoading);
                                     // isLoading = true;
                                     // bloc.add(LoginCompletingStarted());
                                     // bloc.add(LoginCompleting(
@@ -335,7 +336,7 @@ class _LoginPageState extends State<LoginPage>
                                   onPressed: () {
                                     Navigator.pushNamed(
                                         context, SignUpScreen.route);
-
+              
                                     // Get.to(LoginInput(type: "Sign Up"));
                                   },
                                   child: Text("Sign up",
@@ -395,12 +396,37 @@ class _LoginPageState extends State<LoginPage>
                     ),
                   ),
                 ],
-              ),
-              if (isLoading) Center(child: spinkit),
-            ],
-          ));
-        },
-      ),
-    );
+              )
+          )))
+                
+                //_renderLoginWidget(authService)))
+        : LandingScreen();
   }
+
+  // Widget _renderLoginWidget(authService) {
+  //   return BlocListener<LoginBloc, LoginState>(
+  //     listener: (context, state) {
+  //       // if (state is LoginCompletingStateCompleted) {
+  //       //   isLoading = false;
+  //       //   AuthUser? user = state.getUser;
+  //       //   if (user == null) {
+  //       //     bloc.add(LoginCompletingFailed());
+  //       //   } else {
+  //       //     authService.updateUser(user);
+  //       //   }
+  //       //   if (authService.getUser() != null) {
+  //       //     Navigator.of(context).pushAndRemoveUntil(
+  //       //         MaterialPageRoute(builder: (context) => LandingScreen()),
+  //       //         (Route<dynamic> route) => false);
+  //       //   }
+  //       // }
+  //     },s
+  //     child: 
+  //     BlocBuilder<LoginBloc, LoginState>(
+  //       builder: (context, state) {
+  //       //  return 
+  //       },
+  //     ),
+  //   );
+  // }
 }

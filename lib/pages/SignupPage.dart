@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:oxoo/colors.dart';
 import 'package:oxoo/pages/CoontinuePage.dart';
 import 'package:oxoo/widgets/home_screen/commonWidget.dart';
@@ -73,7 +74,14 @@ class _SingupPageState extends State<SingupPage> {
             height: 30,
           ),
           PrimaryButton(
-            title: "SIGN UP",
+            title: Text("SIGN UP",
+                style: TextStyle(
+                    fontFamily: 'Sans Serif',
+                    fontSize: 16.sp,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w400)),
+
+            // "SIGN UP",
             width: double.infinity,
             onTap: () {
               // Navigator.of(context).push(MaterialPageRoute(

@@ -83,15 +83,16 @@ class PhoneAuthBloc extends Bloc<PhoneAuthEvent, PhoneAuthState> {
     };
     final phoneCodeSent = (String verId, [int? forceResent]) {
       this.verID = verId;
+      print(" verId $verId");
       eventStream.add(OtpSendEvent());
     };
     final phoneCodeAutoRetrievalTimeout = (String verid) {
       this.verID = verid;
       eventStream.close();
     };
-    
+
     await _userRepository.sendOtp(
-        "+91$phoNo",
+        phoNo,
         Duration(seconds: 1),
         phoneVerificationFailed,
         phoneVerificationCompleted,

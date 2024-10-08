@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:oxoo/colors.dart';
 import 'package:oxoo/pages/CoontinuePage.dart';
 import 'package:oxoo/pages/chooseAccount.dart';
@@ -158,7 +159,15 @@ class _ChooseInterestState extends State<ChooseInterest> {
               height: 10,
             ),
             PrimaryButton(
-              title: "CONTINUE",
+              title: 
+                 Text("CONTINUE",
+                style: TextStyle(
+                    fontFamily: 'Sans Serif',
+                    fontSize: 16.sp,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w400)
+                ),
+           //   "CONTINUE",
               width: double.infinity,
               height: 69,
               onTap: () {

@@ -101,7 +101,15 @@ class _SwipePageState extends State<SwipePage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: PrimaryButton(
-                title: "SWIPE TO CONTINUE > > >",
+                title:
+                Text("SWIPE TO CONTINUE > > >",
+                style: TextStyle(
+                    fontFamily: 'Sans Serif',
+                    fontSize: 16.sp,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w400)),
+                
+                // "SWIPE TO CONTINUE > > >",
                 width: double.infinity,
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
