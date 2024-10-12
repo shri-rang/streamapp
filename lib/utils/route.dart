@@ -45,7 +45,9 @@ class Routes {
       GenreScreen.route: (_) => GenreScreen(),
       AllCountryScreen.route: (_) => AllCountryScreen(),
       MyProfileScreen.route: (_) => MyProfileScreen(),
-      SettingScreen.route: (_) => SettingScreen(),
+      SettingScreen.route: (_) => SettingScreen(
+            isFrom: false,
+          ),
       MySubscriptionScreen.route: (_) => MySubscriptionScreen(),
       FavouriteScreen.route: (_) => FavouriteScreen(),
       PremiumSubscriptionScreen.route: (_) => PremiumSubscriptionScreen(),

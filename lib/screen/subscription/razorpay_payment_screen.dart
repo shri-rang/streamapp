@@ -31,7 +31,6 @@ class _RazorpayPaymentScreenState extends State<RazorpayPaymentScreen> {
     super.initState();
 
     PaymentService().payWithRazorpay(
-      
         amount: widget.amount,
         paymentConfig: widget.paymentConfig,
         authService: widget.authService,
@@ -77,6 +76,7 @@ class _RazorpayPaymentScreenState extends State<RazorpayPaymentScreen> {
             paymentMethod: "RazorPay",
             paymentInfo: "")
         .then((value) {
+      //  Navigator.of(context).pop();
       Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => MySubscriptionScreen(),
       ));

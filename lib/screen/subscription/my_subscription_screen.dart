@@ -11,6 +11,7 @@ import '../../strings.dart';
 import '../../style/theme.dart';
 import '../../utils/button_widget.dart';
 import '../../constants.dart';
+import '../landing_screen.dart';
 
 class MySubscriptionScreen extends StatefulWidget {
   static final String route = "/MySubscriptionScreen";
@@ -35,10 +36,10 @@ class _MySubscriptionScreenState extends State<MySubscriptionScreen> {
     AuthUser authUser = authService.getUser()!;
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppContent.mySubsCription),
-        backgroundColor:
-            isDark ? CustomTheme.colorAccentDark : CustomTheme.primaryColor,
-      ),
+          title: Text(AppContent.mySubsCription),
+          backgroundColor: CustomTheme.primaryColor
+          //  isDark ? CustomTheme.colorAccentDark : CustomTheme.primaryColor,
+          ),
       body: authService.getUser() != null
           ? FutureBuilder<ActiveSubscription?>(
               future: Repository().getActiveSubscription(authUser.userId!),
@@ -100,6 +101,17 @@ class _MySubscriptionScreenState extends State<MySubscriptionScreen> {
                             },
                             child: HelpMe()
                                 .submitButton(300, AppContent.upgradePurchase)),
+                        _space(40),
+                        // InkWell(
+                        //     onTap: () {
+                        //       Navigator.pushAndRemoveUntil(
+                        //           context,
+                        //           MaterialPageRoute(
+                        //             builder: (context) => LandingScreen(),
+                        //           ),
+                        //           (route) => false);
+                        //     },
+                        //     child: HelpMe().homeButton(300, "Home")),
                       ],
                     ),
                   );

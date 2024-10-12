@@ -97,7 +97,7 @@ class _ContinuePageState extends State<ContinuePage> {
                                 fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
-                            height: 40,
+                            height: 10,
                           ),
                           // GestureDetector(
                           //   onTap: () {
@@ -113,11 +113,11 @@ class _ContinuePageState extends State<ContinuePage> {
                           // SizedBox(
                           //   height: 20,
                           // ),
-                          radiusContainerWithIcon(
-                              "Continue with Google",
-                              "assets/google_logo.png",
-                              context,
-                              _signInWithGoogle),
+                          // radiusContainerWithIcon(
+                          //     "Continue with Google",
+                          //     "assets/google_logo.png",
+                          //     context,
+                          //     _signInWithGoogle),
                           // SizedBox(
                           //   height: 10,
                           // ),

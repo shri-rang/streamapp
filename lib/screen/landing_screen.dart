@@ -112,7 +112,9 @@ class _LandingScreenState extends State<LandingScreen>
   final List<Widget> bottomBarPages = [
     HomeScreen(),
     MoviesScreen(),
-    SettingScreen(),
+    SettingScreen(
+      isFrom: true,
+    ),
     //  TvSeriesScreen(),
     // FavouriteScreen()
   ];

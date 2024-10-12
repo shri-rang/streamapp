@@ -9,6 +9,12 @@ import '../../utils/button_widget.dart';
 import '../constants.dart';
 
 class SettingScreen extends StatefulWidget {
+  final bool isFrom;
+
+  const SettingScreen({
+    Key? key,
+    required this.isFrom,
+  }) : super(key: key);
   static final String route = "/SettingScreen";
   @override
   _SettingScreenState createState() => _SettingScreenState();
@@ -46,11 +52,15 @@ class _SettingScreenState extends State<SettingScreen> {
   Widget build(BuildContext context) {
     printLog("_SettingScreenState");
     return Scaffold(
-      appBar: AppBar(
-        title: Text(AppContent.settings),
-        backgroundColor:
-            isDark! ? CustomTheme.colorAccentDark : CustomTheme.primaryColor,
-      ),
+      appBar: widget.isFrom
+          ? AppBar(
+              backgroundColor: CustomTheme.primaryColorDark,
+            )
+          : AppBar(
+              title: Text(AppContent.settings),
+              backgroundColor: CustomTheme.primaryColor
+              //      isDark! ? CustomTheme.colorAccentDark : CustomTheme.primaryColor,
+              ),
       body: Container(
         color: isDark! ? CustomTheme.primaryColorDark : CustomTheme.whiteColor,
         child: Column(

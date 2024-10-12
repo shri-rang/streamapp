@@ -57,7 +57,9 @@ class PaidControllDialog {
                                       //     liveTvID: movieId,
                                       //     isPaid: "1"),
 
-                                      ChoosePlanScreen(),
+                                      ChoosePlanScreen(
+                                        
+                                      ),
                                 ),
                               );
                             },
