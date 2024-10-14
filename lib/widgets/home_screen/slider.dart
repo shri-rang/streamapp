@@ -3,15 +3,20 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:oxoo/pages/CoontinuePage.dart';
 import 'package:oxoo/screen/tv_series/tv_series_details_screen.dart';
 import 'package:oxoo/widgets/player/flick_player.dart';
+import 'package:provider/provider.dart';
 import '../../models/home_content.dart';
+import '../../models/user_model.dart';
 import '../../screen/live_tv_details_screen.dart';
 import '../../screen/movie/movie_details_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../constants.dart';
+import '../../service/authentication_service.dart';
 import '../../style/theme.dart';
+import '../movie/paid_controll_dialog.dart';
 
 // ignore: must_be_immutable
 class ImageSlider extends StatefulWidget {
@@ -26,7 +31,8 @@ class ImageSlider extends StatefulWidget {
 class _ImageSliderState extends State<ImageSlider> {
   List<Slide>? _list;
   int? currentIndex = 0;
-
+  bool isUserValidSubscriber = false;
+  var appModeBox = Hive.box('appModeBox');
   List image = [
     "assets/poster.jpg",
     "assets/sairab.png",

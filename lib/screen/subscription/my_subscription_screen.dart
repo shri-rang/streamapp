@@ -36,8 +36,7 @@ class _MySubscriptionScreenState extends State<MySubscriptionScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(AppContent.mySubsCription),
-        backgroundColor:
-            isDark ? CustomTheme.colorAccentDark : CustomTheme.primaryColor,
+        backgroundColor: CustomTheme.primaryColor,
       ),
       body: authService.getUser() != null
           ? FutureBuilder<ActiveSubscription?>(

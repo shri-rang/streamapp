@@ -8,6 +8,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:oxoo/colors.dart';
 import 'package:oxoo/pages/CoontinuePage.dart';
+import 'package:oxoo/screen/terms_polices.dart';
 import '../../screen/auth/auth_screen.dart';
 import '../../server/repository.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
@@ -35,6 +36,9 @@ import 'live_tv_details_screen.dart';
 import 'live_tv_screen.dart';
 import 'movie/movie_details_screen.dart';
 import 'movie_screen.dart';
+import 'terms/grievance.dart';
+import 'terms/refund_policy.dart';
+import 'terms/terms_conditions.dart';
 import 'tv_series/tv_series_details_screen.dart';
 import 'tv_series_screen.dart';
 import '../style/theme.dart';
@@ -66,11 +70,13 @@ class _LandingScreenState extends State<LandingScreen>
   String? userID;
   AuthUser? authUser = AuthService().getUser();
   final InAppPurchase _connection = InAppPurchase.instance;
-  List<String> _kProductIdSubscription = <String>['com.oxoo.flutter.allaccess'];
+  List<String> _kProductIdSubscription = <String>['yellow.app.com.allaccess'];
   static bool? isLogin = true;
   @override
   void initState() {
+    // print("isvalid ${appModeBox.get('isUserValidSubscriber')}");
     appModeBox.delete("isUserValidSubscriber");
+
     _controller = new TabController(
         animationDuration: Duration(seconds: 4),
         vsync: this,
@@ -253,27 +259,28 @@ class _LandingScreenState extends State<LandingScreen>
           automaticallyImplyLeading: false,
           // toolbarHeight: 0.12.sh,
           actions: [
-            IconButton(
-                color: Colors.white,
-                iconSize: 30,
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) {
-                      return SearchResultScreen(
-                        isDark: false,
-                      );
-                    },
-                  ));
+            // IconButton(
+            //     color: Colors.white,
+            //     iconSize: 30,
+            //     onPressed: () {
+            //       Navigator.of(context).push(MaterialPageRoute(
+            //         builder: (context) {
+            //           return SearchResultScreen(
+            //             isDark: false,
+            //           );
+            //         },
+            //       ));
 
-                  //
-                },
-                icon: Icon(Icons.search)),
+            //       //
+            //     },
+            //     icon: Icon(Icons.search)),
             InkWell(
               onTap: () {
-                setState(() {
-                  activeSearch = true;
-                  myFocusNode!.requestFocus();
-                });
+                Navigator.pushNamed(context, MyProfileScreen.route);
+                // setState(() {
+                //  activeSearch = true;
+                //  myFocusNode!.requestFocus();
+                //   });
               },
               child: Container(
                 width: 40,
@@ -467,6 +474,8 @@ class _LandingScreenState extends State<LandingScreen>
               leading: SvgPicture.asset(
                 'assets/drawer_icon/${drawerListItem.elementAt(index).navItemIcon}',
                 color: CustomTheme.grey_60,
+                width: 30,
+                height: 30,
               ),
               title: Text(
                 drawerListItem.elementAt(index).navItemName,
@@ -535,6 +544,22 @@ class _LandingScreenState extends State<LandingScreen>
                   Navigator.pushNamed(context, SettingScreen.route);
                   break;
                 case 5:
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, Terms.route);
+                  break;
+                case 6:
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, TermsPolices.route);
+                  break;
+                case 7:
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, Refund.route);
+                  break;
+                case 8:
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, Grievance.route);
+                  break;
+                case 9:
                   // Navigator.pop(context);
                   showDialog(
                       context: context,

@@ -116,6 +116,10 @@ class AppContent {
   static final String doYouWantToProceed =
       "Do you want to proceed ? Please Type DELETE";
   static final String settings = "Settings";
+  static final String terms_conditions = "Terms and Conditions";
+  static final String privacy = "Privacy Policy";
+  static final String refund = "Refund Policy";
+  static final String grievance = "Grievance Redressal";
   static final String notification = "NOTIFICATION";
   static final String pushNotification = "Push Notification";
   static final String others = "OTHERS";

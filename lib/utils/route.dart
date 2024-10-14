@@ -27,6 +27,10 @@ import '../../screen/terms_polices.dart';
 import '../../server/phone_auth_repository.dart';
 import '../../widgets/live_tv/live_tv_channels_card.dart';
 import '../app.dart';
+import '../screen/terms/grievance.dart';
+import '../screen/terms/polices.dart';
+import '../screen/terms/refund_policy.dart';
+import '../screen/terms/terms_conditions.dart';
 
 class Routes {
   static final userRepository =
@@ -55,6 +59,10 @@ class Routes {
             movieID: "",
           ),
       TermsPolices.route: (_) => TermsPolices(),
+      // Policy.route: (_) => Policy(),
+      Terms.route: (_) => Terms(),
+      Refund.route: (_) => Refund(),
+      Grievance.route: (_) => Grievance(),
       PhoneAuthScreen.route: (_) => PhoneAuthScreen(
             userRepository: userRepository,
           ),
@@ -68,3 +76,6 @@ class Routes {
     };
   }
 }
+
+
+// Refund

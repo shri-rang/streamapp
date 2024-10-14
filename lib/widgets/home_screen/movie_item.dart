@@ -2,16 +2,21 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:oxoo/colors.dart';
 import 'package:oxoo/screen/tv_series/tv_series_details_screen.dart';
+import 'package:provider/provider.dart';
 import '../../models/home_content.dart';
+import '../../models/user_model.dart';
 import '../../screen/movie_screen.dart';
 import '../../screen/movie/movie_details_screen.dart';
+import '../../service/authentication_service.dart';
 import '../../strings.dart';
 import '../../style/theme.dart';
+import '../movie/paid_controll_dialog.dart';
 
 // ignore: must_be_immutable
-class HomeScreenMovieList extends StatelessWidget {
+class HomeScreenMovieList extends StatefulWidget {
   List<Movie>? latestMovies;
   final String? title;
   final bool isSearchWidget;
@@ -27,14 +32,30 @@ class HomeScreenMovieList extends StatelessWidget {
       this.isDark});
   var context;
 
+  @override
+  State<HomeScreenMovieList> createState() => _HomeScreenMovieListState();
+}
+
+class _HomeScreenMovieListState extends State<HomeScreenMovieList> {
   double? cardWidth;
+  var appModeBox = Hive.box('appModeBox');
+  bool isUserValidSubscriber = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     cardWidth = MediaQuery.of(context).size.width / 3.1;
-
+    final authService = Provider.of<AuthService>(context);
+    AuthUser? authUser = authService.getUser();
+    isUserValidSubscriber = appModeBox.get('isUserValidSubscriber') ?? false;
+    print("isUserValidSubscriber $isUserValidSubscriber");
     return Container(
-        color: isDark! ? CustomTheme.primaryColorDark : null,
+        color: widget.isDark! ? CustomTheme.primaryColorDark : null,
         padding: EdgeInsets.only(left: 2),
         height: 0.30.sh,
         child: Column(
@@ -47,19 +68,19 @@ class HomeScreenMovieList extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    title!,
+                    widget.title!,
                     textAlign: TextAlign.start,
                     style:
                         //  TextStyle(fontSize: 20, color: Colors.white)
 
-                        isDark!
+                        widget.isDark!
                             ? CustomTheme.bodyText2White
-                            : isSearchWidget
+                            : widget.isSearchWidget
                                 ? CustomTheme.bodyText2
                                 : CustomTheme.coloredBodyText2,
                   ),
                   Spacer(),
-                  if (!isSearchWidget)
+                  if (!widget.isSearchWidget)
                     InkWell(
                       onTap: () {
                         Navigator.pushNamed(context, MoviesScreen.route,
@@ -87,32 +108,33 @@ class HomeScreenMovieList extends StatelessWidget {
             ),
             SizedBox(height: 15),
             Expanded(
-              child: title == "New Releases"
+              child: widget.title == "New Releases"
                   ? Swiper(
                       itemBuilder: (BuildContext context, int index) {
                         return ClipRRect(
                           borderRadius: BorderRadius.circular(16.0),
                           child: Image.network(
-                            latestMovies![index].thumbnailUrl!,
+                            widget.latestMovies![index].thumbnailUrl!,
                             fit: BoxFit.fill,
                           ),
                         );
                       },
-                      itemCount: latestMovies!.length,
+                      itemCount: widget.latestMovies!.length,
                       itemWidth: 300.0,
                       // viewportFraction: 0.9,
                       containerWidth: 100,
                       layout: SwiperLayout.STACK,
                     )
-                  : title == "Trending On Yellow"
+                  : widget.title == "Trending On Yellow"
                       ? Container(
                           color: CustomTheme.amber_800,
+                          height: 300,
                           child: ListView.builder(
                             shrinkWrap: true,
                             itemCount:
                                 //  list!.length,
-                                latestMovies!.length <= 6
-                                    ? latestMovies!.length
+                                widget.latestMovies!.length <= 6
+                                    ? widget.latestMovies!.length
                                     : 6,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) => Stack(
@@ -122,22 +144,30 @@ class HomeScreenMovieList extends StatelessWidget {
                                       horizontal: 2, vertical: 10),
                                   child: Container(
                                     width: cardWidth,
+                                    // height:,
                                     // margin: EdgeInsets.only(right: 4, left: 3),
                                     child: InkWell(
                                       onTap: () {
-                                        print(latestMovies![index].videosId);
-
-                                        if (latestMovies![index].isTvseries ==
+                                        print(widget
+                                            .latestMovies![index].videosId);
+                                        // if (isUserValidSubscriber ||
+                                        //     widget.latestMovies![index]
+                                        //             .isPaid ==
+                                        //         "0") {
+                                        if (widget.latestMovies![index]
+                                                .isTvseries ==
                                             "1") {
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) =>
                                                   TvSerisDetailsScreen(
-                                                seriesID: latestMovies![index]
+                                                seriesID: widget
+                                                    .latestMovies![index]
                                                     .videosId,
-                                                isPaid:
-                                                    latestMovies![index].isPaid,
+                                                isPaid: widget
+                                                    .latestMovies![index]
+                                                    .isPaid,
                                               ),
                                             ),
                                           );
@@ -145,10 +175,20 @@ class HomeScreenMovieList extends StatelessWidget {
                                           Navigator.pushNamed(
                                               context, MovieDetailScreen.route,
                                               arguments: {
-                                                "movieID": latestMovies![index]
+                                                "movieID": widget
+                                                    .latestMovies![index]
                                                     .videosId
                                               });
                                         }
+
+                                        // } else {
+                                        //   PaidControllDialog().createDialog(
+                                        //       context,
+                                        //       widget.isDark!,
+                                        //       authUser!.userId.toString(),
+                                        //       widget.latestMovies![index]
+                                        //           .videosId!);
+                                        // }
                                       },
                                       child: ClipRRect(
                                           borderRadius:
@@ -192,7 +232,9 @@ class HomeScreenMovieList extends StatelessWidget {
                                                         //           fit: BoxFit.cover,
                                                         //         ),
                                                         // image:
-                                                        latestMovies![index]
+                                                        widget
+                                                            .latestMovies![
+                                                                index]
                                                             .thumbnailUrl!),
                                                   ),
                                                 ),
@@ -265,7 +307,7 @@ class HomeScreenMovieList extends StatelessWidget {
                                   ),
                                 ),
                                 Positioned(
-                                    bottom: 2.h,
+                                    bottom: 4.h,
                                     right: 71.w,
                                     // left: 0,
                                     child: Text(" ${index + 1} ",
@@ -444,8 +486,8 @@ class HomeScreenMovieList extends StatelessWidget {
                           shrinkWrap: true,
                           itemCount:
                               //  list!.length,
-                              latestMovies!.length <= 6
-                                  ? latestMovies!.length
+                              widget.latestMovies!.length <= 6
+                                  ? widget.latestMovies!.length
                                   : 6,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) => Container(
@@ -453,16 +495,21 @@ class HomeScreenMovieList extends StatelessWidget {
                             margin: EdgeInsets.only(right: 2),
                             child: InkWell(
                               onTap: () {
-                                print(latestMovies![index].videosId);
+                                print(widget.latestMovies![index].videosId);
 
-                                if (latestMovies![index].isTvseries == "1") {
+                                // if (isUserValidSubscriber ||
+                                //     widget.latestMovies![index].isPaid == "0") {
+                                if (widget.latestMovies![index].isTvseries ==
+                                    "1") {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
                                           TvSerisDetailsScreen(
-                                        seriesID: latestMovies![index].videosId,
-                                        isPaid: latestMovies![index].isPaid,
+                                        seriesID: widget
+                                            .latestMovies![index].videosId,
+                                        isPaid:
+                                            widget.latestMovies![index].isPaid,
                                       ),
                                     ),
                                   );
@@ -470,9 +517,18 @@ class HomeScreenMovieList extends StatelessWidget {
                                   Navigator.pushNamed(
                                       context, MovieDetailScreen.route,
                                       arguments: {
-                                        "movieID": latestMovies![index].videosId
+                                        "movieID":
+                                            widget.latestMovies![index].videosId
                                       });
                                 }
+                                //  }
+                                //  else {
+                                //   PaidControllDialog().createDialog(
+                                //       context,
+                                //       widget.isDark!,
+                                //       authUser!.userId.toString(),
+                                //       widget.latestMovies![index].videosId!);
+                                // }
                               },
                               child: ClipRRect(
                                   borderRadius: BorderRadius.circular(5.0),
@@ -512,7 +568,7 @@ class HomeScreenMovieList extends StatelessWidget {
                                                 //           fit: BoxFit.cover,
                                                 //         ),
                                                 // image:
-                                                latestMovies![index]
+                                                widget.latestMovies![index]
                                                     .thumbnailUrl!),
                                           ),
                                         ),

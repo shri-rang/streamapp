@@ -2,20 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../style/theme.dart';
 
-class HelpMe{
-  Widget submitButton(double? width,String title,{double height = 45}){
+class HelpMe {
+  Widget submitButton(double? width, String title, {double height = 45}) {
     return Container(
       height: height,
       width: width,
       decoration: BoxDecoration(
-          color: CustomTheme.primaryColor,
+          color: CustomTheme.amber_800,
+
+          // CustomTheme.primaryColor,
           borderRadius: BorderRadius.all(Radius.circular(5.0))),
       child: Center(
-          child: Text(title, style: TextStyle(color: Colors.white),
-          )),
+          child: Text(
+        title,
+        style: TextStyle(color: Colors.white),
+      )),
     );
   }
-  Widget accountDeactivate(double? width,String title,{double height = 45}){
+
+  Widget accountDeactivate(double? width, String title, {double height = 45}) {
     return Container(
       height: height,
       decoration: BoxDecoration(
@@ -24,12 +29,14 @@ class HelpMe{
       width: width,
       child: Center(
           child: Text(
-            title,
-            style: TextStyle(color: Colors.white),
-          )),
+        title,
+        style: TextStyle(color: Colors.white),
+      )),
     );
   }
-  Widget premiumSubscriptionButton(double width,String title,{double height = 45}){
+
+  Widget premiumSubscriptionButton(double width, String title,
+      {double height = 45}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Container(
@@ -39,11 +46,14 @@ class HelpMe{
             border: Border.all(color: CustomTheme.primaryColor),
             borderRadius: BorderRadius.all(Radius.circular(3.0))),
         child: Center(
-            child: Text(title, style: CustomTheme.orangeColoredBodyText,
-            )),
+            child: Text(
+          title,
+          style: CustomTheme.orangeColoredBodyText,
+        )),
       ),
     );
   }
+
   launchURL(String downloadUrl) async {
     String url = downloadUrl;
     if (await canLaunch(url)) {
@@ -52,10 +62,12 @@ class HelpMe{
       throw 'Could not launch $url';
     }
   }
-  space(double space){
-    return SizedBox(height:space);
+
+  space(double space) {
+    return SizedBox(height: space);
   }
-  final List<LinearGradient> gradientBG= [
+
+  final List<LinearGradient> gradientBG = [
     CustomTheme.gradient1,
     CustomTheme.gradient2,
     CustomTheme.gradient3,

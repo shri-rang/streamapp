@@ -684,6 +684,8 @@ class Repository {
       final response = await dio.post(
           "${ConfigApi().getApiUrl()}/verify_market_in_app",
           data: formData);
+
+      print("pircdkj $response");
       if (response.statusCode == 200) {
         return true;
       } else {
@@ -725,9 +727,11 @@ class Repository {
     try {
       final response =
           await dio.get(ConfigApi().getApiUrl() + "/home_content_for_android");
+      print("homeeeeee ${response.data} ");
       if (response.statusCode == 200) {
         homeContent = HomeContent.fromJson(response.data);
       }
+
       return homeContent;
     } catch (e) {
       throw Exception();

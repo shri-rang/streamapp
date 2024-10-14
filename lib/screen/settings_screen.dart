@@ -46,11 +46,11 @@ class _SettingScreenState extends State<SettingScreen> {
   Widget build(BuildContext context) {
     printLog("_SettingScreenState");
     return Scaffold(
-      appBar: AppBar(
-        title: Text(AppContent.settings),
-        backgroundColor:
-            isDark! ? CustomTheme.colorAccentDark : CustomTheme.primaryColor,
-      ),
+      // appBar: AppBar(
+      //   title: Text(AppContent.settings),
+      //   backgroundColor:
+      //       isDark! ? CustomTheme.colorAccentDark : CustomTheme.primaryColor,
+      // ),
       body: Container(
         color: isDark! ? CustomTheme.primaryColorDark : CustomTheme.whiteColor,
         child: Column(

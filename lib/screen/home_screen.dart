@@ -179,6 +179,7 @@ class _HomeScreenState extends State<HomeScreen> {
         //Latest movies
         SliverToBoxAdapter(
           child: Container(
+            height: 270,
             margin: EdgeInsets.only(top: 2, bottom: 15),
             child: HomeScreenMovieList(
               latestMovies: homeContent.latestMovies,

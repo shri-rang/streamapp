@@ -58,7 +58,7 @@ class PaidControllDialog {
 
                                       ChoosePlanScreen(),
                                 ),
-                              );
+                              ).then((v) => Navigator.of(context).pop());
                             },
                             child: Text(
                               AppContent.subscribeToPremium,
@@ -96,7 +96,7 @@ class PaidControllDialog {
     final AuthService authService =
         Provider.of<AuthService>(context, listen: false);
 
-        showModalBottomSheet(
+    showModalBottomSheet(
         context: context,
         backgroundColor: Colors.transparent,
         shape: RoundedRectangleBorder(

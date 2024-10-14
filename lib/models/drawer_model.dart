@@ -34,17 +34,37 @@ List<DrawerModel> drawerListItemFirst = [
   //     navItemIcon: "outline_favorite_border_24.svg",
   //     isSelected: false),
   DrawerModel(
-      id: 9,
+      id: 8,
       navItemName: AppContent.purchases,
       navItemIcon: "ic_subscriptions_black_24dp.svg",
       isSelected: false),
   DrawerModel(
-      id: 10,
+      id: 9,
       navItemName: AppContent.settings,
       navItemIcon: "outline_settings_24.svg",
       isSelected: false),
   DrawerModel(
+      id: 10,
+      navItemName: AppContent.terms_conditions,
+      navItemIcon: "terms.svg",
+      isSelected: false),
+  DrawerModel(
       id: 11,
+      navItemName: AppContent.privacy,
+      navItemIcon: "policy.svg",
+      isSelected: false),
+  DrawerModel(
+      id: 11,
+      navItemName: AppContent.refund,
+      navItemIcon: "refund.svg",
+      isSelected: false),
+  DrawerModel(
+      id: 12,
+      navItemName: AppContent.grievance,
+      navItemIcon: "gre.svg",
+      isSelected: false),
+  DrawerModel(
+      id: 13,
       navItemName: AppContent.signOut,
       navItemIcon: "outline_lock_24.svg",
       isSelected: false),

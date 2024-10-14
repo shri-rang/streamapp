@@ -117,10 +117,10 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
 
   _renderAppBar() {
     return AppBar(
-      title: Text(AppContent.myProfile),
-      backgroundColor:
-          isDark! ? CustomTheme.colorAccentDark : CustomTheme.primaryColor,
-    );
+        title: Text(AppContent.myProfile),
+        backgroundColor: CustomTheme.amber_800
+        //  isDark! ? CustomTheme.colorAccentDark : CustomTheme.primaryColor,
+        );
   }
 
   _renderProfileWidget(String? userId) {

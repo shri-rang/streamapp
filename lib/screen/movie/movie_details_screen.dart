@@ -217,9 +217,10 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                     userID: authUser != null ? authUser.userId : null)),
           child: BlocConsumer<MovieDetailsBloc, MovieDetailsState>(
             listener: (context, state) {
-                    if (state is MovieDetailsLoadedState) {
+              if (state is MovieDetailsLoadedState) {
                 movieDetailsModel = state.movieDetails;
                 if (isUserValidSubscriber || movieDetailsModel.isPaid == "0") {
+                  //  isInit = true;
                   if (movieDetailsModel.videos!.length == 1) {
                   } else {
                     SelectServerDialog().createDialog(
@@ -241,6 +242,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   // } else {
                   //user logged in
                   //but he/she hasn't any active subscription plan
+                  // isInit = false;
                   PaidControllDialog().createDialog(context, isDark!,
                       authUser!.userId.toString(), widget.movieID);
                   // }
