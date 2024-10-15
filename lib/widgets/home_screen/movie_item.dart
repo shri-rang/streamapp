@@ -1,4 +1,6 @@
 import 'package:card_swiper/card_swiper.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -8,6 +10,7 @@ import 'package:oxoo/screen/tv_series/tv_series_details_screen.dart';
 import 'package:provider/provider.dart';
 import '../../models/home_content.dart';
 import '../../models/user_model.dart';
+import '../../screen/live_tv_details_screen.dart';
 import '../../screen/movie_screen.dart';
 import '../../screen/movie/movie_details_screen.dart';
 import '../../service/authentication_service.dart';
@@ -40,7 +43,7 @@ class _HomeScreenMovieListState extends State<HomeScreenMovieList> {
   double? cardWidth;
   var appModeBox = Hive.box('appModeBox');
   bool isUserValidSubscriber = false;
-
+   int? currentIndex = 0;
   @override
   void initState() {
     // TODO: implement initState
@@ -57,7 +60,10 @@ class _HomeScreenMovieListState extends State<HomeScreenMovieList> {
     return Container(
         color: widget.isDark! ? CustomTheme.primaryColorDark : null,
         padding: EdgeInsets.only(left: 2),
-        height: 0.30.sh,
+        height:
+         widget.title == "Coming Soon" ?  33.h
+         :
+         0.30.sh,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -108,7 +114,11 @@ class _HomeScreenMovieListState extends State<HomeScreenMovieList> {
             ),
             SizedBox(height: 15),
             Expanded(
-              child: widget.title == "New Releases"
+              child:
+  
+               
+              
+               widget.title == "New Releases"
                   ? Swiper(
                       itemBuilder: (BuildContext context, int index) {
                         return ClipRRect(
@@ -125,7 +135,11 @@ class _HomeScreenMovieListState extends State<HomeScreenMovieList> {
                       containerWidth: 100,
                       layout: SwiperLayout.STACK,
                     )
-                  : widget.title == "Trending On Yellow"
+                  : 
+          
+        
+                  
+                  widget.title == "Trending On Yellow"
                       ? Container(
                           color: CustomTheme.amber_800,
                           height: 300,
@@ -560,7 +574,7 @@ class _HomeScreenMovieListState extends State<HomeScreenMovieList> {
                                                 //     "assets/images/placeholder.png",
                                                 // placeholderScale: 25,
                                                 // height: 180,
-                                                fit: BoxFit.fitHeight,
+                                                fit: BoxFit.contain,
                                                 // imageErrorBuilder:
                                                 //     (context, error, stackTrace) =>
                                                 //         Image.asset(
@@ -630,6 +644,7 @@ class _HomeScreenMovieListState extends State<HomeScreenMovieList> {
                             ),
                           ),
                         ),
+                        // : Container()
             ),
           ],
         ));

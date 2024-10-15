@@ -20,6 +20,7 @@ import '../widgets/home_screen/features_genre_movies_item.dart';
 import '../widgets/home_screen/genre_item.dart';
 import '../widgets/home_screen/live_tv_item.dart';
 import '../widgets/home_screen/movie_item.dart';
+import '../widgets/home_screen/movies_item2.dart';
 import '../widgets/home_screen/slider.dart';
 import '../widgets/home_screen/tv_series_item.dart';
 import '../strings.dart';
@@ -212,16 +213,17 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         SliverToBoxAdapter(
-          child: Container(
+          child:
+           Container(
             margin: EdgeInsets.only(top: 2, bottom: 15),
             child:
-                //  HomeScreenMovieList(
+                //  HomeScreenMovieList1(
                 //   latestMovies: homeContent.latestMovies,
                 //   context: context,
                 //   title: "Coming Soon",
                 //   isDark: isDark,
                 // ),
-                ImageSlider(homeContent.slider, "Coming Soon"),
+               ImageSlider(homeContent.slider, "Coming Soon"),
           ),
         ),
 
@@ -271,7 +273,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         SliverToBoxAdapter(
           child: Container(
-            margin: EdgeInsets.only(top: 2, bottom: 19.w),
+            margin: EdgeInsets.only(top: 2, bottom: 15),
             child: HomeScreenMovieList(
               latestMovies: homeContent.latestMovies,
               context: context,
@@ -280,7 +282,22 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
+         SliverToBoxAdapter(
+          child:       Center(
+            child: Text(AppContent.copyright,
+                        style: isDark!
+                            ? CustomTheme.bodyText2BoldWhite
+                            : CustomTheme.bodyText2Bold),
+          ),
+         ),
 
+
+          SliverToBoxAdapter(
+       child:   SizedBox(
+         height: 50.h,
+       ),
+          )
+     
         //latest tv series
         // if (homeContent.latestTvseries!.isNotEmpty)
         //   SliverToBoxAdapter(

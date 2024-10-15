@@ -36,6 +36,7 @@ import 'live_tv_details_screen.dart';
 import 'live_tv_screen.dart';
 import 'movie/movie_details_screen.dart';
 import 'movie_screen.dart';
+import 'notification/notification.dart';
 import 'terms/grievance.dart';
 import 'terms/refund_policy.dart';
 import 'terms/terms_conditions.dart';
@@ -122,7 +123,7 @@ class _LandingScreenState extends State<LandingScreen>
   final List<Widget> bottomBarPages = [
     HomeScreen(),
     MoviesScreen(),
-    SettingScreen(),
+    Notifications(),
     //  TvSeriesScreen(),
     // FavouriteScreen()
   ];
@@ -361,16 +362,16 @@ class _LandingScreenState extends State<LandingScreen>
             //   color: Colors.white,
             //   size: 35,
             // ),
-            SvgPicture.asset(
-              "assets/drawer_icon/outline_settings_24.svg",
-              width: 35,
-              height: 35,
-            ),
-            // Icon(
-            //   Icons.person,
-            //   color: Colors.white,
-            //   size: 35,
+            // SvgPicture.asset(
+            //   "assets/drawer_icon/outline_settings_24.svg",
+            //   width: 35,
+            //   height: 35,
             // ),
+            Icon(
+              Icons.notifications_outlined,
+              color: Colors.white,
+              size: 35,
+            ),
             Icon(
               Icons.menu_rounded,
               color: Colors.white,

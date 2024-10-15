@@ -124,7 +124,7 @@ class _LoginPageState extends State<LoginPage>
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 16),
                                 child: Text(
-                                  "Sign to your account",
+                                  "Login with mobile",
                                   style: TextStyle(
                                       fontFamily: 'Sans Serif',
                                       color: Colors.white,
@@ -319,43 +319,43 @@ class _LoginPageState extends State<LoginPage>
                               //   ),
                               // ),
                               HelpMe().space(10),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text("Don't have an account?",
-                                      style: TextStyle(
-                                          fontFamily: 'Sans Serif',
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 18.sp,
-                                          color: Colors.white)
-                                      // style: GoogleFonts.nunito(
-                                      //     color: Colors.grey,
-                                      //     fontSize: 18,
-                                      //     fontWeight: FontWeight.w500),
-                                      ),
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.pushNamed(
-                                          context, SignUpScreen.route);
+                              // Row(
+                              //   mainAxisAlignment: MainAxisAlignment.center,
+                              //   children: [
+                              //     Text("Don't have an account?",
+                              //         style: TextStyle(
+                              //             fontFamily: 'Sans Serif',
+                              //             fontWeight: FontWeight.w500,
+                              //             fontSize: 18.sp,
+                              //             color: Colors.white)
+                              //         // style: GoogleFonts.nunito(
+                              //         //     color: Colors.grey,
+                              //         //     fontSize: 18,
+                              //         //     fontWeight: FontWeight.w500),
+                              //         ),
+                              //     TextButton(
+                              //       onPressed: () {
+                              //         Navigator.pushNamed(
+                              //             context, SignUpScreen.route);
 
-                                      // Get.to(LoginInput(type: "Sign Up"));
-                                    },
-                                    child: Text("Sign up",
-                                        style: TextStyle(
-                                            fontFamily: 'Sans Serif',
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 18.sp,
-                                            color:
-                                                Colors.white.withOpacity(0.5))
-                                        // style: GoogleFonts.nunito(
-                                        //     color: Colors.white,
-                                        //     decoration: TextDecoration.underline,
-                                        //     fontSize: 18,
-                                        //     fontWeight: FontWeight.w700),
-                                        ),
-                                  )
-                                ],
-                              ),
+                              //         // Get.to(LoginInput(type: "Sign Up"));
+                              //       },
+                              //       child: Text("Sign up",
+                              //           style: TextStyle(
+                              //               fontFamily: 'Sans Serif',
+                              //               fontWeight: FontWeight.w500,
+                              //               fontSize: 18.sp,
+                              //               color:
+                              //                   Colors.white.withOpacity(0.5))
+                              //           // style: GoogleFonts.nunito(
+                              //           //     color: Colors.white,
+                              //           //     decoration: TextDecoration.underline,
+                              //           //     fontSize: 18,
+                              //           //     fontWeight: FontWeight.w700),
+                              //           ),
+                              //     )
+                              //   ],
+                              // ),
                               // Row(
                               //   mainAxisAlignment: MainAxisAlignment.center,
                               //   children: [
@@ -377,21 +377,21 @@ class _LoginPageState extends State<LoginPage>
                               SizedBox(
                                 height: 8.0,
                               ),
-                              InkWell(
-                                  onTap: () {
-                                    Navigator.pushNamed(
-                                        context, ResetPassword.route);
-                                  },
-                                  child: Center(
-                                    child: Text(
-                                      AppContent.forgetPassword,
-                                      style: TextStyle(
-                                          fontFamily: 'Sans Serif',
-                                          color: Colors.amber,
-                                          fontSize: 18.sp,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ))
+                              // InkWell(
+                              //     onTap: () {
+                              //       Navigator.pushNamed(
+                              //           context, ResetPassword.route);
+                              //     },
+                              //     child: Center(
+                              //       child: Text(
+                              //         AppContent.forgetPassword,
+                              //         style: TextStyle(
+                              //             fontFamily: 'Sans Serif',
+                              //             color: Colors.amber,
+                              //             fontSize: 18.sp,
+                              //             fontWeight: FontWeight.bold),
+                              //       ),
+                              //     ))
                             ],
                           ),
                         ],

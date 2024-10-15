@@ -123,20 +123,20 @@ class _otpScreenState extends State<otpScreen> {
             SizedBox(
               height: 16,
             ),
-            InkWell(
-                onTap: () {
-                  //  Navigator.pushNamed(context, ResetPassword.route);
-                },
-                child: Center(
-                  child: Text(
-                    "Resend OTP",
-                    style: TextStyle(
-                        fontFamily: 'Sans Serif',
-                        color: Colors.amber,
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ))
+            // InkWell(
+            //     onTap: () {
+            //       //  Navigator.pushNamed(context, ResetPassword.route);
+            //     },
+            //     child: Center(
+            //       child: Text(
+            //         "Resend OTP",
+            //         style: TextStyle(
+            //             fontFamily: 'Sans Serif',
+            //             color: Colors.amber,
+            //             fontSize: 18.sp,
+            //             fontWeight: FontWeight.bold),
+            //       ),
+            //     ))
           ],
         ),
       ),

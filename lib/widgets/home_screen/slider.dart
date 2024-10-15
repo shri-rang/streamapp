@@ -5,6 +5,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:oxoo/pages/CoontinuePage.dart';
+import 'package:oxoo/screen/movie_screen.dart';
 import 'package:oxoo/screen/tv_series/tv_series_details_screen.dart';
 import 'package:oxoo/widgets/player/flick_player.dart';
 import 'package:provider/provider.dart';
@@ -45,34 +46,57 @@ class _ImageSliderState extends State<ImageSlider> {
     _list = widget._slider!.slide;
     print("${widget.title} idddddddddd${widget._slider!.slide![0].id}");
     return widget.title == "Coming Soon"
-        ? Column(
+        ? 
+        Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(widget.title!,
-                        textAlign: TextAlign.start,
-                        style:
-                            //  TextStyle(fontSize: 20, color: Colors.white)
+                   Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    widget.title!,
+                    textAlign: TextAlign.start,
+                    style:
+                        //  TextStyle(fontSize: 20, color: Colors.white)
 
-                            // isDark!
-                            //     ?
-                            //
+                            // ? 
                             CustomTheme.bodyText2White
-                        //     : isSearchWidget
-                        //         ?
-                        //CustomTheme.bodyText2
-
-                        //  :
-                        // CustomTheme.coloredBodyText2,
-                        ),
-                    Spacer(),
-                  ],
-                ),
+                            // : widget.isSearchWidget
+                            //     ?
+                        //    CustomTheme.bodyText2
+                               
+                            //     : 
+                                // CustomTheme.coloredBodyText2,
+                  ),
+                  Spacer(),
+                //  if (!widget.isSearchWidget)
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, MoviesScreen.route,
+                            arguments: true);
+                      },
+                      child: Row(
+                        children: [
+                          Text(
+                            "View All",
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: CustomTheme.amber_800),
+                          ),
+                          Icon(
+                            Icons.chevron_right_rounded,
+                            size: 25,
+                            color: CustomTheme.amber_800,
+                          ),
+                        ],
+                      ),
+                    ),
+                ],
               ),
+            ),
               SizedBox(height: 15),
               // Text(widget.title!,
               //     textAlign: TextAlign.start,
@@ -224,7 +248,8 @@ class _ImageSliderState extends State<ImageSlider> {
               )
             ],
           )
-        : CarouselSlider(
+        : 
+        CarouselSlider(
             options: CarouselOptions(
               initialPage: 0,
               enableInfiniteScroll: true,
@@ -304,7 +329,7 @@ class _ImageSliderState extends State<ImageSlider> {
                                     Image.network(
                                       slide.imageLink!,
                                       // slide.imageLink!,
-                                      fit: BoxFit.fitHeight,
+                                      fit: BoxFit.contain,
                                     ),
                                     /*if(slide.thumbnailUrl != null)
                               Image.network(
