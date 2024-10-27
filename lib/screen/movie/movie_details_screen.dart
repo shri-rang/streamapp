@@ -252,10 +252,11 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
               if (state is MovieDetailsLoadedState) {
                 movieDetailsModel = state.movieDetails;
                 // movieDetailsModel.videos!.isNotEmpty
-                //  print("url${movieDetailsModel.videos![0].fileUrl}");
+                 print("paiddddd${ movieDetailsModel.isPaid }");
                 if (isUserValidSubscriber || movieDetailsModel.isPaid == "0") {
                   if (movieDetailsModel.videos!.length == 1) {
                     if (isInit) {
+                       print("fileeee ${movieDetailsModel.videos![0].fileUrl!}");
                       initializePlayer(movieDetailsModel.videos![0].fileUrl!);
                       isInit = false;
                     }
@@ -264,6 +265,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         context, movieDetailsModel.videos!, isDark);
                   }
                 } else {
+
+                  initializePlayer('');
                   // user is not logged in
                   //send user to login screen
                   // if (authUser == null) {
@@ -283,7 +286,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   //   //     authUser.userId.toString(), widget.movieID);
                   // }
                 }
-
+                  
                 // : initializePlayer('');
                 isDownloadEnable =
                     movieDetailsModel.enableDownload.toString() == "1";
@@ -399,10 +402,18 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       //     fit: BoxFit.fill)
                     ),
                     child: Center(
-                      child: _chewieController != null &&
+                      child: 
+                         
+                        //  isUserValidSubscriber || movieDetailsModel.isPaid == "0" ?
+                      _chewieController != null &&
                               _chewieController!
-                                  .videoPlayerController.value.isInitialized
-                          ? Theme(
+                                  .videoPlayerController.value.isInitialized 
+                          ? 
+
+                          
+                      
+                          
+                          Theme(
                               data: ThemeData.light().copyWith(
                                 platform: TargetPlatform.iOS,
                               ),
@@ -415,9 +426,22 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                               children: [
                                 CircularProgressIndicator(),
                                 SizedBox(height: 20),
-                                Text('Loading'),
+                                Text('Loading',
+                                 style: CustomTheme.bodyText2White,
+                                ),
                               ],
-                            ),
+                            )
+                            // : Column(
+                            //   mainAxisAlignment: MainAxisAlignment.center,
+                            //   children: [
+                            //     CircularProgressIndicator(),
+                            //     SizedBox(height: 20),
+                            //     Text('Loading',
+                            //      style: CustomTheme.bodyText2White,
+                            //     ),
+                            //   ],
+                            // )
+                            ,
                       // FlickPlayer(type: "type", url: "sd")
                     ),
                   ),

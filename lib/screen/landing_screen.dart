@@ -8,6 +8,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:oxoo/colors.dart';
 import 'package:oxoo/pages/CoontinuePage.dart';
+import 'package:provider/provider.dart';
 import '../../screen/auth/auth_screen.dart';
 import '../../server/repository.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
@@ -66,7 +67,8 @@ class _LandingScreenState extends State<LandingScreen>
   String? userID;
   AuthUser? authUser = AuthService().getUser();
   final InAppPurchase _connection = InAppPurchase.instance;
-  List<String> _kProductIdSubscription = <String>['com.oxoo.flutter.allaccess'];
+  // List<String> _kProductIdSubscription = <String>['monthly_100'];
+   Set<String> _kProductIdSubscription = <String>{'monthly_100', };
   static bool? isLogin = true;
   @override
   void initState() {
@@ -79,8 +81,11 @@ class _LandingScreenState extends State<LandingScreen>
     if (isLogin == null || isLogin == false) {
       login.put('isLogin', true);
     }
+  
     isDark = appModeBox.get('isDark') ?? false;
-    initStoreInfo();
+   
+     onInit();
+   // initStoreInfo();
     SchedulerBinding.instance
         .addPostFrameCallback((_) => configOneSignal(context));
   }
@@ -100,6 +105,26 @@ class _LandingScreenState extends State<LandingScreen>
     "Tv Series",
     "Favourite"
   ];
+ 
+   onInit() async{
+      
+              print("inittt ${authUser}");
+               try {
+                          var res =  await  Repository().getActiveSubscription(authUser!.userId!);
+                          print("object ${res!.status}");
+                            if (res!.status == "active") {
+                               appModeBox.put("isUserValidSubscriber", true);
+                            }else if( res.status == "inactive" ){
+                                // inactive
+                               appModeBox.put("isUserValidSubscriber", false);
+                            }
+     
+               } catch (e) {
+                 
+               }
+
+        
+   }
 
   List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
@@ -676,6 +701,8 @@ class _LandingScreenState extends State<LandingScreen>
       printLog("productDetailResponse_Error");
       return;
     }
+     
+     print("sds${productDetailResponse.productDetails }");
 
     if (productDetailResponse.productDetails.isEmpty) {
       printLog("product_details_empty");

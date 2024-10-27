@@ -74,13 +74,14 @@ class _RazorpayPaymentScreenState extends State<RazorpayPaymentScreen> {
             userId: widget.authService.getUser()!.userId,
             paidAmount: widget.package.price,
             paymentMethod: "RazorPay",
-            paymentInfo: "")
+            paymentInfo:response.paymentId)
         .then((value) {
       //  Navigator.of(context).pop();
       Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => MySubscriptionScreen(),
       ));
     });
+    printLog("Payment Successful Payment ID: ${response.orderId}");
     printLog("Payment Successful Payment ID: ${response.paymentId}");
   }
 

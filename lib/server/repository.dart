@@ -780,6 +780,7 @@ class Repository {
         "${ConfigApi().getApiUrl()}/check_user_subscription_status?user_id=$userId";
     dio.options.headers = ConfigApi().getHeaders();
     final response = await dio.get(url);
+    
     if (response.statusCode == 200) {
       return ActiveSubscription.fromJson(response.data);
     }
